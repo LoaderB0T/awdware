@@ -12,15 +12,16 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "awd",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "awd",
       "kebab-case"
     ],
+    "variable-name": false,
     "import-blacklist": [
       true,
       "rxjs/Rx"
@@ -54,7 +55,7 @@
     ],
     "no-empty": false,
     "no-inferrable-types": [
-      true,
+      false,
       "ignore-params"
     ],
     "no-non-null-assertion": true,
