@@ -1,0 +1,114 @@
+@import "../../../styles/all.scss";
+
+.input-container {
+  width: calc(100% - 10px);
+  padding: 0 5px;
+  text-align: start;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: $colorHighlightYellow 3px solid;
+  transition: border-bottom 75ms linear;
+
+  &.disabled {
+    border-bottom: $colorHighlightGray 3px solid;
+  }
+
+  .icon-container {
+    display: flex;
+    justify-content: center;
+    width: 32px;
+    clip-path: inset(0 0);
+    .icon,
+    .icon2 {
+      transition: transform cubic-bezier(0.26, 0.14, 0.01, 0.98) 500ms;
+      padding: 0 2px 2px 0;
+      font-size: 20px;
+    }
+    .icon2 {
+      position: absolute;
+      transform: translateY(-32px);
+    }
+  }
+  &.focus {
+    border-bottom: $colorHighlightOrange 3px solid;
+
+    .icon-container.has-second-icon {
+      .icon {
+        transform: translateY(32px);
+      }
+      .icon2 {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .input-label-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2px 10px 2px 0;
+    width: 100%;
+
+    &.no-icon {
+      padding-left: 10px;
+    }
+
+    label {
+      position: absolute;
+      font-size: $fontSizeNormal;
+      color: $colorPaperGray;
+      pointer-events: none;
+      user-select: none;
+      transition: all cubic-bezier(0.26, 0.14, 0.01, 0.98) 300ms;
+      transition-property: font-size, transform;
+
+      &.moved {
+        transform: translateY(26px);
+        font-size: $fontSizeSmall;
+      }
+    }
+
+    input {
+      border: none;
+      background: $colorCharcoalGray;
+      font-size: $fontSizeNormal;
+      color: $colorPaperWhite;
+
+      &[type="password"] {
+        letter-spacing: 2px;
+        font-family: "Aleo", serif;
+      }
+
+      &.has-error {
+        margin-right: 15px;
+      }
+    }
+  }
+
+  .validation-error {
+    position: absolute;
+    right: 5px;
+
+    .error-description {
+      display: none;
+      position: absolute;
+      transform: translateX(-325px) translateY(-20px);
+      background: $colorHighlightGray;
+      border: $colorErrorRed 2px solid;
+      padding: 10px;
+      width: 300px;
+      white-space: pre-line;
+      z-index: 1;
+    }
+
+    .error-icon {
+      font-size: 20px;
+      color: $colorErrorRed;
+
+      &:hover ~ .error-description {
+        display: block;
+      }
+    }
+  }
+}

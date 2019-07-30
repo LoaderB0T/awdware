@@ -1,0 +1,19 @@
+<form class="loginHelp" #loginHelp="ngForm" (ngSubmit)="onSubmit('Password')">
+  <span class="description">
+    {{'account.help.description' | translate}}
+  </span>
+  <div class="input-loading-container">
+    <div class="input-container">
+      <awd-textbox [inputType]="inputType.EMAIL" [placeholder]="'account.loginHelp.form.email.name' | translate"
+        [name]="'email'" [(ngModel)]="loginHelpModel.email" [inputTabIndex]="2" [icon]="'envelope'"
+        [icon2]="'envelope-open'" required [disabled]="clickedButton">
+      </awd-textbox>
+    </div>
+    <awd-loading [class.hidden]="!clickedButton" [scale]="2"></awd-loading>
+  </div>
+  <div class="reset-buttons">
+    <button class="submit" type="submit" (click)="onSubmit('Username')">Reset Username</button>
+    <button class="submit" type="submit" (click)="onSubmit('Password')">Reset Password</button>
+  </div>
+</form>
+<span *ngIf="errorMessageKey">{{'account.login.error.' + errorMessageKey | translate}}</span>

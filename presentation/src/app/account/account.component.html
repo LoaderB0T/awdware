@@ -1,0 +1,19 @@
+<div id="account-container">
+  <div id="select-action-container">
+    <div class="select-action" id="action-login" [class.selected]="selectedAction === 'login'"
+      (click)="selectAction('login')">
+      <span>{{'account.login.heading' | translate}}</span>
+    </div>
+    <div class="select-action" id="action-register" [class.selected]="selectedAction === 'register'"
+      (click)="selectAction('register')">
+      <span>{{'account.register.heading' | translate}}</span>
+    </div>
+    <div class="select-action" id="action-help" [class.selected]="selectedAction === 'help'"
+      (click)="selectAction('help')">
+      <span>{{'account.help.heading' | translate}}</span>
+    </div>
+  </div>
+  <div id="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
