@@ -57,3 +57,7 @@ button,
 svg.color-svg * {
   fill: url(#svg-gradient);
 }
+
+#svg-gradient-element {
+  position: absolute;
+}
