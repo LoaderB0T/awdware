@@ -4,9 +4,10 @@
   </span>
   <div class="input-loading-container">
     <div class="input-container">
-      <awd-textbox [inputType]="inputType.EMAIL" [placeholder]="'account.loginHelp.form.email.name' | translate"
-        [name]="'email'" [(ngModel)]="loginHelpModel.email" [inputTabIndex]="2" [icon]="'envelope'"
-        [icon2]="'envelope-open'" required [disabled]="clickedButton">
+      <awd-textbox [fontSize]="24" [inputType]="inputType.EMAIL"
+        [placeholder]="'account.loginHelp.form.email.name' | translate" [name]="'email'"
+        [(ngModel)]="loginHelpModel.email" [inputTabIndex]="2" [icon]="'envelope'" [icon2]="'envelope-open'" required
+        [disabled]="clickedButton">
       </awd-textbox>
     </div>
     <awd-loading [class.hidden]="!clickedButton" [scale]="2"></awd-loading>

@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  public opened: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public toggleMenu() {
+    this.opened = !this.opened;
   }
 
 }

@@ -4,12 +4,14 @@
   </span>
   <div class="input-loading-container">
     <div class="input-container">
-      <awd-textbox [inputType]="inputType.TEXT" [placeholder]="'account.login.form.username.name' | translate"
-        [name]="'username'" [(ngModel)]="loginModel.username" [inputTabIndex]="1" [icon]="'user'" [icon2]="'user-ninja'"
-        required [disabled]="clickedButton"></awd-textbox>
-      <awd-textbox [inputType]="inputType.PASSWORD" [placeholder]="'account.login.form.password.name' | translate"
-        [name]="'password'" [(ngModel)]="loginModel.password" [inputTabIndex]="2" [icon]="'lock'" [icon2]="'lock-open'"
-        required [disabled]="clickedButton"></awd-textbox>
+      <awd-textbox [fontSize]="24" [inputType]="inputType.TEXT"
+        [placeholder]="'account.login.form.username.name' | translate" [name]="'username'"
+        [(ngModel)]="loginModel.username" [inputTabIndex]="1" [icon]="'user'" [icon2]="'user-ninja'" required
+        [disabled]="clickedButton"></awd-textbox>
+      <awd-textbox [fontSize]="24" [inputType]="inputType.PASSWORD"
+        [placeholder]="'account.login.form.password.name' | translate" [name]="'password'"
+        [(ngModel)]="loginModel.password" [inputTabIndex]="2" [icon]="'lock'" [icon2]="'lock-open'" required
+        [disabled]="clickedButton"></awd-textbox>
     </div>
     <awd-loading [class.hidden]="!clickedButton" [scale]="2"></awd-loading>
   </div>

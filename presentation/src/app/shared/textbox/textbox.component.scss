@@ -8,7 +8,7 @@
   position: relative;
   justify-content: space-between;
   align-items: center;
-  border-bottom: $colorHighlightYellow 3px solid;
+  border-bottom: $colorHighlightPink 3px solid;
   transition: border-bottom 75ms linear;
 
   &.disabled {
@@ -18,25 +18,25 @@
   .icon-container {
     display: flex;
     justify-content: center;
-    width: 32px;
+    width: calc(var(--font-size) * 2);
     clip-path: inset(0 0);
     .icon,
     .icon2 {
       transition: transform cubic-bezier(0.26, 0.14, 0.01, 0.98) 500ms;
       padding: 0 2px 2px 0;
-      font-size: 20px;
+      font-size: calc(var(--font-size) * 1.25);
     }
     .icon2 {
       position: absolute;
-      transform: translateY(-32px);
+      transform: translateY(calc(var(--font-size) * -2));
     }
   }
   &.focus {
-    border-bottom: $colorHighlightOrange 3px solid;
+    border-bottom: $colorHighlightBlue 3px solid;
 
     .icon-container.has-second-icon {
       .icon {
-        transform: translateY(32px);
+        transform: translateY(calc(var(--font-size) * 2));
       }
       .icon2 {
         transform: translateY(0);
@@ -62,10 +62,11 @@
       user-select: none;
       transition: all cubic-bezier(0.26, 0.14, 0.01, 0.98) 300ms;
       transition-property: font-size, transform;
+      font-size: var(--font-size);
 
       &.moved {
-        transform: translateY(26px);
-        font-size: $fontSizeSmall;
+        transform: translateY(calc(26px + calc(calc(var(--font-size) - 16px) * 1.2))); // very nice magic numbers
+        font-size: calc(var(--font-size) * 0.9);
       }
     }
 
@@ -74,6 +75,7 @@
       background: $colorCharcoalGray;
       font-size: $fontSizeNormal;
       color: $colorPaperWhite;
+      font-size: var(--font-size);
 
       &[type="password"] {
         letter-spacing: 2px;
