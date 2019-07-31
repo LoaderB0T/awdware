@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, HostBinding } from '@angular/core';
 import { InputType } from '../models/input-type';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
 import { noop } from 'rxjs';
 import { ValidationDefinition } from '../models/validation-definition';
 import { ValidationErrorType } from '../models/validation-error-type';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'awd-textbox',
@@ -16,6 +17,7 @@ import { ValidationErrorType } from '../models/validation-error-type';
 })
 export class TextboxComponent implements OnInit, ControlValueAccessor, Validator {
   @Input() private validationDefinitions: ValidationDefinition[] = new Array<ValidationDefinition>();
+  @Input() public fontSize: number = 16;
   @Input() public name: string;
   @Input() public placeholder: string;
   @Input() public pattern: string;
@@ -25,12 +27,17 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   @Input() public inputType: InputType = InputType.TEXT;
   @Input() public icon: string;
   @Input() public icon2: string;
-  @Input() public set shouldMatch(value: string) {
+
+  @Input()
+  public set shouldMatch(value: string) {
     this.shouldMatchValue = value;
     this.onChangeCallback(this.value);
   }
   @ViewChild('inputField', { static: true })
   private inputElement: ElementRef<HTMLInputElement>;
+
+  @HostBinding('style.--font-size')
+  private fontSizeVal: string;
 
   public isDisabled: boolean = false;
   public isFocused: boolean = false;
@@ -40,10 +47,11 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   private shouldMatchValue: string;
   private _control: AbstractControl;
 
-  constructor() {
+  constructor(private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
+    this.fontSizeVal = this.fontSize + 'px';
   }
 
   public get getInputType(): string {
@@ -119,6 +127,11 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
     } else {
       return null;
     }
+  }
+
+  public get cssVariablesStyle() {
+    return this.sanitizer.bypassSecurityTrustStyle(
+      `--font-size: ${this.fontSize}px;`);
   }
 
   get value(): any {

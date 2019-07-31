@@ -38,17 +38,26 @@ button,
   border-radius: 5px;
   color: $colorPaperWhite;
   background: $colorCharcoalGray;
-  box-shadow: 0 0 0 3px $colorHighlightYellow inset;
+  box-shadow: 0 0 0 3px $colorHighlightPink inset;
   font-size: $fontSizeNormal;
   transition: box-shadow 75ms linear;
   cursor: pointer;
 
   &:hover,
   &:focus {
-    box-shadow: 0 0 0 3px $colorHighlightOrange inset;
+    box-shadow: 0 0 0 3px $colorHighlightBlue inset;
   }
   &:disabled {
     box-shadow: 0 0 0 3px $colorHighlightGray inset;
     cursor: default;
   }
+}
+
+.color-svg svg *,
+svg.color-svg * {
+  fill: url(#svg-gradient);
+}
+
+#svg-gradient-element {
+  position: absolute;
 }

@@ -1,0 +1,9 @@
+#app-main {
+  display: flex;
+  #app-menu {
+    flex-grow: 0;
+  }
+  #main-content {
+    flex-grow: 1;
+  }
+}

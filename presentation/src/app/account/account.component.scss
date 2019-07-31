@@ -4,7 +4,7 @@
   padding: 10px 10px 0;
   width: 700px;
   margin: auto;
-  margin-top: 80px;
+  padding-top: 80px;
   border-radius: 20px;
 }
 
@@ -40,13 +40,13 @@
 
   &.selected {
     cursor: default;
-    border-bottom-color: $colorHighlightOrange;
-    color: $colorHighlightYellow;
+    border-bottom-color: $colorHighlightBlue;
+    color: $colorHighlightPink;
   }
 }
 
 .select-action:hover:not(.selected) {
-  border-bottom: 3px solid $colorHighlightYellow;
+  border-bottom: 3px solid $colorHighlightPink;
 }
 
 #content {
