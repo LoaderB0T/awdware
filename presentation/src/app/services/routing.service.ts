@@ -31,4 +31,8 @@ export class RoutingService {
   public navigateToAccountHelp() {
     this.router.navigate(['account', 'help']);
   }
+
+  public navigateToAccount() {
+    this.router.navigate(['account', 'me']);
+  }
 }

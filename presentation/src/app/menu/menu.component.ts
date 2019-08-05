@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from '../models/menu-item';
+import { RoutingService } from '../services/routing.service';
+import { SessionStoreService } from '../services/session-store.service';
 
 @Component({
   selector: 'awd-menu',
@@ -6,11 +9,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  private _routingService: RoutingService;
+  private _sessionStoreService: SessionStoreService;
+  private _menuItems: MenuItem[];
+
   public opened: boolean = false;
 
-  constructor() { }
+  constructor(routingService: RoutingService, sessionStoreService: SessionStoreService) {
+    this._routingService = routingService;
+    this._sessionStoreService = sessionStoreService;
+    this._menuItems = [
+      new MenuItem('Home', 'home', () => this._routingService.navigateToHomeHello(), () => true),
+      new MenuItem('Vote', 'ballot', () => { }, () => true),
+      new MenuItem('Login', 'sign-in', () => this._routingService.navigateToAccountLogin(), () => this.showLoginButton()),
+      new MenuItem('Account', 'user', () => this._routingService.navigateToAccount(), () => this.showAccountButton())
+    ];
+  }
 
   ngOnInit() {
+  }
+
+  public get enabledMenuItems(): MenuItem[] {
+    return this._menuItems.filter(x => x.enabled());
+  }
+
+  private showLoginButton(): boolean {
+    return !this._sessionStoreService.hasToken;
+  }
+
+  private showAccountButton(): boolean {
+    return this._sessionStoreService.hasToken;
   }
 
   public toggleMenu() {
