@@ -38,14 +38,14 @@ button,
   border-radius: 5px;
   color: $colorPaperWhite;
   background: $colorCharcoalGray;
-  box-shadow: 0 0 0 3px $colorHighlightPink inset;
+  box-shadow: 0 0 0 3px $colorHighlightColor1 inset;
   font-size: $fontSizeNormal;
   transition: box-shadow 75ms linear;
   cursor: pointer;
 
   &:hover,
   &:focus {
-    box-shadow: 0 0 0 3px $colorHighlightBlue inset;
+    box-shadow: 0 0 0 3px $colorHighlightColor2 inset;
   }
   &:disabled {
     box-shadow: 0 0 0 3px $colorHighlightGray inset;
@@ -60,4 +60,14 @@ svg.color-svg * {
 
 #svg-gradient-element {
   position: absolute;
+}
+
+#gradient-1 {
+  stop-color: $colorHighlightColor1;
+  stop-opacity: 1;
+}
+
+#gradient-2 {
+  stop-color: $colorHighlightColor2;
+  stop-opacity: 1;
 }

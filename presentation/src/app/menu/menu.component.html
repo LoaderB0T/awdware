@@ -10,16 +10,10 @@
     </div>
     <span class="text">Close</span>
   </div>
-  <div class="menu-item">
+  <div class="menu-item" *ngFor="let menuItem of enabledMenuItems" (click)="itemClicked(menuItem)">
     <div class="icon-container">
-      <i class="color-svg  icon fal fa-home" aria-hidden="true"></i>
+      <i class="color-svg  icon fal fa-{{menuItem.icon}}" aria-hidden="true"></i>
     </div>
-    <span class="text">Home</span>
-  </div>
-  <div class="menu-item">
-    <div class="icon-container">
-      <i class="color-svg icon fal fa-ballot-check"></i>
-    </div>
-    <span class="text">Vote</span>
+    <span class="text">{{menuItem.text}}</span>
   </div>
 </div>
