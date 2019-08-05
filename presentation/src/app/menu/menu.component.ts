@@ -21,6 +21,8 @@ export class MenuComponent implements OnInit {
     this._menuItems = [
       new MenuItem('Home', 'home', () => this._routingService.navigateToHomeHello(), () => true),
       new MenuItem('Vote', 'ballot', () => { }, () => true),
+      new MenuItem('Short URL', 'link', () => { }, () => true),
+      new MenuItem('Game', 'gamepad', () => { }, () => true),
       new MenuItem('Login', 'sign-in', () => this._routingService.navigateToAccountLogin(), () => this.showLoginButton()),
       new MenuItem('Account', 'user', () => this._routingService.navigateToAccount(), () => this.showAccountButton())
     ];
