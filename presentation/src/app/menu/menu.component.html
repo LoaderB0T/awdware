@@ -10,7 +10,7 @@
     </div>
     <span class="text">Close</span>
   </div>
-  <div class="menu-item" *ngFor="let menuItem of enabledMenuItems" (click)="menuItem.action()">
+  <div class="menu-item" *ngFor="let menuItem of enabledMenuItems" (click)="itemClicked(menuItem)">
     <div class="icon-container">
       <i class="color-svg  icon fal fa-{{menuItem.icon}}" aria-hidden="true"></i>
     </div>

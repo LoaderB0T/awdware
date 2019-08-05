@@ -45,4 +45,11 @@ export class MenuComponent implements OnInit {
     this.opened = !this.opened;
   }
 
+  public itemClicked(item: MenuItem) {
+    if (this.opened) {
+      this.toggleMenu();
+    }
+    item.action();
+  }
+
 }
