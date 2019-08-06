@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core';
 import { UserInfoDto } from '../models/application-facade';
+import { UserInfo } from '../models/user-info';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserInfoService {
-  public username: string;
-  public userId: string;
+  public userInfo: UserInfo;
+
+  constructor() {
+    this.userInfo = new UserInfo();
+  }
 
   public isLoggedIn(): boolean {
-    return this.userId && true;
+    return this.userInfo && true;
   }
 
   clearUser() {
-    this.userId = null;
-    this.username = null;
+    this.userInfo = null;
   }
 
   setUser(userInfo: UserInfoDto) {
-    this.userId = userInfo.userId;
-    this.username = userInfo.username;
+    this.userInfo.userId = userInfo.userId;
+    this.userInfo.username = userInfo.username;
   }
 }
