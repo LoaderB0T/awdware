@@ -37,7 +37,6 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   private inputElement: ElementRef<HTMLInputElement>;
 
   @HostBinding('style.--font-size')
-  private fontSizeVal: string;
 
   public isDisabled: boolean = false;
   public isFocused: boolean = false;
@@ -53,7 +52,6 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   }
 
   ngOnInit() {
-    this.fontSizeVal = this.fontSize + 'px';
   }
 
   public get getInputType(): string {
