@@ -33,6 +33,6 @@ export class RoutingService {
   }
 
   public navigateToAccount() {
-    this.router.navigate(['account', 'me']);
+    this.router.navigate(['me']);
   }
 }
