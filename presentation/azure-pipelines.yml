@@ -16,7 +16,7 @@ steps:
 
 - script: |
     yarn install
-  displayName: '🐱‍🏍 yarn install'
+  displayName: '😸 yarn install'
 
 - script: |
     yarn run build-prod
