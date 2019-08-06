@@ -26,3 +26,23 @@ steps:
     projectDirectory: 'presentation/'
     arguments: 'run build-prod'
   displayName: 'build productive'
+
+- task: Yarn@3
+  inputs:
+    projectDirectory: 'presentation/'
+    arguments: 'run test-unit'
+  displayName: 'unit test'
+  continueOnError: true
+
+- task: Yarn@3
+  inputs:
+    projectDirectory: 'presentation/'
+    arguments: 'run lint-build'
+  displayName: 'linting'
+  continueOnError: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'presentation/dist/presentation/'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
