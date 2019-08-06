@@ -46,3 +46,4 @@ steps:
     PathtoPublish: 'presentation/dist/presentation/'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+  displayName: publish build
