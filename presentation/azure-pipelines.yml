@@ -18,7 +18,7 @@ steps:
 - task: Yarn@3
   inputs:
     projectDirectory: 'presentation/'
-    arguments: 'run build-prod'
+    arguments: 'install'
   displayName: 'yarn install'
 
 - task: Yarn@3
