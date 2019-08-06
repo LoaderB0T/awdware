@@ -27,12 +27,7 @@ steps:
     arguments: 'run build-prod'
   displayName: 'build productive'
 
-- task: Yarn@3
-  inputs:
-    projectDirectory: 'presentation/'
-    arguments: 'run test-unit'
-  displayName: 'unit test'
-  continueOnError: true
+# 1
 
 - task: Yarn@3
   inputs:
