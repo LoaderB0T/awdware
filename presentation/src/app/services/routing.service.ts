@@ -35,4 +35,16 @@ export class RoutingService {
   public navigateToAccount() {
     this.router.navigate(['me']);
   }
+
+  public navigateToVote() {
+    this.router.navigate(['vote']);
+  }
+
+  public navigateToMyVotes() {
+    this.router.navigate(['vote', 'my']);
+  }
+
+  public navigateToNewVote() {
+    this.router.navigate(['vote', 'new']);
+  }
 }

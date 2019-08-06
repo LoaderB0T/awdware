@@ -12,6 +12,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient, HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { MeComponent } from './me/me.component';
+import { VoteModule } from './vote/vote.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MeComponent } from './me/me.component';
     AppRoutingModule,
     SharedModule,
     AccountModule,
-    HomeModule
+    HomeModule,
+    VoteModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
   bootstrap: [AppComponent]

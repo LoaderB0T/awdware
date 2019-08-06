@@ -9,6 +9,9 @@ import { VerifyMailComponent } from './account/verify-mail/verify-mail.component
 import { NewPasswordComponent } from './account/new-password/new-password.component';
 import { MeComponent } from './me/me.component';
 import { UserInfoResolverService } from './account/services/user-info-resolver.service';
+import { VoteComponent } from './vote/vote.component';
+import { MyVotesComponent } from './vote/my-votes/my-votes.component';
+import { NewVoteComponent } from './vote/new-vote/new-vote.component';
 
 
 const routes: Routes = [
@@ -50,6 +53,25 @@ const routes: Routes = [
       {
         path: 'me',
         component: MeComponent
+      },
+      {
+        path: 'vote',
+        component: VoteComponent,
+        children: [
+          {
+            path: 'my',
+            component: MyVotesComponent
+          },
+          {
+            path: 'new',
+            component: NewVoteComponent
+          },
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'my'
+          }
+        ]
       },
       {
         path: '',

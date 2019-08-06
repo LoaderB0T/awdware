@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { RoutingService } from '../services/routing.service';
 import { ToolbarProviderService } from '../services/toolbar-provider.service';
+import { TabViewContent } from '../shared/models/tab-view-content';
 
 @Component({
   selector: 'awd-account',
@@ -11,40 +12,26 @@ import { ToolbarProviderService } from '../services/toolbar-provider.service';
 })
 export class AccountComponent implements OnInit {
   private readonly _routingService: RoutingService;
-  private readonly _activatedRoute: ActivatedRoute;
   private readonly _toolbarProviderService: ToolbarProviderService;
-  public selectedAction: string = 'login';
+
+  public accountTabContent: TabViewContent;
 
   constructor(
     routingService: RoutingService,
-    activatedRoute: ActivatedRoute,
     toolbarProviderService: ToolbarProviderService
   ) {
     this._routingService = routingService;
-    this._activatedRoute = activatedRoute;
     this._toolbarProviderService = toolbarProviderService;
+
+    this.accountTabContent = new TabViewContent();
+    this.accountTabContent.tabs = [
+      { id: 'login', text: 'account.login.heading', clicked: () => this._routingService.navigateToAccountLogin() },
+      { id: 'register', text: 'account.register.heading', clicked: () => this._routingService.navigateToAccountRegister() },
+      { id: 'help', text: 'account.help.heading', clicked: () => this._routingService.navigateToAccountHelp() },
+    ];
   }
 
   ngOnInit() {
     this._toolbarProviderService.activeItem = 'account.login.heading';
-    this._activatedRoute.url.subscribe(x => {
-      this.selectedAction = this._activatedRoute.snapshot.firstChild.url[0].path;
-    });
   }
-
-  selectAction(action: string) {
-    switch (action) {
-      case 'login':
-        this._routingService.navigateToAccountLogin();
-        return;
-      case 'help':
-        this._routingService.navigateToAccountHelp();
-        return;
-      case 'register':
-      default:
-        this._routingService.navigateToAccountRegister();
-        return;
-    }
-  }
-
 }
