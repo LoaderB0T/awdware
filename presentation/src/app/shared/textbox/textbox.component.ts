@@ -46,8 +46,10 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   private onChangeCallback: (_: any) => void = noop;
   private shouldMatchValue: string;
   private _control: AbstractControl;
+  private _sanitizer: DomSanitizer;
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(sanitizer: DomSanitizer) {
+    this._sanitizer = sanitizer;
   }
 
   ngOnInit() {
@@ -130,7 +132,7 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   }
 
   public get cssVariablesStyle() {
-    return this.sanitizer.bypassSecurityTrustStyle(
+    return this._sanitizer.bypassSecurityTrustStyle(
       `--font-size: ${this.fontSize}px;`);
   }
 

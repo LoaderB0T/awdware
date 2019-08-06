@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, RootRenderer } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { of, Observable } from 'rxjs';
 
@@ -6,20 +6,37 @@ import { AccountService } from './account.service';
 import { SessionStoreService } from '../../services/session-store.service';
 import { SessionService } from '../../services/session.service';
 import { UserInfoDto } from '../../models/application-facade';
+import { UserInfoService } from 'src/app/services/user-info.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserInfoResolverService implements Resolve<UserInfoDto> {
+  private _accountService: AccountService;
+  private _sessionStoreService: SessionStoreService;
+  private _sessionService: SessionService;
+  private _userInfoService: UserInfoService;
 
-  constructor(private accountService: AccountService, private sessionStoreService: SessionStoreService, private sessionService: SessionService) { }
+  constructor(
+    accountService: AccountService,
+    sessionStoreService: SessionStoreService,
+    sessionService: SessionService,
+    userInfoService: UserInfoService
+  ) {
+    this._accountService = accountService;
+    this._sessionStoreService = sessionStoreService;
+    this._sessionService = sessionService;
+    this._userInfoService = userInfoService;
+  }
 
   resolve() {
     return new Observable<UserInfoDto>(obs => {
 
-      if (this.sessionStoreService.hasToken) {
-        if (this.sessionService.sessionNeedsRefresh()) {
-          this.sessionService.renewSession().subscribe(
+      if (this._sessionStoreService.hasToken) {
+        if (this._sessionService.sessionNeedsRefresh()) {
+          this._sessionService.renewSession().subscribe(
             () => {
-              this.accountService.loadUserInfo(this.sessionStoreService.userId).subscribe(x => {
+              this._accountService.loadUserInfo().subscribe(x => {
                 obs.next(x);
                 obs.complete();
               });
@@ -30,7 +47,7 @@ export class UserInfoResolverService implements Resolve<UserInfoDto> {
               obs.complete();
             });
         } else {
-          this.accountService.loadUserInfo(this.sessionStoreService.userId).subscribe(
+          this._accountService.loadUserInfo().subscribe(
             x => {
               obs.next(x);
               obs.complete();
@@ -42,6 +59,7 @@ export class UserInfoResolverService implements Resolve<UserInfoDto> {
             });
         }
       } else {
+        this._userInfoService.clearUser();
         obs.next(null);
         obs.complete();
       }

@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit {
     this._sessionStoreService = sessionStoreService;
     this._menuItems = [
       new MenuItem('Home', 'home', () => this._routingService.navigateToHomeHello(), () => true),
-      new MenuItem('Vote', 'ballot', () => { }, () => true),
+      new MenuItem('Vote', 'ballot', () => this._routingService.navigateToVote(), () => true),
       new MenuItem('Short URL', 'link', () => { }, () => true),
       new MenuItem('Game', 'gamepad', () => { }, () => true),
       new MenuItem('Login', 'sign-in', () => this._routingService.navigateToAccountLogin(), () => this.showLoginButton()),

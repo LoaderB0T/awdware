@@ -7,48 +7,82 @@ import { RegisterComponent } from './account/register/register.component';
 import { LoginHelpComponent } from './account/login-help/login-help.component';
 import { VerifyMailComponent } from './account/verify-mail/verify-mail.component';
 import { NewPasswordComponent } from './account/new-password/new-password.component';
+import { MeComponent } from './me/me.component';
+import { UserInfoResolverService } from './account/services/user-info-resolver.service';
+import { VoteComponent } from './vote/vote.component';
+import { MyVotesComponent } from './vote/my-votes/my-votes.component';
+import { NewVoteComponent } from './vote/new-vote/new-vote.component';
 
 
 const routes: Routes = [
   {
-    path: 'account',
-    component: AccountComponent,
+    path: '',
+    resolve: { userInfo: UserInfoResolverService },
     children: [
       {
-        path: 'login',
-        component: LoginComponent
+        path: 'account',
+        component: AccountComponent,
+        children: [
+          {
+            path: 'login',
+            component: LoginComponent
+          },
+          {
+            path: 'register',
+            component: RegisterComponent
+          },
+          {
+            path: 'help',
+            component: LoginHelpComponent
+          },
+          {
+            path: 'verify/:token',
+            component: VerifyMailComponent
+          },
+          {
+            path: 'resetpw/:token',
+            component: NewPasswordComponent
+          },
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: '/account/login'
+          }
+        ]
       },
       {
-        path: 'register',
-        component: RegisterComponent
+        path: 'me',
+        component: MeComponent
       },
       {
-        path: 'help',
-        component: LoginHelpComponent
-      },
-      {
-        path: 'verify/:token',
-        component: VerifyMailComponent
-      },
-      {
-        path: 'resetpw/:token',
-        component: NewPasswordComponent
+        path: 'vote',
+        component: VoteComponent,
+        children: [
+          {
+            path: 'my',
+            component: MyVotesComponent
+          },
+          {
+            path: 'new',
+            component: NewVoteComponent
+          },
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'my'
+          }
+        ]
       },
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/account/login'
+        component: HomeComponent
+      },
+      {
+        path: '**',
+        redirectTo: ''
       }
     ]
-  },
-  {
-    path: '',
-    pathMatch: 'full',
-    component: HomeComponent
-  },
-  {
-    path: '**',
-    redirectTo: ''
   }
 ];
 
