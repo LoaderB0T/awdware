@@ -39,10 +39,10 @@ export class HttpInterceptorService implements HttpInterceptor {
   private handleResponse(error: any): void {
     const respError = error as HttpErrorResponse;
     if (respError && (respError.status === 401 || respError.status === 403)) {
-      //this.routingService.navigateToAccountLogin();
-      //TODO: Implement redirect, except ypu already are on login pare or are currently beeing redirected
+      // this.routingService.navigateToAccountLogin();
+      // TODO: Implement redirect, except ypu already are on login pare or are currently beeing redirected
     } else {
-      //Todo: Visualize Error?
+      // Todo: Visualize Error?
     }
   }
 }
