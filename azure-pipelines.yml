@@ -1,0 +1,81 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  name: Hosted VS2017
+  demands: java
+
+steps:
+- task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core sdk'
+  inputs:
+    version: 2.2.401
+
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 4.9.2'
+  inputs:
+    versionSpec: 4.9.2
+    checkLatest: true
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: '$(Parameters.solution)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: WebApi/WebApi/WebApi.csproj
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: WebApi/WebApi/WebApi.csproj
+    arguments: '-o ./bin/publish --no-build --no-restore'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test with code coverage'
+  inputs:
+    command: custom
+    projects: WebApi/UnitTest/UnitTest.csproj
+    custom: test
+    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Convert coverage.cobertura.xml to htmlInline'
+  inputs:
+    command: custom
+    projects: WebApi/UnitTest/UnitTest.csproj
+    custom: reportgenerator
+    arguments: '"-reports:$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml" "-targetdir:$(Build.SourcesDirectory)\TestResults\Coverage\Reports" -tag:$(Build.BuildNumber) -reportTypes:htmlInline'
+    workingDirectory: WebApi/UnitTest
+
+- task: DotNetCoreCLI@2
+  displayName: 'Convert coverage.cobertura.xml to sonarQube'
+  inputs:
+    command: custom
+    projects: WebApi/UnitTest/UnitTest.csproj
+    custom: reportgenerator
+    arguments: '"-reports:$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml" "-targetdir:$(Build.SourcesDirectory)\TestResults\Coverage\Reports\sonar" -tag:$(Build.BuildNumber) -reportTypes:sonarQube'
+    workingDirectory: WebApi/UnitTest
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage from $(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+  inputs:
+    PathtoPublish: WebApi/WebApi/bin/publish
