@@ -6,10 +6,10 @@
 trigger:
   branches:
     include:
-     - master
+    - master
   paths:
     include:
-      - WebApi/**
+    - WebApi/**
 
 pool:
   name: Hosted VS2017
