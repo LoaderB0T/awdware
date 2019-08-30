@@ -30,7 +30,7 @@ steps:
   continueOnError: true
   displayName: 'Prepare analysis on SonarQube'
   inputs:
-    SonarQube: 'awdware.de sonarQube'
+    SonarQube: 'sonarqube'
     projectKey: 'awdware:webapi'
     projectName: 'awdware_webapi'
     extraProperties: |
