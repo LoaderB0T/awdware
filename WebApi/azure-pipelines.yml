@@ -9,7 +9,7 @@ trigger:
     - master
   paths:
     include:
-    - $(Build.SourcesDirectory)/WebApi/**
+    - WebApi/*
 
 pool:
   name: Hosted VS2017
