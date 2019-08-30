@@ -1,5 +1,10 @@
 trigger:
-- master
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - presentation/**
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -20,6 +25,27 @@ steps:
     projectDirectory: 'presentation/'
     arguments: 'install'
   displayName: 'yarn install'
+
+
+- task: SonarCloudPrepare@1
+  continueOnError: true
+  displayName: 'Prepare analysis on SonarCloud'
+  inputs:
+    SonarCloud: 'sonarcloud'
+    organization: 'awdware'
+    scannerMode: CLI
+    configMode: manual
+    cliProjectKey: 'awdware:presentation'
+    cliSources: presentation
+    extraProperties: |
+     sonar.sources=presentation/src
+     sonar.sourceEncoding=UTF-8
+     sonar.exclusions=**/node_modules/**,**/*.spec.ts
+     sonar.tests=presentation/src
+     sonar.test.inclusions=**/*.spec.ts
+     sonar.ts.tslintconfigpath=presentation/tslint.json
+     sonar.exclusions=**/node_modules/**,**/*.spec.ts
+
 
 - task: Yarn@3
   inputs:
@@ -47,3 +73,13 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
   displayName: publish build
+
+- task: SonarCloudAnalyze@1
+  displayName: 'Run Code Analysis'
+  continueOnError: true
+
+- task: SonarCloudPublish@1
+  displayName: 'Publish Quality Gate Result'
+  continueOnError: true
+  inputs:
+    pollingTimeoutSec: '300'
