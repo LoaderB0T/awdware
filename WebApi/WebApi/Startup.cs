@@ -142,7 +142,7 @@ namespace WebApi
             {
                 corsBuilder.AllowAnyHeader();
                 corsBuilder.AllowAnyMethod();
-                corsBuilder.WithOrigins("https://vote.awdware.de");
+                corsBuilder.WithOrigins("https://two.awdware.de");
                 corsBuilder.AllowCredentials();
             }
 
