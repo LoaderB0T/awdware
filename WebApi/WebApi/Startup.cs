@@ -142,8 +142,8 @@ namespace WebApi
             {
                 corsBuilder.AllowAnyHeader();
                 corsBuilder.AllowAnyMethod();
-                corsBuilder.AllowAnyOrigin();
-                //corsBuilder.WithOrigins("https://two.awdware.de");
+                //corsBuilder.AllowAnyOrigin();
+                corsBuilder.WithOrigins("https://two.awdware.de");
                 corsBuilder.AllowCredentials();
             }
 
