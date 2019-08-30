@@ -29,7 +29,7 @@ namespace WebApi
                 })
                 .ConfigureServices((hostingContext, services) =>
                 {
-                    var connectionString = hostingContext.Configuration.GetConnectionString("VoteDB");
+                    var connectionString = hostingContext.Configuration.GetConnectionString("awdwareDB");
                     services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(connectionString));
 
                     //Add Repositories
