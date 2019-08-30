@@ -4,7 +4,12 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - WebApi/**
 
 pool:
   name: Hosted VS2017
@@ -26,13 +31,15 @@ steps:
   displayName: 'NuGet restore'
   inputs:
     restoreSolution: '$(Parameters.solution)'
-- task: SonarQubePrepare@4
+
+- task: SonarCloudPrepare@1
   continueOnError: true
-  displayName: 'Prepare analysis on SonarQube'
+  displayName: 'Prepare analysis on SonarCloud'
   inputs:
-    SonarQube: 'awdware.de sonarQube'
+    SonarCloud: 'sonarcloud'
+    organization: 'awdware'
+    scannerMode: 'MSBuild'
     projectKey: 'awdware:webapi'
-    projectName: 'awdware_webapi'
     extraProperties: |
      sonar.exclusions=**/bin/**,**/obj/**
      sonar.test.exclusions=**/bin/**,**/obj/**
@@ -91,11 +98,12 @@ steps:
   inputs:
     PathtoPublish: WebApi/WebApi/bin/publish
 
-- task: SonarQubeAnalyze@4
+
+- task: SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
   continueOnError: true
 
-- task: SonarQubePublish@4
+- task: SonarCloudPublish@1
   displayName: 'Publish Quality Gate Result'
   continueOnError: true
   inputs:
