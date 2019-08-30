@@ -26,6 +26,17 @@ steps:
   displayName: 'NuGet restore'
   inputs:
     restoreSolution: '$(Parameters.solution)'
+- task: SonarQubePrepare@4
+  continueOnError: true
+  displayName: 'Prepare analysis on SonarQube'
+  inputs:
+    SonarQube: 'awdware.de sonarQube'
+    projectKey: 'awdware:webapi'
+    projectName: 'awdware_webapi'
+    extraProperties: |
+     sonar.exclusions=**/bin/**,**/obj/**
+     sonar.test.exclusions=**/bin/**,**/obj/**
+     sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarCube.xml
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
@@ -79,3 +90,13 @@ steps:
   displayName: 'Publish Artifact: drop'
   inputs:
     PathtoPublish: WebApi/WebApi/bin/publish
+
+- task: SonarQubeAnalyze@4
+  displayName: 'Run Code Analysis'
+  continueOnError: true
+
+- task: SonarQubePublish@4
+  displayName: 'Publish Quality Gate Result'
+  continueOnError: true
+  inputs:
+    pollingTimeoutSec: '300'
