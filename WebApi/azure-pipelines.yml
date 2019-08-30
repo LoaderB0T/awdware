@@ -49,6 +49,7 @@ steps:
   displayName: 'dotnet build'
   inputs:
     projects: WebApi/WebApi/WebApi.csproj
+    configuration: Release
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
@@ -59,6 +60,7 @@ steps:
     arguments: '-o ./bin/publish --no-build --no-restore'
     zipAfterPublish: false
     modifyOutputPath: false
+    configuration: Release
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test with code coverage'
