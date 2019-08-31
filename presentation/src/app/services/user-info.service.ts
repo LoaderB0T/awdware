@@ -17,7 +17,8 @@ export class UserInfoService {
   }
 
   clearUser() {
-    this.userInfo = null;
+    this.userInfo.userId = null;
+    this.userInfo.username = null;
   }
 
   setUser(userInfo: UserInfoDto) {

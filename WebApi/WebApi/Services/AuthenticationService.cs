@@ -26,7 +26,7 @@ namespace WebApi.Services
         private readonly IMailService _mailService;
         private readonly ILogger _logger;
 
-        private readonly string _emailConfirmationLink;
+        private readonly string _clientUrl;
 
         public AuthenticationService(
             IUserRepository userRepository,
@@ -40,7 +40,7 @@ namespace WebApi.Services
             _configuration = configuration;
             _mailService = mailService;
             _logger = logger;
-            _emailConfirmationLink = _configuration.GetSection("Links").GetValue<string>("EmailConfirmation");
+            _clientUrl = _configuration.GetSection("Clients").GetValue<string>("WebClient");
         }
 
         public string CreateToken(string userId)
@@ -113,7 +113,7 @@ namespace WebApi.Services
             string link = GenerateRandomLink();
             if (_userRepository.AddConfirmationKey(user, link, ConfirmType.EmailConfirmation))
             {
-                string completeLink = _emailConfirmationLink + "/" + link;
+                string completeLink = _clientUrl + "/account/verify/" + link;
                 MailBuilder builder = new MailBuilder(_configuration);
                 MailConfirmEmail model = new MailConfirmEmail
                 {
