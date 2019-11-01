@@ -43,7 +43,7 @@ steps:
     extraProperties: |
      sonar.exclusions=**/bin/**,**/obj/**
      sonar.test.exclusions=**/bin/**,**/obj/**
-     sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/
+     sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
