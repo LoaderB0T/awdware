@@ -70,6 +70,7 @@ namespace WebApi
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseCors("SiteCorsPolicy");
 
