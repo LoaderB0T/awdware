@@ -21,7 +21,7 @@ namespace WebApi.Static
         /// <param name="password">The password.</param>
         /// <param name="iterations">Number of iterations.</param>
         /// <returns>The hash.</returns>
-        public static string Hash(string password, int iterations)
+        private static string Hash(string password, int iterations)
         {
             // Create salt
             byte[] salt = new byte[SaltSize];
@@ -40,7 +40,7 @@ namespace WebApi.Static
             var base64Hash = Convert.ToBase64String(hashBytes);
 
             // Format hash with extra information
-            return string.Format("$FHWEBSHOPHASH$V1${0}${1}", iterations, base64Hash);
+            return string.Format("$awdware$v1${0}${1}", iterations, base64Hash);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace WebApi.Static
         /// </summary>
         /// <param name="hashString">The hash.</param>
         /// <returns>Is supported?</returns>
-        public static bool IsHashSupported(string hashString)
+        private static bool IsHashSupported(string hashString)
         {
-            return hashString.Contains("$FHWEBSHOPHASH$V1$");
+            return hashString.Contains("$awdware$v1$");
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace WebApi.Static
             }
 
             // Extract iteration and Base64 string
-            var splittedHashString = hashedPassword.Replace("$FHWEBSHOPHASH$V1$", "").Split('$');
+            var splittedHashString = hashedPassword.Replace("$awdware$v1$", "").Split('$');
             var iterations = int.Parse(splittedHashString[0]);
             var base64Hash = splittedHashString[1];
 

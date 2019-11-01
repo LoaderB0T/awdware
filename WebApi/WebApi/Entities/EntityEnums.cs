@@ -1,4 +1,4 @@
-﻿namespace WebApi.Entities.Enums
+﻿namespace WebApi.Entities
 {
     public enum ConfirmType
     {

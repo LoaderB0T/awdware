@@ -30,25 +30,25 @@ namespace WebApi.Static
             return new MailAddress(_config.GetValue<string>("Email"), _config.GetValue<string>("DisplayName"));
         }
 
-        private bool LoadTemplate(EmailType type)
+        private bool LoadTemplate(StaticEnums type)
         {
             var config = _configuration.GetSection("Mail");
             string path;
             switch (type)
             {
-                case EmailType.EMAIL_CONFIRMATION:
+                case StaticEnums.EMAIL_CONFIRMATION:
                     path = config.GetSection("Template").GetValue<string>("EmailConfirm");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("EmailConfirm");
                     break;
-                case EmailType.PASSWORD_RESET:
+                case StaticEnums.PASSWORD_RESET:
                     path = config.GetSection("Template").GetValue<string>("PasswordReset");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("PasswordReset");
                     break;
-                case EmailType.PASSWORD_RESET_NO_USER:
+                case StaticEnums.PASSWORD_RESET_NO_USER:
                     path = config.GetSection("Template").GetValue<string>("PasswordResetNoUser");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("PasswordReset");
                     break;
-                case EmailType.FORGOT_USERNAME:
+                case StaticEnums.FORGOT_USERNAME:
                     path = config.GetSection("Template").GetValue<string>("ForgotUsername");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("ForgotUsername");
                     break;
@@ -78,7 +78,7 @@ namespace WebApi.Static
         public MailMessage CreateUserDoesNotExistMail(string email)
         {
             Init(GetFrom(), new MailAddress(email));
-            if (!LoadTemplate(EmailType.PASSWORD_RESET_NO_USER))
+            if (!LoadTemplate(StaticEnums.PASSWORD_RESET_NO_USER))
                 throw new InvalidOperationException("Mail template not found.");
             _message.Body = _body;
             return _message;

@@ -5,14 +5,12 @@ using WebApi.Static;
 using WebApi.Mapper;
 using Microsoft.Extensions.Configuration;
 using System.Text;
-using WebApi.Entities.Enums;
 using WebApi.Models;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Logging;
 using WebApi.Models.JwtPayloads;
 using WebApi.Repositories;
-using WebApi.Models.Enums;
 
 namespace WebApi.Services
 {
@@ -85,7 +83,7 @@ namespace WebApi.Services
                 Lastname = registerRequestDto.Lastname,
                 Username = registerRequestDto.Username
             };
-            var newPw = PasswordHasher.Hash(registerRequestDto.Password, 10_000);
+            var newPw = PasswordHasher.Hash(registerRequestDto.Password);
             newUser.PasswordHash = newPw;
 
             if (_userRepository.AddUser(newUser))
@@ -121,7 +119,7 @@ namespace WebApi.Services
                     LastName = user.Lastname,
                     Link = completeLink,
                     To = user.Email,
-                    Type = EmailType.EMAIL_CONFIRMATION
+                    Type = StaticEnums.EMAIL_CONFIRMATION
                 };
                 return _mailService.Send(builder.CreateMailConfirmEmail(model));
             }
@@ -168,7 +166,7 @@ namespace WebApi.Services
                         LastName = user.Lastname,
                         Link = completeLink,
                         To = user.Email,
-                        Type = EmailType.PASSWORD_RESET
+                        Type = StaticEnums.PASSWORD_RESET
                     };
                     return _mailService.Send(builder.CreateMailConfirmEmail(model));
                 }
@@ -192,7 +190,7 @@ namespace WebApi.Services
                     FirstName = user.Firstname,
                     LastName = user.Lastname,
                     To = user.Email,
-                    Type = EmailType.FORGOT_USERNAME,
+                    Type = StaticEnums.FORGOT_USERNAME,
                     Username = user.Username
                 };
                 return _mailService.Send(builder.CreateMailConfirmEmail(model));
@@ -222,7 +220,7 @@ namespace WebApi.Services
             {
                 return false;
             }
-            return _userRepository.UpdatePassword(resetPasswordDto.Token, PasswordHasher.Hash(resetPasswordDto.NewPassword, 10_000));
+            return _userRepository.UpdatePassword(resetPasswordDto.Token, PasswordHasher.Hash(resetPasswordDto.NewPassword));
         }
 
         public TokenDto RenewToken(string oldToken)

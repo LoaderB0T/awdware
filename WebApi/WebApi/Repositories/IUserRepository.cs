@@ -1,6 +1,5 @@
 ﻿using System;
 using WebApi.Entities;
-using WebApi.Entities.Enums;
 using WebApi.Models;
 
 namespace WebApi.Repositories

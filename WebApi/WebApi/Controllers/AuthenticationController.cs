@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using WebApi.Dtos;
-using WebApi.Dtos.Enums;
 using WebApi.Services;
 
 namespace WebApi.Controllers

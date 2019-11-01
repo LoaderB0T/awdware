@@ -1,5 +1,4 @@
 ﻿using WebApi.Entities;
-using WebApi.Models.Enums;
 
 namespace WebApi.Models
 {

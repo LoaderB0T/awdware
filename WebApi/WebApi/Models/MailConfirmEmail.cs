@@ -4,7 +4,7 @@ namespace WebApi.Models
 {
     public class MailConfirmEmail
     {
-        public EmailType Type { get; set; }
+        public StaticEnums Type { get; set; }
         public string To { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

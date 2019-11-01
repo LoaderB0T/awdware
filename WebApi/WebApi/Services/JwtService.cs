@@ -33,12 +33,11 @@ namespace WebApi.Services
             var secretKey = new SymmetricSecurityKey(Convert.FromBase64String(secretKeyB64));
             var claims = new Claim[] {
             new Claim("userId", userId),
-            //new Claim(ClaimTypes.GivenName, userId)
             };
 
             var token = new JwtSecurityToken(
-                issuer: "FHWEBSHOP",
-                audience: "FHWEB Shop User",
+                issuer: "awdware",
+                audience: "awdware user",
                 claims: claims,
                 notBefore: DateTime.UtcNow,
                 expires: DateTime.UtcNow.AddDays(30),
@@ -62,8 +61,8 @@ namespace WebApi.Services
                 ValidateIssuerSigningKey = true,
                 ValidateActor = false,
                 ValidateLifetime = true,
-                //ValidIssuer = "FHWEBSHOP",
-                //ValidAudience = "FHWEB Shop User",
+                //ValidIssuer = "awdware",
+                //ValidAudience = "awdware user",
                 IssuerSigningKey = new SymmetricSecurityKey(
                            Convert.FromBase64String(System.IO.File.ReadAllText(@_userTokenKeyPath)))
             };

@@ -1,4 +1,4 @@
-﻿namespace WebApi.Models.Enums
+﻿namespace WebApi.Models
 {
     public enum ConfirmKeyUsageSuccess
     {

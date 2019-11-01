@@ -3,9 +3,7 @@ using System;
 using System.Linq;
 using WebApi.Contexts;
 using WebApi.Entities;
-using WebApi.Entities.Enums;
 using WebApi.Static;
-using WebApi.Models.Enums;
 using WebApi.Models;
 
 namespace WebApi.Repositories
