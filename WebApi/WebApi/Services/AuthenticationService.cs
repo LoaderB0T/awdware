@@ -33,7 +33,7 @@ namespace WebApi.Services
             IJwtService jwtService,
             IConfiguration configuration,
             IMailService mailService,
-            ILogger<AuthenticationService> logger)
+            ILogger<IAuthenticationService> logger)
         {
             _userRepository = userRepository;
             _jwtService = jwtService;

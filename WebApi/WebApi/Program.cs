@@ -7,6 +7,7 @@ using WebApi.Services;
 using WebApi.Repositories;
 using WebApi.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace WebApi
 {
@@ -14,34 +15,23 @@ namespace WebApi
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            return WebHost.CreateDefaultBuilder(args)
-                .ConfigureLogging((hostingContext, logging) =>
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-                    logging.ClearProviders();
-                    logging.AddConsole();
-                    logging.AddEventLog();
-                })
-                .ConfigureServices((hostingContext, services) =>
-                {
-                    var connectionString = hostingContext.Configuration.GetConnectionString("awdwareDB");
-                    services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(connectionString));
-
-                    //Add Repositories
-                    services.AddScoped<IUserRepository, UserRepository>();
-
-                    //Add Services
-                    services.AddScoped<IUserService, UserService>();
-                    services.AddScoped<IJwtService, JwtService>();
-                    services.AddScoped<IMailService, MailService>();
-                    services.AddScoped<IAuthenticationService, AuthenticationService>();
-                })
-                .UseStartup<Startup>();
+                    webBuilder.ConfigureLogging((hostingContext, logging) =>
+                    {
+                        logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                        logging.ClearProviders();
+                        logging.AddConsole();
+                        logging.AddEventLog();
+                    });
+                    webBuilder.UseStartup<Startup>();
+                });
         }
     }
 }

@@ -15,7 +15,7 @@ namespace WebApi.Services
         public IConfiguration Configuration { get; }
         private readonly string _userTokenKeyPath;
 
-        public JwtService(IConfiguration configuration, IHostingEnvironment evn)
+        public JwtService(IConfiguration configuration, IWebHostEnvironment evn)
         {
             Configuration = configuration;
             var userTokenKeyPath = Configuration.GetSection("Certificates").GetValue<string>("JwtUserSignature");

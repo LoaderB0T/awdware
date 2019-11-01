@@ -1,39 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
 	<UserSecretsId>7e136951-3b8c-4be6-a055-7500cc6d6c45</UserSecretsId>
 	<ProjectGuid>{80574927-2d08-43ca-8da1-e64ecf3e54ed}</ProjectGuid>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Template\forgot_username.html" />
-    <None Remove="Template\mail_confirm_mail.html" />
-    <None Remove="Template\mail_password_reset.html" />
-    <None Remove="Template\mail_password_reset_no_user.html" />
-  </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Template\forgot_username.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Template\mail_confirm_mail.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Template\mail_password_reset.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Template\mail_password_reset_no_user.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.Extensions.Logging.EventLog" Version="2.2.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
-  </ItemGroup>
 
 </Project>

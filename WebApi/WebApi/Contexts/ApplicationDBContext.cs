@@ -21,8 +21,6 @@ namespace WebApi.Contexts
         {
             if (modelBuilder == null)
                 throw new ArgumentNullException(nameof(modelBuilder));
-            //modelBuilder.Entity<Confirmationkey>()
-            //    .HasKey(uc => new { uc.UserId, uc.ConfirmType });
         }
     }
 }

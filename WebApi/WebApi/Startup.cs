@@ -1,50 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.Contexts;
+using WebApi.Hubs;
+using WebApi.Repositories;
 using WebApi.Services;
 
 namespace WebApi
 {
     public class Startup
     {
-        private readonly ILogger _logger;
-        private readonly IAuthenticationService _authenticationService;
         public IConfiguration Configuration { get; }
-        public IHostingEnvironment Environment { get; }
+        public IWebHostEnvironment Environment { get; }
 
         public Startup(
             IConfiguration configuration,
-            IHostingEnvironment env,
-            ILogger<Startup> logger,
-            IAuthenticationService authenticationService)
+            IWebHostEnvironment env
+            )
         {
             Configuration = configuration;
             Environment = env;
-            _logger = logger;
-            _authenticationService = authenticationService;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureJwtAuthentication(services);
             ConfigureCors(services);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
             services.AddSignalR();
+
+            var connectionString = Configuration.GetConnectionString("awdwareDB");
+            services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(connectionString));
+
+            //Add Repositories
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            //Add Services
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IMailService, MailService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+            ConfigureJwtAuthentication(services);
+
         }
 
         public void Configure(IApplicationBuilder app)
@@ -60,16 +69,17 @@ namespace WebApi
 
             UpdateDatabase(app);
 
-            app.UseCors("SiteCorsPolicy");
-            app.UseAuthentication();
             app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthentication();
 
-            app.UseSignalR(routes =>
+            app.UseCors("SiteCorsPolicy");
+
+            app.UseEndpoints(endpoints =>
             {
-                //routes.MapHub<HardwareDataHub>("/hardwaredata");
+                endpoints.MapControllers();
+                endpoints.MapHub<LedConfigHub>("ledConfigHub");
             });
-
-            app.UseMvc();
         }
 
         private void ConfigureJwtAuthentication(IServiceCollection services)
@@ -113,10 +123,18 @@ namespace WebApi
                     .RequireAssertion(context =>
                     {
                         var userId = context.User.Claims.ToList()[0].Value;
-                        return _authenticationService.HasMailConfirmed(userId);
+
+                        var scopeFactory = services
+                            .BuildServiceProvider()
+                            .GetRequiredService<IServiceScopeFactory>();
+
+                        using var scope = scopeFactory.CreateScope();
+                        var provider = scope.ServiceProvider;
+                        var authService = provider.GetRequiredService<IAuthenticationService>();
+                        return authService.HasMailConfirmed(userId);
                     })
-                    .AddAuthenticationSchemes("UserToken")
-                    .Build());
+                        .AddAuthenticationSchemes("UserToken")
+                        .Build());
                 options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
                 {
                     policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
@@ -131,7 +149,6 @@ namespace WebApi
 
             if (Environment.IsDevelopment())
             {
-                _logger.LogInformation("In Development environment");
                 corsBuilder.AllowAnyHeader();
                 corsBuilder.AllowAnyMethod();
                 corsBuilder.WithOrigins("http://localhost:4200");
@@ -154,15 +171,11 @@ namespace WebApi
 
         private static void UpdateDatabase(IApplicationBuilder app)
         {
-            using (var serviceScope = app.ApplicationServices
+            using var serviceScope = app.ApplicationServices
                 .GetRequiredService<IServiceScopeFactory>()
-                .CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
-                {
-                    context.Database.Migrate();
-                }
-            }
+                .CreateScope();
+            using var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+            context.Database.Migrate();
         }
     }
 }
