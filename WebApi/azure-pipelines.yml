@@ -16,12 +16,12 @@ pool:
   demands: java
 
 steps:
-- task: DotNetCoreInstaller@0
+- task: DotNetCoreInstaller@1
   displayName: 'Use .NET Core sdk'
   inputs:
     version: 3.0.100
 
-- task: NuGetToolInstaller@0
+- task: NuGetToolInstaller@1
   displayName: 'Use NuGet 4.9.2'
   inputs:
     versionSpec: 4.9.2

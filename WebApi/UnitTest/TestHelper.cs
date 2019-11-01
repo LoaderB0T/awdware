@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -17,7 +16,7 @@ namespace UnitTest
     {
         private readonly TestContext _testContext;
 
-        private IHostingEnvironment _environment;
+        private Mock<IWebHostEnvironment> _environment;
         private IConfiguration _configuration;
         private ApplicationDbContext _webShopDbContext;
         private UserRepository _userRepo;
@@ -133,13 +132,13 @@ namespace UnitTest
             return _configuration;
         }
 
-        public IHostingEnvironment GetEnvironment()
+        public IWebHostEnvironment GetEnvironment()
         {
             if(_environment == null)
             {
-                _environment = new HostingEnvironment();
+                _environment = new Mock<IWebHostEnvironment>();
             }
-            return _environment;
+            return _environment.Object;
         }
     }
 }
