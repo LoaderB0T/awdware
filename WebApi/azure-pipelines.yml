@@ -70,23 +70,21 @@ steps:
     custom: test
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
 
-- task: DotNetCoreCLI@2
+- task: reportgenerator@4
   displayName: 'Convert coverage.cobertura.xml to htmlInline'
   inputs:
-    command: custom
-    projects: WebApi/UnitTest/UnitTest.csproj
-    custom: reportgenerator
-    arguments: '"-reports:$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml" "-targetdir:$(Build.SourcesDirectory)\TestResults\Coverage\Reports" -tag:$(Build.BuildNumber) -reportTypes:htmlInline'
-    workingDirectory: WebApi/UnitTest
+    reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
+    targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
+    tag: '$(Build.BuildNumber)'
+    reporttypes: 'htmlInline'
 
-- task: DotNetCoreCLI@2
+- task: reportgenerator@4
   displayName: 'Convert coverage.cobertura.xml to sonarQube'
   inputs:
-    command: custom
-    projects: WebApi/UnitTest/UnitTest.csproj
-    custom: reportgenerator
-    arguments: '"-reports:$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml" "-targetdir:$(Build.SourcesDirectory)\TestResults\Coverage\Reports\sonar" -tag:$(Build.BuildNumber) -reportTypes:sonarQube'
-    workingDirectory: WebApi/UnitTest
+    reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
+    targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports\sonar'
+    tag: '$(Build.BuildNumber)'
+    reporttypes: 'sonarQube'
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage from $(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
