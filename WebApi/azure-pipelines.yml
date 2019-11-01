@@ -57,7 +57,7 @@ steps:
     command: publish
     publishWebProjects: false
     projects: WebApi/WebApi/WebApi.csproj
-    arguments: '-o ./bin/publish --no-build --no-restore'
+    arguments: '-o WebApi/WebApi/bin/publish --no-build --no-restore'
     zipAfterPublish: false
     modifyOutputPath: false
     configuration: Release

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebApi.Contexts;
-using WebApi.Dtos;
+﻿using WebApi.Dtos;
 using WebApi.Repositories;
 using WebApi.Mapper;
 using WebApi.Static;
-using WebApi.Entities;
 
 namespace WebApi.Services
 {

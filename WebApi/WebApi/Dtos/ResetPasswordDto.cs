@@ -1,5 +1,4 @@
-﻿
-namespace WebApi.Dtos
+﻿namespace WebApi.Dtos
 {
     public class ResetPasswordDto
     {

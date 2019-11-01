@@ -1,12 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
-using WebApi;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebApi.Controllers;
 
 namespace UnitTest.Tests.Controllers

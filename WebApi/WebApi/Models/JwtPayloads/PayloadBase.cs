@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WebApi.Models.JwtPayloads
+﻿namespace WebApi.Models.JwtPayloads
 {
     public abstract class PayloadBase
     {
