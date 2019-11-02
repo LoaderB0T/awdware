@@ -39,7 +39,8 @@ namespace WebApi.Mapper
         {
             return new LedConfigurationDto()
             {
-                Name = ledConfig.Name
+                Name = ledConfig.Name,
+                ConfigJson = ledConfig.ConfigJson
             };
         }
     }

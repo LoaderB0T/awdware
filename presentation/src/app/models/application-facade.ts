@@ -27,6 +27,7 @@ export enum PasswordResetStatus {
 
 export class LedConfigurationDto {
   public name: string;
+  public configJson: string;
 }
 
 export class LoginHelpRequestDto {
