@@ -28,7 +28,8 @@ import { SliderComponent } from './slider/slider.component';
     LoadingComponent,
     TextboxComponent,
     TabViewComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    SliderComponent
   ]
 })
 export class SharedModule { }

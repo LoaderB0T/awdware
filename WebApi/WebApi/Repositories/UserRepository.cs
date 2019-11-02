@@ -21,7 +21,8 @@ namespace WebApi.Repositories
 
         public WebUser GetUserById(string userId)
         {
-            var user = _webShopDBContext.WebUser.First(x => x.UserId == userId);
+            var userId2 = userId;
+            var user = _webShopDBContext.WebUser.Single(x => x.UserId == userId2);
             return user;
         }
 

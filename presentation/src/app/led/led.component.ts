@@ -24,7 +24,7 @@ export class LedComponent implements OnInit {
   ngOnInit() {
     this._ledService.getConfigs().subscribe(x => {
       this.ledConfigs = x;
-      this.updateTemp();
+      // this.updateTemp();
     });
   }
 
@@ -41,13 +41,13 @@ export class LedComponent implements OnInit {
           id: 1,
           name: 'Do Stuff',
           effectType: LedEffectPropertyType.BOOL,
-          value: true,
+          value: Math.random() < 0.5,
         },
         {
           id: 2,
           name: 'How much?',
           effectType: LedEffectPropertyType.NUMBER,
-          value: 2,
+          value: Math.floor(Math.random() * 100),
           minVal: 1,
           maxVal: 100
         } as LedEffectProperty

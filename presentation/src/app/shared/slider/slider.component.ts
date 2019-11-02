@@ -1,13 +1,99 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { noop } from 'rxjs';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { ThemeService } from '../services/theme.service';
+import { ColorType } from '../models/color-type.model';
 
 @Component({
   selector: 'awd-slider',
   templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  styleUrls: ['./slider.component.scss'],
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: SliderComponent, multi: true },
+  ]
 })
-export class SliderComponent implements OnInit {
+export class SliderComponent implements OnInit, ControlValueAccessor {
+  @Input() public min: number;
+  @Input() public max: number = 524288;
+  @Input() public inputTabIndex: number;
+  @Input() public name: string;
+  @Input() public labelText: string;
 
-  constructor() { }
+  private onTouchedCallback: () => void = noop;
+  private onChangeCallback: (_: any) => void = noop;
+  private _sanitizer: DomSanitizer;
+  private _theme: ThemeService;
+  public isDisabled: boolean;
+  public innerValue: number;
+  public isFocused: boolean;
+  public cssVariables: SafeStyle;
+
+  constructor(sanitizer: DomSanitizer, themeService: ThemeService) {
+    this._sanitizer = sanitizer;
+    this._theme = themeService;
+  }
+
+  writeValue(value: any) {
+    if (value !== this.innerValue) {
+      this.innerValue = value;
+      this.refreshStyles();
+    }
+  }
+
+  get value(): any {
+    return this.innerValue;
+  }
+
+  set value(v: any) {
+    if (v !== this.innerValue) {
+      this.innerValue = v;
+      this.onChangeCallback(v);
+      this.refreshStyles();
+    }
+  }
+
+  private refreshStyles() {
+    this.cssVariables = this._sanitizer.bypassSecurityTrustStyle(
+      `--slider-color: ${this.getCalculatedColor()};
+    --slider-background: ${this._theme.getColor('colorCharcoalGray')};`);
+  }
+
+  private getCalculatedColor(): string {
+    const col1 = this._theme.getColor('colorHighlightColor1');
+    const col2 = this._theme.getColor('colorHighlightColor2');
+
+    const color1 = ColorType.fromCssPropertyString(col1);
+    const color2 = ColorType.fromCssPropertyString(col2);
+
+    const ratio = this.value / this.max;
+
+    const colorRes = ColorType.transition(color1, color2, ratio);
+
+    return colorRes.toCssProperyString();
+  }
+
+  onBlur() {
+    this.isFocused = false;
+    this.onTouchedCallback();
+  }
+
+  onFocus() {
+    this.isFocused = true;
+  }
+
+
+  registerOnChange(fn: any) {
+    this.onChangeCallback = fn;
+  }
+
+  registerOnTouched(fn: any) {
+    this.onTouchedCallback = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
+  }
 
   ngOnInit() {
   }

@@ -1,1 +1,3 @@
-<p>slider works!</p>
+<input type="range" [(ngModel)]="value" [name]="name" [class]="name" [id]="name" [tabindex]="inputTabIndex"
+  [disabled]="isDisabled" (blur)="onBlur()" (focus)="onFocus()" [min]="min" [max]="max" [style]="cssVariables">
+<label [for]="name">{{labelText}}</label>
