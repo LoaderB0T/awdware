@@ -2,6 +2,12 @@ import { Component, OnInit, ChangeDetectorRef, EventEmitter, OnDestroy, Input, O
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { noop } from 'rxjs';
 
+export enum CheckedState {
+  UNDEFINED = 0,
+  CHECKED = 1,
+  UNCHECKED = 2
+}
+
 @Component({
   selector: 'awd-checkbox',
   templateUrl: './checkbox.component.html',
@@ -126,10 +132,4 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor, OnDestro
     this.ref = null;
     this.stateChanged.complete();
   }
-}
-
-export enum CheckedState {
-  UNDEFINED = 0,
-  CHECKED = 1,
-  UNCHECKED = 2
 }

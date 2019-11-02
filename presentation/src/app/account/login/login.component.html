@@ -13,7 +13,7 @@
         [(ngModel)]="loginModel.password" [inputTabIndex]="2" [icon]="'lock'" [icon2]="'lock-open'" required
         [disabled]="clickedButton"></awd-textbox>
     </div>
-    <awd-loading [class.hidden]="!clickedButton" [scale]="2"></awd-loading>
+    <awd-loading class="awd-loading" [class.hidden]="!clickedButton" [scale]="2"></awd-loading>
   </div>
   <input class="submit" type="submit" tabindex="3" [disabled]="loginDisabled"
     value="{{'account.login.form.submit.name' | translate}}">

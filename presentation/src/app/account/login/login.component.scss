@@ -26,7 +26,7 @@ span.description {
   display: inline-block;
 }
 
-awd-loading {
+.awd-loading {
   position: absolute;
   pointer-events: none;
   transition: opacity cubic-bezier(0.26, 0.14, 0.01, 0.98) 200ms;

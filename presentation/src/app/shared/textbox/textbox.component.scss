@@ -62,7 +62,6 @@
       user-select: none;
       transition: all cubic-bezier(0.26, 0.14, 0.01, 0.98) 300ms;
       transition-property: font-size, transform;
-      font-size: var(--font-size);
 
       &.moved {
         transform: translateY(calc(26px + calc(calc(var(--font-size) - 16px) * 1.2))); // very nice magic numbers
@@ -73,7 +72,6 @@
     input {
       border: none;
       background: transparent;
-      font-size: $fontSizeNormal;
       color: var(--colorPaperWhite);
       font-size: var(--font-size);
 
