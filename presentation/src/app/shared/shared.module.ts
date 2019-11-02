@@ -5,6 +5,8 @@ import { LoadingComponent } from './loading/loading.component';
 import { TextboxComponent } from './textbox/textbox.component';
 import { FormsModule } from '@angular/forms';
 import { TabViewComponent } from './tab-view/tab-view.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+import { SliderComponent } from './slider/slider.component';
 
 
 
@@ -12,7 +14,9 @@ import { TabViewComponent } from './tab-view/tab-view.component';
   declarations: [
     LoadingComponent,
     TextboxComponent,
-    TabViewComponent
+    TabViewComponent,
+    CheckboxComponent,
+    SliderComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +27,8 @@ import { TabViewComponent } from './tab-view/tab-view.component';
     TranslateModule,
     LoadingComponent,
     TextboxComponent,
-    TabViewComponent
+    TabViewComponent,
+    CheckboxComponent
   ]
 })
 export class SharedModule { }

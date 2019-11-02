@@ -5,8 +5,8 @@ export class LedEffectNumberProperty extends LedEffectProperty {
   public minVal: number;
   public maxVal: number;
 
-  constructor(effectType: LedEffectPropertyType, value: any, minValue: number, maxValue: number) {
-    super(effectType, value);
+  constructor(id: number, name: string, effectType: LedEffectPropertyType, value: any, minValue: number, maxValue: number) {
+    super(id, name, effectType, value);
     this.minVal = minValue;
     this.maxVal = maxValue;
   }

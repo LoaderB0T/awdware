@@ -10,6 +10,8 @@
 
     public class LedEffectPropertyDto
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
         public LedEffectPropertyType EffectType { get; set; }
         public object Value { get; set; }
         public int? MinValue { get; set; }

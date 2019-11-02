@@ -33,21 +33,29 @@ export class LedComponent implements OnInit {
   }
 
   updateTemp() {
-    const a = this.ledConfigs[0];
-    a.props = [
-      {
-        effectType: LedEffectPropertyType.BOOL,
-        value: true
-      },
-      {
-        effectType: LedEffectPropertyType.NUMBER,
-        value: 2,
-        minVal: 1,
-        maxVal: 100
-      } as LedEffectProperty
-    ];
 
-    this._ledService.updateConfig(a.toDto()).subscribe();
+    this.ledConfigs.forEach(a => {
+
+      a.props = [
+        {
+          id: 1,
+          name: 'Do Stuff',
+          effectType: LedEffectPropertyType.BOOL,
+          value: true,
+        },
+        {
+          id: 2,
+          name: 'How much?',
+          effectType: LedEffectPropertyType.NUMBER,
+          value: 2,
+          minVal: 1,
+          maxVal: 100
+        } as LedEffectProperty
+      ];
+
+      this._ledService.updateConfig(a.toDto()).subscribe();
+
+    });
   }
 
 }

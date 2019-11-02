@@ -1,1 +1,10 @@
-<b>{{ effectProperty.value }}</b>
+<div class="led-effect-property-container">
+  <ng-container [ngSwitch]="effectProperty.effectType">
+    <div *ngSwitchCase="effectType.BOOL" class="no-select">
+      <awd-checkbox [(ngModel)]="effectProperty.value" [labelText]="effectProperty.name"
+        [color]="theme.getColor('colorCharcoalGray')"></awd-checkbox>
+    </div>
+    <div *ngSwitchCase="effectType.COLOR"></div>
+    <div *ngSwitchCase="effectType.NUMBER"></div>
+  </ng-container>
+</div>

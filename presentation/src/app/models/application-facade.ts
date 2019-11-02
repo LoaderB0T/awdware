@@ -92,6 +92,8 @@ export enum LedEffectPropertyType {
 }
 
 export class LedEffectPropertyDto {
+  public id: number;
+  public name: string;
   public effectType: LedEffectPropertyType;
   public value: any;
   public minValue?: number;

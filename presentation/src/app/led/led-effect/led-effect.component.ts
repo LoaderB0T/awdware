@@ -11,9 +11,6 @@ export class LedEffectComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    setTimeout(() => {
-      console.warn(this.effect);
-    }, 100);
   }
 
 }

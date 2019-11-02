@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LedEffectProperty } from '../../models/led-effect-property.model';
+import { LedEffectPropertyType } from 'src/app/models/application-facade';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 
 @Component({
   selector: 'awd-led-effect-property',
@@ -8,10 +10,10 @@ import { LedEffectProperty } from '../../models/led-effect-property.model';
 })
 export class LedEffectPropertyComponent implements OnInit {
   @Input() effectProperty: LedEffectProperty;
+  effectType = LedEffectPropertyType;
 
-  constructor() { }
+  constructor(public theme: ThemeService) { }
 
   ngOnInit() {
   }
-
 }

@@ -40,13 +40,13 @@
 
   &.selected {
     cursor: default;
-    border-bottom-color: $colorHighlightColor2;
-    color: $colorHighlightColor1;
+    border-bottom-color: var(--colorHighlightColor2);
+    color: var(--colorHighlightColor1);
   }
 }
 
 .select-action:hover:not(.selected) {
-  border-bottom: 3px solid $colorHighlightColor1;
+  border-bottom: 3px solid var(--colorHighlightColor1);
 }
 
 #content {

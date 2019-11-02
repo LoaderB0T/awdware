@@ -3,7 +3,7 @@ import { LedEffectPropertyType } from 'src/app/models/application-facade';
 
 export class LedEffectBoolProperty extends LedEffectProperty {
 
-  constructor(effectType: LedEffectPropertyType, value: any) {
-    super(effectType, value);
+  constructor(id: number, name: string, effectType: LedEffectPropertyType, value: any) {
+    super(id, name, effectType, value);
   }
 }

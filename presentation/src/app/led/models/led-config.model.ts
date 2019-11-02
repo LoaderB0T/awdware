@@ -17,11 +17,11 @@ export class LedConfig {
       this.props = dto.ledEffect.properties.map(propDto => {
         switch (propDto.effectType) {
           case LedEffectPropertyType.BOOL:
-            return new LedEffectBoolProperty(propDto.effectType, propDto.value);
+            return new LedEffectBoolProperty(propDto.id, propDto.name, propDto.effectType, propDto.value);
           case LedEffectPropertyType.COLOR:
-            return new LedEffectColorProperty(propDto.effectType, propDto.value);
+            return new LedEffectColorProperty(propDto.id, propDto.name, propDto.effectType, propDto.value);
           case LedEffectPropertyType.NUMBER:
-            return new LedEffectNumberProperty(propDto.effectType, propDto.value, propDto.minValue, propDto.maxValue);
+            return new LedEffectNumberProperty(propDto.id, propDto.name, propDto.effectType, propDto.value, propDto.minValue, propDto.maxValue);
           default:
             return null;
         }
@@ -43,6 +43,8 @@ export class LedConfig {
         propDto.minValue = (prop as LedEffectNumberProperty).minVal;
       }
 
+      propDto.id = prop.id;
+      propDto.name = prop.name;
       propDto.effectType = prop.effectType;
       propDto.value = prop.value;
       return propDto;

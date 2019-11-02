@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { TranslationService } from './services/translation.service';
+import { TranslationService } from './shared/services/translation.service';
+import { ThemeService } from './shared/services/theme.service';
 
 @Component({
   selector: 'awd-root',
@@ -10,7 +11,8 @@ import { TranslationService } from './services/translation.service';
 export class AppComponent {
   title = 'presentation';
 
-  constructor(private translationService: TranslationService) {
+  constructor(private translationService: TranslationService, private themeService: ThemeService) {
     this.translationService.init();
+    this.themeService.changeTheme(themeService.darkTheme);
   }
 }

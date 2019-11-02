@@ -8,11 +8,11 @@
   position: relative;
   justify-content: space-between;
   align-items: center;
-  border-bottom: $colorHighlightColor1 3px solid;
+  border-bottom: var(--colorHighlightColor1) 3px solid;
   transition: border-bottom 75ms linear;
 
   &.disabled {
-    border-bottom: $colorHighlightGray 3px solid;
+    border-bottom: var(--colorHighlightGray) 3px solid;
   }
 
   .icon-container {
@@ -32,7 +32,7 @@
     }
   }
   &.focus {
-    border-bottom: $colorHighlightColor2 3px solid;
+    border-bottom: var(--colorHighlightColor2) 3px solid;
 
     .icon-container.has-second-icon {
       .icon {
@@ -57,7 +57,7 @@
     label {
       position: absolute;
       font-size: $fontSizeNormal;
-      color: $colorPaperGray;
+      color: var(--colorPaperGray);
       pointer-events: none;
       user-select: none;
       transition: all cubic-bezier(0.26, 0.14, 0.01, 0.98) 300ms;
@@ -74,7 +74,7 @@
       border: none;
       background: transparent;
       font-size: $fontSizeNormal;
-      color: $colorPaperWhite;
+      color: var(--colorPaperWhite);
       font-size: var(--font-size);
 
       &[type="password"] {
@@ -96,8 +96,8 @@
       display: none;
       position: absolute;
       transform: translateX(-325px) translateY(-20px);
-      background: $colorHighlightGray;
-      border: $colorErrorRed 2px solid;
+      background: var(--colorHighlightGray);
+      border: var(--colorErrorRed) 2px solid;
       padding: 10px;
       width: 300px;
       white-space: pre-line;
@@ -106,7 +106,7 @@
 
     .error-icon {
       font-size: 20px;
-      color: $colorErrorRed;
+      color: var(--colorErrorRed);
 
       &:hover ~ .error-description {
         display: block;
