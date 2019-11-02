@@ -13,7 +13,7 @@ namespace WebApi.Repositories
         private readonly ILogger _logger;
         private readonly ApplicationDbContext _webShopDBContext;
 
-        public UserRepository(ApplicationDbContext webShopDBContext, ILogger<UserRepository> logger)
+        public UserRepository(ApplicationDbContext webShopDBContext, ILogger logger)
         {
             _webShopDBContext = webShopDBContext;
             _logger = logger;

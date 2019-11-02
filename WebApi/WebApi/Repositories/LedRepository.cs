@@ -11,7 +11,7 @@ namespace WebApi.Repositories
         private readonly ILogger _logger;
         private readonly ApplicationDbContext _webShopDBContext;
 
-        public LedRepository(ApplicationDbContext webShopDBContext, ILogger<ILedRepository> logger)
+        public LedRepository(ApplicationDbContext webShopDBContext, ILogger logger)
         {
             _webShopDBContext = webShopDBContext;
             _logger = logger;

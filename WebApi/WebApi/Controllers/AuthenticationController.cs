@@ -19,7 +19,7 @@ namespace WebApi.Controllers
         public AuthenticationController(
             IAuthenticationService authenticationService,
             IUserService userService,
-            ILogger<AuthenticationController> logger)
+            ILogger logger)
         {
             _authenticationService = authenticationService;
             _userService = userService;
