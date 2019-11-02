@@ -13,6 +13,7 @@ import { HttpClient, HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { MeComponent } from './me/me.component';
 import { VoteModule } from './vote/vote.module';
+import { LedModule } from './led/led.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { VoteModule } from './vote/vote.module';
     SharedModule,
     AccountModule,
     HomeModule,
-    VoteModule
+    VoteModule,
+    LedModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
   bootstrap: [AppComponent]

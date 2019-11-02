@@ -25,6 +25,10 @@ export enum PasswordResetStatus {
   SUCCESS = 1
 }
 
+export class LedConfigurationDto {
+  public name: string;
+}
+
 export class LoginHelpRequestDto {
   public email: string;
   public forgotUsername: boolean;

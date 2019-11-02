@@ -31,7 +31,7 @@ namespace WebApi.Services
             IJwtService jwtService,
             IConfiguration configuration,
             IMailService mailService,
-            ILogger<IAuthenticationService> logger)
+            ILogger logger)
         {
             _userRepository = userRepository;
             _jwtService = jwtService;
@@ -62,7 +62,7 @@ namespace WebApi.Services
 
             if (passwordMatch)
             {
-                return potentialUser.ConvertToLoginResponseDto();
+                return potentialUser.ToLoginResponseDto();
             }
             else
             {
@@ -89,7 +89,7 @@ namespace WebApi.Services
             if (_userRepository.AddUser(newUser))
             {
                 SendEmailConfirmationLink(newUser);
-                return newUser.ConvertToRegisterResponseDto();
+                return newUser.ToRegisterResponseDto();
             }
 
             return new RegisterResponseDto { RegisterSuccess = RegisterResult.UNKNOWN };

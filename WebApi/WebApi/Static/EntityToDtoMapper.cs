@@ -5,16 +5,16 @@ namespace WebApi.Mapper
 {
     public static class EntityToDtoMapper
     {
-        public static LoginResponseDto ConvertToLoginResponseDto(this WebUser user)
+        public static LoginResponseDto ToLoginResponseDto(this WebUser user)
         {
             return new LoginResponseDto()
             {
-                UserInfo = user.ConvertToUserInfoDto(),
+                UserInfo = user.ToUserInfoDto(),
                 LoginSuccess = LoginResult.SUCCESS
             };
         }
 
-        public static UserInfoDto ConvertToUserInfoDto(this WebUser user)
+        public static UserInfoDto ToUserInfoDto(this WebUser user)
         {
             return new UserInfoDto()
             {
@@ -26,12 +26,20 @@ namespace WebApi.Mapper
             };
         }
 
-        public static RegisterResponseDto ConvertToRegisterResponseDto(this WebUser user)
+        public static RegisterResponseDto ToRegisterResponseDto(this WebUser user)
         {
             return new RegisterResponseDto()
             {
                 RegisterSuccess = RegisterResult.SUCCESS,
-                UserInfo = user.ConvertToUserInfoDto()
+                UserInfo = user.ToUserInfoDto()
+            };
+        }
+
+        public static LedConfigurationDto ToDto(this LedConfig ledConfig)
+        {
+            return new LedConfigurationDto()
+            {
+                Name = ledConfig.Name
             };
         }
     }

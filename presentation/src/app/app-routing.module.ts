@@ -12,6 +12,7 @@ import { UserInfoResolverService } from './account/services/user-info-resolver.s
 import { VoteComponent } from './vote/vote.component';
 import { MyVotesComponent } from './vote/my-votes/my-votes.component';
 import { NewVoteComponent } from './vote/new-vote/new-vote.component';
+import { LedComponent } from './led/led.component';
 
 
 const routes: Routes = [
@@ -72,6 +73,10 @@ const routes: Routes = [
             redirectTo: 'my'
           }
         ]
+      },
+      {
+        path: 'led',
+        component: LedComponent
       },
       {
         path: '',

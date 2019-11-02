@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -17,6 +18,7 @@ namespace UnitTest
         private readonly TestContext _testContext;
 
         private Mock<IWebHostEnvironment> _environment;
+        private Mock<ILogger> _logger;
         private IConfiguration _configuration;
         private ApplicationDbContext _webShopDbContext;
         private UserRepository _userRepo;
@@ -115,7 +117,7 @@ namespace UnitTest
         {
             if (_mailService == null)
             {
-                _mailService = new MailService(GetConfiguration());
+                _mailService = new MailService(GetConfiguration(), GetLogger());
             }
             return _mailService;
         }
@@ -130,6 +132,15 @@ namespace UnitTest
                 _configuration = configurationBuilder.Build();
             }
             return _configuration;
+        }
+
+        public ILogger GetLogger()
+        {
+            if(_logger == null)
+            {
+                _logger = new Mock<ILogger>();
+            }
+            return _logger.Object;
         }
 
         public IWebHostEnvironment GetEnvironment()

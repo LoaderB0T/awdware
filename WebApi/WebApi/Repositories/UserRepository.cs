@@ -79,13 +79,13 @@ namespace WebApi.Repositories
                 Expiration = expiration
             };
 
-            if (_webShopDBContext.UserConfirmation.Any(x => (x.UserId == confirm.UserId && x.ConfirmType == confirm.ConfirmType)))
+            if (_webShopDBContext.UserConfirmations.Any(x => (x.UserId == confirm.UserId && x.ConfirmType == confirm.ConfirmType)))
             {
                 throw new InvalidOperationException("The confirm key already exists");
             }
             else
             {
-                _webShopDBContext.UserConfirmation.Add(confirm);
+                _webShopDBContext.UserConfirmations.Add(confirm);
             }
 
             _webShopDBContext.SaveChanges();
@@ -95,18 +95,18 @@ namespace WebApi.Repositories
 
         public bool UserHasConfirmedEmail(string userId)
         {
-            return !_webShopDBContext.UserConfirmation.Any(x => (x.UserId == userId && x.ConfirmType == ConfirmType.EmailConfirmation));
+            return !_webShopDBContext.UserConfirmations.Any(x => (x.UserId == userId && x.ConfirmType == ConfirmType.EmailConfirmation));
         }
 
         public bool ConfirmationLinkExists(string link, ConfirmType type)
         {
-            return _webShopDBContext.UserConfirmation.Any(
+            return _webShopDBContext.UserConfirmations.Any(
                 x => (x.KeyString == link && x.ConfirmType == type));
         }
 
         public bool ConfirmationLinkIsValid(string link, ConfirmType type)
         {
-            Confirmationkey confirm = _webShopDBContext.UserConfirmation.First(
+            Confirmationkey confirm = _webShopDBContext.UserConfirmations.First(
                 x => (x.KeyString == link && x.ConfirmType == type));
             return confirm.Expiration > DateTime.Now;
         }
@@ -115,7 +115,7 @@ namespace WebApi.Repositories
         public ConfirmKeyUsageResult TryUseConfirmationLink(string key, ConfirmType type)
         {
             var res = new ConfirmKeyUsageResult();
-            var confirmKey = _webShopDBContext.UserConfirmation.FirstOrDefault(x => (x.KeyString == key && x.ConfirmType == type));
+            var confirmKey = _webShopDBContext.UserConfirmations.FirstOrDefault(x => (x.KeyString == key && x.ConfirmType == type));
 
             if (confirmKey == null)
             {
@@ -123,7 +123,7 @@ namespace WebApi.Repositories
                 return res;
             }
 
-            _webShopDBContext.UserConfirmation.Remove(confirmKey);
+            _webShopDBContext.UserConfirmations.Remove(confirmKey);
             _webShopDBContext.SaveChanges();
 
             if (confirmKey.Expiration > DateTime.Now)

@@ -47,4 +47,8 @@ export class RoutingService {
   public navigateToNewVote() {
     this.router.navigate(['vote', 'new']);
   }
+
+  public navigateToLed() {
+    this.router.navigate(['led']);
+  }
 }

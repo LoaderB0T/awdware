@@ -21,7 +21,7 @@ namespace WebApi.Services
         public UserInfoDto GetMyUserInfo(string userId)
         {
             var userEntity = _userRepository.GetUserById(userId);
-            var foreignUserDto = userEntity.ConvertToUserInfoDto();
+            var foreignUserDto = userEntity.ToUserInfoDto();
             return foreignUserDto;
         }
 

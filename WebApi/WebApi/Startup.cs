@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.Contexts;
 using WebApi.Hubs;
@@ -43,12 +44,18 @@ namespace WebApi
 
             //Add Repositories
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ILedRepository, LedRepository>();
 
             //Add Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<ILedService, LedService>();
+
+            var serviceProvider = services.BuildServiceProvider();
+            var logger = serviceProvider.GetService<ILogger<Startup>>();
+            services.AddSingleton(typeof(ILogger), logger);
 
             ConfigureJwtAuthentication(services);
 

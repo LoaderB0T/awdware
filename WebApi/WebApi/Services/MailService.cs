@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Mail;
 
@@ -7,13 +8,15 @@ namespace WebApi.Services
     public class MailService : IMailService, IDisposable
     {
         private readonly IConfiguration _configuration;
+        private readonly ILogger _logger;
         private SmtpClient _smtp;
 
         private readonly int _retry = 3;
 
-        public MailService(IConfiguration configuration)
+        public MailService(IConfiguration configuration, ILogger logger)
         {
             _configuration = configuration;
+            _logger = logger;
             Init();
         }
 
@@ -35,22 +38,16 @@ namespace WebApi.Services
 
         public bool Send(MailMessage mail)
         {
-            for( int i = _retry; i > 0; --i)
+            try
             {
-                try
-                {
-                    _smtp.Send(mail);
-                    return true;
-                }
-                catch( Exception)
-                {
-                    if( i != 1)
-                    {
-                        //TODO: sleep async
-                    }
-                }
+                _smtp.Send(mail);
+                return true;
             }
-            return false;
+            catch (Exception)
+            {
+                _logger.LogError("Failed to send mail", mail, _smtp);
+                return false;
+            }
         }
 
         public void Dispose()
