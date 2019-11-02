@@ -40,7 +40,8 @@
     </div>
     <awd-loading [class.hidden]="!clickedButton" [scale]="2"></awd-loading>
   </div>
-  <input type="submit" class="submit" tabindex="7" [disabled]="registerDisabled">
+  <input type="submit" class="submit" tabindex="7" [disabled]="registerDisabled"
+    value="{{'account.register.form.submit.name' | translate}}">
 </form>
 
 <span *ngIf="errorMessageKey">{{'account.register.error.' + errorMessageKey | translate}}</span>

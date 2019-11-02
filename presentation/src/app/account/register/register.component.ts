@@ -25,9 +25,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private _subMgr = new SubscriptionManager();
   private _accountService: AccountService;
   private _routingService: RoutingService;
-  private _formElement: NgForm;
   @ViewChild('register', { static: true })
-  formElement: NgForm;
+  private _formElement: NgForm;
 
   constructor(accountService: AccountService, routingService: RoutingService) {
     this._accountService = accountService;

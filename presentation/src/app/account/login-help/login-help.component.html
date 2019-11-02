@@ -13,8 +13,10 @@
     <awd-loading [class.hidden]="!clickedButton" [scale]="2"></awd-loading>
   </div>
   <div class="reset-buttons">
-    <button class="submit" type="submit" (click)="onSubmit('Username')">Reset Username</button>
-    <button class="submit" type="submit" (click)="onSubmit('Password')">Reset Password</button>
+    <button class="submit" type="submit" (click)="onSubmit('Username')" [disabled]="loginHelpDisabled"
+      value="{{'account.loginHelp.form.submitUsername.name' | translate}}">Reset Username</button>
+    <button class="submit" type="submit" (click)="onSubmit('Password')" [disabled]="loginHelpDisabled"
+      value="{{'account.loginHelp.form.submitPassword.name' | translate}}">Reset Password</button>
   </div>
 </form>
 <span *ngIf="errorMessageKey">{{'account.login.error.' + errorMessageKey | translate}}</span>

@@ -33,6 +33,16 @@ export class LoginHelpComponent implements OnInit, OnDestroy {
 
   }
 
+  get loginHelpDisabled(): boolean {
+    if (this.clickedButton) {
+      return true;
+    }
+
+    if (this._formElement) {
+      return !this._formElement.valid;
+    }
+  }
+
   public ngOnDestroy() {
     this._subMgr.unsubscribeAll();
   }
