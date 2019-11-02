@@ -18,6 +18,8 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
   @Input() public max: number = 524288;
   @Input() public inputTabIndex: number;
   @Input() public name: string;
+  @Input() public minColor: string;
+  @Input() public maxColor: string;
   @Input() public labelText: string;
 
   private onTouchedCallback: () => void = noop;
@@ -60,17 +62,25 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
   }
 
   private getCalculatedColor(): string {
-    const col1 = this._theme.getColor('colorHighlightColor1');
-    const col2 = this._theme.getColor('colorHighlightColor2');
+    if (this.minColor) {
+      if (this.maxColor) {
 
-    const color1 = ColorType.fromCssPropertyString(col1);
-    const color2 = ColorType.fromCssPropertyString(col2);
+        const color1 = ColorType.fromCssPropertyString(this.minColor);
+        const color2 = ColorType.fromCssPropertyString(this.maxColor);
 
-    const ratio = this.value / this.max;
+        const ratio = this.value / this.max;
 
-    const colorRes = ColorType.transition(color1, color2, ratio);
+        const colorRes = ColorType.transition(color1, color2, ratio);
 
-    return colorRes.toCssProperyString();
+        return colorRes.toCssProperyString();
+      } else {
+        return this.minColor;
+      }
+    } else {
+      return this._theme.getColor('colorHighlightColor1');
+    }
+
+
   }
 
   onBlur() {

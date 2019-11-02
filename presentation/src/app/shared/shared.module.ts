@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { TabViewComponent } from './tab-view/tab-view.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { SliderComponent } from './slider/slider.component';
+import { ColorSliderComponent } from './color-slider/color-slider.component';
 
 
 
@@ -16,7 +17,8 @@ import { SliderComponent } from './slider/slider.component';
     TextboxComponent,
     TabViewComponent,
     CheckboxComponent,
-    SliderComponent
+    SliderComponent,
+    ColorSliderComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { SliderComponent } from './slider/slider.component';
     TextboxComponent,
     TabViewComponent,
     CheckboxComponent,
-    SliderComponent
+    SliderComponent,
+    ColorSliderComponent
   ]
 })
 export class SharedModule { }
