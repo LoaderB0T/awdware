@@ -1,4 +1,6 @@
-﻿using WebApi.Dtos;
+﻿using System.Text.Json;
+using WebApi.Dtos;
+using WebApi.Dtos.Led;
 using WebApi.Entities;
 
 namespace WebApi.Mapper
@@ -39,8 +41,9 @@ namespace WebApi.Mapper
         {
             return new LedConfigurationDto()
             {
+                Id = ledConfig.Id.ToString(),
                 Name = ledConfig.Name,
-                ConfigJson = ledConfig.ConfigJson
+                LedEffect = JsonSerializer.Deserialize<LedEffectDto>(ledConfig.ConfigJson)
             };
         }
     }

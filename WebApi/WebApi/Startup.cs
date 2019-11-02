@@ -36,7 +36,9 @@ namespace WebApi
         {
             ConfigureCors(services);
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options => {
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+            });
             services.AddSignalR();
 
             var connectionString = Configuration.GetConnectionString("awdwareDB");
@@ -53,7 +55,7 @@ namespace WebApi
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ILedService, LedService>();
 
-            var serviceProvider = services.BuildServiceProvider();
+            using var serviceProvider = services.BuildServiceProvider();
             var logger = serviceProvider.GetService<ILogger<Startup>>();
             services.AddSingleton(typeof(ILogger), logger);
 

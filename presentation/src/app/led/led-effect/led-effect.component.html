@@ -1,0 +1,5 @@
+<div *ngIf="effect && effect.props">
+  <div *ngFor="let prop of effect.props">
+    <awd-led-effect-property [effectProperty]="prop"></awd-led-effect-property>
+  </div>
+</div>

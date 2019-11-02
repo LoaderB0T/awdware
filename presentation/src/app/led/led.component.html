@@ -3,5 +3,9 @@
     This is <strong>{{userInfo.username}}</strong>
   </span>
   <br>
-  <span *ngFor="let cfg of ledConfigs">{{cfg.name}}</span>
+  <div *ngFor="let effect of ledConfigs">
+    {{ effect.id }}
+    {{ effect.name }}
+    <awd-led-effect [effect]="effect"></awd-led-effect>
+  </div>
 </div>

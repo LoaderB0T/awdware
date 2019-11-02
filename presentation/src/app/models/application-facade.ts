@@ -25,11 +25,6 @@ export enum PasswordResetStatus {
   SUCCESS = 1
 }
 
-export class LedConfigurationDto {
-  public name: string;
-  public configJson: string;
-}
-
 export class LoginHelpRequestDto {
   public email: string;
   public forgotUsername: boolean;
@@ -77,4 +72,28 @@ export class UserInfoDto {
   public firstname: string;
   public lastname: string;
   public email: string;
+}
+
+export class LedConfigurationDto {
+  public id: string;
+  public name: string;
+  public ledEffect: LedEffectDto;
+}
+
+export class LedEffectDto {
+  public properties: Array<LedEffectPropertyDto>;
+}
+
+export enum LedEffectPropertyType {
+  UNKNOWN = 0,
+  COLOR = 1,
+  NUMBER = 2,
+  BOOL = 3
+}
+
+export class LedEffectPropertyDto {
+  public effectType: LedEffectPropertyType;
+  public value: any;
+  public minValue?: number;
+  public maxValue?: number;
 }

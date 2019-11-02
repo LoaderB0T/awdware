@@ -3,6 +3,9 @@ using System.Linq;
 using WebApi.Contexts;
 using WebApi.Entities;
 using System.Collections.Generic;
+using WebApi.Dtos.Led;
+using System;
+using System.Text.Json;
 
 namespace WebApi.Repositories
 {
@@ -17,9 +20,17 @@ namespace WebApi.Repositories
             _logger = logger;
         }
 
-        public IEnumerable<LedConfig> GetLedConfig(string userId)
+        public IEnumerable<LedConfig> GetLedConfigs(string userId)
         {
             return _webShopDBContext.LedConfigs.Where(x => x.UserId == userId);
+        }
+
+        public void UpdateLedConfig(Guid id, LedEffectDto ledEffect, string newName)
+        {
+            var oldConfig = _webShopDBContext.LedConfigs.First(x => x.Id == id);
+            oldConfig.Name = newName;
+            oldConfig.ConfigJson = JsonSerializer.Serialize(ledEffect);
+            _webShopDBContext.SaveChangesAsync();
         }
     }
 }

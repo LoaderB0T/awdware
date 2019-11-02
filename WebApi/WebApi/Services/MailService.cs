@@ -11,8 +11,6 @@ namespace WebApi.Services
         private readonly ILogger _logger;
         private SmtpClient _smtp;
 
-        private readonly int _retry = 3;
-
         public MailService(IConfiguration configuration, ILogger logger)
         {
             _configuration = configuration;

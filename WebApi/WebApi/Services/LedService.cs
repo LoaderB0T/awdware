@@ -1,9 +1,9 @@
-﻿using WebApi.Dtos;
-using WebApi.Repositories;
+﻿using WebApi.Repositories;
 using WebApi.Mapper;
-using WebApi.Static;
 using System.Collections.Generic;
 using System.Linq;
+using WebApi.Dtos.Led;
+using System;
 
 namespace WebApi.Services
 {
@@ -22,7 +22,19 @@ namespace WebApi.Services
 
         public IEnumerable<LedConfigurationDto> GetConfigurations(string userId)
         {
-            return _ledRepository.GetLedConfig(userId).Select(x => x.ToDto());
+            return _ledRepository.GetLedConfigs(userId).Select(x => x.ToDto());
+        }
+
+        public bool UpdateConfiguration(string userId, LedConfigurationDto newConfig)
+        {
+            var id = Guid.Parse(newConfig.Id);
+            var oldConfigs = _ledRepository.GetLedConfigs(userId);
+            if (!oldConfigs.Any(x => x.Id.Equals(id)))
+            {
+                return false;
+            }
+            _ledRepository.UpdateLedConfig(id, newConfig.LedEffect, newConfig.Name);
+            return true;
         }
     }
 }
