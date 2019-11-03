@@ -37,8 +37,6 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   @ViewChild('inputField', { static: true })
   private inputElement: ElementRef<HTMLInputElement>;
 
-  @HostBinding('style.--font-size')
-
   public isDisabled: boolean = false;
   public isFocused: boolean = false;
   private innerValue: any = '';
