@@ -77,6 +77,7 @@ export class UserInfoDto {
 export class LedConfigurationDto {
   public id: string;
   public name: string;
+  public ordinal: number;
   public ledEffect: LedEffectDto;
 }
 

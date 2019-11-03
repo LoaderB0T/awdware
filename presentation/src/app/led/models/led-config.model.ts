@@ -66,13 +66,33 @@ export class LedEffect {
 
   private getDefaultParams() {
     switch (this.effectKind) {
+      case LedEffectKind.STATIC: {
+        this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
+        break;
+      }
       case LedEffectKind.PIXEL: {
+        this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
+        this.props.push(new LedEffectColorProperty(2, 'Background Color', '#000000'));
+        this.props.push(new LedEffectNumberProperty(3, 'Speed', 30, 5, 255));
+        this.props.push(new LedEffectNumberProperty(4, 'Count', 200, 1, 1000));
+        this.props.push(new LedEffectBoolProperty(5, 'Even Colors', true));
+        break;
+      }
+      case LedEffectKind.MIX: {
+        this.props.push(new LedEffectColorProperty(1, 'Color A', '#FFFFFF'));
+        this.props.push(new LedEffectColorProperty(2, 'Color B', '#000000'));
+        this.props.push(new LedEffectNumberProperty(3, 'Speed', 30, 5, 255));
+        this.props.push(new LedEffectBoolProperty(4, 'Animated', false));
+        this.props.push(new LedEffectBoolProperty(5, 'Random Colors', false));
+        break;
+      }
+      case LedEffectKind.STRIPE: {
         this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
         this.props.push(new LedEffectColorProperty(2, 'Background Color', '#000000'));
         this.props.push(new LedEffectBoolProperty(3, 'Music Reactive', false));
         this.props.push(new LedEffectNumberProperty(4, 'Speed', 30, 5, 255));
-        this.props.push(new LedEffectNumberProperty(5, 'Count', 200, 1, 1000));
-        this.props.push(new LedEffectBoolProperty(6, 'Even Colors', true));
+        this.props.push(new LedEffectBoolProperty(5, 'Switch Direction', false));
+        this.props.push(new LedEffectBoolProperty(6, 'Two Sides', false));
         break;
       }
     }

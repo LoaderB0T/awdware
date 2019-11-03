@@ -5,6 +5,7 @@ namespace WebApi.Dtos.Led
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public int Ordinal { get; set; }
         public LedEffectDto LedEffect { get; set; }
     }
 }

@@ -20,6 +20,7 @@ export class LedService {
     return this._apiService.get<Array<LedConfigurationDto>>('led/effects')
       .pipe(
         tap(dtos => {
+          dtos.sort((a, b) => a.ordinal - b.ordinal);
           const models = dtos.map(
             dto => LedEffect.fromDto(dto)
           );

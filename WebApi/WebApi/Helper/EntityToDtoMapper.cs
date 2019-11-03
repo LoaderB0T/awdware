@@ -43,6 +43,7 @@ namespace WebApi.Mapper
             {
                 Id = ledConfig.Id.ToString(),
                 Name = ledConfig.Name,
+                Ordinal = ledConfig.Ordinal,
                 LedEffect = JsonSerializer.Deserialize<LedEffectDto>(ledConfig.ConfigJson)
             };
         }

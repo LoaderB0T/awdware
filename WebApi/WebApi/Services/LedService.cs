@@ -22,14 +22,14 @@ namespace WebApi.Services
 
         public IEnumerable<LedConfigurationDto> GetConfigurations(string userId)
         {
-            return _ledRepository.GetLedConfigs(userId).Select(x => x.ToDto());
+            return _ledRepository.GetLedEffects(userId).Select(x => x.ToDto());
         }
 
         public bool UpdateEffect(string userId, LedConfigurationDto newConfig)
         {
             var id = Guid.Parse(newConfig.Id);
-            var oldConfigs = _ledRepository.GetLedConfigs(userId);
-            if (!oldConfigs.Any(x => x.Id.Equals(id)))
+            var oldEffects = _ledRepository.GetLedEffects(userId);
+            if (!oldEffects.Any(x => x.Id.Equals(id)))
             {
                 return false;
             }
@@ -40,7 +40,9 @@ namespace WebApi.Services
         public Guid AddEffect(string userId, LedConfigurationDto newConfig)
         {
             var newId = Guid.NewGuid();
-            _ledRepository.AddLedConfig(newId, userId, newConfig.LedEffect, newConfig.Name);
+            var existingOrdinals = _ledRepository.GetLedEffects(userId).Select(x => x.Ordinal);
+            var newOrdinal = existingOrdinals.Any() ? existingOrdinals.Max() + 1 : 1;
+            _ledRepository.AddLedConfig(newId, userId, newConfig.LedEffect, newConfig.Name, newOrdinal);
             return newId;
         }
 

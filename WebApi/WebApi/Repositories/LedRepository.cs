@@ -20,7 +20,7 @@ namespace WebApi.Repositories
             _logger = logger;
         }
 
-        public IEnumerable<LedEffect> GetLedConfigs(string userId)
+        public IEnumerable<LedEffect> GetLedEffects(string userId)
         {
             return _webShopDBContext.LedConfigs.Where(x => x.UserId == userId);
         }
@@ -32,13 +32,14 @@ namespace WebApi.Repositories
             oldConfig.ConfigJson = JsonSerializer.Serialize(ledEffect);
             _webShopDBContext.SaveChanges();
         }
-        public void AddLedConfig(Guid id, string userId, LedEffectDto ledEffect, string newName)
+        public void AddLedConfig(Guid id, string userId, LedEffectDto ledEffect, string newName, int ordinal)
         {
             var ledConfig = new LedEffect();
             ledConfig.Id = id;
             ledConfig.UserId = userId;
             ledConfig.Name = newName;
             ledConfig.Version = 1;
+            ledConfig.Ordinal = ordinal;
             ledConfig.ConfigJson = JsonSerializer.Serialize(ledEffect);
             _webShopDBContext.LedConfigs.Add(ledConfig);
             _webShopDBContext.SaveChanges();

@@ -22,5 +22,8 @@ namespace WebApi.Entities
 
         [Required]
         public int Version { get; set; }
+
+        [Required]
+        public int Ordinal { get; set; }
     }
 }
