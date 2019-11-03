@@ -52,30 +52,4 @@ export class LedComponent implements OnInit {
   public cancelAddEffect() {
     this.addDialogVisible = false;
   }
-
-  updateTemp() {
-    this.ledConfigs.forEach(a => {
-
-      a.props = [
-        {
-          id: 1,
-          name: 'Do Stuff',
-          effectType: LedEffectPropertyKind.BOOL,
-          value: Math.random() < 0.5,
-        },
-        {
-          id: 2,
-          name: 'How much?',
-          effectType: LedEffectPropertyKind.NUMBER,
-          value: Math.floor(Math.random() * 100),
-          minVal: 1,
-          maxVal: 100
-        } as LedEffectProperty
-      ];
-
-      this._ledService.updateEffect(a.toDto()).subscribe();
-
-    });
-  }
-
 }
