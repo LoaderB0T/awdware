@@ -40,6 +40,9 @@ export class LedComponent implements OnInit {
   }
 
   public confirmAddEffect() {
+    if (!this.canConfirmAddEffect) {
+      return;
+    }
     this.addDialogVisible = false;
     const newEffect = this._ledService.getNewEffect(this.selectedAddEffect, this.addEffectName);
     this.ledConfigs.push(newEffect);
@@ -50,5 +53,9 @@ export class LedComponent implements OnInit {
 
   public cancelAddEffect() {
     this.addDialogVisible = false;
+  }
+
+  public get canConfirmAddEffect(): boolean {
+    return this.selectedAddEffect && this.addEffectName && this.addEffectName.length >= 2 && this.addEffectName.length <= 32;
   }
 }

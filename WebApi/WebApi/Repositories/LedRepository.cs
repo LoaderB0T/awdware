@@ -20,7 +20,7 @@ namespace WebApi.Repositories
             _logger = logger;
         }
 
-        public IEnumerable<LedConfig> GetLedConfigs(string userId)
+        public IEnumerable<LedEffect> GetLedConfigs(string userId)
         {
             return _webShopDBContext.LedConfigs.Where(x => x.UserId == userId);
         }
@@ -34,7 +34,7 @@ namespace WebApi.Repositories
         }
         public void AddLedConfig(Guid id, string userId, LedEffectDto ledEffect, string newName)
         {
-            var ledConfig = new LedConfig();
+            var ledConfig = new LedEffect();
             ledConfig.Id = id;
             ledConfig.UserId = userId;
             ledConfig.Name = newName;

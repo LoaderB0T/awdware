@@ -37,7 +37,7 @@ namespace WebApi.Mapper
             };
         }
 
-        public static LedConfigurationDto ToDto(this LedConfig ledConfig)
+        public static LedConfigurationDto ToDto(this LedEffect ledConfig)
         {
             return new LedConfigurationDto()
             {

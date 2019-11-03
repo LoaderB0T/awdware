@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApi.Entities
 {
-    public class LedConfig
+    public class LedEffect
     {
         [Key]
         [Required]
@@ -14,7 +14,7 @@ namespace WebApi.Entities
         public string UserId { get; set; }
 
         [Required]
-        [MinLength(2), MaxLength(30)]
+        [MinLength(2), MaxLength(64)]
         public string Name { get; set; }
 
         [Required]

@@ -110,9 +110,13 @@
       .icon {
         font-size: 50px;
         padding-left: 10px;
-        cursor: pointer;
-        &:hover {
-          color: var(--colorHighlightColor1);
+      }
+      :not(.disabled) {
+        .icon {
+          cursor: pointer;
+          &:hover {
+            color: var(--colorHighlightColor1);
+          }
         }
       }
     }

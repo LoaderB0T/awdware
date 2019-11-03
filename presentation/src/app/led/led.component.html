@@ -35,11 +35,11 @@
       <span>Pixel</span>
     </div>
   </div>
-  <div class="add-effect-lower" *ngIf="selectedAddEffect">
-    <awd-textbox class="textbox" [hidePlaceholderOnInput]="true" [fontSize]="32" [placeholder]="'Name'"
-      [(ngModel)]="addEffectName"></awd-textbox>
+  <div class="add-effect-lower">
+    <awd-textbox class="textbox" [hidePlaceholderOnInput]="true" [fontSize]="32" [placeholder]="'Name'" [minLength]="2"
+      [maxLength]="64" [(ngModel)]="addEffectName"></awd-textbox>
     <div class="button-group">
-      <div (click)="confirmAddEffect()">
+      <div (click)="confirmAddEffect()" [class.disabled]="!canConfirmAddEffect">
         <i class="icon fal fa-check-square"></i>
       </div>
       <div (click)="cancelAddEffect()">
