@@ -41,8 +41,8 @@ export class ThemeService {
       { name: 'colorPaperWhite', value: 'rgba(26, 25, 25, 1)' },
       { name: 'colorPaperGray', value: 'rgb(92, 94, 96)' },
       { name: 'colorHighlightGray', value: 'rgb(40, 40, 46)' },
-      { name: 'colorHighlightYellow', value: 'rgba(255, 166, 0, 1)' },
-      { name: 'colorHighlightOrange', value: 'rgb(255, 72, 0)' },
+      { name: 'colorHighlightColor1', value: 'rgba(255, 166, 0, 1)' },
+      { name: 'colorHighlightColor2', value: 'rgb(255, 72, 0)' },
       { name: 'colorErrorRed', value: 'rgb(238, 31, 16)' },
     ];
     return theme;

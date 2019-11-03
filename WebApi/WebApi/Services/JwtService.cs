@@ -70,7 +70,7 @@ namespace WebApi.Services
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
             var user = handler.ValidateToken(token, validationParameters, out validatedToken);
             var claims = user.Claims.ToList();
-            if (claims.Count() != 5)
+            if (claims.Count != 5)
                 return false;
             return true;
         }

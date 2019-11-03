@@ -30,7 +30,18 @@ namespace WebApi.Repositories
             var oldConfig = _webShopDBContext.LedConfigs.First(x => x.Id == id);
             oldConfig.Name = newName;
             oldConfig.ConfigJson = JsonSerializer.Serialize(ledEffect);
-            _webShopDBContext.SaveChangesAsync();
+            _webShopDBContext.SaveChanges();
+        }
+        public void AddLedConfig(Guid id, string userId, LedEffectDto ledEffect, string newName)
+        {
+            var ledConfig = new LedConfig();
+            ledConfig.Id = id;
+            ledConfig.UserId = userId;
+            ledConfig.Name = newName;
+            ledConfig.Version = 1;
+            ledConfig.ConfigJson = JsonSerializer.Serialize(ledEffect);
+            _webShopDBContext.LedConfigs.Add(ledConfig);
+            _webShopDBContext.SaveChanges();
         }
     }
 }

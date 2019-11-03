@@ -21,20 +21,29 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("configs")]
-        public ActionResult<UserInfoDto> GetMyLedConfigurations([FromHeader] string authorization)
+        [Route("effects")]
+        public ActionResult<UserInfoDto> GetMyLedeffects([FromHeader] string authorization)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
             return Ok(_ledService.GetConfigurations(userId));
         }
 
         [HttpPost]
-        [Route("config")]
-        public ActionResult<UserInfoDto> UpdateLedConfiguration([FromHeader] string authorization, [FromBody] LedConfigurationDto newConfig)
+        [Route("updateeffect")]
+        public ActionResult<UserInfoDto> UpdateLedEffect([FromHeader] string authorization, [FromBody] LedConfigurationDto newConfig)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
-            _ledService.UpdateConfiguration(userId, newConfig);
+            _ledService.UpdateEffect(userId, newConfig);
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("addeffect")]
+        public ActionResult<UserInfoDto> AddLedEffect([FromHeader] string authorization, [FromBody] LedConfigurationDto newConfig)
+        {
+            var userId = _authenticationService.GetUserIdFromToken(authorization);
+            var newId = _ledService.AddEffect(userId, newConfig);
+            return Ok(newId.ToString());
         }
     }
 }

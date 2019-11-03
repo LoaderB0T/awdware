@@ -81,10 +81,19 @@ export class LedConfigurationDto {
 }
 
 export class LedEffectDto {
+  public effectKind: LedEffectKind;
   public properties: Array<LedEffectPropertyDto>;
 }
 
-export enum LedEffectPropertyType {
+export enum LedEffectKind {
+  UNKNOWN = 0,
+  MIX = 1,
+  STRIPE = 2,
+  STATIC = 3,
+  PIXEL = 4
+}
+
+export enum LedEffectPropertyKind {
   UNKNOWN = 0,
   COLOR = 1,
   NUMBER = 2,
@@ -94,7 +103,7 @@ export enum LedEffectPropertyType {
 export class LedEffectPropertyDto {
   public id: number;
   public name: string;
-  public effectType: LedEffectPropertyType;
+  public effectType: LedEffectPropertyKind;
   public value: any;
   public minValue?: number;
   public maxValue?: number;

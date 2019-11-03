@@ -1,22 +1,130 @@
 @import "../../styles/all.scss";
 
-.led-effects-container {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
-  .led-effect-container {
-    width: 25vw;
-    min-width: 380px;
-    padding: 40px 20px;
-    background-color: var(--colorHighlightGray);
-    margin: 10px;
+#led-main {
+  .led-effects-container {
     display: flex;
-    flex-direction: column;
-    span.header {
-      font-size: $fontSizeGiant;
-      font-weight: $fontWeightBold;
-      align-self: center;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    .led-effect-container {
+      width: 25vw;
+      min-width: 380px;
+      padding: 40px 20px;
+      background-color: var(--colorHighlightGray);
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      span.header {
+        font-size: $fontSizeGiant;
+        font-weight: $fontWeightBold;
+        align-self: center;
+      }
     }
   }
+}
+
+.add-button {
+  height: 80px;
+  width: 80px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--colorHighlightGray);
+  }
+  .icon {
+    font-size: 80px;
+    padding-left: 10px;
+  }
+}
+
+.add-dialog {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: fit-content;
+  width: fit-content;
+  background: var(--colorHighlightGray);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  span.description {
+    padding-bottom: 10px;
+    display: block;
+  }
+  .add-dialog-items {
+    display: flex;
+    .add-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-width: 100px;
+      cursor: pointer;
+      .icon {
+        font-size: 64px;
+      }
+      .icon1 {
+        display: block;
+      }
+      .icon2 {
+        display: none;
+      }
+      &:hover,
+      &.selected {
+        background-color: var(--colorCharcoalGray);
+        .icon1 {
+          display: none;
+        }
+        .icon2 {
+          display: block;
+        }
+      }
+      &.selected {
+        .icon {
+          color: var(--colorHighlightColor1);
+        }
+      }
+      span {
+        padding-top: 15px;
+        font-size: $fontSizeLarge;
+      }
+    }
+  }
+  .add-effect-lower {
+    display: flex;
+    align-items: flex-end;
+    height: 80px;
+    width: 100%;
+    .textbox {
+      flex-grow: 1;
+    }
+    .button-group {
+      display: flex;
+      .icon {
+        font-size: 50px;
+        padding-left: 10px;
+        cursor: pointer;
+        &:hover {
+          color: var(--colorHighlightColor1);
+        }
+      }
+    }
+  }
+}
+
+.add-dialog-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9;
 }

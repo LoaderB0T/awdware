@@ -1,7 +1,7 @@
 ﻿using WebApi.Dtos;
 using WebApi.Repositories;
 using WebApi.Mapper;
-using WebApi.Static;
+using WebApi.Helper;
 
 namespace WebApi.Services
 {

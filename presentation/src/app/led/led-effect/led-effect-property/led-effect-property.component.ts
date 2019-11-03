@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LedEffectProperty } from '../../models/led-effect-property.model';
-import { LedEffectPropertyType } from 'src/app/models/application-facade';
+import { LedEffectPropertyKind } from 'src/app/models/application-facade';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 import { LedEffectNumberProperty } from '../../models/led-effect-number-property.model';
 import { InvalidOperationError } from 'src/app/models/invalid-operation-error';
@@ -14,7 +14,7 @@ import { LedEffectColorProperty } from '../../models/led-effect-color-property.m
 })
 export class LedEffectPropertyComponent implements OnInit {
   @Input() effectProperty: LedEffectProperty;
-  effectType = LedEffectPropertyType;
+  effectType = LedEffectPropertyKind;
 
   constructor(public theme: ThemeService) { }
 
@@ -22,19 +22,19 @@ export class LedEffectPropertyComponent implements OnInit {
   }
 
   public get numProp(): LedEffectNumberProperty {
-    if (this.effectProperty.effectType !== LedEffectPropertyType.NUMBER) {
+    if (this.effectProperty.effectType !== LedEffectPropertyKind.NUMBER) {
       throw new InvalidOperationError('Invalid cast');
     }
     return this.effectProperty as LedEffectNumberProperty;
   }
   public get boolProp(): LedEffectBoolProperty {
-    if (this.effectProperty.effectType !== LedEffectPropertyType.BOOL) {
+    if (this.effectProperty.effectType !== LedEffectPropertyKind.BOOL) {
       throw new InvalidOperationError('Invalid cast');
     }
     return this.effectProperty as LedEffectBoolProperty;
   }
   public get colorProp(): LedEffectColorProperty {
-    if (this.effectProperty.effectType !== LedEffectPropertyType.COLOR) {
+    if (this.effectProperty.effectType !== LedEffectPropertyKind.COLOR) {
       throw new InvalidOperationError('Invalid cast');
     }
     return this.effectProperty as LedEffectColorProperty;

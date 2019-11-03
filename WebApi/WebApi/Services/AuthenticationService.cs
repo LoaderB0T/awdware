@@ -1,7 +1,7 @@
 ﻿using System;
 using WebApi.Dtos;
 using WebApi.Entities;
-using WebApi.Static;
+using WebApi.Helper;
 using WebApi.Mapper;
 using Microsoft.Extensions.Configuration;
 using System.Text;
@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using Microsoft.Extensions.Logging;
 using WebApi.Models.JwtPayloads;
 using WebApi.Repositories;
+using System.Globalization;
 
 namespace WebApi.Services
 {
@@ -77,7 +78,7 @@ namespace WebApi.Services
         {
             var newUser = new WebUser
             {
-                UserId = "user:" + string.Format("{0:yyyyMMddHHmmssffff}", DateTime.UtcNow),
+                UserId = "user:" + string.Format(CultureInfo.InvariantCulture ,"{0:yyyyMMddHHmmssffff}", DateTime.UtcNow),
                 Email = registerRequestDto.Email,
                 Firstname = registerRequestDto.Firstname,
                 Lastname = registerRequestDto.Lastname,
@@ -98,10 +99,12 @@ namespace WebApi.Services
         public string GenerateRandomLink()
         {
             byte[] b = new byte[32];
-            RandomNumberGenerator.Create().GetNonZeroBytes(b);
+            var rndm = RandomNumberGenerator.Create();
+            rndm.GetNonZeroBytes(b);
+            rndm.Dispose();
             string randomPart = Convert.ToBase64String(b);
             randomPart = randomPart.Replace('/', 'm').Replace('+', 'x');
-            string time = Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0:yyyyMMddHHmmssffff}", DateTime.UtcNow)));
+            string time = Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format(CultureInfo.InvariantCulture, "{0:yyyyMMddHHmmssffff}", DateTime.UtcNow)));
             time = time.Replace('/', 'm').Replace('+', 'x');
             return randomPart + time;
         }
@@ -119,7 +122,7 @@ namespace WebApi.Services
                     LastName = user.Lastname,
                     Link = completeLink,
                     To = user.Email,
-                    Type = StaticEnums.EMAIL_CONFIRMATION
+                    Type = EmailKind.EMAIL_CONFIRMATION
                 };
                 return _mailService.Send(builder.CreateMailConfirmEmail(model));
             }
@@ -142,7 +145,7 @@ namespace WebApi.Services
 
         public string GetUserIdFromToken(string token)
         {
-            token = token.Replace("Bearer ", "");
+            token = token.Replace("Bearer ", "", StringComparison.OrdinalIgnoreCase);
             var tokenPayloadStr = token.Split('.')[1];
             var tokenPayloadStrBytes = Base64Url.Decode(tokenPayloadStr);
             var tokenPayloadStrDecoded = Encoding.UTF8.GetString(tokenPayloadStrBytes);
@@ -166,7 +169,7 @@ namespace WebApi.Services
                         LastName = user.Lastname,
                         Link = completeLink,
                         To = user.Email,
-                        Type = StaticEnums.PASSWORD_RESET
+                        Type = EmailKind.PASSWORD_RESET
                     };
                     return _mailService.Send(builder.CreateMailConfirmEmail(model));
                 }
@@ -190,7 +193,7 @@ namespace WebApi.Services
                     FirstName = user.Firstname,
                     LastName = user.Lastname,
                     To = user.Email,
-                    Type = StaticEnums.FORGOT_USERNAME,
+                    Type = EmailKind.FORGOT_USERNAME,
                     Username = user.Username
                 };
                 return _mailService.Send(builder.CreateMailConfirmEmail(model));

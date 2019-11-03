@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.Security.Cryptography;
 
-namespace WebApi.Static
+namespace WebApi.Helper
 {
     public static class PasswordHasher
     {
@@ -25,11 +26,13 @@ namespace WebApi.Static
         {
             // Create salt
             byte[] salt = new byte[SaltSize];
-            new RNGCryptoServiceProvider().GetBytes(salt);
-
+            var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
+            rngCryptoServiceProvider.GetBytes(salt);
+            rngCryptoServiceProvider.Dispose();
             // Create hash
             var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256);
             var hash = pbkdf2.GetBytes(HashSize);
+            pbkdf2.Dispose();
 
             // Combine salt and hash
             var hashBytes = new byte[SaltSize + HashSize];
@@ -40,7 +43,7 @@ namespace WebApi.Static
             var base64Hash = Convert.ToBase64String(hashBytes);
 
             // Format hash with extra information
-            return string.Format("$awdware$v1${0}${1}", iterations, base64Hash);
+            return string.Format(CultureInfo.InvariantCulture, "$awdware$v1${0}${1}", iterations, base64Hash);
         }
 
         /// <summary>
@@ -60,7 +63,7 @@ namespace WebApi.Static
         /// <returns>Is supported?</returns>
         private static bool IsHashSupported(string hashString)
         {
-            return hashString.Contains("$awdware$v1$");
+            return hashString.Contains("$awdware$v1$", StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -78,8 +81,8 @@ namespace WebApi.Static
             }
 
             // Extract iteration and Base64 string
-            var splittedHashString = hashedPassword.Replace("$awdware$v1$", "").Split('$');
-            var iterations = int.Parse(splittedHashString[0]);
+            var splittedHashString = hashedPassword.Replace("$awdware$v1$", "", StringComparison.OrdinalIgnoreCase).Split('$');
+            var iterations = int.Parse(splittedHashString[0], NumberStyles.Integer, CultureInfo.InvariantCulture);
             var base64Hash = splittedHashString[1];
 
             // Get hash bytes
@@ -92,6 +95,7 @@ namespace WebApi.Static
             // Create hash with given salt
             var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256);
             byte[] hash = pbkdf2.GetBytes(HashSize);
+            pbkdf2.Dispose();
 
             // Get result
             for (var i = 0; i < HashSize; i++)

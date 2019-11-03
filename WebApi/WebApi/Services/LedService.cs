@@ -25,7 +25,7 @@ namespace WebApi.Services
             return _ledRepository.GetLedConfigs(userId).Select(x => x.ToDto());
         }
 
-        public bool UpdateConfiguration(string userId, LedConfigurationDto newConfig)
+        public bool UpdateEffect(string userId, LedConfigurationDto newConfig)
         {
             var id = Guid.Parse(newConfig.Id);
             var oldConfigs = _ledRepository.GetLedConfigs(userId);
@@ -35,6 +35,13 @@ namespace WebApi.Services
             }
             _ledRepository.UpdateLedConfig(id, newConfig.LedEffect, newConfig.Name);
             return true;
+        }
+
+        public Guid AddEffect(string userId, LedConfigurationDto newConfig)
+        {
+            var newId = Guid.NewGuid();
+            _ledRepository.AddLedConfig(newId, userId, newConfig.LedEffect, newConfig.Name);
+            return newId;
         }
     }
 }

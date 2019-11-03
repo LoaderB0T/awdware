@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace WebApi.Static
+namespace WebApi.Helper
 {
     public static class PropertyValidation
     {

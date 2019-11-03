@@ -1,12 +1,12 @@
-import { LedEffectPropertyType } from 'src/app/models/application-facade';
+import { LedEffectPropertyKind } from 'src/app/models/application-facade';
 
 export abstract class LedEffectProperty {
   public id: number;
   public name: string;
-  public effectType: LedEffectPropertyType;
+  public effectType: LedEffectPropertyKind;
   public value: any;
 
-  constructor(id: number, name: string, effectType: LedEffectPropertyType, value: any) {
+  constructor(id: number, name: string, effectType: LedEffectPropertyKind, value: any) {
     this.id = id;
     this.name = name;
     this.effectType = effectType;

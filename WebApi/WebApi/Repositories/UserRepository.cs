@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using WebApi.Contexts;
 using WebApi.Entities;
-using WebApi.Static;
+using WebApi.Helper;
 using WebApi.Models;
 
 namespace WebApi.Repositories
@@ -28,13 +28,13 @@ namespace WebApi.Repositories
 
         public WebUser TryGetUserByName(string username)
         {
-            var user = _webShopDBContext.WebUser.FirstOrDefault(x => x.Username.ToLower() == username.ToLower());
+            var user = _webShopDBContext.WebUser.FirstOrDefault(x => x.Username.ToUpperInvariant() == username.ToUpperInvariant());
             return user;
         }
 
         public WebUser TryGetUserByEmail(string email)
         {
-            var user = _webShopDBContext.WebUser.FirstOrDefault(x => x.Email.ToLower() == email.ToLower());
+            var user = _webShopDBContext.WebUser.FirstOrDefault(x => x.Email.ToUpperInvariant() == email.ToUpperInvariant());
             return user;
         }
 
@@ -45,13 +45,13 @@ namespace WebApi.Repositories
 
         public bool CheckIfUsernameExists(string username)
         {
-            var exists = _webShopDBContext.WebUser.Any(x => x.Username.ToLower() == username.ToLower());
+            var exists = _webShopDBContext.WebUser.Any(x => x.Username.ToUpperInvariant() == username.ToUpperInvariant());
             return exists;
         }
 
         public bool CheckIfEmailExists(string email)
         {
-            var exists = _webShopDBContext.WebUser.Any(x => x.Email.ToLower() == email.ToLower());
+            var exists = _webShopDBContext.WebUser.Any(x => x.Email.ToUpperInvariant() == email.ToUpperInvariant());
             return exists;
         }
 

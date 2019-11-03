@@ -1,8 +1,4 @@
-<div id="me-main">
-  <span>
-    This is <strong>{{userInfo.username}}</strong>
-  </span>
-  <br>
+<div id="led-main">
   <div class="led-effects-container">
     <div *ngFor="let effect of ledConfigs" class="led-effect-container" id="led-effect-{{effect.id}}">
       <span class="header">
@@ -12,3 +8,44 @@
     </div>
   </div>
 </div>
+
+<div class="add-button" (click)="showAddDialog()">
+  <i class="icon fal fa-plus"></i>
+</div>
+
+<div class="add-dialog" *ngIf="addDialogVisible">
+  <span class="description">Please do stuff and lick and bla and more text</span>
+  <div class="add-dialog-items">
+    <div class="add-item" [class.selected]="selectedAddEffect === ledEffectKind.STATIC"
+      (click)="selectAddEffect(ledEffectKind.STATIC)">
+      <i class="icon icon1 fal fa-lightbulb"></i>
+      <i class="icon icon2 fal fa-lightbulb-on"></i>
+      <span>Static</span>
+    </div>
+    <div class="add-item" [class.selected]="selectedAddEffect === ledEffectKind.MIX"
+      (click)="selectAddEffect(ledEffectKind.MIX)">
+      <i class="icon icon1 fal fa-lightbulb"></i>
+      <i class="icon icon2 fal fa-lightbulb-on"></i>
+      <span>Mix</span>
+    </div>
+    <div class="add-item" [class.selected]="selectedAddEffect === ledEffectKind.PIXEL"
+      (click)="selectAddEffect(ledEffectKind.PIXEL)">
+      <i class="icon icon1 fal fa-lightbulb"></i>
+      <i class="icon icon2 fal fa-lightbulb-on"></i>
+      <span>Pixel</span>
+    </div>
+  </div>
+  <div class="add-effect-lower" *ngIf="selectedAddEffect">
+    <awd-textbox class="textbox" [hidePlaceholderOnInput]="true" [fontSize]="32" [placeholder]="'Name'"
+      [(ngModel)]="addEffectName"></awd-textbox>
+    <div class="button-group">
+      <div (click)="confirmAddEffect()">
+        <i class="icon fal fa-check-square"></i>
+      </div>
+      <div (click)="cancelAddEffect()">
+        <i class="icon fal fa-times-square"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="add-dialog-bg" *ngIf="addDialogVisible"></div>

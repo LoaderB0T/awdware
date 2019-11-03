@@ -1,6 +1,6 @@
-﻿namespace WebApi.Static
+﻿namespace WebApi.Helper
 {
-    public enum StaticEnums
+    public enum EmailKind
     {
         EMAIL_CONFIRMATION,
         PASSWORD_RESET,

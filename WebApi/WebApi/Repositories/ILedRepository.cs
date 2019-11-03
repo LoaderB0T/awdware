@@ -9,5 +9,6 @@ namespace WebApi.Repositories
     {
         IEnumerable<LedConfig> GetLedConfigs(string userId);
         void UpdateLedConfig(Guid id, LedEffectDto ledEffect, string newName);
+        void AddLedConfig(Guid id, string userId, LedEffectDto ledEffect, string newName);
     }
 }

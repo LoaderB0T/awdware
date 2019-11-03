@@ -1,5 +1,5 @@
 import { LedEffectProperty } from './led-effect-property.model';
-import { LedConfigurationDto, LedEffectDto, LedEffectPropertyDto, LedEffectPropertyType } from 'src/app/models/application-facade';
+import { LedConfigurationDto, LedEffectDto, LedEffectPropertyDto, LedEffectPropertyKind, LedEffectKind } from 'src/app/models/application-facade';
 import { LedEffectNumberProperty } from './led-effect-number-property.model';
 import { LedEffectBoolProperty } from './led-effect-bool-property.model';
 import { LedEffectColorProperty } from './led-effect-color-property.model';
@@ -8,25 +8,35 @@ export class LedConfig {
   public name: string;
   public id: string;
   public props: LedEffectProperty[];
+  public effectKind: LedEffectKind;
 
-  constructor(dto: LedConfigurationDto) {
-    this.name = dto.name;
-    this.id = dto.id;
+  constructor(name: string, effectKind: LedEffectKind) {
+    this.id = 'tmp';
+    this.name = name;
+    this.effectKind = effectKind;
     this.props = new Array<LedEffectProperty>();
+    this.getDefaultParams();
+  }
+
+  public static fromDto(dto: LedConfigurationDto): LedConfig {
+    const newLedConfig = new LedConfig(dto.name, dto.ledEffect.effectKind);
+    newLedConfig.id = dto.id;
+    newLedConfig.props = new Array<LedEffectProperty>();
     if (dto.ledEffect.properties) {
-      this.props = dto.ledEffect.properties.map(propDto => {
+      newLedConfig.props = dto.ledEffect.properties.map(propDto => {
         switch (propDto.effectType) {
-          case LedEffectPropertyType.BOOL:
-            return new LedEffectBoolProperty(propDto.id, propDto.name, propDto.effectType, propDto.value);
-          case LedEffectPropertyType.COLOR:
-            return new LedEffectColorProperty(propDto.id, propDto.name, propDto.effectType, propDto.value);
-          case LedEffectPropertyType.NUMBER:
-            return new LedEffectNumberProperty(propDto.id, propDto.name, propDto.effectType, propDto.value, propDto.minValue, propDto.maxValue);
+          case LedEffectPropertyKind.BOOL:
+            return new LedEffectBoolProperty(propDto.id, propDto.name, propDto.value);
+          case LedEffectPropertyKind.COLOR:
+            return new LedEffectColorProperty(propDto.id, propDto.name, propDto.value);
+          case LedEffectPropertyKind.NUMBER:
+            return new LedEffectNumberProperty(propDto.id, propDto.name, propDto.value, propDto.minValue, propDto.maxValue);
           default:
             return null;
         }
       });
     }
+    return newLedConfig;
   }
 
   public toDto(): LedConfigurationDto {
@@ -38,7 +48,7 @@ export class LedConfig {
     ledCOnfigDto.ledEffect.properties = this.props.map(prop => {
       const propDto = new LedEffectPropertyDto();
 
-      if (prop.effectType === LedEffectPropertyType.NUMBER) {
+      if (prop.effectType === LedEffectPropertyKind.NUMBER) {
         propDto.maxValue = (prop as LedEffectNumberProperty).maxVal;
         propDto.minValue = (prop as LedEffectNumberProperty).minVal;
       }
@@ -51,5 +61,19 @@ export class LedConfig {
     });
 
     return ledCOnfigDto;
+  }
+
+  private getDefaultParams() {
+    switch (this.effectKind) {
+      case LedEffectKind.PIXEL: {
+        this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
+        this.props.push(new LedEffectColorProperty(2, 'Background Color', '#000000'));
+        this.props.push(new LedEffectBoolProperty(3, 'Music Reactive', false));
+        this.props.push(new LedEffectNumberProperty(4, 'Speed', 30, 5, 255));
+        this.props.push(new LedEffectNumberProperty(5, 'Count', 200, 1, 1000));
+        this.props.push(new LedEffectBoolProperty(6, 'Even Colors', true));
+        break;
+      }
+    }
   }
 }

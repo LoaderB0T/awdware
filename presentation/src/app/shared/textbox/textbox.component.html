@@ -8,7 +8,8 @@
       [tabindex]="inputTabIndex" [pattern]="pattern" [minlength]="minLength" [maxlength]="maxLength"
       [disabled]="isDisabled" [class.has-icon]="icon && true" (blur)="onBlur()" (focus)="onFocus()"
       [class.has-error]="validationError && true" [disabled]="isDisabled">
-    <label for="{{name}}" [class.moved]="showLabel" [class.has-icon]="icon && true">
+    <label for="{{name}}" [class.hide]="showLabel && hidePlaceholderOnInput" [class.moved]="showLabel"
+      [class.has-icon]="icon && true">
       {{placeholder}}
     </label>
   </div>

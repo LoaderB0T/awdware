@@ -3,7 +3,7 @@ using System;
 using System.Net.Mail;
 using WebApi.Models;
 
-namespace WebApi.Static
+namespace WebApi.Helper
 {
     public class MailBuilder: IDisposable
     {
@@ -30,25 +30,25 @@ namespace WebApi.Static
             return new MailAddress(_config.GetValue<string>("Email"), _config.GetValue<string>("DisplayName"));
         }
 
-        private bool LoadTemplate(StaticEnums type)
+        private bool LoadTemplate(EmailKind type)
         {
             var config = _configuration.GetSection("Mail");
             string path;
             switch (type)
             {
-                case StaticEnums.EMAIL_CONFIRMATION:
+                case EmailKind.EMAIL_CONFIRMATION:
                     path = config.GetSection("Template").GetValue<string>("EmailConfirm");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("EmailConfirm");
                     break;
-                case StaticEnums.PASSWORD_RESET:
+                case EmailKind.PASSWORD_RESET:
                     path = config.GetSection("Template").GetValue<string>("PasswordReset");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("PasswordReset");
                     break;
-                case StaticEnums.PASSWORD_RESET_NO_USER:
+                case EmailKind.PASSWORD_RESET_NO_USER:
                     path = config.GetSection("Template").GetValue<string>("PasswordResetNoUser");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("PasswordReset");
                     break;
-                case StaticEnums.FORGOT_USERNAME:
+                case EmailKind.FORGOT_USERNAME:
                     path = config.GetSection("Template").GetValue<string>("ForgotUsername");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("ForgotUsername");
                     break;
@@ -78,7 +78,7 @@ namespace WebApi.Static
         public MailMessage CreateUserDoesNotExistMail(string email)
         {
             Init(GetFrom(), new MailAddress(email));
-            if (!LoadTemplate(StaticEnums.PASSWORD_RESET_NO_USER))
+            if (!LoadTemplate(EmailKind.PASSWORD_RESET_NO_USER))
                 throw new InvalidOperationException("Mail template not found.");
             _message.Body = _body;
             return _message;
@@ -86,7 +86,7 @@ namespace WebApi.Static
 
         private void ReplaceInTemplate( string key, string value)
         {
-            _body = _body.Replace("{{" + key + "}}", value);
+            _body = _body.Replace("{{" + key + "}}", value, StringComparison.OrdinalIgnoreCase);
         }
 
         public void Dispose()

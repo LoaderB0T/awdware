@@ -27,6 +27,7 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   @Input() public inputType: InputType = InputType.TEXT;
   @Input() public icon: string;
   @Input() public icon2: string;
+  @Input() public hidePlaceholderOnInput: boolean;
 
   @Input()
   public set shouldMatch(value: string) {
