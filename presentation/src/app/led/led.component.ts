@@ -26,7 +26,6 @@ export class LedComponent implements OnInit {
   ngOnInit() {
     this._ledService.getEffetcs().subscribe(x => {
       this.ledConfigs = x;
-      // this.updateTemp();
     });
   }
 
