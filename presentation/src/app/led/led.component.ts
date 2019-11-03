@@ -39,6 +39,12 @@ export class LedComponent implements OnInit {
     this.selectedAddEffect = effect;
   }
 
+  public deleteEffect(id: string) {
+    this._ledService.deleteEffect(id).subscribe();
+    const index = this.ledConfigs.findIndex(x => x.id === id);
+    this.ledConfigs.splice(index, 1);
+  }
+
   public confirmAddEffect() {
     if (!this.canConfirmAddEffect) {
       return;

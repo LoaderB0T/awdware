@@ -9,6 +9,6 @@ namespace WebApi.Services
         IEnumerable<LedConfigurationDto> GetConfigurations(string userId);
         bool UpdateEffect(string userId, LedConfigurationDto newConfig);
         Guid AddEffect(string userId, LedConfigurationDto newConfig);
-
+        bool DeleteEffect(string userId, string id);
     }
 }

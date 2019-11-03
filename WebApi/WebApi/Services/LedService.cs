@@ -43,5 +43,12 @@ namespace WebApi.Services
             _ledRepository.AddLedConfig(newId, userId, newConfig.LedEffect, newConfig.Name);
             return newId;
         }
+
+        public bool DeleteEffect(string userId, string id)
+        {
+            var guid = Guid.Parse(id);
+            var success = _ledRepository.DeleteLedConfig(userId, guid);
+            return success;
+        }
     }
 }

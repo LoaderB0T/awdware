@@ -1,6 +1,7 @@
 <div id="led-main">
   <div class="led-effects-container">
     <div *ngFor="let effect of ledConfigs" class="led-effect-container" id="led-effect-{{effect.id}}">
+      <button (click)="deleteEffect(effect.id)"></button>
       <span class="header">
         {{ effect.name }}
       </span>

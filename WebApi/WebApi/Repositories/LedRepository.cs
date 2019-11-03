@@ -43,5 +43,23 @@ namespace WebApi.Repositories
             _webShopDBContext.LedConfigs.Add(ledConfig);
             _webShopDBContext.SaveChanges();
         }
+
+        public LedEffect GetLedConfig(string userId, Guid id)
+        {
+            var effect = _webShopDBContext.LedConfigs.FirstOrDefault(x => x.Id.Equals(id) && x.UserId.Equals(userId));
+            return effect;
+        }
+
+        public bool DeleteLedConfig(string userId, Guid id)
+        {
+            var effect = _webShopDBContext.LedConfigs.FirstOrDefault(x => x.Id.Equals(id) && x.UserId.Equals(userId));
+            if(effect == null)
+            {
+                return false;
+            }
+            _webShopDBContext.LedConfigs.Remove(effect);
+            _webShopDBContext.SaveChanges();
+            return true;
+        }
     }
 }

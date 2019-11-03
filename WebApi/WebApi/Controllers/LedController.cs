@@ -22,7 +22,7 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("effects")]
-        public ActionResult<UserInfoDto> GetMyLedeffects([FromHeader] string authorization)
+        public ActionResult<LedConfigurationDto> GetMyLedeffects([FromHeader] string authorization)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
             return Ok(_ledService.GetConfigurations(userId));
@@ -30,7 +30,7 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("updateeffect")]
-        public ActionResult<UserInfoDto> UpdateLedEffect([FromHeader] string authorization, [FromBody] LedConfigurationDto newConfig)
+        public ActionResult UpdateLedEffect([FromHeader] string authorization, [FromBody] LedConfigurationDto newConfig)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
             _ledService.UpdateEffect(userId, newConfig);
@@ -39,11 +39,20 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("addeffect")]
-        public ActionResult<UserInfoDto> AddLedEffect([FromHeader] string authorization, [FromBody] LedConfigurationDto newConfig)
+        public ActionResult<string> AddLedEffect([FromHeader] string authorization, [FromBody] LedConfigurationDto newConfig)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
             var newId = _ledService.AddEffect(userId, newConfig);
             return Ok(newId.ToString());
+        }
+
+        [HttpDelete]
+        [Route("effect/{id}")]
+        public ActionResult<bool> DeleteLedEffect([FromHeader] string authorization, string id)
+        {
+            var userId = _authenticationService.GetUserIdFromToken(authorization);
+            var success = _ledService.DeleteEffect(userId, id);
+            return Ok(success);
         }
     }
 }

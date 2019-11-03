@@ -26,12 +26,16 @@ export class LedService {
       );
   }
 
+  public deleteEffect(id: string) {
+    return this._apiService.delete<boolean>(`led/effect/${id}`);
+  }
+
   public updateEffect(newConfig: LedConfigurationDto): Observable<void> {
     return this._apiService.post<void>('led/updateeffect', newConfig);
   }
 
   public addEffect(newConfig: LedConfigurationDto): Observable<string> {
-    return this._apiService.post<string>('led/addeffect', newConfig);
+    return this._apiService.post<string>('led/addeffect', newConfig, false);
   }
 
   public getNewEffect(kind: LedEffectKind, name: string) {
