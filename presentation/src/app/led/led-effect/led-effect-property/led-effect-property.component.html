@@ -5,7 +5,8 @@
         [color]="theme.getColor('colorCharcoalGray')" [inputTabIndex]="10 + boolProp.id"></awd-checkbox>
     </div>
     <div *ngSwitchCase="effectType.COLOR">
-      <awd-color-slider [(ngModel)]="colorProp.value"></awd-color-slider>
+      <awd-color-slider [(ngModel)]="colorProp.value" [labelText]="colorProp.name" [name]="colorProp.id">
+      </awd-color-slider>
     </div>
     <div *ngSwitchCase="effectType.NUMBER">
       <awd-slider [(ngModel)]="numProp.value" [min]="numProp.minVal" [max]="numProp.maxVal"

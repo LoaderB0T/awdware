@@ -19,8 +19,8 @@ export class ColorSliderComponent implements OnInit, ControlValueAccessor {
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
   private rgbColor: ColorType = new ColorType(0, 0, 0);
+  private innerValue: string;
   public isDisabled: boolean;
-  public innerValue: string;
   public isFocused: boolean;
 
   public get r(): number {
@@ -43,6 +43,10 @@ export class ColorSliderComponent implements OnInit, ControlValueAccessor {
   public set b(value: number) {
     this.rgbColor.b = value;
     this.value = this.rgbColor.toHex();
+  }
+
+  public get previewColor() {
+    return this.rgbColor.toCssProperyString();
   }
 
   constructor() {
