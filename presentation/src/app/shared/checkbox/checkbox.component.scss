@@ -37,10 +37,6 @@ input[type="checkbox"] {
   outline: none;
 }
 
-input[type="checkbox"] {
-  outline: none;
-}
-
 input[type="checkbox"]:not(:empty):focus + label span .checkIcon:hover,
 input[type="checkbox"] + label:hover span .checkIcon {
   transform: scale($scaleHover);
