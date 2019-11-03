@@ -28,13 +28,13 @@ namespace WebApi.Repositories
 
         public WebUser TryGetUserByName(string username)
         {
-            var user = _webShopDBContext.WebUser.FirstOrDefault(x => x.Username.ToUpperInvariant() == username.ToUpperInvariant());
+            var user = _webShopDBContext.WebUser.FirstOrDefault(x => x.Username.ToUpper() == username.ToUpper());
             return user;
         }
 
         public WebUser TryGetUserByEmail(string email)
         {
-            var user = _webShopDBContext.WebUser.FirstOrDefault(x => x.Email.ToUpperInvariant() == email.ToUpperInvariant());
+            var user = _webShopDBContext.WebUser.FirstOrDefault(x => x.Email.ToUpper() == email.ToUpper());
             return user;
         }
 
@@ -45,13 +45,13 @@ namespace WebApi.Repositories
 
         public bool CheckIfUsernameExists(string username)
         {
-            var exists = _webShopDBContext.WebUser.Any(x => x.Username.ToUpperInvariant() == username.ToUpperInvariant());
+            var exists = _webShopDBContext.WebUser.Any(x => x.Username.ToUpper() == username.ToUpper());
             return exists;
         }
 
         public bool CheckIfEmailExists(string email)
         {
-            var exists = _webShopDBContext.WebUser.Any(x => x.Email.ToUpperInvariant() == email.ToUpperInvariant());
+            var exists = _webShopDBContext.WebUser.Any(x => x.Email.ToUpper() == email.ToUpper());
             return exists;
         }
 
