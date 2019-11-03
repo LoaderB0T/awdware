@@ -4,11 +4,12 @@ import { LedEffectNumberProperty } from './led-effect-number-property.model';
 import { LedEffectBoolProperty } from './led-effect-bool-property.model';
 import { LedEffectColorProperty } from './led-effect-color-property.model';
 
-export class LedConfig {
+export class LedEffect {
   public name: string;
   public id: string;
   public props: LedEffectProperty[];
   public effectKind: LedEffectKind;
+  public hasPendingChanges: boolean = false;
 
   constructor(name: string, effectKind: LedEffectKind) {
     this.id = 'tmp';
@@ -18,8 +19,8 @@ export class LedConfig {
     this.getDefaultParams();
   }
 
-  public static fromDto(dto: LedConfigurationDto): LedConfig {
-    const newLedConfig = new LedConfig(dto.name, dto.ledEffect.effectKind);
+  public static fromDto(dto: LedConfigurationDto): LedEffect {
+    const newLedConfig = new LedEffect(dto.name, dto.ledEffect.effectKind);
     newLedConfig.id = dto.id;
     newLedConfig.props = new Array<LedEffectProperty>();
     if (dto.ledEffect.properties) {

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LedConfig } from '../models/led-config.model';
+import { LedEffect } from '../models/led-config.model';
+import { LedService } from '../services/led.service';
 
 @Component({
   selector: 'awd-led-effect',
@@ -7,10 +8,28 @@ import { LedConfig } from '../models/led-config.model';
   styleUrls: ['./led-effect.component.scss']
 })
 export class LedEffectComponent implements OnInit {
-  @Input() effect: LedConfig;
-  constructor() { }
+  @Input() effect: LedEffect;
+
+  private _ledService: LedService;
+
+  constructor(ledService: LedService) {
+    this._ledService = ledService;
+  }
 
   ngOnInit() {
+  }
+
+  public madeChanges(evt: any) {
+    this.effect.hasPendingChanges = true;
+  }
+
+  public deleteEffect() {
+    this._ledService.deleteEffect(this.effect.id).subscribe();
+  }
+
+  public saveEffect() {
+    this._ledService.updateEffect(this.effect).subscribe();
+    this.effect.hasPendingChanges = false;
   }
 
 }

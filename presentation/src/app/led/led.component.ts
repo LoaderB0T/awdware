@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserInfoService } from '../services/user-info.service';
 import { UserInfo } from '../models/user-info';
 import { LedService } from './services/led.service';
-import { LedConfig } from './models/led-config.model';
+import { LedEffect } from './models/led-config.model';
 import { LedEffectProperty } from './models/led-effect-property.model';
 import { LedEffectPropertyKind, LedEffectKind } from '../models/application-facade';
 
@@ -13,7 +13,6 @@ import { LedEffectPropertyKind, LedEffectKind } from '../models/application-faca
 })
 export class LedComponent implements OnInit {
   private _ledService: LedService;
-  public ledConfigs: LedConfig[];
   public ledEffectKind = LedEffectKind;
   public selectedAddEffect: LedEffectKind;
   public addDialogVisible: boolean;
@@ -24,9 +23,11 @@ export class LedComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._ledService.getEffetcs().subscribe(x => {
-      this.ledConfigs = x;
-    });
+    this._ledService.getEffetcs().subscribe();
+  }
+
+  public get ledConfigs() {
+    return this._ledService.ledEffects;
   }
 
   public showAddDialog() {
@@ -52,7 +53,7 @@ export class LedComponent implements OnInit {
     this.addDialogVisible = false;
     const newEffect = this._ledService.getNewEffect(this.selectedAddEffect, this.addEffectName);
     this.ledConfigs.push(newEffect);
-    this._ledService.addEffect(newEffect.toDto()).subscribe(effectId => {
+    this._ledService.addEffect(newEffect).subscribe(effectId => {
       newEffect.id = effectId;
     });
   }

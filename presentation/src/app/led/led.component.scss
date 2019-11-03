@@ -15,26 +15,6 @@
       margin: 10px;
       display: flex;
       flex-direction: column;
-      .effect-actions {
-        display: flex;
-        .action-item {
-          cursor: pointer;
-          &:not(:first-child) {
-            margin-left: 10px;
-          }
-          .icon {
-            font-size: 32px;
-            &:hover {
-              color: var(--colorHighlightColor1);
-            }
-          }
-        }
-      }
-      span.header {
-        font-size: $fontSizeGiant;
-        font-weight: $fontWeightBold;
-        align-self: center;
-      }
     }
   }
 }

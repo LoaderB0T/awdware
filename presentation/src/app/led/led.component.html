@@ -1,20 +1,6 @@
 <div id="led-main">
   <div class="led-effects-container">
     <div *ngFor="let effect of ledConfigs" class="led-effect-container" id="led-effect-{{effect.id}}">
-      <div class="effect-actions">
-        <div class="action-item" (click)="deleteEffect(effect.id)">
-          <i class="icon fal fa-times"></i>
-        </div>
-        <div class="action-item" (click)="deleteEffect(effect.id)">
-          <i class="icon fal fa-save"></i>
-        </div>
-        <div class="action-item" (click)="deleteEffect(effect.id)">
-          <i class="icon fal fa-undo"></i>
-        </div>
-      </div>
-      <span class="header">
-        {{ effect.name }}
-      </span>
       <awd-led-effect [effect]="effect"></awd-led-effect>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LedEffectProperty } from '../../models/led-effect-property.model';
 import { LedEffectPropertyKind } from 'src/app/models/application-facade';
 import { ThemeService } from 'src/app/shared/services/theme.service';
@@ -14,11 +14,16 @@ import { LedEffectColorProperty } from '../../models/led-effect-color-property.m
 })
 export class LedEffectPropertyComponent implements OnInit {
   @Input() effectProperty: LedEffectProperty;
+  @Output() valueChanged = new EventEmitter<any>();
   effectType = LedEffectPropertyKind;
 
   constructor(public theme: ThemeService) { }
 
   ngOnInit() {
+  }
+
+  public madeChanges(evt: any) {
+    this.valueChanged.next(evt);
   }
 
   public get numProp(): LedEffectNumberProperty {

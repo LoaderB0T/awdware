@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { noop } from 'rxjs';
 import { ColorType } from '../models/color-type.model';
@@ -15,6 +15,7 @@ export class ColorSliderComponent implements OnInit, ControlValueAccessor {
   @Input() public inputTabIndex: number;
   @Input() public name: string;
   @Input() public labelText: string;
+  @Output() public valueChanged = new EventEmitter<string>();
 
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
@@ -70,6 +71,7 @@ export class ColorSliderComponent implements OnInit, ControlValueAccessor {
       this.innerValue = v;
       this.onChangeCallback(v);
       this.rgbColor = ColorType.fromHex(this.innerValue);
+      this.valueChanged.next(this.innerValue);
     }
   }
 

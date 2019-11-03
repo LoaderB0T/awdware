@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { noop } from 'rxjs';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
@@ -21,6 +21,8 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
   @Input() public minColor: string;
   @Input() public maxColor: string;
   @Input() public labelText: string;
+
+  @Output() public valueChanged = new EventEmitter<number>();
 
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
@@ -52,6 +54,7 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
       this.innerValue = v;
       this.onChangeCallback(v);
       this.refreshStyles();
+      this.valueChanged.next(this.innerValue);
     }
   }
 
