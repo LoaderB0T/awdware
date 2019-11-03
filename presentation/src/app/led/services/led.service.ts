@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { WebApiService } from 'src/app/services/web-api.service';
 import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { WebApiService } from 'src/app/services/web-api.service';
 import { LedConfigurationDto, LedEffectKind } from 'src/app/models/application-facade';
 import { LedEffect } from '../models/led-config.model';
-import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +47,9 @@ export class LedService {
   public getNewEffect(kind: LedEffectKind, name: string) {
     const newEffect = new LedEffect(name, kind);
     return newEffect;
+  }
+
+  public selectEffect(id: string) {
+    return this._apiService.get<void>(`led/selecteffect/${id}`);
   }
 }

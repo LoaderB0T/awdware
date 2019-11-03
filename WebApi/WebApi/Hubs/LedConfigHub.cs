@@ -1,13 +1,51 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using WebApi.Dtos.Led;
+using WebApi.Services;
 
 namespace WebApi.Hubs
 {
-    public class LedConfigHub: Hub
+    public class LedConfigHub : Hub
     {
-        public async Task SendMessage(string user, string msg)
+        public static readonly LedConfigScope _scope = new LedConfigScope();
+
+        public override Task OnConnectedAsync()
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, msg);
+            return base.OnConnectedAsync();
+        }
+
+        public override Task OnDisconnectedAsync(Exception exception)
+        {
+            //LeaveOldLobby();
+            return base.OnDisconnectedAsync(exception);
+        }
+
+        public void StartListening(string userId)
+        {
+            _scope.AddUser(Context.ConnectionId, userId);
+        }
+    }
+
+    public class LedConfigScope
+    {
+        private Dictionary<string, string> userConnectionMap;
+
+        public LedConfigScope()
+        {
+            userConnectionMap = new Dictionary<string, string>();
+        }
+
+        public void AddUser(string connectionId, string userId)
+        {
+            userConnectionMap.Add(userId, connectionId);
+        }
+
+        public string GetConnectionId(string userId)
+        {
+            userConnectionMap.TryGetValue(userId, out var conId);
+            return conId;
         }
     }
 }

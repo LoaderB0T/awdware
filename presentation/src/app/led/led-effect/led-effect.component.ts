@@ -27,6 +27,10 @@ export class LedEffectComponent implements OnInit {
     this._ledService.deleteEffect(this.effect.id).subscribe();
   }
 
+  public selectEffect() {
+    this._ledService.selectEffect(this.effect.id).subscribe();
+  }
+
   public saveEffect() {
     this._ledService.updateEffect(this.effect).subscribe();
     this.effect.hasPendingChanges = false;

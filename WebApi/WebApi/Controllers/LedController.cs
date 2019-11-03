@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using System.Linq;
 using WebApi.Dtos.Led;
+using WebApi.Hubs;
+using WebApi.Mapper;
 using WebApi.Services;
 
 namespace WebApi.Controllers
@@ -12,19 +16,21 @@ namespace WebApi.Controllers
     {
         private readonly ILedService _ledService;
         private readonly IAuthenticationService _authenticationService;
+        private readonly IHubContext<LedConfigHub> _ledConfigHub;
 
-        public LedController(ILedService ledService, IAuthenticationService authenticationService)
+        public LedController(ILedService ledService, IAuthenticationService authenticationService, IHubContext<LedConfigHub> ledConfigHub)
         {
             _ledService = ledService;
             _authenticationService = authenticationService;
+            _ledConfigHub = ledConfigHub;
         }
 
         [HttpGet]
         [Route("effects")]
-        public ActionResult<LedConfigurationDto> GetMyLedeffects([FromHeader] string authorization)
+        public ActionResult<LedConfigurationDto> GetMyLedEffects([FromHeader] string authorization)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
-            return Ok(_ledService.GetConfigurations(userId));
+            return Ok(_ledService.GetEffects(userId).Select(x => x.ToDto()));
         }
 
         [HttpPost]
@@ -52,6 +58,21 @@ namespace WebApi.Controllers
             var userId = _authenticationService.GetUserIdFromToken(authorization);
             var success = _ledService.DeleteEffect(userId, id);
             return Ok(success);
+        }
+
+        [HttpGet]
+        [Route("selecteffect/{id}")]
+        public ActionResult SelectEffect([FromHeader] string authorization, string id)
+        {
+            var userId = _authenticationService.GetUserIdFromToken(authorization);
+            var effect = _ledService.GetEffect(userId, id);
+
+            var hubConId = LedConfigHub._scope.GetConnectionId(userId);
+            if (hubConId != null)
+            {
+                _ledConfigHub.Clients.Client(hubConId).SendAsync("ReceiveEffect", effect.ToDto()).ConfigureAwait(false);
+            }
+            return Ok();
         }
     }
 }

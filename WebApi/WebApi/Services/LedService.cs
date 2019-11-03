@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebApi.Dtos.Led;
 using System;
+using WebApi.Entities;
 
 namespace WebApi.Services
 {
@@ -20,9 +21,14 @@ namespace WebApi.Services
             _jwtService = jwtService;
         }
 
-        public IEnumerable<LedConfigurationDto> GetConfigurations(string userId)
+        public IEnumerable<LedEffect> GetEffects(string userId)
         {
-            return _ledRepository.GetLedEffects(userId).Select(x => x.ToDto());
+            return _ledRepository.GetLedEffects(userId);
+        }
+
+        public LedEffect GetEffect(string userId, string id)
+        {
+            return _ledRepository.GetLedEffects(userId).FirstOrDefault(x => x.Id.ToString().Equals(id));
         }
 
         public bool UpdateEffect(string userId, LedConfigurationDto newConfig)

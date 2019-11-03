@@ -3,6 +3,9 @@
     <div class="action-item" (click)="deleteEffect()">
       <i class="icon fal fa-times"></i>
     </div>
+    <div class="action-item" (click)="selectEffect()">
+      <i class="icon fal fa-check-circle"></i>
+    </div>
     <div class="action-item" *ngIf="effect.hasPendingChanges" (click)="saveEffect()">
       <i class="icon fal fa-save"></i>
     </div>

@@ -86,7 +86,7 @@ namespace WebApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<LedConfigHub>("ledConfigHub");
+                endpoints.MapHub<LedConfigHub>("LedHub");
             });
         }
 
