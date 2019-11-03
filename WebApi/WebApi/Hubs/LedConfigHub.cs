@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebApi.Dtos.Led;
 using WebApi.Services;
@@ -18,7 +19,7 @@ namespace WebApi.Hubs
 
         public override Task OnDisconnectedAsync(Exception exception)
         {
-            //LeaveOldLobby();
+            _scope.RemoveUserByConnection(Context.ConnectionId);
             return base.OnDisconnectedAsync(exception);
         }
 
@@ -46,6 +47,15 @@ namespace WebApi.Hubs
         {
             userConnectionMap.TryGetValue(userId, out var conId);
             return conId;
+        }
+
+        public void RemoveUserByConnection(string conId)
+        {
+            var keyToDelete = userConnectionMap.FirstOrDefault(x => x.Value.Equals(conId));
+            if (keyToDelete.Key != null)
+            {
+                userConnectionMap.Remove(keyToDelete.Key);
+            }
         }
     }
 }

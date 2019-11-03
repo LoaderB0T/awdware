@@ -10,6 +10,7 @@ namespace LedController
     class SocketService
     {
         private HubConnection _connection;
+        public event EventHandler<LedConfigurationDto> OnEffectSelected;
         public SocketService()
         {
             _connection = new HubConnectionBuilder()
@@ -33,7 +34,7 @@ namespace LedController
 
         private void ReceivedEffectHandler(LedConfigurationDto effect)
         {
-            Console.WriteLine(effect.Name);
+            OnEffectSelected?.Invoke(this, effect);
         }
 
         public async Task Init()

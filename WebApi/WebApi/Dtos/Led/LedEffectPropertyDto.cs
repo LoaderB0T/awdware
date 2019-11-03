@@ -13,7 +13,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public LedEffectPropertyKind EffectType { get; set; }
-        public object Value { get; set; }
+        public string Value { get; set; }
         public int? MinValue { get; set; }
         public int? MaxValue { get; set; }
     }

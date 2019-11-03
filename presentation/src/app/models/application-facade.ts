@@ -78,6 +78,7 @@ export class LedConfigurationDto {
   public id: string;
   public name: string;
   public ordinal: number;
+  public userId: string;
   public ledEffect: LedEffectDto;
 }
 
@@ -105,7 +106,7 @@ export class LedEffectPropertyDto {
   public id: number;
   public name: string;
   public effectType: LedEffectPropertyKind;
-  public value: any;
+  public value: string;
   public minValue?: number;
   public maxValue?: number;
 }

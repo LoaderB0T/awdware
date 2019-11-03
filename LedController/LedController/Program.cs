@@ -7,7 +7,13 @@ namespace LedController
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            var a = new SocketService();
+            var socket = new SocketService();
+            var mgr = new EffectManager();
+            socket.OnEffectSelected += ((sender, args) =>
+            {
+                var effect = LedEffectBuilder.GetEffect(args, mgr.LedCount);
+                mgr.StartEffect(effect);
+            });
             Console.ReadLine();
         }
     }

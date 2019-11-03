@@ -27,11 +27,11 @@ export class LedEffect {
       newLedConfig.props = dto.ledEffect.properties.map(propDto => {
         switch (propDto.effectType) {
           case LedEffectPropertyKind.BOOL:
-            return new LedEffectBoolProperty(propDto.id, propDto.name, propDto.value);
+            return new LedEffectBoolProperty(propDto.id, propDto.name, propDto.value && true);
           case LedEffectPropertyKind.COLOR:
             return new LedEffectColorProperty(propDto.id, propDto.name, propDto.value);
           case LedEffectPropertyKind.NUMBER:
-            return new LedEffectNumberProperty(propDto.id, propDto.name, propDto.value, propDto.minValue, propDto.maxValue);
+            return new LedEffectNumberProperty(propDto.id, propDto.name, Number.parseInt(propDto.value, 10), propDto.minValue, propDto.maxValue);
           default:
             return null;
         }
@@ -46,6 +46,7 @@ export class LedEffect {
     ledCOnfigDto.name = this.name;
 
     ledCOnfigDto.ledEffect = new LedEffectDto();
+    ledCOnfigDto.ledEffect.effectKind = this.effectKind;
     ledCOnfigDto.ledEffect.properties = this.props.map(prop => {
       const propDto = new LedEffectPropertyDto();
 
@@ -57,7 +58,11 @@ export class LedEffect {
       propDto.id = prop.id;
       propDto.name = prop.name;
       propDto.effectType = prop.effectType;
-      propDto.value = prop.value;
+      if (typeof (prop.value) !== 'string') {
+        propDto.value = prop.value.toString();
+      } else {
+        propDto.value = prop.value;
+      }
       return propDto;
     });
 
