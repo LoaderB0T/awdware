@@ -48,6 +48,12 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
+    projects: WebApi/WebApi/WebApi.csproj
+    configuration: Release
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
     projects: LedController/LedController/LedController.csproj
     configuration: Release
 
