@@ -27,11 +27,6 @@ steps:
     versionSpec: 4.9.2
     checkLatest: true
 
-- task: NuGetCommand@2
-  displayName: 'NuGet restore'
-  inputs:
-    restoreSolution: '$(Parameters.solution)'
-
 # - task: SonarCloudPrepare@1
 #   continueOnError: true
 #   displayName: 'Prepare analysis on SonarCloud'
@@ -63,7 +58,7 @@ steps:
     command: publish
     publishWebProjects: false
     projects: LedController/LedController/LedController.csproj
-    arguments: '-o LedController/LedController/bin/publish --no-build --no-restore /p:PublishSingleFile=true -r win-x64'
+    arguments: '-o LedController/LedController/bin/publish --no-build --no-restore /p:PublishSingleFile=true'
     zipAfterPublish: false
     modifyOutputPath: false
     configuration: Release

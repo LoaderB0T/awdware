@@ -27,11 +27,6 @@ steps:
     versionSpec: 4.9.2
     checkLatest: true
 
-- task: NuGetCommand@2
-  displayName: 'NuGet restore'
-  inputs:
-    restoreSolution: '$(Parameters.solution)'
-
 - task: SonarCloudPrepare@1
   continueOnError: true
   displayName: 'Prepare analysis on SonarCloud'
