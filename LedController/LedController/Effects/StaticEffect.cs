@@ -7,7 +7,7 @@ namespace LedController.Models.Effects
     public class StaticEffect : LedEffect
     {
         private RgbColor _color;
-        public StaticEffect(int ledCount, RgbColor color): base(ledCount)
+        public StaticEffect(int ledCount, string name, RgbColor color): base(ledCount, name)
         {
             _color = color;
         }

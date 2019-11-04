@@ -14,10 +14,10 @@ namespace LedController
             var props = dto.LedEffect.Properties;
             return dto.LedEffect.EffectKind switch
             {
-                LedEffectKind.STATIC => new StaticEffect(ledCount,
+                LedEffectKind.STATIC => new StaticEffect(ledCount, dto.Name,
                     GetColorPropery(props, 1)
                 ),
-                LedEffectKind.PIXEL => new PixelEffect(ledCount,
+                LedEffectKind.PIXEL => new PixelEffect(ledCount, dto.Name,
                     GetColorPropery(props, 1),
                     GetColorPropery(props, 2),
                     GetIntPropery(props, 3),

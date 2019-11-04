@@ -5,13 +5,15 @@ namespace LedController.Models.Effects
 {
     public abstract class LedEffect
     {
+        public string name;
         protected DateTime lastRenderTime;
         protected int ledCount;
         protected Random rndm;
         protected List<RgbColor> LEDs;
         public abstract byte[] Render();
-        protected LedEffect(int ledCount)
+        protected LedEffect(int ledCount, string name)
         {
+            this.name = name;
             this.ledCount = ledCount;
             rndm = new Random();
             lastRenderTime = DateTime.UtcNow;

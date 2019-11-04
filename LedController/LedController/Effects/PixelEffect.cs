@@ -11,7 +11,7 @@ namespace LedController.Models.Effects
         private int _speed;
         private int _count;
         private bool _evenColors;
-        public PixelEffect(int ledCount, RgbColor color, RgbColor bgcolor, int speed, int count, bool evenColors) : base(ledCount)
+        public PixelEffect(int ledCount, string name, RgbColor color, RgbColor bgcolor, int speed, int count, bool evenColors) : base(ledCount, name)
         {
             _color = color;
             _bgcolor = bgcolor;
