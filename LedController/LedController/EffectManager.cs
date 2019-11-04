@@ -23,7 +23,7 @@ namespace LedController
         public void StartEffect(LedEffect effect)
         {
             CurrentEffect = effect;
-            Console.WriteLine("Starting effect " + CurrentEffect.name);
+            Console.WriteLine("Starting Effect " + CurrentEffect.name);
         }
 
         public void RenderEffect()
