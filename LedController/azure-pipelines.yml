@@ -63,10 +63,11 @@ steps:
     command: publish
     publishWebProjects: false
     projects: LedController/LedController/LedController.csproj
-    arguments: '-o LedController/LedController/bin/publish --no-build --no-restore'
+    arguments: '-o LedController/LedController/bin/publish --no-build --no-restore /p:PublishSingleFile=true -r win-x64'
     zipAfterPublish: false
     modifyOutputPath: false
     configuration: Release
+    
 
 # - task: DotNetCoreCLI@2
 #   displayName: 'dotnet test with code coverage'
