@@ -1,0 +1,110 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - LedController/*
+
+pool:
+  name: Hosted VS2017
+  demands: java
+
+steps:
+- task: DotNetCoreInstaller@1
+  displayName: 'Use .NET Core sdk'
+  inputs:
+    version: 3.0.100
+
+- task: NuGetToolInstaller@1
+  displayName: 'Use NuGet 4.9.2'
+  inputs:
+    versionSpec: 4.9.2
+    checkLatest: true
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: '$(Parameters.solution)'
+
+# - task: SonarCloudPrepare@1
+#   continueOnError: true
+#   displayName: 'Prepare analysis on SonarCloud'
+#   inputs:
+#     SonarCloud: 'sonarcloud'
+#     organization: 'awdware'
+#     scannerMode: 'MSBuild'
+#     projectKey: 'awdware:ledcontroller'
+#     extraProperties: |
+#      sonar.exclusions=**/bin/**,**/obj/**
+#      sonar.test.exclusions=**/bin/**,**/obj/**
+#      sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: LedController/LedController/LedController.csproj
+    configuration: Release
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: LedController/LedController/LedController.csproj
+    arguments: '-o LedController/LedController/bin/publish --no-build --no-restore'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    configuration: Release
+
+# - task: DotNetCoreCLI@2
+#   displayName: 'dotnet test with code coverage'
+#   inputs:
+#     command: custom
+#     projects: LedController/UnitTest/UnitTest.csproj
+#     custom: test
+#     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+
+# - task: reportgenerator@4
+#   displayName: 'Convert coverage.cobertura.xml to htmlInline'
+#   inputs:
+#     reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
+#     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
+#     tag: '$(Build.BuildNumber)'
+#     reporttypes: 'htmlInline'
+
+# - task: reportgenerator@4
+#   displayName: 'Convert coverage.cobertura.xml to sonarQube'
+#   inputs:
+#     reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
+#     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports\sonar'
+#     tag: '$(Build.BuildNumber)'
+#     reporttypes: 'sonarQube'
+
+# - task: PublishCodeCoverageResults@1
+#   displayName: 'Publish code coverage from $(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
+#   inputs:
+#     codeCoverageTool: Cobertura
+#     summaryFileLocation: '$(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
+#     reportDirectory: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+  inputs:
+    PathtoPublish: LedController/LedController/bin/publish
+
+
+# - task: SonarCloudAnalyze@1
+#   displayName: 'Run Code Analysis'
+#   continueOnError: true
+
+# - task: SonarCloudPublish@1
+#   displayName: 'Publish Quality Gate Result'
+#   continueOnError: true
+#   inputs:
+#     pollingTimeoutSec: '300'
