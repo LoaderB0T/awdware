@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-	<UserSecretsId>bdf9cd30-0141-44dc-9596-c5ce7deedb4f</UserSecretsId>
-	<ProjectGuid>{6a221b4c-ec66-41d7-93b5-62bcbe7338a9}</ProjectGuid>
+	  <UserSecretsId>bdf9cd30-0141-44dc-9596-c5ce7deedb4f</UserSecretsId>
+	  <ProjectGuid>{6a221b4c-ec66-41d7-93b5-62bcbe7338a9}</ProjectGuid>
     <StartupObject>LedController.Program</StartupObject>
     <Company>awdware</Company>
     <Authors>Janik Schumacher</Authors>
