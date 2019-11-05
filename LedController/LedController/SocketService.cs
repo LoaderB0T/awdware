@@ -13,7 +13,7 @@ namespace LedController
         private bool useHttps = false;
         private string serverDomain = "localhost";
         private int serverPort = 5555;
-        private string userId = "user:201911032357141884";
+        private string userId = "user:201911020202236614";
         private HubConnection _connection;
         public event EventHandler<LedConfigurationDto> OnEffectSelected;
         public SocketService()

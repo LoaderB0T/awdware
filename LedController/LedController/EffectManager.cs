@@ -16,7 +16,7 @@ namespace LedController
 
         public EffectManager()
         {
-            //this._arduinoSerial = new ArduinoSerial("COM4");
+            this._arduinoSerial = new ArduinoSerial("COM4");
             Task task = Task.Run(RenderEffect);
         }
 
@@ -35,7 +35,7 @@ namespace LedController
                     var data = CurrentEffect.Render();
                     if (data != null)
                     {
-                        //_arduinoSerial.WriteToArduino(data);
+                        _arduinoSerial.WriteToArduino(data);
                     }
                 }
                 Thread.Sleep(10);
