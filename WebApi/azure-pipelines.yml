@@ -36,8 +36,8 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'awdware:webapi'
     extraProperties: |
-     sonar.exclusions=**/bin/**,**/obj/**
-     sonar.test.exclusions=**/bin/**,**/obj/**,**/Template/**
+     sonar.exclusions=**/bin/**,**/obj/**,**/Template/**
+     sonar.test.exclusions=**/bin/**,**/obj/**
      sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
 - task: DotNetCoreCLI@2
