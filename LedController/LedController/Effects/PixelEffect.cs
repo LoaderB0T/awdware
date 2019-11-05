@@ -25,9 +25,10 @@ namespace LedController.Models.Effects
             {
                 if (rndm.Next(1000) < _count)
                 {
-                    LEDs[RndmIndex()].R = _color.R;
-                    LEDs[RndmIndex()].G = _color.G;
-                    LEDs[RndmIndex()].B = _color.B;
+                    var index = RndmIndex();
+                    LEDs[index].R = _color.R;
+                    LEDs[index].G = _color.G;
+                    LEDs[index].B = _color.B;
                 }
                 lastRenderTime = DateTime.UtcNow;
                 return LEDs.ToByteArray();
