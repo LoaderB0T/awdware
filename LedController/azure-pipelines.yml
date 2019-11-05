@@ -36,8 +36,8 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'awdware:ledcontroller'
     extraProperties: |
-     sonar.exclusions=**/bin/**,**/obj/**
-     sonar.test.exclusions=**/bin/**,**/obj/**,**/WebApi/**
+     sonar.exclusions=**/bin/**,**/obj/**,**/WebApi/**
+     sonar.test.exclusions=**/bin/**,**/obj/**
     #  sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
 - task: DotNetCoreCLI@2
