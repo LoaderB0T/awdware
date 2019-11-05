@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 
@@ -18,7 +19,7 @@ namespace WebApi.Services
             Configuration = configuration;
             var userTokenKeyPath = Configuration.GetSection("Certificates").GetValue<string>("JwtUserSignature");
             var contentRoot = evn.ContentRootPath;
-            var path = contentRoot + "\\" + userTokenKeyPath;
+            var path = Path.Join(contentRoot, userTokenKeyPath);
             _userTokenKeyPath = path;
         }
 

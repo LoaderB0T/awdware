@@ -11,13 +11,11 @@ namespace WebApi.Repositories
 {
     public class LedRepository : ILedRepository
     {
-        private readonly ILogger _logger;
         private readonly ApplicationDbContext _webShopDBContext;
 
-        public LedRepository(ApplicationDbContext webShopDBContext, ILogger logger)
+        public LedRepository(ApplicationDbContext webShopDBContext)
         {
             _webShopDBContext = webShopDBContext;
-            _logger = logger;
         }
 
         public IEnumerable<LedEffect> GetLedEffects(string userId)

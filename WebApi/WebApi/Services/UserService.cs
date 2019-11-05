@@ -8,14 +8,11 @@ namespace WebApi.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IJwtService _jwtService;
 
         public UserService(
-            IUserRepository userRepository,
-            IJwtService jwtService)
+            IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _jwtService = jwtService;
         }
 
         public UserInfoDto GetMyUserInfo(string userId)

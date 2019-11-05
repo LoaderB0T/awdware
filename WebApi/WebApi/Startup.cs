@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -94,7 +95,7 @@ namespace WebApi
         {
             var userTokenKeyPath = Configuration.GetSection("Certificates").GetValue<string>("JwtUserSignature");
             var contentRoot = Environment.ContentRootPath;
-            var path = contentRoot + "\\" + userTokenKeyPath;
+            var path = Path.Join(contentRoot, userTokenKeyPath);
             var userToken = System.IO.File.ReadAllText(path);
             services.AddAuthentication(options =>
             {

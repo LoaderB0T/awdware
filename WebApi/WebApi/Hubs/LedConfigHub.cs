@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApi.Dtos.Led;
-using WebApi.Services;
 
 namespace WebApi.Hubs
 {
@@ -31,7 +29,7 @@ namespace WebApi.Hubs
 
     public class LedConfigScope
     {
-        private Dictionary<string, string> userConnectionMap;
+        private readonly Dictionary<string, string> userConnectionMap;
 
         public LedConfigScope()
         {

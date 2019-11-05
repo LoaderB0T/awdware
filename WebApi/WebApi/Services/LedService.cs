@@ -11,14 +11,12 @@ namespace WebApi.Services
     public class LedService : ILedService
     {
         private readonly ILedRepository _ledRepository;
-        private readonly IJwtService _jwtService;
 
         public LedService(
-            ILedRepository ledRepository,
-            IJwtService jwtService)
+            ILedRepository ledRepository
+            )
         {
             _ledRepository = ledRepository;
-            _jwtService = jwtService;
         }
 
         public IEnumerable<LedEffect> GetEffects(string userId)
