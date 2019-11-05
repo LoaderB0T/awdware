@@ -11,6 +11,10 @@ namespace LedController
     {
         public static LedEffect GetEffect(LedConfigurationDto dto, int ledCount)
         {
+            if (dto == null)
+            {
+                throw new ArgumentNullException(nameof(dto));
+            }
             var props = dto.LedEffect.Properties;
             return dto.LedEffect.EffectKind switch
             {
