@@ -3,6 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <StartupObject>LedController.Program</StartupObject>
+    <Company>awdware</Company>
+    <Authors>Janik Schumacher</Authors>
+    <Product>awdware - RgbLedClient</Product>
+    <Version>0.0.1.0</Version>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
