@@ -14,7 +14,7 @@ namespace LedController.Models.Effects
         public override byte[] Render()
         {
             var a = new List<byte>();
-            for (int i = 0; i < ledCount; i++)
+            for (int i = 0; i < LedCount; i++)
             {
                 a.Add((byte)_color.R);
                 a.Add((byte)_color.G);

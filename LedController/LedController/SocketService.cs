@@ -27,7 +27,7 @@ namespace LedController
             {
                 Console.Error.WriteLine(error);
                 Console.WriteLine("\nLost connection. Trying to reconnect");
-                await Connect(true);
+                await Connect(true).ConfigureAwait(false); ;
             };
 
             _connection.On<LedConfigurationDto>("ReceiveEffect", (effect) =>
@@ -44,14 +44,14 @@ namespace LedController
             {
                 if (addDelay)
                 {
-                    await Task.Delay(new Random().Next(0, 5) * 1000);
+                    await Task.Delay(new Random().Next(0, 5) * 1000).ConfigureAwait(false);
                 }
                 if (PingHost(serverDomain, serverPort))
                 {
-                    await _connection.StartAsync();
+                    await _connection.StartAsync().ConfigureAwait(false); ;
                     if (addDelay)
                     {
-                        await Task.Delay(4000);
+                        await Task.Delay(4000).ConfigureAwait(false); ;
                     }
                     Console.WriteLine(reconnectAfterError ? "Reconnected" : "Connection established");
                     break;
@@ -62,7 +62,7 @@ namespace LedController
                 }
             }
 
-            await _connection.SendAsync("StartListening", userId);
+            await _connection.SendAsync("StartListening", userId).ConfigureAwait(false); ;
             Console.WriteLine("Started Listening");
         }
 

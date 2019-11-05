@@ -5,18 +5,20 @@ namespace LedController.Models.Effects
 {
     public abstract class LedEffect
     {
-        public string name;
-        protected DateTime lastRenderTime;
-        protected int ledCount;
-        protected Random rndm;
-        protected List<RgbColor> LEDs;
+        public string Name { get; set; }
+        protected DateTime LastRenderTime { get; set; }
+        protected int LedCount { get; set; }
+        protected bool FirstFrame { get; set; }
+        protected Random Rndm { get; set; }
+        protected List<RgbColor> LEDs { get; private set; }
+
         public abstract byte[] Render();
         protected LedEffect(int ledCount, string name)
         {
-            this.name = name;
-            this.ledCount = ledCount;
-            rndm = new Random();
-            lastRenderTime = DateTime.UtcNow;
+            this.Name = name;
+            this.LedCount = ledCount;
+            Rndm = new Random();
+            LastRenderTime = DateTime.UtcNow;
             LEDs = new List<RgbColor>(ledCount);
             for (int i = 0; i < ledCount; i++)
             {
@@ -25,7 +27,7 @@ namespace LedController.Models.Effects
         }
         protected int RndmIndex()
         {
-            return rndm.Next(ledCount);
+            return Rndm.Next(LedCount);
         }
     }
 
@@ -33,6 +35,10 @@ namespace LedController.Models.Effects
     {
         public static byte[] ToByteArray(this List<RgbColor> leds)
         {
+            if(leds == null)
+            {
+                throw new ArgumentNullException(nameof(leds));
+            }
             var result = new byte[leds.Count * 3];
             for (int i = 0; i < leds.Count; i++)
             {
@@ -42,6 +48,16 @@ namespace LedController.Models.Effects
             }
     
             return result;
+        }
+
+        public static void SetAll(this List<RgbColor> leds, RgbColor color)
+        {
+            if (leds == null)
+                throw new ArgumentNullException(nameof(leds));
+            if (color == null)
+                throw new ArgumentNullException(nameof(color));
+
+            leds.ForEach(led => led.SetColor(color));
         }
     }
 }
