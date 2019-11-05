@@ -27,18 +27,18 @@ steps:
     versionSpec: 4.9.2
     checkLatest: true
 
-# - task: SonarCloudPrepare@1
-#   continueOnError: true
-#   displayName: 'Prepare analysis on SonarCloud'
-#   inputs:
-#     SonarCloud: 'sonarcloud'
-#     organization: 'awdware'
-#     scannerMode: 'MSBuild'
-#     projectKey: 'awdware:ledcontroller'
-#     extraProperties: |
-#      sonar.exclusions=**/bin/**,**/obj/**
-#      sonar.test.exclusions=**/bin/**,**/obj/**
-#      sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
+- task: SonarCloudPrepare@1
+  continueOnError: true
+  displayName: 'Prepare analysis on SonarCloud'
+  inputs:
+    SonarCloud: 'sonarcloud'
+    organization: 'awdware'
+    scannerMode: 'MSBuild'
+    projectKey: 'awdware:ledcontroller'
+    extraProperties: |
+     sonar.exclusions=**/bin/**,**/obj/**
+     sonar.test.exclusions=**/bin/**,**/obj/**
+    #  sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
@@ -101,12 +101,12 @@ steps:
     PathtoPublish: LedController/LedController/bin/publish
 
 
-# - task: SonarCloudAnalyze@1
-#   displayName: 'Run Code Analysis'
-#   continueOnError: true
+- task: SonarCloudAnalyze@1
+  displayName: 'Run Code Analysis'
+  continueOnError: true
 
-# - task: SonarCloudPublish@1
-#   displayName: 'Publish Quality Gate Result'
-#   continueOnError: true
-#   inputs:
-#     pollingTimeoutSec: '300'
+- task: SonarCloudPublish@1
+  displayName: 'Publish Quality Gate Result'
+  continueOnError: true
+  inputs:
+    pollingTimeoutSec: '300'
