@@ -21,8 +21,12 @@ namespace LedController
 
         public RgbColor(string hex)
         {
-            hex = hex.Replace("#", "");
-            var bigint = int.Parse(hex, NumberStyles.HexNumber);
+            if (string.IsNullOrEmpty(hex))
+            {
+                throw new ArgumentNullException(nameof(hex));
+            }
+            hex = hex.Replace("#", "", StringComparison.InvariantCultureIgnoreCase);
+            var bigint = int.Parse(hex, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
 
             R = (byte)((bigint >> 16) & 255);
             G = (byte)((bigint >> 8) & 255);
@@ -47,7 +51,18 @@ namespace LedController
                      || c1.B * 1.0 / c2.B < perc);
         }
 
-        public static RgbColor GetRandom(bool lessRandom = true, RgbColor oldColor = null)
+        internal void SetColor(RgbColor color)
+        {
+            this.SetColor(color.R, color.G, color.B);
+        }
+        internal void SetColor(byte r, byte g, byte b)
+        {
+            this.R = r;
+            this.G = g;
+            this.B = b;
+        }
+
+        public static RgbColor GetRandom(bool lessRandom = false, RgbColor oldColor = null)
         {
             byte r;
             byte g;
@@ -85,6 +100,55 @@ namespace LedController
                 return new RgbColor(r, g, b);
             }
 
+        }
+
+        internal static RgbColor Transition(RgbColor colorA, RgbColor colorB, double progress, bool evenColors)
+        {
+            byte rd;
+            byte gd;
+            byte bd;
+            if (evenColors)
+            {
+                rd = (byte)(colorB.R - ((colorB.R - colorA.R) * progress));
+                gd = (byte)(colorB.G - ((colorB.G - colorA.G) * progress));
+                bd = (byte)(colorB.B - (byte)((colorB.B - colorA.B) * progress));
+            }
+            else
+            {
+                progress = 1 - progress;
+                rd = CalcColors(colorB.R, colorA.R, progress);
+                gd = CalcColors(colorB.G, colorA.G, progress);
+                bd = CalcColors(colorB.B, colorA.B, progress);
+            }
+
+            return new RgbColor(rd, gd, bd);
+        }
+
+        private static byte CalcColors(byte c1, byte c2, double prog)
+        {
+            int progInt = (int)(255 * prog);
+            if (c2 > c1)
+            {
+                if (c2 - progInt > c1)
+                {
+                    return (byte)(c2 - progInt);
+                }
+                else
+                {
+                    return c1;
+                }
+            }
+            else
+            {
+                if (c2 + progInt < c1)
+                {
+                    return (byte)(c2 + progInt);
+                }
+                else
+                {
+                    return c1;
+                }
+            }
         }
     }
 }
