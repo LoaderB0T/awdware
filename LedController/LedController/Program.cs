@@ -15,6 +15,7 @@ namespace LedController
                 mgr.StartEffect(effect);
             });
             Console.ReadLine();
+            mgr.Dispose();
         }
     }
 }

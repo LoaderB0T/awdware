@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LedController
 {
-    public class EffectManager
+    public class EffectManager: IDisposable
     {
         private ArduinoSerial _arduinoSerial;
 
@@ -22,8 +22,8 @@ namespace LedController
 
         public void StartEffect(LedEffect effect)
         {
-            CurrentEffect = effect;
-            Console.WriteLine("Starting Effect " + CurrentEffect.name);
+            CurrentEffect = effect ?? throw new ArgumentNullException(nameof(effect));
+            Console.WriteLine("Starting Effect " + CurrentEffect.Name);
         }
 
         public void RenderEffect()
@@ -41,5 +41,35 @@ namespace LedController
                 Thread.Sleep(10);
             }
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    this._arduinoSerial.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        ~EffectManager()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }
