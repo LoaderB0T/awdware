@@ -6,12 +6,12 @@ namespace LedController.Models.Effects
 {
     public class PixelEffect : LedEffect
     {
-        private RgbColor _color;
-        private RgbColor _bgcolor;
-        private double[] _pixelArray;
-        private int _speed;
-        private int _count;
-        private bool _evenColors;
+        private readonly RgbColor _color;
+        private readonly RgbColor _bgcolor;
+        private readonly double[] _pixelArray;
+        private readonly int _speed;
+        private readonly int _count;
+        private readonly bool _evenColors;
         public PixelEffect(int ledCount, string name, RgbColor color, RgbColor bgcolor, int speed, int count, bool evenColors) : base(ledCount, name)
         {
             _pixelArray = new double[ledCount];
