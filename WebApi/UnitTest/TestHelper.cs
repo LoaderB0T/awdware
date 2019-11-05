@@ -49,7 +49,7 @@ namespace UnitTest
             return _authenticationController;
         }
 
-        public ApplicationDbContext GetWebShopDbContext()
+        public ApplicationDbContext GetDbContext()
         {
             if (_webShopDbContext == null)
             {
@@ -67,7 +67,7 @@ namespace UnitTest
         {
             if (_userRepo == null)
             {
-                var context = GetWebShopDbContext();
+                var context = GetDbContext();
                 _userRepo = new UserRepository(context, new NullLogger<UserRepository>());
             }
             return _userRepo;
@@ -78,8 +78,7 @@ namespace UnitTest
             if (_userService == null)
             {
                 var userRepo = GetUserRepository();
-                var jwtService = GetJwtService();
-                _userService = new UserService(userRepo, jwtService);
+                _userService = new UserService(userRepo);
             }
 
             return _userService;
