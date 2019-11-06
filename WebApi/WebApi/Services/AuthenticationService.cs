@@ -78,7 +78,7 @@ namespace WebApi.Services
         {
             var newUser = new WebUser
             {
-                UserId = "user:" + string.Format(CultureInfo.InvariantCulture ,"{0:yyyyMMddHHmmssffff}", DateTime.UtcNow),
+                UserId = "user:" + string.Format(CultureInfo.InvariantCulture, "{0:yyyyMMddHHmmssffff}", DateTime.UtcNow),
                 Email = registerRequestDto.Email,
                 Firstname = registerRequestDto.Firstname,
                 Lastname = registerRequestDto.Lastname,
@@ -147,8 +147,7 @@ namespace WebApi.Services
         {
             token = token.Replace("Bearer ", "", StringComparison.OrdinalIgnoreCase);
             var tokenPayloadStr = token.Split('.')[1];
-            var tokenPayloadStrBytes = Base64Url.Decode(tokenPayloadStr);
-            var tokenPayloadStrDecoded = Encoding.UTF8.GetString(tokenPayloadStrBytes);
+            var tokenPayloadStrDecoded = StringUtils.Decode(tokenPayloadStr);
             var userTokenPayload = JsonConvert.DeserializeObject<UserAuthenticationPayload>(tokenPayloadStrDecoded);
             return userTokenPayload.UserID;
         }
@@ -229,8 +228,7 @@ namespace WebApi.Services
         public TokenDto RenewToken(string oldToken)
         {
             var tokenPayloadStr = oldToken.Split('.')[1];
-            var tokenPayloadStrBytes = Base64Url.Decode(tokenPayloadStr);
-            var tokenPayloadStrDecoded = Encoding.UTF8.GetString(tokenPayloadStrBytes);
+            var tokenPayloadStrDecoded = StringUtils.Decode(tokenPayloadStr);
             var tokenPayload = JsonConvert.DeserializeObject<UserAuthenticationPayload>(tokenPayloadStrDecoded);
             return
                 new TokenDto

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserInfoService } from '../services/user-info.service';
-import { UserInfo } from '../models/user-info';
 import { LedService } from './services/led.service';
-import { LedEffect } from './models/led-config.model';
-import { LedEffectProperty } from './models/led-effect-property.model';
-import { LedEffectPropertyKind, LedEffectKind } from '../models/application-facade';
+import { LedEffectKind } from '../models/application-facade';
+import { DownloadService } from '../shared/services/download.service';
 
 @Component({
   selector: 'awd-led',
@@ -13,13 +10,18 @@ import { LedEffectPropertyKind, LedEffectKind } from '../models/application-faca
 })
 export class LedComponent implements OnInit {
   private _ledService: LedService;
+  private _downloadService: DownloadService;
   public ledEffectKind = LedEffectKind;
   public selectedAddEffect: LedEffectKind;
   public addDialogVisible: boolean;
   public addEffectName: string;
 
-  constructor(ledService: LedService) {
+  constructor(
+    ledService: LedService,
+    downloadService: DownloadService
+  ) {
     this._ledService = ledService;
+    this._downloadService = downloadService;
   }
 
   ngOnInit() {
@@ -38,6 +40,12 @@ export class LedComponent implements OnInit {
 
   public selectAddEffect(effect: LedEffectKind) {
     this.selectedAddEffect = effect;
+  }
+
+  public getConfigFile() {
+    this._ledService.getConfigFile().subscribe(config => {
+      this._downloadService.downloadStringAsFile('config.led', config);
+    });
   }
 
   public deleteEffect(id: string) {

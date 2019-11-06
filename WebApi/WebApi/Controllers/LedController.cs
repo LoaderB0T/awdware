@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Linq;
+using System.Text.Json;
 using WebApi.Dtos.Led;
+using WebApi.Helper;
 using WebApi.Hubs;
 using WebApi.Mapper;
 using WebApi.Services;
@@ -73,6 +75,32 @@ namespace WebApi.Controllers
                 _ledConfigHub.Clients.Client(hubConId).SendAsync("ReceiveEffect", effect.ToDto()).ConfigureAwait(false);
             }
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("ledConfigFile")]
+        public ActionResult<string> GetLedConfigFile([FromHeader] string authorization)
+        {
+            var userId = _authenticationService.GetUserIdFromToken(authorization);
+            var hostInfo = HttpContext.Request.Host;
+            var useHttps = HttpContext.Request.Scheme == "https";
+            var host = hostInfo.Host;
+            var port = hostInfo.Port;
+            if (!port.HasValue)
+            {
+                return null;
+            }
+            var response = new LedConfigFileDto
+            {
+                ServerHost = host,
+                ServerPort = port.Value,
+                ServerUseHttps = useHttps,
+                UserId = userId
+            };
+            var jsonString = JsonSerializer.Serialize(response);
+            var encodedString = StringUtils.Encode(jsonString);
+            var moreEncodedString = StringUtils.Caesar(encodedString, 42);
+            return Ok(moreEncodedString);
         }
     }
 }

@@ -10,17 +10,21 @@ namespace LedController
 {
     class SocketService
     {
-        private bool useHttps = false;
-        private string serverDomain = "localhost";
-        private int serverPort = 5555;
-        private string userId = "user:201911020202236614";
-        private HubConnection _connection;
+        private readonly bool useHttps;
+        private readonly string serverDomain;
+        private readonly int serverPort;
+        private readonly string userId;
+        private readonly HubConnection _connection;
         public event EventHandler<LedConfigurationDto> OnEffectSelected;
-        public SocketService()
+        public SocketService(string serverDomain, int serverPort, bool useHttps, string userId)
         {
-            var connectionTypeString = useHttps ? "https" : "http";
+            this.serverDomain = serverDomain;
+            this.serverPort = serverPort;
+            this.useHttps = useHttps;
+            this.userId = userId;
+            var connectionTypeString = this.useHttps ? "https" : "http";
             _connection = new HubConnectionBuilder()
-                .WithUrl($"{connectionTypeString}://{serverDomain}:{serverPort}/LedHub")
+                .WithUrl($"{connectionTypeString}://{this.serverDomain}:{this.serverPort}/LedHub")
                 .Build();
 
             _connection.Closed += async (error) =>
@@ -75,8 +79,8 @@ namespace LedController
         {
             try
             {
-                using (var client = new TcpClient(hostUri, portNumber))
-                    return true;
+                using var client = new TcpClient(hostUri, portNumber);
+                return true;
             }
             catch (SocketException)
             {

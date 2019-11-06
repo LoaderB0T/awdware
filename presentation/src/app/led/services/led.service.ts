@@ -52,4 +52,8 @@ export class LedService {
   public selectEffect(id: string) {
     return this._apiService.get<void>(`led/selecteffect/${id}`);
   }
+
+  public getConfigFile() {
+    return this._apiService.get<string>(`led/ledConfigFile`, false);
+  }
 }
