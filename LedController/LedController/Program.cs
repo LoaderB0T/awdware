@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 using WebApi.Dtos.Led;
 using WebApi.Helper;
@@ -33,11 +34,38 @@ namespace LedController
 
             var socket = new SocketService(config.ServerHost, config.ServerPort, config.ServerUseHttps, config.UserId);
             var mgr = new EffectManager();
-            socket.OnEffectSelected += ((sender, args) =>
+            socket.OnEffectSelected += ((sender, effectDto) =>
             {
-                var effect = LedEffectBuilder.GetEffect(args, mgr.LedCount);
+                var effect = LedEffectBuilder.GetEffect(effectDto, mgr.LedCount);
                 mgr.StartEffect(effect);
+
+                var json = JsonSerializer.Serialize(effectDto);
+                var cacheBase42 = StringUtils.Encode(json);
+                var cacheEncrypted = StringUtils.Caesar(cacheBase42, 42);
+                File.WriteAllText("./cache.led", cacheEncrypted, Encoding.UTF8);
             });
+
+            if(File.Exists("./cache.led"))
+            {
+                var cacheEncrypted = File.ReadAllText("./cache.led");
+                var cacheLessEncrypted = StringUtils.Caesar(cacheEncrypted, -42);
+                var cacheJson = StringUtils.Decode(cacheLessEncrypted);
+                LedConfigurationDto cache = null;
+                try
+                {
+                    cache = JsonSerializer.Deserialize<LedConfigurationDto>(cacheJson);
+                }
+                catch (JsonException)
+                {
+                    Console.Error.WriteLine("Invalid Cache File!");
+                }
+                if(cache != null)
+                {
+                    var effect = LedEffectBuilder.GetEffect(cache, mgr.LedCount);
+                    mgr.StartEffect(effect);
+                }
+            }
+
             Console.ReadLine();
             mgr.Dispose();
         }
