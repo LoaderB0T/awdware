@@ -13,6 +13,7 @@ namespace WebApi.Contexts
 
         public DbSet<WebUser> WebUser { get; set; }
         public DbSet<LedEffect> LedConfigs { get; set; }
+        public DbSet<LedSetting> LedSettings { get; set; }
         public DbSet<Confirmationkey> UserConfirmations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

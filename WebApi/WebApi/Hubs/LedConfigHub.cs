@@ -10,11 +10,6 @@ namespace WebApi.Hubs
     {
         public static readonly LedConfigScope _scope = new LedConfigScope();
 
-        public override Task OnConnectedAsync()
-        {
-            return base.OnConnectedAsync();
-        }
-
         public override Task OnDisconnectedAsync(Exception exception)
         {
             _scope.RemoveUserByConnection(Context.ConnectionId);
@@ -24,6 +19,7 @@ namespace WebApi.Hubs
         public void StartListening(string userId)
         {
             _scope.AddUser(Context.ConnectionId, userId);
+
         }
     }
 
