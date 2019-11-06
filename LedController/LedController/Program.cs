@@ -25,6 +25,7 @@ namespace LedController
             try
             {
                 config = JsonSerializer.Deserialize<LedConfigFileDto>(configJson);
+                Console.WriteLine($"Using config {config.ConfigName}!");
             }
             catch (JsonException)
             {
@@ -33,7 +34,7 @@ namespace LedController
             }
 
             var socket = new SocketService(config.ServerHost, config.ServerPort, config.ServerUseHttps, config.UserId);
-            var mgr = new EffectManager();
+            var mgr = new EffectManager(config.LedCount);
             socket.OnEffectSelected += ((sender, effectDto) =>
             {
                 var effect = LedEffectBuilder.GetEffect(effectDto, mgr.LedCount);
@@ -61,6 +62,7 @@ namespace LedController
                 }
                 if(cache != null)
                 {
+                    Console.WriteLine("Starting Cached Effect: " + cache.Name);
                     var effect = LedEffectBuilder.GetEffect(cache, mgr.LedCount);
                     mgr.StartEffect(effect);
                 }

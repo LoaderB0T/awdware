@@ -11,5 +11,7 @@ namespace WebApi.Dtos.Led
         public int ServerPort { get; set; }
         public bool ServerUseHttps { get; set; }
         public string UserId { get; set; }
+        public string ConfigName { get; set; }
+        public int LedCount { get; set; }
     }
 }

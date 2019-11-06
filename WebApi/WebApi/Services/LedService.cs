@@ -56,5 +56,11 @@ namespace WebApi.Services
             var success = _ledRepository.DeleteLedConfig(userId, guid);
             return success;
         }
+
+        public LedSetting GetSetting(Guid id)
+        {
+            var setting = _ledRepository.GetSetting(id);
+            return setting;
+        }
     }
 }

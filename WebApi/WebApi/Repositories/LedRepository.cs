@@ -11,24 +11,24 @@ namespace WebApi.Repositories
 {
     public class LedRepository : ILedRepository
     {
-        private readonly ApplicationDbContext _webShopDBContext;
+        private readonly ApplicationDbContext _dbContext;
 
         public LedRepository(ApplicationDbContext webShopDBContext)
         {
-            _webShopDBContext = webShopDBContext;
+            _dbContext = webShopDBContext;
         }
 
         public IEnumerable<LedEffect> GetLedEffects(string userId)
         {
-            return _webShopDBContext.LedConfigs.Where(x => x.UserId == userId);
+            return _dbContext.LedConfigs.Where(x => x.UserId == userId);
         }
 
         public void UpdateLedConfig(Guid id, LedEffectDto ledEffect, string newName)
         {
-            var oldConfig = _webShopDBContext.LedConfigs.First(x => x.Id == id);
+            var oldConfig = _dbContext.LedConfigs.First(x => x.Id == id);
             oldConfig.Name = newName;
             oldConfig.ConfigJson = JsonSerializer.Serialize(ledEffect);
-            _webShopDBContext.SaveChanges();
+            _dbContext.SaveChanges();
         }
         public void AddLedConfig(Guid id, string userId, LedEffectDto ledEffect, string newName, int ordinal)
         {
@@ -39,26 +39,32 @@ namespace WebApi.Repositories
             ledConfig.Version = 1;
             ledConfig.Ordinal = ordinal;
             ledConfig.ConfigJson = JsonSerializer.Serialize(ledEffect);
-            _webShopDBContext.LedConfigs.Add(ledConfig);
-            _webShopDBContext.SaveChanges();
+            _dbContext.LedConfigs.Add(ledConfig);
+            _dbContext.SaveChanges();
         }
 
         public LedEffect GetLedConfig(string userId, Guid id)
         {
-            var effect = _webShopDBContext.LedConfigs.FirstOrDefault(x => x.Id.Equals(id) && x.UserId.Equals(userId));
+            var effect = _dbContext.LedConfigs.FirstOrDefault(x => x.Id.Equals(id) && x.UserId.Equals(userId));
             return effect;
         }
 
         public bool DeleteLedConfig(string userId, Guid id)
         {
-            var effect = _webShopDBContext.LedConfigs.FirstOrDefault(x => x.Id.Equals(id) && x.UserId.Equals(userId));
+            var effect = _dbContext.LedConfigs.FirstOrDefault(x => x.Id.Equals(id) && x.UserId.Equals(userId));
             if(effect == null)
             {
                 return false;
             }
-            _webShopDBContext.LedConfigs.Remove(effect);
-            _webShopDBContext.SaveChanges();
+            _dbContext.LedConfigs.Remove(effect);
+            _dbContext.SaveChanges();
             return true;
+        }
+
+        public LedSetting GetSetting(Guid id)
+        {
+            var setting = _dbContext.LedSettings.FirstOrDefault(x => x.Id.Equals(id));
+            return setting;
         }
     }
 }

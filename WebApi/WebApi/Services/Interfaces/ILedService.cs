@@ -12,5 +12,6 @@ namespace WebApi.Services
         bool UpdateEffect(string userId, LedConfigurationDto newConfig);
         Guid AddEffect(string userId, LedConfigurationDto newConfig);
         bool DeleteEffect(string userId, string id);
+        LedSetting GetSetting(Guid id);
     }
 }

@@ -11,11 +11,12 @@ namespace LedController
     {
         private ArduinoSerial _arduinoSerial;
 
-        public int LedCount { get; set; } = 30;
+        public int LedCount { get; private set; }
         public LedEffect CurrentEffect { get; private set; }
 
-        public EffectManager()
+        public EffectManager(int ledCount)
         {
+            this.LedCount = ledCount;
             this._arduinoSerial = new ArduinoSerial("COM4");
             Task task = Task.Run(RenderEffect);
         }

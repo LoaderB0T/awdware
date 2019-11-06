@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Linq;
 using System.Text.Json;
 using WebApi.Dtos.Led;
@@ -78,10 +79,15 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("ledConfigFile")]
-        public ActionResult<string> GetLedConfigFile([FromHeader] string authorization)
+        [Route("ledConfigFile/{configId}")]
+        public ActionResult<string> GetLedConfigFile([FromHeader] string authorization, string configId)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
+            var ledConfig = _ledService.GetSetting(Guid.Parse(configId));
+            if(ledConfig == null)
+            {
+                return null;
+            }
             var hostInfo = HttpContext.Request.Host;
             var useHttps = HttpContext.Request.Scheme == "https";
             var host = hostInfo.Host;
@@ -95,7 +101,9 @@ namespace WebApi.Controllers
                 ServerHost = host,
                 ServerPort = port.Value,
                 ServerUseHttps = useHttps,
-                UserId = userId
+                UserId = userId,
+                ConfigName = ledConfig.SettingName,
+                LedCount = ledConfig.LedCount
             };
             var jsonString = JsonSerializer.Serialize(response);
             var encodedString = StringUtils.Encode(jsonString);

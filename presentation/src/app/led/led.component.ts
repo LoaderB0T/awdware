@@ -48,7 +48,7 @@ export class LedComponent implements OnInit {
   }
 
   public getConfigFile() {
-    this._ledService.getConfigFile().subscribe(config => {
+    this._ledService.getConfigFile('57e00b61-2a0d-46ec-90df-2ddce407664e').subscribe(config => {
       this._downloadService.downloadStringAsFile('config.led', config);
     });
   }

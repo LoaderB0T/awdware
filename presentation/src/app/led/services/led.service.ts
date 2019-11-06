@@ -53,7 +53,7 @@ export class LedService {
     return this._apiService.get<void>(`led/selecteffect/${id}`);
   }
 
-  public getConfigFile() {
-    return this._apiService.get<string>(`led/ledConfigFile`, false);
+  public getConfigFile(id: string) {
+    return this._apiService.get<string>(`led/ledConfigFile/${id}`, false);
   }
 }
