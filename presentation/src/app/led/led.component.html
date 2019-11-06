@@ -6,10 +6,12 @@
   </div>
 </div>
 
-<div class="add-button" (click)="showAddDialog()">
+<div class="bottom-button add-button" (click)="showAddDialog()">
   <i class="icon fal fa-plus"></i>
 </div>
-<button (click)="getConfigFile()">awd</button>
+<div class="bottom-button settings-button" (click)="showSettingsDialog()">
+  <i class="icon fal fa-cog"></i>
+</div>
 
 <div class="add-dialog" *ngIf="addDialogVisible">
   <span class="description">Please do stuff and lick and bla and more text</span>
@@ -46,4 +48,9 @@
     </div>
   </div>
 </div>
-<div class="add-dialog-bg" *ngIf="addDialogVisible"></div>
+
+<div class="settings-dialog" *ngIf="settingsDialogVisible">
+  <button (click)="getConfigFile()">awd</button>
+</div>
+
+<div class="dialog-bg" *ngIf="addDialogVisible"></div>

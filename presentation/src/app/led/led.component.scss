@@ -19,19 +19,25 @@
   }
 }
 
-.add-button {
+.bottom-button {
   height: 80px;
   width: 80px;
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  &.add-button {
+    right: 20px;
+    font-size: 80px;
+  }
+  &.settings-button {
+    right: 120px;
+    font-size: 60px;
+  }
   &:hover {
     background-color: var(--colorHighlightGray);
-  }
-  .icon {
-    font-size: 80px;
-    padding-left: 10px;
   }
 }
 
@@ -119,7 +125,7 @@
   }
 }
 
-.add-dialog-bg {
+.dialog-bg {
   position: absolute;
   top: 0;
   bottom: 0;

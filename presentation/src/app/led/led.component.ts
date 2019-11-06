@@ -14,6 +14,7 @@ export class LedComponent implements OnInit {
   public ledEffectKind = LedEffectKind;
   public selectedAddEffect: LedEffectKind;
   public addDialogVisible: boolean;
+  public settingsDialogVisible: boolean;
   public addEffectName: string;
 
   constructor(
@@ -36,6 +37,10 @@ export class LedComponent implements OnInit {
     this.addEffectName = '';
     this.selectedAddEffect = null;
     this.addDialogVisible = true;
+  }
+
+  public showSettingsDialog() {
+    this.settingsDialogVisible = true;
   }
 
   public selectAddEffect(effect: LedEffectKind) {
