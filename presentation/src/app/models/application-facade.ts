@@ -1,30 +1,3 @@
-export enum ConfirmEmailStatus {
-  UNKNOWN_LINK = 0,
-  EXPIRED_LINK = 1,
-  SUCCESS = 3
-}
-
-export enum LoginResult {
-  UNKNOWN = 0,
-  SUCCESS = 1,
-  WRONG_USERNAME = 2,
-  WRONG_PASSWORD = 3
-}
-
-export enum RegisterResult {
-  UNKNOWN = 0,
-  SUCCESS = 1,
-  USERNAME_TAKEN = 2,
-  EMAIL_TAKEN = 3,
-  PASSWORDS_NOT_MATCHING = 4,
-  MISSING_INFORMATION = 5
-}
-
-export enum PasswordResetStatus {
-  NO_SUCCESS = 0,
-  SUCCESS = 1
-}
-
 export class LoginHelpRequestDto {
   public email: string;
   public forgotUsername: boolean;
@@ -72,6 +45,43 @@ export class UserInfoDto {
   public firstname: string;
   public lastname: string;
   public email: string;
+}
+
+export enum ConfirmEmailStatus {
+  UNKNOWN = 0,
+  UNKNOWN_LINK = 0,
+  EXPIRED_LINK = 1,
+  SUCCESS = 3
+}
+
+export enum LoginResult {
+  UNKNOWN = 0,
+  SUCCESS = 1,
+  WRONG_USERNAME = 2,
+  WRONG_PASSWORD = 3
+}
+
+export enum RegisterResult {
+  UNKNOWN = 0,
+  SUCCESS = 1,
+  USERNAME_TAKEN = 2,
+  EMAIL_TAKEN = 3,
+  PASSWORD_MISMATCH = 4,
+  MISSING_INFORMATION = 5
+}
+
+export enum PasswordResetStatus {
+  ERROR = 0,
+  SUCCESS = 1
+}
+
+export class LedConfigFileDto {
+  public serverHost: string;
+  public serverPort: number;
+  public serverUseHttps: boolean;
+  public userId: string;
+  public configName: string;
+  public ledCount: number;
 }
 
 export class LedConfigurationDto {

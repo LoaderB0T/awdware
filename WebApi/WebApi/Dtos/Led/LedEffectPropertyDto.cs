@@ -2,10 +2,10 @@
 {
     public enum LedEffectPropertyKind
     {
-        UNKNOWN = 0,
-        COLOR = 1,
-        NUMBER = 2,
-        BOOL = 3
+        Unknown = 0,
+        Color = 1,
+        Number = 2,
+        Bool = 3
     }
 
     public class LedEffectPropertyDto

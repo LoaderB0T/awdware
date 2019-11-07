@@ -28,7 +28,7 @@ namespace UnitTest.Tests
         {
             var registerRequestDto = _testHelper.TestData.BasicRegisterRequestDto;
             var isValid = _userService.RegisterRequestValid(registerRequestDto);
-            Assert.AreEqual(RegisterResult.SUCCESS, isValid, "This Request should be detected as valid");
+            Assert.AreEqual(RegisterResult.Success, isValid, "This Request should be detected as valid");
         }
 
         [TestMethod]
@@ -41,13 +41,13 @@ namespace UnitTest.Tests
             foreach (PropertyInfo property in properties)
             {
                 var isValid = _userService.RegisterRequestValid(registerRequestDto);
-                Assert.AreEqual(isValid, RegisterResult.SUCCESS, "This Request should be detected as valid");
+                Assert.AreEqual(isValid, RegisterResult.Success, "This Request should be detected as valid");
 
                 oldValue = property.GetValue(registerRequestDto);
                 property.SetValue(registerRequestDto, null);
 
                 var isInvalid = _userService.RegisterRequestValid(registerRequestDto);
-                Assert.AreEqual(RegisterResult.MISSING_INFORMATION, isInvalid, "This Request should be detected as missing information!");
+                Assert.AreEqual(RegisterResult.MissingInformation, isInvalid, "This Request should be detected as missing information!");
 
                 property.SetValue(registerRequestDto, oldValue);
             }
@@ -60,7 +60,7 @@ namespace UnitTest.Tests
             registerRequestDto.Password2 = "thisIsMyPW!2";
 
             var isValid = _userService.RegisterRequestValid(registerRequestDto);
-            Assert.AreEqual(RegisterResult.PASSWORDS_NOT_MATCHING, isValid, "This Request should be detected as valid");
+            Assert.AreEqual(RegisterResult.PasswordMismatch, isValid, "This Request should be detected as valid");
         }
     }
 }

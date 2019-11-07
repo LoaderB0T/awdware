@@ -38,7 +38,7 @@ namespace WebApi.Controllers
             }
 
             var requestValid = _userService.RegisterRequestValid(registerRequestDto);
-            if (requestValid != RegisterResult.SUCCESS)
+            if (requestValid != RegisterResult.Success)
             {
                 return Ok(new RegisterResponseDto { RegisterSuccess = requestValid });
             }
@@ -61,7 +61,7 @@ namespace WebApi.Controllers
 
             var loginResponse = _authenticationService.Login(loginRequestDto);
 
-            if (loginResponse.LoginSuccess != LoginResult.SUCCESS)
+            if (loginResponse.LoginSuccess != LoginResult.Success)
             {
                 return Ok(loginResponse);
             }
@@ -97,8 +97,8 @@ namespace WebApi.Controllers
             if (resetPasswordDto == null)
                 throw new ArgumentNullException(nameof(resetPasswordDto));
             if (_authenticationService.ResetPassword(resetPasswordDto))
-                return Ok(PasswordResetStatus.SUCCESS);
-            return Ok(PasswordResetStatus.NO_SUCCESS);
+                return Ok(PasswordResetStatus.Success);
+            return Ok(PasswordResetStatus.Error);
         }
 
         [AllowAnonymous]

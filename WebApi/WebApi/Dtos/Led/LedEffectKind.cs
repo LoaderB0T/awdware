@@ -2,10 +2,10 @@
 {
     public enum LedEffectKind
     {
-        UNKNOWN = 0,
-        MIX = 1,
-        STRIPE = 2,
-        STATIC = 3,
-        PIXEL = 4,
+        Unknown = 0,
+        Mix = 1,
+        Stripe = 2,
+        Static = 3,
+        Pixel = 4,
     }
 }

@@ -120,7 +120,7 @@ namespace WebApi.Repositories
 
             if (confirmKey == null)
             {
-                res.Success = ConfirmKeyUsageSuccess.UNKNOWN_KEY;
+                res.Success = ConfirmKeyUsageSuccess.UnknownError;
                 return res;
             }
 
@@ -129,13 +129,13 @@ namespace WebApi.Repositories
 
             if (confirmKey.Expiration > DateTime.Now)
             {
-                res.Success = ConfirmKeyUsageSuccess.SUCESS;
+                res.Success = ConfirmKeyUsageSuccess.Success;
                 res.WebUser = GetUserById(confirmKey.UserId);
                 return res;
             }
             else
             {
-                res.Success = ConfirmKeyUsageSuccess.EXPIRED_KEY;
+                res.Success = ConfirmKeyUsageSuccess.ExpiredKey;
                 return res;
             }
         }
@@ -144,7 +144,7 @@ namespace WebApi.Repositories
         {
             var confirmKeyResult = TryUseConfirmationLink(token, ConfirmType.PasswordReset);
 
-            if (confirmKeyResult.Success != ConfirmKeyUsageSuccess.SUCESS)
+            if (confirmKeyResult.Success != ConfirmKeyUsageSuccess.Success)
             {
                 return false;
             }

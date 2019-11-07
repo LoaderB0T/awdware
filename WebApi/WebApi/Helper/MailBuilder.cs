@@ -36,19 +36,19 @@ namespace WebApi.Helper
             string path;
             switch (type)
             {
-                case EmailKind.EMAIL_CONFIRMATION:
+                case EmailKind.EmailConfirmation:
                     path = config.GetSection("Template").GetValue<string>("EmailConfirm");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("EmailConfirm");
                     break;
-                case EmailKind.PASSWORD_RESET:
+                case EmailKind.PasswordReset:
                     path = config.GetSection("Template").GetValue<string>("PasswordReset");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("PasswordReset");
                     break;
-                case EmailKind.PASSWORD_RESET_NO_USER:
+                case EmailKind.PasswordResetNoUser:
                     path = config.GetSection("Template").GetValue<string>("PasswordResetNoUser");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("PasswordReset");
                     break;
-                case EmailKind.FORGOT_USERNAME:
+                case EmailKind.ForgotUsername:
                     path = config.GetSection("Template").GetValue<string>("ForgotUsername");
                     _message.Subject = config.GetSection("Subject").GetValue<string>("ForgotUsername");
                     break;
@@ -78,7 +78,7 @@ namespace WebApi.Helper
         public MailMessage CreateUserDoesNotExistMail(string email)
         {
             Init(GetFrom(), new MailAddress(email));
-            if (!LoadTemplate(EmailKind.PASSWORD_RESET_NO_USER))
+            if (!LoadTemplate(EmailKind.PasswordResetNoUser))
                 throw new InvalidOperationException("Mail template not found.");
             _message.Body = _body;
             return _message;

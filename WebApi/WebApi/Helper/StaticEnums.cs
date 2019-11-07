@@ -2,9 +2,10 @@
 {
     public enum EmailKind
     {
-        EMAIL_CONFIRMATION,
-        PASSWORD_RESET,
-        PASSWORD_RESET_NO_USER,
-        FORGOT_USERNAME
+        Unknown = 0,
+        EmailConfirmation = 1,
+        PasswordReset = 2,
+        PasswordResetNoUser = 3,
+        ForgotUsername = 4
     }
 }

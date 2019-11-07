@@ -34,23 +34,23 @@ namespace WebApi.Services
                 || !PropertyValidation.IsValidPassword(registerRequestDto.Password2)
                 )
             {
-                return RegisterResult.MISSING_INFORMATION;
+                return RegisterResult.MissingInformation;
             }
 
             if (registerRequestDto.Password != registerRequestDto.Password2)
             {
-                return RegisterResult.PASSWORDS_NOT_MATCHING;
+                return RegisterResult.PasswordMismatch;
             }
 
             bool usernameTaken = _userRepository.CheckIfUsernameExists(registerRequestDto.Username);
             if (usernameTaken)
-                return RegisterResult.USERNAME_TAKEN;
+                return RegisterResult.UsernameTaken;
 
             bool emailTaken = _userRepository.CheckIfEmailExists(registerRequestDto.Email);
             if (emailTaken)
-                return RegisterResult.EMAIL_TAKEN;
+                return RegisterResult.EmailTaken;
 
-            return RegisterResult.SUCCESS;
+            return RegisterResult.Success;
         }
     }
 }

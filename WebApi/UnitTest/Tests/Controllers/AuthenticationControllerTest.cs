@@ -44,7 +44,7 @@ namespace UnitTest.Tests.Controllers
                 Password = "pw123"
             };
             var res = _authenticationController.Login(loginRequestDto);
-            Assert.AreEqual(((res.Result as OkObjectResult).Value as LoginResponseDto).LoginSuccess, LoginResult.WRONG_USERNAME);
+            Assert.AreEqual(((res.Result as OkObjectResult).Value as LoginResponseDto).LoginSuccess, LoginResult.WrongUsername);
         }
     }
 }

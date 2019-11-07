@@ -12,7 +12,7 @@ namespace WebApi.Mapper
             return new LoginResponseDto()
             {
                 UserInfo = user.ToUserInfoDto(),
-                LoginSuccess = LoginResult.SUCCESS
+                LoginSuccess = LoginResult.Success
             };
         }
 
@@ -32,7 +32,7 @@ namespace WebApi.Mapper
         {
             return new RegisterResponseDto()
             {
-                RegisterSuccess = RegisterResult.SUCCESS,
+                RegisterSuccess = RegisterResult.Success,
                 UserInfo = user.ToUserInfoDto()
             };
         }

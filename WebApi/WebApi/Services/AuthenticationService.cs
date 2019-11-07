@@ -55,7 +55,7 @@ namespace WebApi.Services
             {
                 return new LoginResponseDto
                 {
-                    LoginSuccess = LoginResult.WRONG_USERNAME
+                    LoginSuccess = LoginResult.WrongUsername
                 };
             }
 
@@ -69,7 +69,7 @@ namespace WebApi.Services
             {
                 return new LoginResponseDto
                 {
-                    LoginSuccess = LoginResult.WRONG_PASSWORD
+                    LoginSuccess = LoginResult.WrongPassword
                 };
             }
         }
@@ -93,7 +93,7 @@ namespace WebApi.Services
                 return newUser.ToRegisterResponseDto();
             }
 
-            return new RegisterResponseDto { RegisterSuccess = RegisterResult.UNKNOWN };
+            return new RegisterResponseDto { RegisterSuccess = RegisterResult.Unknown };
         }
 
         public string GenerateRandomLink()
@@ -122,7 +122,7 @@ namespace WebApi.Services
                     LastName = user.Lastname,
                     Link = completeLink,
                     To = user.Email,
-                    Type = EmailKind.EMAIL_CONFIRMATION
+                    Type = EmailKind.EmailConfirmation
                 };
                 return _mailService.Send(builder.CreateMailConfirmEmail(model));
             }
@@ -133,7 +133,7 @@ namespace WebApi.Services
         public bool ConfirmEmail(string link)
         {
             var res = _userRepository.TryUseConfirmationLink(link, ConfirmType.EmailConfirmation);
-            if (res.Success != ConfirmKeyUsageSuccess.SUCESS)
+            if (res.Success != ConfirmKeyUsageSuccess.Success)
             {
                 return false;
             }
@@ -168,7 +168,7 @@ namespace WebApi.Services
                         LastName = user.Lastname,
                         Link = completeLink,
                         To = user.Email,
-                        Type = EmailKind.PASSWORD_RESET
+                        Type = EmailKind.PasswordReset
                     };
                     return _mailService.Send(builder.CreateMailConfirmEmail(model));
                 }
@@ -192,7 +192,7 @@ namespace WebApi.Services
                     FirstName = user.Firstname,
                     LastName = user.Lastname,
                     To = user.Email,
-                    Type = EmailKind.FORGOT_USERNAME,
+                    Type = EmailKind.ForgotUsername,
                     Username = user.Username
                 };
                 return _mailService.Send(builder.CreateMailConfirmEmail(model));
@@ -218,7 +218,7 @@ namespace WebApi.Services
             }
 
             var res = _userRepository.TryUseConfirmationLink(resetPasswordDto.Token, ConfirmType.EmailConfirmation);
-            if (res.Success != ConfirmKeyUsageSuccess.SUCESS)
+            if (res.Success != ConfirmKeyUsageSuccess.Success)
             {
                 return false;
             }
