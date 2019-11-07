@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { LedService } from './services/led.service';
 import { LedEffectKind } from '../models/application-facade';
 import { DownloadService } from '../shared/services/download.service';
+import { DialogService } from '../shared/services/dialog.service';
+import { Dialog, DialogRow, DialogElementType, DialogElement, DialogElementTextBox, DialogElementText, DialogElementButton } from '../shared/models/dialog.model';
+import { InputType } from '../shared/models/input-type';
 
 @Component({
   selector: 'awd-led',
@@ -11,18 +14,21 @@ import { DownloadService } from '../shared/services/download.service';
 export class LedComponent implements OnInit {
   private _ledService: LedService;
   private _downloadService: DownloadService;
+  private _dialogService: DialogService;
+  private _configSaved = false;
   public ledEffectKind = LedEffectKind;
   public selectedAddEffect: LedEffectKind;
   public addDialogVisible: boolean;
-  public settingsDialogVisible: boolean;
   public addEffectName: string;
 
   constructor(
     ledService: LedService,
-    downloadService: DownloadService
+    downloadService: DownloadService,
+    dialogService: DialogService
   ) {
     this._ledService = ledService;
     this._downloadService = downloadService;
+    this._dialogService = dialogService;
   }
 
   ngOnInit() {
@@ -40,7 +46,38 @@ export class LedComponent implements OnInit {
   }
 
   public showSettingsDialog() {
-    this.settingsDialogVisible = true;
+
+    const dialog = new Dialog();
+    dialog.rows.push(new DialogRow());
+    dialog.rows.push(new DialogRow());
+    dialog.rows.push(new DialogRow());
+    dialog.rows.push(new DialogRow());
+
+    dialog.rows[0].elements.push(
+      new DialogElementText('This is a description')
+    );
+
+    const ledCountTextbox = new DialogElementTextBox('Led Count', '');
+    ledCountTextbox.constraint = InputType.NUMERIC;
+    ledCountTextbox.minValue = 5;
+    ledCountTextbox.maxValue = 600;
+    dialog.rows[1].elements.push(
+      ledCountTextbox
+    );
+
+    const downloadConfigButton = new DialogElementButton('Download Config File', () => this.getConfigFile());
+    downloadConfigButton.enabledCallback = () => this._configSaved;
+
+    dialog.rows[2].elements.push(
+      downloadConfigButton
+    );
+
+    dialog.rows[3].elements.push(
+      new DialogElementButton('Save', () => { }, true),
+      new DialogElementButton('Close', () => { }, true)
+    );
+
+    this._dialogService.showDialog(dialog);
   }
 
   public selectAddEffect(effect: LedEffectKind) {

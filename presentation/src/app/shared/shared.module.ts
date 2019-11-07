@@ -8,6 +8,7 @@ import { TabViewComponent } from './tab-view/tab-view.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { SliderComponent } from './slider/slider.component';
 import { ColorSliderComponent } from './color-slider/color-slider.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 
@@ -18,7 +19,8 @@ import { ColorSliderComponent } from './color-slider/color-slider.component';
     TabViewComponent,
     CheckboxComponent,
     SliderComponent,
-    ColorSliderComponent
+    ColorSliderComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { ColorSliderComponent } from './color-slider/color-slider.component';
     TabViewComponent,
     CheckboxComponent,
     SliderComponent,
-    ColorSliderComponent
+    ColorSliderComponent,
+    DialogComponent
   ]
 })
 export class SharedModule { }

@@ -28,6 +28,8 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   @Input() public icon: string;
   @Input() public icon2: string;
   @Input() public hidePlaceholderOnInput: boolean;
+  @Input() public minValue: number = -1;
+  @Input() public maxValue: number = -1;
 
   @Input()
   public set shouldMatch(value: string) {
