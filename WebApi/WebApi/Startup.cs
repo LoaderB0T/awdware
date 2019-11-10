@@ -160,9 +160,7 @@ namespace WebApi
             {
                 corsBuilder.AllowAnyHeader();
                 corsBuilder.AllowAnyMethod();
-                corsBuilder.WithOrigins("http://localhost:4200");
-                corsBuilder.AllowCredentials();
-
+                corsBuilder.AllowAnyOrigin();
             }
             else
             {
