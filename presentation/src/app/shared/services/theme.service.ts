@@ -23,10 +23,10 @@ export class ThemeService {
   public get darkTheme(): Theme {
     const theme = new Theme('dark');
     theme.props = [
-      { name: 'colorMainBg', value: 'rgb(26, 25, 25)' },
+      { name: 'colorMainBg', value: 'rgb(37, 36, 35)' },
       { name: 'colorMainContent', value: 'rgb(242, 239, 234)' },
       { name: 'colorPassiveContent', value: 'rgb(117, 115, 110)' },
-      { name: 'colorHighlightContent', value: 'rgb(40, 40, 46)' },
+      { name: 'colorHighlightContent', value: 'rgb(50, 49, 48)' },
       { name: 'colorHighlightColor1', value: 'rgb(242, 0, 255)' },
       { name: 'colorHighlightColor2', value: 'rgb(38, 131, 224)' },
       { name: 'colorError', value: 'rgb(238, 31, 16)' },
