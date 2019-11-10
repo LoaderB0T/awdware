@@ -7,6 +7,8 @@
   left: 0;
   right: 0;
   margin: auto;
+  max-height: 90vh;
+  overflow: auto;
   height: fit-content;
   width: fit-content;
   background: var(--colorHighlightContent);
