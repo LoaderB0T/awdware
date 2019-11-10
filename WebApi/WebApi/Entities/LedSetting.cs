@@ -13,9 +13,6 @@ namespace WebApi.Entities
         public string UserId { get; set; }
 
         [Required]
-        public int LedCount { get; set; }
-
-        [Required]
         public string ComPortName { get; set; }
 
         [Required]

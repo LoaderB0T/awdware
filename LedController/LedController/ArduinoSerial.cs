@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace LedController
@@ -12,6 +14,8 @@ namespace LedController
     {
         private SerialPort _port;
         private bool fileLogging = false;
+        private bool initialized = false;
+        public event EventHandler<int> Initialized;
 
         public ArduinoSerial(string comPortName)
         {
@@ -43,7 +47,21 @@ namespace LedController
                 }
                 else
                 {
-                    _port.ReadExisting();
+                    var receivedData = _port.ReadExisting();
+                    var formatRegex = new Regex(@"^leds:([0-9]+)$");
+                    if (formatRegex.IsMatch(receivedData))
+                    {
+                        if(initialized)
+                        {
+                            return;
+                        }
+                        initialized = true;
+                        var match = formatRegex.Match(receivedData);
+                        var grp = match.Groups[0].Value;
+                        var ledCountVal = grp.Split(":")[1];
+                        Console.WriteLine("Got Led Count: " + ledCountVal);
+                        this.Initialized?.Invoke(this, int.Parse(ledCountVal, NumberStyles.Integer, CultureInfo.InvariantCulture));
+                    }
                 }
             }
         }

@@ -9,6 +9,8 @@ namespace LedController
 {
     class Program
     {
+        private static EffectManager mgr;
+
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -34,7 +36,20 @@ namespace LedController
             }
 
             var socket = new SocketService(config.ServerHost, config.ServerPort, config.ServerUseHttps, config.UserId);
-            var mgr = new EffectManager(config.LedCount, config.ComPortName);
+
+            var arduino = new ArduinoSerial(config.ComPortName);
+            arduino.Initialized += (sender, ledCount) => {
+                StartEffectManagement(socket, ledCount, arduino);
+            };
+            Console.ReadLine();
+
+            arduino.Dispose();
+            mgr.Dispose();
+        }
+
+        private static void StartEffectManagement(SocketService socket, int ledCount, ArduinoSerial arduino)
+        {
+            mgr = new EffectManager(ledCount, arduino);
             socket.OnEffectSelected += ((sender, effectDto) =>
             {
                 var effect = LedEffectBuilder.GetEffect(effectDto, mgr.LedCount);
@@ -46,7 +61,7 @@ namespace LedController
                 File.WriteAllText("./cache.led", cacheEncrypted, Encoding.UTF8);
             });
 
-            if(File.Exists("./cache.led"))
+            if (File.Exists("./cache.led"))
             {
                 var cacheEncrypted = File.ReadAllText("./cache.led");
                 var cacheLessEncrypted = StringUtils.Caesar(cacheEncrypted, -42);
@@ -60,16 +75,13 @@ namespace LedController
                 {
                     Console.Error.WriteLine("Invalid Cache File!");
                 }
-                if(cache != null)
+                if (cache != null)
                 {
                     Console.WriteLine("Starting Cached Effect: " + cache.Name);
                     var effect = LedEffectBuilder.GetEffect(cache, mgr.LedCount);
                     mgr.StartEffect(effect);
                 }
             }
-
-            Console.ReadLine();
-            mgr.Dispose();
         }
     }
 }

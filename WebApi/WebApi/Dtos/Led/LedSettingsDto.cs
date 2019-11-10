@@ -9,7 +9,6 @@ namespace WebApi.Dtos.Led
     {
         public string UserId { get; set; }
         public string SettingName { get; set; }
-        public int LedCount { get; set; }
         public string ComPortName { get; set; }
         public string Id { get; set; }
     }

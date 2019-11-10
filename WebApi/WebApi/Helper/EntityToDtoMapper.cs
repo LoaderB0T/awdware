@@ -56,8 +56,7 @@ namespace WebApi.Mapper
                 Id = ledSetting.Id.ToString(),
                 SettingName = ledSetting.SettingName,
                 ComPortName = ledSetting.ComPortName,
-                UserId = ledSetting.UserId,
-                LedCount = ledSetting.LedCount
+                UserId = ledSetting.UserId
             };
         }
     }

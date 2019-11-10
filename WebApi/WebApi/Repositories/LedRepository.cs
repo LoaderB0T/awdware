@@ -79,7 +79,6 @@ namespace WebApi.Repositories
                 return false;
             }
             setting.ComPortName = config.ComPortName;
-            setting.LedCount = config.LedCount;
             setting.SettingName = config.SettingName;
             _dbContext.SaveChanges();
             return true;
@@ -92,7 +91,6 @@ namespace WebApi.Repositories
                 ComPortName = "COM1",
                 SettingName = "Setting1",
                 Id = Guid.NewGuid(),
-                LedCount = 20,
                 UserId = userId
             };
 

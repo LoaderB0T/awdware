@@ -48,11 +48,4 @@ export class LedSettingComponent implements OnInit {
     this.configSaved = false;
     // todo: save this information in a model for each setting (not a dto!)
   }
-
-  public get ledCount(): string {
-    return this.settings.ledCount.toString();
-  }
-  public set ledCount(value: string) {
-    this.settings.ledCount = Number.parseInt(value, 10);
-  }
 }

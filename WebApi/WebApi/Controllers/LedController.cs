@@ -134,7 +134,6 @@ namespace WebApi.Controllers
                 ServerUseHttps = useHttps,
                 UserId = ledConfig.UserId,
                 ConfigName = ledConfig.SettingName,
-                LedCount = ledConfig.LedCount,
                 ComPortName = ledConfig.ComPortName
             };
             var jsonString = JsonSerializer.Serialize(response);

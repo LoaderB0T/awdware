@@ -81,7 +81,6 @@ export class LedConfigFileDto {
   public serverUseHttps: boolean;
   public userId: string;
   public configName: string;
-  public ledCount: number;
   public comPortName: string;
   public id: string;
 }
@@ -126,7 +125,6 @@ export class LedEffectPropertyDto {
 export class LedSettingsDto {
   public userId: string;
   public settingName: string;
-  public ledCount: number;
   public comPortName: string;
   public id: string;
 }
