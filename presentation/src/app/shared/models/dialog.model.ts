@@ -8,6 +8,15 @@ export class Dialog {
   }
 }
 
+export enum DialogElementType {
+  UNKNOWN = 0,
+  TEXTBOX = 1,
+  CHECKBOX = 2,
+  BUTTON = 3,
+  TEXT = 4,
+  SELECT = 5
+}
+
 export class DialogRow {
   public elements: DialogElement[];
   constructor() {
@@ -93,13 +102,4 @@ export class DialogElementButton extends DialogElement {
     this.actionCallback = actionCallback;
     this.hideDialogOnAction = hideDialogOnAction;
   }
-}
-
-export enum DialogElementType {
-  UNKNOWN = 0,
-  TEXTBOX = 1,
-  CHECKBOX = 2,
-  BUTTON = 3,
-  TEXT = 4,
-  SELECT = 5
 }
