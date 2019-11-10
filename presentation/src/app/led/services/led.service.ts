@@ -62,7 +62,7 @@ export class LedService {
   }
 
   public updateSetting(ledSetting: LedSettingsDto) {
-    return this._apiService.post<void>('led/updateLedSettings', ledSetting);
+    return this._apiService.post<boolean>('led/updateLedSettings', ledSetting);
   }
 
   public addSettings() {

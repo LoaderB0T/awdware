@@ -18,10 +18,10 @@ namespace LedController
             var props = dto.LedEffect.Properties;
             return dto.LedEffect.EffectKind switch
             {
-                LedEffectKind.STATIC => new StaticEffect(ledCount, dto.Name,
+                LedEffectKind.Static => new StaticEffect(ledCount, dto.Name,
                     GetColorPropery(props, 1)
                 ),
-                LedEffectKind.PIXEL => new PixelEffect(ledCount, dto.Name,
+                LedEffectKind.Pixel => new PixelEffect(ledCount, dto.Name,
                     GetColorPropery(props, 1),
                     GetColorPropery(props, 2),
                     GetIntPropery(props, 3),
@@ -35,7 +35,7 @@ namespace LedController
         private static int GetIntPropery(IEnumerable<LedEffectPropertyDto> props, int id)
         {
             var prop = props.First(x => x.Id == id);
-            if (prop.EffectType == LedEffectPropertyKind.NUMBER)
+            if (prop.EffectType == LedEffectPropertyKind.Number)
             {
                 var success = int.TryParse(prop.Value, out var val);
                 if (success)
@@ -48,7 +48,7 @@ namespace LedController
         private static bool GetBoolPropery(IEnumerable<LedEffectPropertyDto> props, int id)
         {
             var prop = props.First(x => x.Id == id);
-            if (prop.EffectType == LedEffectPropertyKind.BOOL)
+            if (prop.EffectType == LedEffectPropertyKind.Bool)
             {
                 var success = bool.TryParse(prop.Value, out var val);
                 if (success)
@@ -61,7 +61,7 @@ namespace LedController
         private static RgbColor GetColorPropery(IEnumerable<LedEffectPropertyDto> props, int id)
         {
             var prop = props.First(x => x.Id == id);
-            if (prop.EffectType == LedEffectPropertyKind.COLOR)
+            if (prop.EffectType == LedEffectPropertyKind.Color)
             {
                 return new RgbColor(prop.Value);
             }

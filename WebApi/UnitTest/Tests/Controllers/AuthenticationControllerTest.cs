@@ -1,17 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WebApi.Contexts;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebApi.Controllers;
-using Microsoft.EntityFrameworkCore;
-using WebApi.Repositories;
-using WebApi.Services;
-using WebApi;
-using System.Net;
 using WebApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
 

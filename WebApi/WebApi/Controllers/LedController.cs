@@ -81,7 +81,7 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("updateLedSettings")]
-        public ActionResult SetLedSettings([FromHeader] string authorization, [FromBody] LedSettingsDto config)
+        public ActionResult<bool> SetLedSettings([FromHeader] string authorization, [FromBody] LedSettingsDto config)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
             var success = _ledService.ChangeSetting(config, userId);
