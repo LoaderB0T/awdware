@@ -18,8 +18,11 @@
   </div>
 </div>
 
-<div id="menu-mobile-button" [class.opened]="opened">
-  <div (click)="toggleMenu()">
-    <i class="fal fa-bars"></i>
+<div id="menu-mobile-button" [class.opened]="opened" [class.hide]="hideToTop">
+  <div class="header">
+    <div class="icon-container" (click)="toggleMenu()">
+      <i class="fal fa-bars"></i>
+    </div>
+    <span>awdware</span>
   </div>
 </div>

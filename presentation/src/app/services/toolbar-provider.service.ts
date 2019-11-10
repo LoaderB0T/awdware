@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToolbarItem } from '../models/toolbar-item';
 import { PossibleToolbarItem } from '../models/possible-toolbar-item';
 import { EventService } from './event.service';
-import { ToolbarInvalidated } from '../events/toolbar-invalidated.event';
+import { ToolbarInvalidatedEvent } from '../events/toolbar-invalidated.event';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class ToolbarProviderService {
   public addItem(item: PossibleToolbarItem) {
     if (!this.possibleToolbarItems.some(x => x.text === item.text)) {
       this.possibleToolbarItems.push(item);
-      this.eventService.publishEvent<ToolbarInvalidated>(ToolbarInvalidated);
+      this.eventService.publishEvent<ToolbarInvalidatedEvent>(ToolbarInvalidatedEvent);
     }
   }
 

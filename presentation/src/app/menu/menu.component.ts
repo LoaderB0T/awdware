@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MenuItem } from '../models/menu-item';
 import { RoutingService } from '../services/routing.service';
 import { SessionStoreService } from '../services/session-store.service';
@@ -12,6 +12,9 @@ export class MenuComponent implements OnInit {
   private _routingService: RoutingService;
   private _sessionStoreService: SessionStoreService;
   private _menuItems: MenuItem[];
+
+  @Input()
+  public hideToTop: boolean;
 
   public opened: boolean = false;
 

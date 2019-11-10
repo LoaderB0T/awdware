@@ -1,6 +1,6 @@
 import { BaseEvent } from '../models/base-event';
 
-export class ToolbarInvalidated extends BaseEvent {
+export class ToolbarInvalidatedEvent extends BaseEvent {
   constructor() {
     super('ToolbarInvalidated');
   }

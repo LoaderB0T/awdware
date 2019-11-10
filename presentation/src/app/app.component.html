@@ -1,8 +1,8 @@
 <div id="app-main" [class.blur]="dialogVisible">
   <div id="app-menu">
-    <awd-menu></awd-menu>
+    <awd-menu [hideToTop]="hideMenu"></awd-menu>
   </div>
-  <div id="main-content">
+  <div #mainContent id="main-content" (scroll)="handleScroll()">
     <router-outlet></router-outlet>
   </div>
 </div>

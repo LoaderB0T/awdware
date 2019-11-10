@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 import { RegisterRequestDto, RegisterResponseDto } from '../../models/application-facade';
 import { map, tap } from 'rxjs/operators';
 import { EventService } from 'src/app/services/event.service';
-import { ToolbarInvalidated } from 'src/app/events/toolbar-invalidated.event';
+import { ToolbarInvalidatedEvent } from 'src/app/events/toolbar-invalidated.event';
 import { SessionService } from 'src/app/services/session.service';
 import { RoutingService } from 'src/app/services/routing.service';
 import { UserInfoService } from 'src/app/services/user-info.service';
@@ -56,7 +56,7 @@ export class AccountService {
               this._sessionService.startCheckSession();
               console.log(data);
               this._userInfoService.setUser(data.userInfo);
-              this._eventService.publishEvent<ToolbarInvalidated>(ToolbarInvalidated);
+              this._eventService.publishEvent<ToolbarInvalidatedEvent>(ToolbarInvalidatedEvent);
               return LoginResult.SUCCESS;
             } else {
               return data.loginSuccess;
@@ -73,7 +73,7 @@ export class AccountService {
             this._sessionStoreService.putToken(data.token);
             this._sessionService.startCheckSession();
             this._userInfoService.setUser(data.userInfo);
-            this._eventService.publishEvent<ToolbarInvalidated>(ToolbarInvalidated);
+            this._eventService.publishEvent<ToolbarInvalidatedEvent>(ToolbarInvalidatedEvent);
             return RegisterResult.SUCCESS;
           } else {
             return data.registerSuccess;
@@ -95,7 +95,7 @@ export class AccountService {
       .pipe(
         tap(x => {
           this._userInfoService.setUser(x);
-          this._eventService.publishEvent<ToolbarInvalidated>(ToolbarInvalidated);
+          this._eventService.publishEvent<ToolbarInvalidatedEvent>(ToolbarInvalidatedEvent);
         })
       );
   }
@@ -104,7 +104,7 @@ export class AccountService {
     this._sessionStoreService.removeToken();
     this._sessionService.stopCheckSession();
     this._userInfoService.clearUser();
-    this._eventService.publishEvent<ToolbarInvalidated>(ToolbarInvalidated);
+    this._eventService.publishEvent<ToolbarInvalidatedEvent>(ToolbarInvalidatedEvent);
     this._routingService.navigateToHomeHello();
   }
 
