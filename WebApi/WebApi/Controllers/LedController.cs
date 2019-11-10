@@ -121,16 +121,13 @@ namespace WebApi.Controllers
             var hostInfo = HttpContext.Request.Host;
             var useHttps = HttpContext.Request.Scheme == "https";
             var host = hostInfo.Host;
-            var port = hostInfo.Port;
-            if (!port.HasValue)
-            {
-                return null;
-            }
+            var port = hostInfo.Port ?? (useHttps ? 443 : 80);
+
             var response = new LedConfigFileDto
             {
                 Id = ledConfig.Id.ToString(),
                 ServerHost = host,
-                ServerPort = port.Value,
+                ServerPort = port,
                 ServerUseHttps = useHttps,
                 UserId = ledConfig.UserId,
                 ConfigName = ledConfig.SettingName,

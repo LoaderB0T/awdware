@@ -26,7 +26,7 @@ namespace LedController
         {
             _logger.LogError(msg, args);
         }
-        public static void LogError(string msg, object args)
+        public static void LogError(string msg, object args = null)
         {
             _logger.LogError(msg, args);
         }

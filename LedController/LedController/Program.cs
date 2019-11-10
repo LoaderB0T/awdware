@@ -16,7 +16,7 @@ namespace LedController
             Console.WriteLine("Hello World!");
             if (!File.Exists("./config.led"))
             {
-                Console.Error.WriteLine("Config file not found");
+                Logger.LogError("Config file not found!");
                 return;
             }
 
@@ -31,7 +31,7 @@ namespace LedController
             }
             catch (JsonException)
             {
-                Console.Error.WriteLine("Invalid Config File!");
+                Logger.LogError("Invalid Config File!");
                 return;
             }
 
