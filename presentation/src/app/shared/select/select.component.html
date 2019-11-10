@@ -1,8 +1,8 @@
-<label>{{label}}</label>
+<label *ngIf="label">{{label}}</label>
 <div class="select-container noselect" id="" (clickOutside)="onClickedOutside()">
   <button #selectButton class="drop-button" (click)="toggleSelect(id)" (keypress)="toggleSelect(id)"
     [class.selected]="isVisible" [class.is-read-only]="isReadOnly">
-    <span class="select-selected-option-text">{{displayText}}&nbsp;</span>
+    <span class="select-selected-option-text">{{displayText}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
     <div class="select-arrow-div" *ngIf="!isReadOnly">
       <div class="select-arrow-offset">
         <i class="fal fa-caret-down select-arrow"></i>

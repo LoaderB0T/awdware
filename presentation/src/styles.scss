@@ -88,14 +88,14 @@ svg.color-svg * {
   z-index: 10;
   background: var(--colorHighlightContent);
   padding: 20px;
-  > :not(:first-child) {
+  :not(:first-child).dialog-row {
     margin-top: 30px;
   }
   .dialog-row {
     display: grid;
     grid-auto-flow: column;
     width: 100%;
-    grid-auto-columns: calc(100% / var(--elementCount) - 10px * (var(--elementCount))-1);
+    grid-auto-columns: 1fr;
     grid-column-gap: 10px;
     .dialog-element > * {
       width: 100%;

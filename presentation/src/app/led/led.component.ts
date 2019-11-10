@@ -36,7 +36,7 @@ export class LedComponent implements OnInit {
   }
 
   public showAddDialog() {
-    this._dialogService.showComponentDialog(AddEffectComponent, null, [{ key: 'effectAdded', callback: (e) => this.effectAdded(e) }]);
+    this._dialogService.showComponentDialog<AddEffectComponent>(AddEffectComponent, null, [{ key: 'effectAdded', callback: (e) => this.effectAdded(e) }]);
   }
 
   effectAdded(e: LedEffect): void {
@@ -44,7 +44,7 @@ export class LedComponent implements OnInit {
   }
 
   public showSettingsDialog() {
-    this._dialogService.showComponentDialog(LedSettingsComponent, [{ key: 'settingsList', value: this.ledSettings }]);
+    this._dialogService.showComponentDialog<LedSettingsComponent>(LedSettingsComponent, [{ key: 'settingsList', value: this.ledSettings }]);
   }
 
   public deleteEffect(id: string) {

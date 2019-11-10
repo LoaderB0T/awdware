@@ -19,7 +19,7 @@ export class DialogService {
     this._rootViewContainer = viewContainerRef;
   }
 
-  showComponentDialog<T>(componentType: new () => T, inputs: { key: string, value: any }[] = null, outputs: { key: string, callback: (value: any) => void }[] = null) {
+  showComponentDialog<T>(componentType: new (args) => T, inputs: { key: string, value: any }[] = null, outputs: { key: string, callback: (value: any) => void }[] = null) {
     const factory = this._factoryResolver
       .resolveComponentFactory<T>(componentType);
     const component = factory

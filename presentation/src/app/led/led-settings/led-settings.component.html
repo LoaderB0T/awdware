@@ -1,5 +1,9 @@
 <div class="led-settings-container dialog">
-  <awd-select [options]="selectOptions" [(ngModel)]="selectedOptionName"></awd-select>
-
-  <awd-led-setting (closeDialog)="close()" [settings]="currentSettings"></awd-led-setting>
+  <div class="dialog-row">
+    <awd-select [options]="selectOptions" [(ngModel)]="selectedOptionName"></awd-select>
+    <awd-textbox [(ngModel)]="currentSettings.settingName"></awd-textbox>
+  </div>
+  <div class="dialog-row">
+    <awd-led-setting (closeDialog)="close()" [settings]="currentSettings"></awd-led-setting>
+  </div>
 </div>
