@@ -87,12 +87,14 @@ namespace WebApi.Repositories
 
         public LedSetting AddSetting(string userId)
         {
-            var newSetting = new LedSetting();
-            newSetting.ComPortName = "COM1";
-            newSetting.SettingName = "Setting1";
-            newSetting.Id = Guid.NewGuid();
-            newSetting.LedCount = 20;
-            newSetting.UserId = userId;
+            var newSetting = new LedSetting
+            {
+                ComPortName = "COM1",
+                SettingName = "Setting1",
+                Id = Guid.NewGuid(),
+                LedCount = 20,
+                UserId = userId
+            };
 
             _dbContext.LedSettings.Add(newSetting);
             _dbContext.SaveChanges();
