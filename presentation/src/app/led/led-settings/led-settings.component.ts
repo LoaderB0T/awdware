@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LedSettingsDto } from 'src/app/models/application-facade';
 import { SelectOption } from 'src/app/shared/models/select-option.model';
+import { LedService } from '../services/led.service';
 
 @Component({
   selector: 'awd-led-settings',
@@ -12,10 +13,12 @@ export class LedSettingsComponent implements OnInit {
   @Input() public settingsList: LedSettingsDto[];
   @Output() public closeDialog = new EventEmitter();
 
-
   public selectedOptionName: string;
+  private _ledService: LedService;
 
-  constructor() { }
+  constructor(ledService: LedService) {
+    this._ledService = ledService;
+  }
 
   ngOnInit() {
     if (this.settingsList && this.settingsList.length > 0) {
@@ -38,6 +41,26 @@ export class LedSettingsComponent implements OnInit {
     } else {
       return null;
     }
+  }
+
+  public deleteSetting(id: string) {
+    const deleteIndex = this.settingsList.findIndex(x => x.id === id);
+    this.settingsList.splice(deleteIndex, 1);
+    if (this.settingsList.length > 0) {
+      this.selectedOptionName = this.settingsList[0].id;
+    } else {
+      this.selectedOptionName = null;
+    }
+  }
+
+  public newSetting() {
+    this._ledService.addSettings().subscribe(x => {
+      if (!this.settingsList) {
+        this.settingsList = new Array<LedSettingsDto>();
+      }
+      this.settingsList.push(x);
+      this.selectedOptionName = x.id;
+    });
   }
 
   public close() {

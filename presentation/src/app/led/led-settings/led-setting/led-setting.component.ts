@@ -13,6 +13,7 @@ export class LedSettingComponent implements OnInit {
 
   @Input() settings: LedSettingsDto;
   @Output() closeDialog = new EventEmitter();
+  @Output() deleteSetting = new EventEmitter<string>();
 
   InputType = InputType;
   private _ledService: LedService;
@@ -42,6 +43,10 @@ export class LedSettingComponent implements OnInit {
 
   public close() {
     this.closeDialog.next();
+  }
+
+  public delete() {
+    this.deleteSetting.next(this.settings.id);
   }
 
   public editedSettings() {

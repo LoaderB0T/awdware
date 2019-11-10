@@ -1,10 +1,12 @@
 <div class="led-settings-container dialog">
-  <div class="dialog-row">
+  <button class="dialog-row button" (click)="newSetting()">Add new Setting</button>
+  <div class="dialog-row" *ngIf="currentSettings">
     <awd-select [options]="selectOptions" [(ngModel)]="selectedOptionName"></awd-select>
-    <awd-textbox [disabled]="!currentSettings" [(ngModel)]="currentSettings && currentSettings.settingName">
+    <awd-textbox [(ngModel)]="currentSettings && currentSettings.settingName">
     </awd-textbox>
   </div>
-  <div class="dialog-row">
-    <awd-led-setting (closeDialog)="close()" [settings]="currentSettings"></awd-led-setting>
+  <div class="dialog-row" *ngIf="currentSettings">
+    <awd-led-setting (closeDialog)="close()" (deleteSetting)="deleteSetting($event)" [settings]="currentSettings">
+    </awd-led-setting>
   </div>
 </div>
