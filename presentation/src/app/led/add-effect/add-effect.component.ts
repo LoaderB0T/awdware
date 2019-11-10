@@ -29,12 +29,12 @@ export class AddEffectComponent implements OnInit {
     if (!this.canConfirmAddEffect) {
       return;
     }
-    this.closeDialog.emit();
     const newEffect = this._ledService.getNewEffect(this.selectedAddEffect, this.addEffectName);
     this.effectAdded.emit(newEffect);
     this._ledService.addEffect(newEffect).subscribe(effectId => {
       newEffect.id = effectId;
     });
+    this.closeDialog.emit();
   }
 
   public cancelAddEffect() {
