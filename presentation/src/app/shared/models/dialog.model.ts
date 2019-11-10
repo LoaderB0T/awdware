@@ -1,4 +1,5 @@
 import { InputType } from './input-type';
+import { SelectOption } from './select-option.model';
 
 export class Dialog {
   public rows: DialogRow[];
@@ -17,6 +18,15 @@ export class DialogRow {
 export class DialogElement {
   public relativeWidth?: number;
   public type: DialogElementType;
+  protected _setter: (val: any) => void;
+  protected _getter: () => any;
+
+  public get model(): any {
+    return this._getter();
+  }
+  public set model(value: any) {
+    this._setter(value);
+  }
 
   constructor(type: DialogElementType, relativeWidth = 1) {
     this.type = type;
@@ -25,27 +35,40 @@ export class DialogElement {
 }
 
 export class DialogElementTextBox extends DialogElement {
-  public model: string;
   public label?: string;
   public constraint: InputType = InputType.TEXT;
   public minValue: number;
   public maxValue: number;
 
-  constructor(label: string, model: string, relativeWidth = 1) {
+  constructor(label: string, get: () => string, set: (val: string) => void, relativeWidth = 1) {
     super(DialogElementType.TEXTBOX, relativeWidth);
     this.label = label;
-    this.model = model;
+    this._getter = get;
+    this._setter = set;
+  }
+}
+
+export class DialogElementSelect extends DialogElement {
+  public label: string;
+  public options: SelectOption[];
+
+  constructor(label: string, get: () => string, set: (val: string) => void, options: SelectOption[], relativeWidth = 1) {
+    super(DialogElementType.SELECT, relativeWidth);
+    this.label = label;
+    this.options = options;
+    this._getter = get;
+    this._setter = set;
   }
 }
 
 export class DialogElementCheckBox extends DialogElement {
-  public model: boolean;
   public label?: string;
 
-  constructor(label: string, model: boolean, relativeWidth = 1) {
+  constructor(label: string, get: () => string, set: (val: string) => void, relativeWidth = 1) {
     super(DialogElementType.CHECKBOX, relativeWidth);
     this.label = label;
-    this.model = model;
+    this._getter = get;
+    this._setter = set;
   }
 }
 
@@ -77,5 +100,6 @@ export enum DialogElementType {
   TEXTBOX = 1,
   CHECKBOX = 2,
   BUTTON = 3,
-  TEXT = 4
+  TEXT = 4,
+  SELECT = 5
 }

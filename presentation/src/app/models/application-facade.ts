@@ -82,6 +82,8 @@ export class LedConfigFileDto {
   public userId: string;
   public configName: string;
   public ledCount: number;
+  public comPortName: string;
+  public id: string;
 }
 
 export class LedConfigurationDto {
@@ -119,4 +121,12 @@ export class LedEffectPropertyDto {
   public value: string;
   public minValue?: number;
   public maxValue?: number;
+}
+
+export class LedSettingsDto {
+  public userId: string;
+  public settingName: string;
+  public ledCount: number;
+  public comPortName: string;
+  public id: string;
 }

@@ -11,7 +11,7 @@
       min-width: 380px;
       padding: 20px;
       padding-bottom: 0;
-      background-color: var(--colorHighlightGray);
+      background-color: var(--colorHighlightContent);
       margin: 10px;
       display: flex;
       flex-direction: column;
@@ -37,7 +37,7 @@
     font-size: 60px;
   }
   &:hover {
-    background-color: var(--colorHighlightGray);
+    background-color: var(--colorHighlightContent);
   }
 }
 
@@ -50,7 +50,7 @@
   margin: auto;
   height: fit-content;
   width: fit-content;
-  background: var(--colorHighlightGray);
+  background: var(--colorHighlightContent);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -80,7 +80,7 @@
       }
       &:hover,
       &.selected {
-        background-color: var(--colorCharcoalGray);
+        background-color: var(--colorMainBg);
         .icon1 {
           display: none;
         }

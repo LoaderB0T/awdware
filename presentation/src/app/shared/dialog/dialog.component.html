@@ -7,7 +7,10 @@
         <awd-checkbox *ngSwitchCase="ElemType.CHECKBOX" [(ngModel)]="elem.model" [labelText]="elem.label">
         </awd-checkbox>
         <span *ngSwitchCase="ElemType.TEXT">{{elem.label}}</span>
-        <button *ngSwitchCase="ElemType.BUTTON" (click)="performAction(elem)">{{elem.label}}</button>
+        <button *ngSwitchCase="ElemType.BUTTON" class="button" [disabled]="isDisabled(elem)"
+          (click)="performAction(elem)">{{elem.label}}</button>
+        <awd-select *ngSwitchCase="ElemType.SELECT" [label]="elem.label" [options]="elemSelect(elem).options"
+          [(ngModel)]="elemSelect(elem).model"></awd-select>
       </ng-container>
     </div>
   </div>

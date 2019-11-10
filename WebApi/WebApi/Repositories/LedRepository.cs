@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System.Linq;
+﻿using System.Linq;
 using WebApi.Contexts;
 using WebApi.Entities;
 using System.Collections.Generic;
@@ -52,7 +51,7 @@ namespace WebApi.Repositories
         public bool DeleteLedConfig(string userId, Guid id)
         {
             var effect = _dbContext.LedConfigs.FirstOrDefault(x => x.Id.Equals(id) && x.UserId.Equals(userId));
-            if(effect == null)
+            if (effect == null)
             {
                 return false;
             }
@@ -65,6 +64,46 @@ namespace WebApi.Repositories
         {
             var setting = _dbContext.LedSettings.FirstOrDefault(x => x.Id.Equals(id));
             return setting;
+        }
+
+        public bool ChangeSetting(LedSettingsDto config, string userId)
+        {
+            var setting = _dbContext.LedSettings.FirstOrDefault(x => Guid.Parse(config.Id).Equals(x.Id));
+
+            var settingUserId = setting.UserId;
+            var dtoUserId = config.UserId;
+            var authUserId = userId;
+
+            if (!settingUserId.Equals(dtoUserId) || !settingUserId.Equals(authUserId))
+            {
+                return false;
+            }
+            setting.ComPortName = config.ComPortName;
+            setting.LedCount = config.LedCount;
+            setting.SettingName = config.SettingName;
+            _dbContext.SaveChanges();
+            return true;
+        }
+
+        public LedSetting AddSetting(string userId)
+        {
+            var newSetting = new LedSetting();
+            newSetting.ComPortName = "COM1";
+            newSetting.SettingName = "Setting1";
+            newSetting.Id = Guid.NewGuid();
+            newSetting.LedCount = 20;
+            newSetting.UserId = userId;
+
+            _dbContext.LedSettings.Add(newSetting);
+            _dbContext.SaveChanges();
+
+            return newSetting;
+        }
+
+        public IEnumerable<LedSetting> GetAllSettings(string userId)
+        {
+            var settings = _dbContext.LedSettings.Where(x => x.UserId.ToUpper().Equals(userId.ToUpper()));
+            return settings;
         }
     }
 }

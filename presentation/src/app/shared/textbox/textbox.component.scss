@@ -12,7 +12,7 @@
   transition: border-bottom 75ms linear;
 
   &.disabled {
-    border-bottom: var(--colorHighlightGray) 3px solid;
+    border-bottom: var(--colorHighlightContent) 3px solid;
   }
 
   .icon-container {
@@ -57,7 +57,7 @@
     label {
       position: absolute;
       font-size: var(--font-size);
-      color: var(--colorPaperGray);
+      color: var(--colorPassiveContent);
       pointer-events: none;
       user-select: none;
       transition: all cubic-bezier(0.26, 0.14, 0.01, 0.98) 300ms;
@@ -76,7 +76,7 @@
     input {
       border: none;
       background: transparent;
-      color: var(--colorPaperWhite);
+      color: var(--colorMainContent);
       font-size: var(--font-size);
 
       &[type="password"] {
@@ -98,8 +98,8 @@
       display: none;
       position: absolute;
       transform: translateX(-325px) translateY(-20px);
-      background: var(--colorHighlightGray);
-      border: var(--colorErrorRed) 2px solid;
+      background: var(--colorHighlightContent);
+      border: var(--colorError) 2px solid;
       padding: 10px;
       width: 300px;
       white-space: pre-line;
@@ -108,7 +108,7 @@
 
     .error-icon {
       font-size: 20px;
-      color: var(--colorErrorRed);
+      color: var(--colorError);
 
       &:hover ~ .error-description {
         display: block;

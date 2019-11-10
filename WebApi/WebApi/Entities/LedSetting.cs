@@ -16,6 +16,9 @@ namespace WebApi.Entities
         public int LedCount { get; set; }
 
         [Required]
+        public string ComPortName { get; set; }
+
+        [Required]
         public string SettingName { get; set; }
     }
 }

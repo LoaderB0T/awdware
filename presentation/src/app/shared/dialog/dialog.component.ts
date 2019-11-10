@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Dialog, DialogElementType, DialogElement, DialogElementButton, DialogElementCheckBox, DialogElementText, DialogElementTextBox } from '../models/dialog.model';
+import { Dialog, DialogElementType, DialogElement, DialogElementButton, DialogElementCheckBox, DialogElementText, DialogElementTextBox, DialogElementSelect } from '../models/dialog.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DialogService } from '../services/dialog.service';
 import { InvalidOperationError } from 'src/app/models/invalid-operation-error';
@@ -44,6 +44,12 @@ export class DialogComponent implements OnInit {
     }
     return elem as DialogElementTextBox;
   }
+  public elemSelect(elem: DialogElement) {
+    if (elem.type !== DialogElementType.SELECT) {
+      throw new InvalidOperationError('Could not interpret model as Textbox');
+    }
+    return elem as DialogElementSelect;
+  }
   public elemButton(elem: DialogElement) {
     if (elem.type !== DialogElementType.BUTTON) {
       throw new InvalidOperationError('Could not interpret model as Button');
@@ -57,6 +63,14 @@ export class DialogComponent implements OnInit {
     }
     if (elem.hideDialogOnAction) {
       this.showDialog = false;
+    }
+  }
+
+  public isDisabled(elem: DialogElementButton): boolean {
+    if (elem.enabledCallback && typeof (elem.enabledCallback) === 'function') {
+      return !elem.enabledCallback();
+    } else {
+      return false;
     }
   }
 

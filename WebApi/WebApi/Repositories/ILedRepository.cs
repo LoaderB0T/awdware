@@ -13,5 +13,8 @@ namespace WebApi.Repositories
         LedEffect GetLedConfig(string userId, Guid id);
         bool DeleteLedConfig(string userId, Guid id);
         LedSetting GetSetting(Guid id);
+        bool ChangeSetting(LedSettingsDto config, string userId);
+        LedSetting AddSetting(string userId);
+        IEnumerable<LedSetting> GetAllSettings(string userId);
     }
 }

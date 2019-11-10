@@ -62,5 +62,23 @@ namespace WebApi.Services
             var setting = _ledRepository.GetSetting(id);
             return setting;
         }
+
+        public bool ChangeSetting(LedSettingsDto config, string userId)
+        {
+            var success = _ledRepository.ChangeSetting(config, userId);
+            return success;
+        }
+
+        public LedSetting AddSetting(string userId)
+        {
+            var result = _ledRepository.AddSetting(userId);
+            return result;
+        }
+
+        public IEnumerable<LedSetting> GetAllSettings(string userId)
+        {
+            var result = _ledRepository.GetAllSettings(userId);
+            return result;
+        }
     }
 }

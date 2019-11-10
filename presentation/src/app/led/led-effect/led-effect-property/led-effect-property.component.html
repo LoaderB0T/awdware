@@ -2,7 +2,7 @@
   <ng-container [ngSwitch]="effectProperty.effectType">
     <div *ngSwitchCase="effectType.BOOL" class="no-select">
       <awd-checkbox (stateChanged)="madeChanges($event)" [(ngModel)]="boolProp.value" [labelText]="boolProp.name"
-        [color]="theme.getColor('colorCharcoalGray')" [inputTabIndex]="10 + boolProp.id"></awd-checkbox>
+        [color]="theme.getColor('colorMainBg')" [inputTabIndex]="10 + boolProp.id"></awd-checkbox>
     </div>
     <div *ngSwitchCase="effectType.COLOR">
       <awd-color-slider [(ngModel)]="colorProp.value" (valueChanged)="madeChanges($event)" [labelText]="colorProp.name"

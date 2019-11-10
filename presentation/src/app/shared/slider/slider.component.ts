@@ -61,7 +61,7 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
   private refreshStyles() {
     this.cssVariables = this._sanitizer.bypassSecurityTrustStyle(
       `--slider-color: ${this.getCalculatedColor()};
-    --slider-background: ${this._theme.getColor('colorCharcoalGray')};`);
+    --slider-background: ${this._theme.getColor('colorMainBg')};`);
   }
 
   private getCalculatedColor(): string {

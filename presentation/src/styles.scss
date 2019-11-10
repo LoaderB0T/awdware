@@ -16,8 +16,8 @@ html {
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  background-color: var(--colorCharcoalGray);
-  color: var(--colorPaperWhite);
+  background-color: var(--colorMainBg);
+  color: var(--colorMainContent);
 }
 
 body {
@@ -31,13 +31,12 @@ body {
 }
 
 input[type="submit"],
-button,
 .button {
   padding: 10px 25px;
   border: none;
   border-radius: 5px;
-  color: var(--colorPaperWhite);
-  background: var(--colorCharcoalGray);
+  color: var(--colorMainContent);
+  background: var(--colorMainBg);
   box-shadow: 0 0 0 3px var(--colorHighlightColor1) inset;
   font-size: $fontSizeNormal;
   transition: box-shadow 75ms linear;
@@ -48,7 +47,7 @@ button,
     box-shadow: 0 0 0 3px var(--colorHighlightColor2) inset;
   }
   &:disabled {
-    box-shadow: 0 0 0 3px var(--colorHighlightGray) inset;
+    box-shadow: 0 0 0 3px var(--colorHighlightContent) inset;
     cursor: default;
   }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using WebApi.Dtos.Led;
@@ -78,13 +79,42 @@ namespace WebApi.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        [Route("updateLedSettings")]
+        public ActionResult SetLedSettings([FromHeader] string authorization, [FromBody] LedSettingsDto config)
+        {
+            var userId = _authenticationService.GetUserIdFromToken(authorization);
+            var success = _ledService.ChangeSetting(config, userId);
+            return Ok(success);
+        }
+
+        [HttpGet]
+        [Route("ledSettings")]
+        public ActionResult<IEnumerable<LedSettingsDto>> GetAllSettings([FromHeader] string authorization)
+        {
+            var userId = _authenticationService.GetUserIdFromToken(authorization);
+            var result = _ledService.GetAllSettings(userId);
+            var resultDto = result.Select(x => x.ToDto());
+            return Ok(resultDto);
+        }
+
+        [HttpGet]
+        [Route("newLedSettings")]
+        public ActionResult<LedSettingsDto> SetLedSettings([FromHeader] string authorization)
+        {
+            var userId = _authenticationService.GetUserIdFromToken(authorization);
+            var newSetting = _ledService.AddSetting(userId);
+            var newSettingDto = newSetting.ToDto();
+            return Ok(newSettingDto);
+        }
+
         [HttpGet]
         [Route("ledConfigFile/{configId}")]
         public ActionResult<string> GetLedConfigFile([FromHeader] string authorization, string configId)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
             var ledConfig = _ledService.GetSetting(Guid.Parse(configId));
-            if(ledConfig == null)
+            if(ledConfig == null || !ledConfig.UserId.Equals(userId, StringComparison.OrdinalIgnoreCase))
             {
                 return null;
             }
@@ -98,12 +128,14 @@ namespace WebApi.Controllers
             }
             var response = new LedConfigFileDto
             {
+                Id = ledConfig.Id.ToString(),
                 ServerHost = host,
                 ServerPort = port.Value,
                 ServerUseHttps = useHttps,
-                UserId = userId,
+                UserId = ledConfig.UserId,
                 ConfigName = ledConfig.SettingName,
-                LedCount = ledConfig.LedCount
+                LedCount = ledConfig.LedCount,
+                ComPortName = ledConfig.ComPortName
             };
             var jsonString = JsonSerializer.Serialize(response);
             var encodedString = StringUtils.Encode(jsonString);

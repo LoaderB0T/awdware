@@ -48,5 +48,17 @@ namespace WebApi.Mapper
                 LedEffect = JsonSerializer.Deserialize<LedEffectDto>(ledConfig.ConfigJson)
             };
         }
+
+        public static LedSettingsDto ToDto(this LedSetting ledSetting)
+        {
+            return new LedSettingsDto()
+            {
+                Id = ledSetting.Id.ToString(),
+                SettingName = ledSetting.SettingName,
+                ComPortName = ledSetting.ComPortName,
+                UserId = ledSetting.UserId,
+                LedCount = ledSetting.LedCount
+            };
+        }
     }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { WebApiService } from 'src/app/services/web-api.service';
-import { LedConfigurationDto, LedEffectKind } from 'src/app/models/application-facade';
+import { LedConfigurationDto, LedEffectKind, LedSettingsDto } from 'src/app/models/application-facade';
 import { LedEffect } from '../models/led-config.model';
 
 @Injectable({
@@ -55,5 +55,13 @@ export class LedService {
 
   public getConfigFile(id: string) {
     return this._apiService.get<string>(`led/ledConfigFile/${id}`, false);
+  }
+
+  public getAllSettings() {
+    return this._apiService.get<LedSettingsDto[]>(`led/ledSettings`);
+  }
+
+  public updateSetting(ledSetting: LedSettingsDto) {
+    return this._apiService.post<void>('led/updateLedSettings', ledSetting);
   }
 }
