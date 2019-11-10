@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace LedController
 {
-    public class ArduinoSerial: IDisposable
+    public class ArduinoSerial : IDisposable
     {
         private SerialPort _port;
         private bool fileLogging = false;
@@ -18,7 +18,15 @@ namespace LedController
             _port = new SerialPort();
             _port.PortName = comPortName;
             _port.BaudRate = 115200;
-            _port.Open();
+            try
+            {
+                _port.Open();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError("Unable to open port: " + comPortName, ex);
+                Environment.Exit(-1);
+            }
             _port.DataReceived += Port_DataReceived;
 
             _port.Write(new byte[] { 122, 122, 122, 122, 122 }, 0, 5); // Workaround for false bytes at fist send(s)
@@ -42,7 +50,7 @@ namespace LedController
 
         public void WriteToArduino(byte[] buffer)
         {
-            if(buffer == null)
+            if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));
             }
