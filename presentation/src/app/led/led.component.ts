@@ -16,7 +16,7 @@ export class LedComponent implements OnInit {
   private _ledService: LedService;
   private _downloadService: DownloadService;
   private _dialogService: DialogService;
-  private _configSaved = false;
+  private _configSaved = true;
   private _currentLedSetting: LedSettingsDto;
   private _ledSettings: LedSettingsDto[];
   public ledEffectKind = LedEffectKind;
@@ -62,6 +62,7 @@ export class LedComponent implements OnInit {
     const parsed = Number.parseInt(value, 10);
     if (parsed && parsed >= 5 && parsed <= 600) {
       this._currentLedSetting.ledCount = parsed;
+      this._configSaved = false;
     }
   }
 
@@ -69,7 +70,10 @@ export class LedComponent implements OnInit {
     return this._currentLedSetting.comPortName;
   }
   private set comPortName(value: string) {
-    this._currentLedSetting.comPortName = value;
+    if (value) {
+      this._currentLedSetting.comPortName = value;
+      this._configSaved = false;
+    }
   }
 
 
