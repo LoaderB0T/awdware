@@ -35,6 +35,8 @@ export class LedSettingsComponent implements OnInit {
   public get currentSettings(): LedSettingsDto {
     if (this.selectedOptionName) {
       return this.settingsList.find(x => x.id === this.selectedOptionName);
+    } else {
+      return null;
     }
   }
 

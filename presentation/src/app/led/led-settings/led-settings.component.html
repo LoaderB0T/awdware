@@ -1,4 +1,4 @@
-<div class="led-settings-container dialog">
+<div *ngIf="currentSettings" class="led-settings-container dialog">
   <div class="dialog-row">
     <awd-select [options]="selectOptions" [(ngModel)]="selectedOptionName"></awd-select>
     <awd-textbox [(ngModel)]="currentSettings.settingName"></awd-textbox>
