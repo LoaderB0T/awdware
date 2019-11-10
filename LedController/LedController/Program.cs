@@ -34,7 +34,7 @@ namespace LedController
             }
 
             var socket = new SocketService(config.ServerHost, config.ServerPort, config.ServerUseHttps, config.UserId);
-            var mgr = new EffectManager(config.LedCount);
+            var mgr = new EffectManager(config.LedCount, config.ComPortName);
             socket.OnEffectSelected += ((sender, effectDto) =>
             {
                 var effect = LedEffectBuilder.GetEffect(effectDto, mgr.LedCount);

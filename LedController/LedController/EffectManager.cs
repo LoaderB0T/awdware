@@ -14,10 +14,10 @@ namespace LedController
         public int LedCount { get; private set; }
         public LedEffect CurrentEffect { get; private set; }
 
-        public EffectManager(int ledCount)
+        public EffectManager(int ledCount, string comPortName)
         {
             this.LedCount = ledCount;
-            this._arduinoSerial = new ArduinoSerial("COM4");
+            this._arduinoSerial = new ArduinoSerial(comPortName);
             Task task = Task.Run(RenderEffect);
         }
 
