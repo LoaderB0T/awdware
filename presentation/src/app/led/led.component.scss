@@ -6,10 +6,16 @@
     width: 100%;
     flex-wrap: wrap;
     justify-content: center;
+    padding-bottom: 100px;
     .led-effect-container {
       position: relative;
       width: 25vw;
       min-width: 380px;
+      @media only screen and (max-width: 600px) {
+        min-width: unset;
+        width: 90%;
+      }
+
       padding: 20px;
       padding-bottom: 0;
       background-color: var(--colorHighlightContent);

@@ -13,8 +13,6 @@ export class TabViewComponent implements OnInit {
   private _activatedRoute: ActivatedRoute;
   @Input()
   public content: TabViewContent;
-  @Input()
-  private mainWidth: number = 700;
   private _sanitizer: DomSanitizer;
 
   constructor(activatedRoute: ActivatedRoute, sanitizer: DomSanitizer) {
@@ -31,8 +29,7 @@ export class TabViewComponent implements OnInit {
 
   public get cssVariablesStyle() {
     return this._sanitizer.bypassSecurityTrustStyle(
-      `--tabCount: ${this.content.tabs.length};
-      --mainWidth: ${this.mainWidth}px;`);
+      `--tabCount: ${this.content.tabs.length};`);
   }
 
   public selectTab(tab: TabViewTab) {

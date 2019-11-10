@@ -15,8 +15,7 @@
     </div>
     <awd-loading class="awd-loading" [class.hidden]="!clickedButton" [scale]="2"></awd-loading>
   </div>
-  <input class="submit" type="submit" tabindex="3" [disabled]="loginDisabled"
-    value="{{'account.login.form.submit.name' | translate}}">
+  <input type="submit" tabindex="3" [disabled]="loginDisabled" value="{{'account.login.form.submit.name' | translate}}">
 </form>
 <span *ngIf="errorMessageKey">
   {{'account.login.error.' + errorMessageKey | translate}}

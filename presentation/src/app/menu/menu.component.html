@@ -17,3 +17,9 @@
     <span class="text">{{menuItem.text}}</span>
   </div>
 </div>
+
+<div id="menu-mobile-button" [class.opened]="opened">
+  <div (click)="toggleMenu()">
+    <i class="fal fa-bars"></i>
+  </div>
+</div>

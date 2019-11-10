@@ -78,6 +78,7 @@
       background: transparent;
       color: var(--colorMainContent);
       font-size: var(--font-size);
+      width: 100%;
 
       &[type="password"] {
         letter-spacing: 2px;

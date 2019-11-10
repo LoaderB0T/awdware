@@ -1,56 +1,51 @@
 @import "../../../styles/all";
 
-.tab-view-container {
+// @media only screen and (max-width: 600px) {
+//   min-width: unset;
+//   width: 90%;
+// }
+
+#tab-view-container {
   padding: 10px 10px 0;
-  width: var(--mainWidth);
+  width: 700px;
+  @media only screen and (max-width: 840px) {
+    width: 90%;
+  }
   margin: auto;
   padding-top: 80px;
   border-radius: 20px;
-}
-
-@media only screen and (max-device-width: calc(var(--mainWidth) + 50)px) {
-  .tab-view-container {
-    min-width: 250px;
-    width: 90%;
-  }
-}
-
-#select-action-container {
-  width: 100%;
-  height: auto;
-  display: grid;
-  grid-template-columns: repeat(var(--tabCount), 1fr);
-}
-
-@media only screen and (max-device-width: 550px) {
   #select-action-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-auto-flow: column;
+    @media only screen and (max-width: 700px) {
+      grid-auto-flow: row;
+    }
+    .select-action {
+      font-size: $fontSizeLarge;
+      text-align: center;
+      line-height: 60px;
+      transition: border 100ms linear;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      user-select: none;
+
+      &.selected {
+        cursor: default;
+        border-bottom-color: var(--colorHighlightColor2);
+        color: var(--colorHighlightColor1);
+      }
+      &:hover:not(.selected) {
+        border-bottom: 3px solid var(--colorHighlightColor1);
+      }
+    }
   }
-}
-
-.select-action {
-  font-size: $fontSizeLarge;
-  text-align: center;
-  line-height: 60px;
-  transition: border 100ms linear;
-  border-bottom: 3px solid transparent;
-  cursor: pointer;
-  user-select: none;
-
-  &.selected {
-    cursor: default;
-    border-bottom-color: var(--colorHighlightColor2);
-    color: var(--colorHighlightColor1);
+  #content {
+    width: calc(100% - 20px);
+    margin-top: 30px;
+    padding: 10px;
   }
-}
-
-.select-action:hover:not(.selected) {
-  border-bottom: 3px solid var(--colorHighlightColor1);
-}
-
-#content {
-  width: calc(100% - 20px);
-  margin-top: 30px;
-  padding: 10px;
 }
