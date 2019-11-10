@@ -15,12 +15,18 @@
   flex-direction: column;
   align-items: center;
   z-index: 10;
+  @media only screen and (max-width: 600px) {
+    width: 80%;
+  }
   span.description {
     padding-bottom: 10px;
     display: block;
   }
   .add-dialog-items {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     .add-item {
       display: flex;
       flex-direction: column;

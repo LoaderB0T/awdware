@@ -84,7 +84,11 @@ svg.color-svg * {
   margin: auto;
   height: fit-content;
   width: fit-content;
-  max-width: 50vw;
+  @media only screen and (max-width: 700px) {
+    width: 90vw;
+    max-width: 90vw;
+  }
+  max-width: 75vw;
   z-index: 10;
   background: var(--colorHighlightContent);
   padding: 20px;
@@ -99,6 +103,10 @@ svg.color-svg * {
     grid-column-gap: 10px;
     .dialog-element > * {
       width: 100%;
+    }
+    @media only screen and (max-width: 400px) {
+      grid-row-gap: 10px;
+      grid-auto-flow: row;
     }
   }
 }
