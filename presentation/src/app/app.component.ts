@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 
 import { TranslationService } from './shared/services/translation.service';
 import { ThemeService } from './shared/services/theme.service';
+import { DialogService } from './shared/services/dialog.service';
 
 @Component({
   selector: 'awd-root',
@@ -11,8 +12,18 @@ import { ThemeService } from './shared/services/theme.service';
 export class AppComponent {
   title = 'presentation';
 
-  constructor(private translationService: TranslationService, private themeService: ThemeService) {
+  constructor(
+    private translationService: TranslationService,
+    private themeService: ThemeService,
+    private dialogService: DialogService,
+    viewContainerRef: ViewContainerRef
+  ) {
     this.translationService.init();
     this.themeService.changeTheme(themeService.darkTheme);
+    dialogService.setRootViewContainerRef(viewContainerRef);
+  }
+
+  public get dialogVisible() {
+    return this.dialogService.dialogVisible;
   }
 }

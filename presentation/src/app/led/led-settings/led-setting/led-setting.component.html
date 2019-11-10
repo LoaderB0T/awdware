@@ -1,0 +1,10 @@
+<div>
+  <awd-textbox [(ngModel)]="settings.ledCount" [inputType]="InputType.NUMERIC" [minValue]="5" [maxValue]="600">
+  </awd-textbox>
+  <awd-textbox [(ngModel)]="settings.comPortName"></awd-textbox>
+  <button class="button" [disabled]="!configSaved">Download Config File</button>
+  <div>
+    <button class="button" [disabled]="configSaved" (click)="saveCurrentSettings()">Save</button>
+    <button class="button" (click)="close()">Close</button>
+  </div>
+</div>

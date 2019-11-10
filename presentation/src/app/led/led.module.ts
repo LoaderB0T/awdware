@@ -7,6 +7,9 @@ import { LedComponent } from './led.component';
 import { LedRoutingModule } from './account-routing.module';
 import { LedEffectComponent } from './led-effect/led-effect.component';
 import { LedEffectPropertyComponent } from './led-effect/led-effect-property/led-effect-property.component';
+import { LedSettingsComponent } from './led-settings/led-settings.component';
+import { LedSettingComponent } from './led-settings/led-setting/led-setting.component';
+import { AddEffectComponent } from './add-effect/add-effect.component';
 
 
 
@@ -14,13 +17,20 @@ import { LedEffectPropertyComponent } from './led-effect/led-effect-property/led
   declarations: [
     LedComponent,
     LedEffectComponent,
-    LedEffectPropertyComponent
+    LedEffectPropertyComponent,
+    LedSettingsComponent,
+    LedSettingComponent,
+    AddEffectComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
     LedRoutingModule
+  ],
+  entryComponents: [
+    LedSettingsComponent,
+    AddEffectComponent
   ]
 })
 export class LedModule { }

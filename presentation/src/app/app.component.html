@@ -1,4 +1,4 @@
-<div id="app-main">
+<div id="app-main" [class.blur]="dialogVisible">
   <div id="app-menu">
     <awd-menu></awd-menu>
   </div>
@@ -7,4 +7,4 @@
   </div>
 </div>
 
-<awd-dialog></awd-dialog>
+<div [class.shown]="dialogVisible" class="dialog-bg dialog-bg-blurred"></div>

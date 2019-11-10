@@ -10,7 +10,6 @@ import { TabViewComponent } from './tab-view/tab-view.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { SliderComponent } from './slider/slider.component';
 import { ColorSliderComponent } from './color-slider/color-slider.component';
-import { DialogComponent } from './dialog/dialog.component';
 import { SelectComponent } from './select/select.component';
 
 
@@ -22,7 +21,6 @@ import { SelectComponent } from './select/select.component';
     CheckboxComponent,
     SliderComponent,
     ColorSliderComponent,
-    DialogComponent,
     SelectComponent
   ],
   imports: [
@@ -39,7 +37,6 @@ import { SelectComponent } from './select/select.component';
     CheckboxComponent,
     SliderComponent,
     ColorSliderComponent,
-    DialogComponent,
     SelectComponent
   ]
 })

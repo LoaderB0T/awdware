@@ -1,0 +1,85 @@
+@import "../../../styles/all.scss";
+
+.add-dialog {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: fit-content;
+  width: fit-content;
+  background: var(--colorHighlightContent);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  span.description {
+    padding-bottom: 10px;
+    display: block;
+  }
+  .add-dialog-items {
+    display: flex;
+    .add-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-width: 100px;
+      cursor: pointer;
+      .icon {
+        font-size: 64px;
+      }
+      .icon1 {
+        display: block;
+      }
+      .icon2 {
+        display: none;
+      }
+      &:hover,
+      &.selected {
+        background-color: var(--colorMainBg);
+        .icon1 {
+          display: none;
+        }
+        .icon2 {
+          display: block;
+        }
+      }
+      &.selected {
+        .icon {
+          color: var(--colorHighlightColor1);
+        }
+      }
+      span {
+        padding-top: 15px;
+        font-size: $fontSizeLarge;
+      }
+    }
+  }
+  .add-effect-lower {
+    display: flex;
+    align-items: flex-end;
+    height: 80px;
+    width: 100%;
+    .textbox {
+      flex-grow: 1;
+    }
+    .button-group {
+      display: flex;
+      .icon {
+        font-size: 50px;
+        padding-left: 10px;
+      }
+      :not(.disabled) {
+        .icon {
+          cursor: pointer;
+          &:hover {
+            color: var(--colorHighlightColor1);
+          }
+        }
+      }
+    }
+  }
+}

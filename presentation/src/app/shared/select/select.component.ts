@@ -23,7 +23,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
   public contentLeft: number = 100;
   public opened = this._opened.asObservable();
 
-  private _value: SelectOption;
+  private _value: string;
   private _isFocused: boolean;
   private _isDisabled: boolean;
   private onTouchedCallback: () => void = noop;
@@ -35,6 +35,9 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
   @Input() public options: SelectOption[];
   @Input() public isReadOnly: boolean;
   @Input() public label: string;
+  @Input() public set triggerChangeDetection(value: number) {
+    this.ref.detectChanges();
+  }
 
   @Output() selectionChanged = new EventEmitter<string>();
   @Output() toggled = new EventEmitter<boolean>();
@@ -56,8 +59,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
   }
 
   writeValue(value: any) {
-    const foundOption = this.options.find(x => x.key === value);
-    this._value = foundOption;
+    this._value = value;
     this.ref.detectChanges();
   }
 
@@ -79,6 +81,9 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
     this.id = Math.random().toString(36).slice(2);
     this.ref.detach();
     this.ref.detectChanges();
+    // setInterval(() => {
+    //   this.ref.detectChanges();
+    // }, 1000);
   }
 
   public detectChanges() {
@@ -144,7 +149,8 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
     if (!this._value) {
       return '';
     }
-    return this._value.text;
+    const optionItem = this.options.find(x => x.key === this._value);
+    return optionItem.text;
   }
 
   public onClickedOutside() {
@@ -159,10 +165,9 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
     if (this.isReadOnly) {
       throw new InvalidOperationError('Project is readonly');
     }
-    const optionItem = this.options.find(x => x.key === option.key);
-    this._value = optionItem;
+    this._value = option.key;
     this.isVisible = false;
-    this.onChangeCallback(this._value.key);
+    this.onChangeCallback(this._value);
     this.toggled.next(this.isVisible);
     this.ref.detectChanges();
   }

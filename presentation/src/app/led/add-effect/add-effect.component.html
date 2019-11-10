@@ -1,0 +1,35 @@
+<div class="add-dialog">
+  <span class="description">Please do stuff and lick and bla and more text</span>
+  <div class="add-dialog-items">
+    <div class="add-item" [class.selected]="selectedAddEffect === LedEffectKind.STATIC"
+      (click)="selectAddEffect(LedEffectKind.STATIC)">
+      <i class="icon icon1 fal fa-lightbulb"></i>
+      <i class="icon icon2 fal fa-lightbulb-on"></i>
+      <span>Static</span>
+    </div>
+    <div class="add-item" [class.selected]="selectedAddEffect === LedEffectKind.MIX"
+      (click)="selectAddEffect(LedEffectKind.MIX)">
+      <i class="icon icon1 fal fa-lightbulb"></i>
+      <i class="icon icon2 fal fa-lightbulb-on"></i>
+      <span>Mix</span>
+    </div>
+    <div class="add-item" [class.selected]="selectedAddEffect === LedEffectKind.PIXEL"
+      (click)="selectAddEffect(LedEffectKind.PIXEL)">
+      <i class="icon icon1 fal fa-lightbulb"></i>
+      <i class="icon icon2 fal fa-lightbulb-on"></i>
+      <span>Pixel</span>
+    </div>
+  </div>
+  <div class="add-effect-lower">
+    <awd-textbox class="textbox" [hidePlaceholderOnInput]="true" [fontSize]="32" [placeholder]="'Name'" [minLength]="2"
+      [maxLength]="64" [(ngModel)]="addEffectName"></awd-textbox>
+    <div class="button-group">
+      <div (click)="confirmAddEffect()" [class.disabled]="!canConfirmAddEffect">
+        <i class="icon fal fa-check-square"></i>
+      </div>
+      <div (click)="cancelAddEffect()">
+        <i class="icon fal fa-times-square"></i>
+      </div>
+    </div>
+  </div>
+</div>

@@ -64,4 +64,8 @@ export class LedService {
   public updateSetting(ledSetting: LedSettingsDto) {
     return this._apiService.post<void>('led/updateLedSettings', ledSetting);
   }
+
+  public addSettings() {
+    return this._apiService.get<LedSettingsDto>('led/newLedSettings');
+  }
 }

@@ -1,11 +1,28 @@
 #app-main {
   display: flex;
   width: 100%;
+  transition: filter 0.5s cubic-bezier(0, 0.5, 0.5, 1);
+  &.blur {
+    filter: blur(4px);
+  }
   #app-menu {
     flex-grow: 0;
   }
   #main-content {
     flex-grow: 1;
     overflow: hidden;
+  }
+}
+
+.dialog-bg.dialog-bg-blurred {
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.3);
+  transition: opacity 0.5s cubic-bezier(0, 0.5, 0.5, 1);
+  touch-action: none;
+  pointer-events: none;
+  &.shown {
+    opacity: 1;
+    touch-action: unset;
+    pointer-events: unset;
   }
 }
