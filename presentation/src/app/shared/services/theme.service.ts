@@ -25,7 +25,7 @@ export class ThemeService {
     theme.props = [
       { name: 'colorMainBg', value: 'rgb(37, 36, 35)' },
       { name: 'colorMainContent', value: 'rgb(242, 239, 234)' },
-      { name: 'colorPassiveContent', value: 'rgb(117, 115, 110)' },
+      { name: 'colorPassiveContent', value: 'rgb(140, 138, 133)' },
       { name: 'colorHighlightContent', value: 'rgb(50, 49, 48)' },
       { name: 'colorHighlightColor1', value: 'rgb(242, 0, 255)' },
       { name: 'colorHighlightColor2', value: 'rgb(38, 131, 224)' },
