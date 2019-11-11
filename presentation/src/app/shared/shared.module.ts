@@ -11,6 +11,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { SliderComponent } from './slider/slider.component';
 import { ColorSliderComponent } from './color-slider/color-slider.component';
 import { SelectComponent } from './select/select.component';
+import { LogoComponent } from './logo/logo.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SelectComponent } from './select/select.component';
     CheckboxComponent,
     SliderComponent,
     ColorSliderComponent,
-    SelectComponent
+    SelectComponent,
+    LogoComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { SelectComponent } from './select/select.component';
     CheckboxComponent,
     SliderComponent,
     ColorSliderComponent,
-    SelectComponent
+    SelectComponent,
+    LogoComponent
   ]
 })
 export class SharedModule { }

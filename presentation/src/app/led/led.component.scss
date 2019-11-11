@@ -8,6 +8,7 @@
     justify-content: center;
     padding-bottom: 100px;
     .led-effect-container {
+      @include content-color;
       position: relative;
       width: 25vw;
       min-width: 380px;
@@ -18,14 +19,9 @@
 
       padding: 20px;
       padding-bottom: 0;
-      background-color: var(--colorHighlightContent);
       margin: 10px;
       display: flex;
       flex-direction: column;
-      box-shadow: $shaddowDefault;
-      &:hover {
-        box-shadow: $shaddowFocus;
-      }
     }
   }
 }

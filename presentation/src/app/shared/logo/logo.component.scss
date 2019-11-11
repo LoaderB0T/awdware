@@ -1,0 +1,19 @@
+.cls-1 {
+  fill: var(--colorHighlightContent);
+}
+
+.cls-2 {
+  fill: rgb(66, 66, 66);
+}
+
+.logo-container {
+  height: 100%;
+  width: 100%;
+  svg {
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    min-width: 1500px;
+    margin-top: 15vh;
+  }
+}

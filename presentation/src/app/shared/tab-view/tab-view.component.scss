@@ -8,12 +8,13 @@
 #tab-view-container {
   padding: 10px 10px 0;
   width: 700px;
+  @include content-color;
   @media only screen and (max-width: 840px) {
     width: 90%;
   }
   margin: auto;
-  padding-top: 80px;
-  border-radius: 20px;
+  margin-top: 80px;
+  padding: 20px 10px;
   #select-action-container {
     width: 100%;
     height: auto;
