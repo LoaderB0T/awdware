@@ -38,7 +38,8 @@ namespace LedController
             var socket = new SocketService(config.ServerHost, config.ServerPort, config.ServerUseHttps, config.UserId);
 
             var arduino = new ArduinoSerial(config.ComPortName);
-            arduino.Initialized += (sender, ledCount) => {
+            arduino.Initialized += (sender, ledCount) =>
+            {
                 StartEffectManagement(socket, ledCount, arduino);
             };
             Console.ReadLine();
