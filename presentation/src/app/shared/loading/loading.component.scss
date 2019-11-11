@@ -2,28 +2,23 @@
   display: flex;
   margin: 0 auto;
   pointer-events: none;
-}
-
-.loading-container div {
-  pointer-events: none;
-  height: 100%;
-  animation: strech-keyframes 1.2s infinite ease-in-out;
-}
-
-.loading-container .rect2 {
-  animation-delay: -1.1s;
-}
-
-.loading-container .rect3 {
-  animation-delay: -1s;
-}
-
-.loading-container .rect4 {
-  animation-delay: -0.9s;
-}
-
-.loading-container .rect5 {
-  animation-delay: -0.8s;
+  div {
+    pointer-events: none;
+    height: 100%;
+    animation: strech-keyframes 1.2s infinite ease-in-out;
+    &.rect2 {
+      animation-delay: -1.1s;
+    }
+    &.rect3 {
+      animation-delay: -1s;
+    }
+    &.rect4 {
+      animation-delay: -0.9s;
+    }
+    &.rect5 {
+      animation-delay: -0.8s;
+    }
+  }
 }
 
 @keyframes strech-keyframes {
