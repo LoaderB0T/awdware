@@ -15,11 +15,17 @@ export class DialogService {
     this._factoryResolver = factoryResolver;
   }
 
-  setRootViewContainerRef(viewContainerRef: ViewContainerRef) {
+  public hideDialog() {
+    this._rootViewContainer.clear();
+    this._subMgr.unsubscribeAll();
+    this.dialogVisible = false;
+  }
+
+  public setRootViewContainerRef(viewContainerRef: ViewContainerRef) {
     this._rootViewContainer = viewContainerRef;
   }
 
-  showComponentDialog<T>(componentType: new (args) => T, inputs: { key: string, value: any }[] = null, outputs: { key: string, callback: (value: any) => void }[] = null) {
+  public showComponentDialog<T>(componentType: new (args) => T, inputs: { key: string, value: any }[] = null, outputs: { key: string, callback: (value: any) => void }[] = null) {
     const factory = this._factoryResolver
       .resolveComponentFactory<T>(componentType);
     const component = factory

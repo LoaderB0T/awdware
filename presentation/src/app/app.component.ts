@@ -3,6 +3,8 @@ import { Component, ViewContainerRef, ViewChild, ElementRef, OnInit } from '@ang
 import { TranslationService } from './shared/services/translation.service';
 import { ThemeService } from './shared/services/theme.service';
 import { DialogService } from './shared/services/dialog.service';
+import { Router, NavigationStart } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'awd-root',
@@ -19,11 +21,25 @@ export class AppComponent implements OnInit {
     private translationService: TranslationService,
     private themeService: ThemeService,
     private dialogService: DialogService,
-    viewContainerRef: ViewContainerRef
+    viewContainerRef: ViewContainerRef,
+    router: Router
   ) {
     this.translationService.init();
     this.themeService.changeTheme(themeService.darkTheme);
     dialogService.setRootViewContainerRef(viewContainerRef);
+    router.events
+      .pipe(
+        filter(
+          (event: NavigationStart) => {
+            return (event instanceof NavigationStart);
+          }
+        )
+      )
+      .subscribe(
+        () => {
+          this.dialogService.hideDialog();
+        }
+      );
   }
 
   ngOnInit(): void {
