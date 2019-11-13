@@ -4,139 +4,144 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using NAudio;
-using NAudio.CoreAudioApi;
-using NAudio.Dsp;
-using NAudio.Wave;
-using NAudio.Wave.SampleProviders;
+using System.Threading;
+using ManagedBass;
+using ManagedBass.Wasapi;
 
 namespace LedController.Music
 {
-    class WindowsMusicManager : IMusicManager, IDisposable
+    class WindowsMusicManager : IMusicManager
     {
-        private readonly WasapiLoopbackCapture _loopback;
+        private bool _enable;               //enabled status
+        private float[] _fft;               //buffer for fft data
+        private WasapiProcedure _process;        //callback function to obtain data
+        private int _lastlevel;             //last output level
+        private int _hanctr;                //last output level counter
+        private List<int> _spectrumdata;   //spectrum data buffer
+        private bool _initialized;          //initialized flag
 
-        private object _lock;
-        private int _fftPos;
-        private int _fftLength;
-        private Complex[] _fftBuffer;
-        private float[] _lastFftBuffer;
-        private bool _fftBufferAvailable;
-        private int _m;
+        private List<Tuple<int, string>> _devicelist;
+        private int selectedDeviceIndex = 0;
 
         public WindowsMusicManager()
         {
-            this._lock = new object();
-            this._m = (int)Math.Log(this._fftLength, 2.0);
-            this._fftLength = 2048; // 44.1kHz.
-            this._fftBuffer = new Complex[this._fftLength];
-            this._lastFftBuffer = new float[this._fftLength];
-
-
-            MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
-            var devices = enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active);
-            var device = devices.ElementAt(0);
-            _loopback = new WasapiLoopbackCapture(device);
-            _loopback.DataAvailable += Loopback_DataAvailable;
-            _loopback.StartRecording();
-            enumerator.Dispose();
+            _fft = new float[1024];
+            _lastlevel = 0;
+            _hanctr = 0;
+            _process = new WasapiProcedure(Process);
+            _spectrumdata = new List<int>();
+            _initialized = false;
+            _devicelist = new List<Tuple<int, string>>();
+            Init();
+            Enable = true;
         }
 
-        public WaveFormat Format
+        private void Init()
         {
-            get
+            for (int i = 0; i < BassWasapi.DeviceCount; i++)
             {
-                return this._loopback.WaveFormat;
-            }
-        }
-
-        private float[] ConvertByteToFloat(byte[] array, int length)
-        {
-            int samplesNeeded = length / 4;
-            float[] floatArr = new float[samplesNeeded];
-
-            for (int i = 0; i < samplesNeeded; i++)
-            {
-                floatArr[i] = BitConverter.ToSingle(array, i * 4);
-            }
-
-            return floatArr;
-        }
-
-        private void Loopback_DataAvailable(object sender, WaveInEventArgs e)
-        {
-            // Convert byte[] to float[].
-            float[] data = ConvertByteToFloat(e.Buffer, e.BytesRecorded);
-
-            // For all data. Skip right channel on stereo (i += this.Format.Channels).
-            for (int i = 0; i < data.Length; i += this.Format.Channels)
-            {
-                this._fftBuffer[_fftPos].X = (float)(data[i] * FastFourierTransform.BlackmannHarrisWindow(_fftPos, _fftLength));
-                this._fftBuffer[_fftPos].Y = 0;
-                this._fftPos++;
-
-                if (this._fftPos >= this._fftLength)
+                var device = BassWasapi.GetDeviceInfo(i);
+                if (device.IsEnabled && device.IsLoopback)
                 {
-                    this._fftPos = 0;
-
-                    // NAudio FFT implementation.
-                    FastFourierTransform.FFT(true, this._m, this._fftBuffer);
-                    this._fftBufferAvailable = true;
+                    _devicelist.Add(Tuple.Create(i, device.Name));
                 }
             }
+            Bass.Configure(Configuration.UpdateThreads, false);
+            bool result = Bass.Init(0, 44100, DeviceInitFlags.Default, IntPtr.Zero);
+            if (!result) throw new Exception("Init Error");
         }
 
-        private Complex[] GetFFTData()
+        public bool Enable
         {
-            lock (this._lock)
+            get { return _enable; }
+            set
             {
-                // Use last available buffer.
-                if (this._fftBufferAvailable)
+                _enable = value;
+                if (value)
                 {
-                    return this._fftBuffer;
+                    if (!_initialized)
+                    {
+                        int devindex = _devicelist[selectedDeviceIndex].Item1;
+                        bool result = BassWasapi.Init(devindex, 0, 0, WasapiInitFlags.Buffer, 1f, 0.05f, _process, IntPtr.Zero);
+                        if (!result)
+                        {
+                            var error = Bass.LastError;
+                            Logger.LogError(error.ToString());
+                        }
+                        else
+                        {
+                            _initialized = true;
+                        }
+                    }
+                    BassWasapi.Start();
                 }
-                return null;
+                else BassWasapi.Stop(true);
+                Thread.Sleep(500);
             }
-        }
-
-        public void Dispose()
-        {
-            _loopback.Dispose();
         }
 
         public int[] GetSpectrum(int rowCount, int maxValue)
         {
-            var result = new int[rowCount];
-            var fftData = GetFFTData();
-            if (fftData == null) return Array.Empty<int>();
-            var binsPerPoint = (int)Math.Ceiling((double)fftData.Length / 2 / rowCount);
-            if (fftData != null)
+            int ret = BassWasapi.GetData(_fft, (int)DataFlags.FFT2048); //get channel fft data
+            if (ret < -1) return Array.Empty<int>();
+            int x, y;
+            int b0 = 0;
+
+            //computes the spectrum data, the code is taken from a bass_wasapi sample.
+            for (x = 0; x < rowCount; x++)
             {
-                for (int n = 0; n < fftData.Length / 2; n += binsPerPoint)
+                float peak = 0;
+                int b1 = (int)Math.Pow(2, x * 10.0 / (rowCount - 1));
+                if (b1 > 1023) b1 = 1023;
+                if (b1 <= b0) b1 = b0 + 1;
+                for (; b0 < b1; b0++)
                 {
-                    // averaging out bins
-                    double yPos = 0;
-                    for (int b = 0; b < binsPerPoint; b++)
-                    {
-                        yPos += GetYPosLog(fftData[n + b], maxValue);
-                    }
-                    result[n / binsPerPoint] = (int)(yPos / binsPerPoint);
+                    if (peak < _fft[1 + b0]) peak = _fft[1 + b0];
                 }
+                y = (int)(Math.Sqrt(peak) * 3 * 255 - 4);
+                if (y > 255) y = 255;
+                if (y < 0) y = 0;
+
+                var mappedVal = Map(y, 0, 255, 0, maxValue);
+
+                _spectrumdata.Add(mappedVal);
+                //Console.Write("{0, 3} ", y);
             }
-            return result;
+
+            var data = _spectrumdata.Select(x => (int)x).ToArray();
+            _spectrumdata.Clear();
+
+            int level = BassWasapi.GetLevel();
+            if (level == _lastlevel && level != 0) _hanctr++;
+            _lastlevel = level;
+
+            //Required, because some programs hang the output. If the output hangs for a 75ms
+            //this piece of code re initializes the output so it doesn't make a gliched sound for long.
+            if (_hanctr > 3)
+            {
+                _hanctr = 0;
+                Free();
+                Bass.Init(0, 44100, DeviceInitFlags.Default, IntPtr.Zero);
+                _initialized = false;
+                Enable = true;
+            }
+            return data;
         }
 
-        private double GetYPosLog(Complex c, int maxValue)
+        static int Map(double val, double oldMin, double oldMax, double newMin, double newMax)
         {
-            // not entirely sure whether the multiplier should be 10 or 20 in this case.
-            // going with 10 from here http://stackoverflow.com/a/10636698/7532
-            double intensityDB = 10 * Math.Log10(Math.Sqrt(c.X * c.X + c.Y * c.Y));
-            double minDB = -90;
-            if (intensityDB < minDB) intensityDB = minDB;
-            double percent = intensityDB / minDB;
-            // we want 0dB to be at the top (i.e. yPos = 0)
-            double yPos = percent * maxValue;
-            return yPos;
+            return (int)((val - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin);
+        }
+
+        public void Free()
+        {
+            BassWasapi.Free();
+            Bass.Free();
+        }
+
+        private int Process(IntPtr buffer, int length, IntPtr user)
+        {
+            return length;
         }
     }
 }

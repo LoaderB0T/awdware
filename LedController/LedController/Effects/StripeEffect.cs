@@ -61,10 +61,14 @@ namespace LedController.Models.Effects
             {
                 if (_musicReactive)
                 {
-                    var spectrum = _musicManager.GetSpectrum(265, 128);
+                    var spectrum = _musicManager.GetSpectrum(LedCount, 255);
+                    var max = spectrum.Max();
                     for (int i = 0; i < spectrum.Length; i++)
                     {
-                        DrawSpectrumToConsole(i, spectrum[i]);
+                        DrawSpectrumToConsole(i, 128 - (spectrum[i] / 2));
+                        var val = (double)spectrum[i] / max;
+                        var res = RgbColor.Transition(_bgcolor, _color, val, true);
+                        LEDs[i].SetColor(res);
                     }
                 }
                 else

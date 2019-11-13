@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-	  <ProjectGuid>{6a221b4c-ec66-41d7-93b5-62bcbe7338a9}</ProjectGuid>
+    <ProjectGuid>{6a221b4c-ec66-41d7-93b5-62bcbe7338a9}</ProjectGuid>
     <StartupObject>LedController.Program</StartupObject>
     <Company>awdware</Company>
     <Authors>Janik Schumacher</Authors>
@@ -13,6 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ManagedBass" Version="2.0.4" />
+    <PackageReference Include="ManagedBass.Wasapi" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.7">
       <PrivateAssets>all</PrivateAssets>
@@ -21,7 +23,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.EventLog" Version="3.0.0" />
-    <PackageReference Include="NAudio" Version="1.9.0" />
     <PackageReference Include="System.IO.Ports" Version="4.6.0" />
   </ItemGroup>
 
@@ -32,6 +33,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="bass.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="basswasapi.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="bass.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
