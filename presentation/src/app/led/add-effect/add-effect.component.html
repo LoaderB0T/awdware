@@ -7,6 +7,12 @@
       <i class="icon icon2 fal fa-lightbulb-on"></i>
       <span>Static</span>
     </div>
+    <div class="add-item" [class.selected]="selectedAddEffect === LedEffectKind.STRIPE"
+      (click)="selectAddEffect(LedEffectKind.STRIPE)">
+      <i class="icon icon1 fal fa-lightbulb"></i>
+      <i class="icon icon2 fal fa-lightbulb-on"></i>
+      <span>Stripe</span>
+    </div>
     <div class="add-item" [class.selected]="selectedAddEffect === LedEffectKind.MIX"
       (click)="selectAddEffect(LedEffectKind.MIX)">
       <i class="icon icon1 fal fa-lightbulb"></i>

@@ -21,6 +21,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.EventLog" Version="3.0.0" />
+    <PackageReference Include="NAudio" Version="1.9.0" />
     <PackageReference Include="System.IO.Ports" Version="4.6.0" />
   </ItemGroup>
 
@@ -28,6 +29,15 @@
     <Reference Include="WebApi">
       <HintPath>..\..\WebApi\WebApi\bin\$(ConfigurationName)\netcoreapp3.0\WebApi.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="bass.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="basswasapi.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

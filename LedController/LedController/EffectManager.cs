@@ -36,6 +36,7 @@ namespace LedController
                     var data = CurrentEffect.Render();
                     if (data != null)
                     {
+                        CurrentEffect.Rendered();
                         _arduinoSerial.WriteToArduino(data);
                     }
                 }

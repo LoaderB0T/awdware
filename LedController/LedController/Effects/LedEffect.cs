@@ -18,8 +18,9 @@ namespace LedController.Models.Effects
             this.Name = name;
             this.LedCount = ledCount;
             Rndm = new Random();
-            LastRenderTime = DateTime.UtcNow;
+            LastRenderTime = DateTime.UtcNow.AddDays(-1);
             LEDs = new List<RgbColor>(ledCount);
+            FirstFrame = true;
             for (int i = 0; i < ledCount; i++)
             {
                 LEDs.Add(new RgbColor(0, 0, 0));
@@ -29,13 +30,27 @@ namespace LedController.Models.Effects
         {
             return Rndm.Next(LedCount);
         }
+
+        protected bool TimePassed(int millis)
+        {
+            return DateTime.UtcNow - LastRenderTime > TimeSpan.FromMilliseconds(millis);
+        }
+
+        internal void Rendered()
+        {
+            LastRenderTime = DateTime.UtcNow;
+            if(FirstFrame)
+            {
+                FirstFrame = false;
+            }
+        }
     }
 
     public static class LedExtentions
     {
         public static byte[] ToByteArray(this List<RgbColor> leds)
         {
-            if(leds == null)
+            if (leds == null)
             {
                 throw new ArgumentNullException(nameof(leds));
             }
@@ -46,7 +61,7 @@ namespace LedController.Models.Effects
                 result[i * 3 + 1] = leds[i].R;
                 result[i * 3 + 2] = leds[i].B;
             }
-    
+
             return result;
         }
 

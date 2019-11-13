@@ -23,12 +23,11 @@ namespace LedController.Models.Effects
         }
         public override byte[] Render()
         {
-            if (DateTime.UtcNow - LastRenderTime > TimeSpan.FromMilliseconds(5))
+            if (TimePassed(5))
             {
                 if (FirstFrame)
                 {
                     LEDs.SetAll(_bgcolor);
-                    FirstFrame = false;
                 }
 
                 for (int i = 0; i < LedCount; i++)
@@ -73,13 +72,9 @@ namespace LedController.Models.Effects
                         LEDs[i].SetColor(_bgcolor);
                     }
                 }
-                LastRenderTime = DateTime.UtcNow;
                 return LEDs.ToByteArray();
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
     }
 }

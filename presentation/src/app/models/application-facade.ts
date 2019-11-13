@@ -103,7 +103,8 @@ export enum LedEffectKind {
   MIX = 1,
   STRIPE = 2,
   STATIC = 3,
-  PIXEL = 4
+  PIXEL = 4,
+  MUSIC = 5
 }
 
 export enum LedEffectPropertyKind {
