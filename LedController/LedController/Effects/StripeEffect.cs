@@ -16,7 +16,6 @@ namespace LedController.Models.Effects
         private readonly bool _switchDirection;
         private readonly bool _twoSides;
         private readonly IMusicManager _musicManager;
-        private List<int> _oldChars;
 
         public StripeEffect(int ledCount, string name, RgbColor color, RgbColor bgcolor, bool musicReactive, int speed, bool switchDirection, bool twoSides) : base(ledCount, name)
         {
@@ -26,11 +25,6 @@ namespace LedController.Models.Effects
             _speed = speed;
             _switchDirection = switchDirection;
             _twoSides = twoSides;
-            _oldChars = new List<int>();
-            for (int i = 0; i < 265; i++)
-            {
-                _oldChars.Add(0);
-            }
             if (musicReactive)
             {
                 _musicManager = IMusicManager.GetInstance();
@@ -57,7 +51,6 @@ namespace LedController.Models.Effects
                     var spectrum = _musicManager.GetSpectrum(LedCount, 255);
                     for (int i = 0; i < spectrum.Length; i++)
                     {
-                        DrawSpectrumToConsole(i, 128 - (spectrum[i] / 2));
                         var val = (double)spectrum[i] / 255;
                         var res = RgbColor.Transition(_bgcolor, _color, val, true);
                         LEDs[i].SetColor(res);
@@ -91,17 +84,6 @@ namespace LedController.Models.Effects
                 return LEDs.ToByteArray();
             }
             return null;
-        }
-
-        private void DrawSpectrumToConsole(int index, int power)
-        {
-            Console.CursorLeft = index;
-            Console.CursorTop = _oldChars[index];
-            Console.Write(" ");
-            Console.CursorLeft = index;
-            Console.CursorTop = power;
-            Console.Write("#");
-            _oldChars[index] = power;
         }
 
         private void RenderOneDirection(sbyte direction)
