@@ -1,20 +1,18 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Mail;
+using WebApi.Helper;
 
 namespace WebApi.Services
 {
     public class MailService : IMailService, IDisposable
     {
         private readonly IConfiguration _configuration;
-        private readonly ILogger _logger;
         private SmtpClient _smtp;
 
-        public MailService(IConfiguration configuration, ILogger logger)
+        public MailService(IConfiguration configuration)
         {
             _configuration = configuration;
-            _logger = logger;
             Init();
         }
 
@@ -43,7 +41,7 @@ namespace WebApi.Services
             }
             catch (Exception)
             {
-                _logger.LogError("Failed to send mail", mail, _smtp);
+                Logger.LogError("Failed to send mail", mail, _smtp);
                 return false;
             }
         }

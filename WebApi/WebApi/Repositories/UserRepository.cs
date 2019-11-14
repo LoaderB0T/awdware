@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Linq;
 using WebApi.Contexts;
 using WebApi.Entities;
@@ -10,13 +9,11 @@ namespace WebApi.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly ILogger _logger;
         private readonly ApplicationDbContext _webShopDBContext;
 
-        public UserRepository(ApplicationDbContext webShopDBContext, ILogger logger)
+        public UserRepository(ApplicationDbContext webShopDBContext)
         {
             _webShopDBContext = webShopDBContext;
-            _logger = logger;
         }
 
         public WebUser GetUserById(string userId)
@@ -65,7 +62,7 @@ namespace WebApi.Repositories
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Could not add user {user} to database.", user);
+                Logger.LogError(exception, "Could not add user {user} to database.", user);
                 return false;
             }
         }

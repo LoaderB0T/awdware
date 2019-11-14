@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.IO;
@@ -18,7 +16,6 @@ namespace UnitTest
         private readonly TestContext _testContext;
 
         private Mock<IWebHostEnvironment> _environment;
-        private Mock<ILogger> _logger;
         private IConfiguration _configuration;
         private ApplicationDbContext _webShopDbContext;
         private UserRepository _userRepo;
@@ -44,7 +41,7 @@ namespace UnitTest
             {
                 var authenticationService = GetAuthenticationService();
                 var userService = GetUserService();
-                _authenticationController = new AuthenticationController(authenticationService, userService, new NullLogger<AuthenticationController>());
+                _authenticationController = new AuthenticationController(authenticationService, userService);
             }
             return _authenticationController;
         }
@@ -68,7 +65,7 @@ namespace UnitTest
             if (_userRepo == null)
             {
                 var context = GetDbContext();
-                _userRepo = new UserRepository(context, new NullLogger<UserRepository>());
+                _userRepo = new UserRepository(context);
             }
             return _userRepo;
         }
@@ -106,8 +103,7 @@ namespace UnitTest
                     userRepository,
                     jwtService,
                     configuration,
-                    mailService,
-                    new NullLogger<AuthenticationService>());
+                    mailService);
             }
             return _authenticationService;
         }
@@ -116,7 +112,7 @@ namespace UnitTest
         {
             if (_mailService == null)
             {
-                _mailService = new MailService(GetConfiguration(), GetLogger());
+                _mailService = new MailService(GetConfiguration());
             }
             return _mailService;
         }
@@ -131,15 +127,6 @@ namespace UnitTest
                 _configuration = configurationBuilder.Build();
             }
             return _configuration;
-        }
-
-        public ILogger GetLogger()
-        {
-            if(_logger == null)
-            {
-                _logger = new Mock<ILogger>();
-            }
-            return _logger.Object;
         }
 
         public IWebHostEnvironment GetEnvironment()

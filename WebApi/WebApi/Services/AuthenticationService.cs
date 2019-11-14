@@ -8,7 +8,6 @@ using System.Text;
 using WebApi.Models;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
-using Microsoft.Extensions.Logging;
 using WebApi.Models.JwtPayloads;
 using WebApi.Repositories;
 using System.Globalization;
@@ -23,7 +22,6 @@ namespace WebApi.Services
         private readonly IJwtService _jwtService;
         private readonly IConfiguration _configuration;
         private readonly IMailService _mailService;
-        private readonly ILogger _logger;
 
         private readonly string _clientUrl;
 
@@ -31,14 +29,12 @@ namespace WebApi.Services
             IUserRepository userRepository,
             IJwtService jwtService,
             IConfiguration configuration,
-            IMailService mailService,
-            ILogger logger)
+            IMailService mailService)
         {
             _userRepository = userRepository;
             _jwtService = jwtService;
             _configuration = configuration;
             _mailService = mailService;
-            _logger = logger;
             _clientUrl = _configuration.GetSection("Clients").GetValue<string>("WebClient");
         }
 
@@ -126,7 +122,7 @@ namespace WebApi.Services
                 };
                 return _mailService.Send(builder.CreateMailConfirmEmail(model));
             }
-            _logger.LogInformation("Could not save confirmation link {link} for user {user}", link, user);
+            Logger.LogInformation("Could not save confirmation link {link} for user {user}", link, user);
             return false;
         }
 

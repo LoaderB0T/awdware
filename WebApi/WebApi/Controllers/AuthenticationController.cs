@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using WebApi.Dtos;
+using WebApi.Helper;
 using WebApi.Services;
 
 namespace WebApi.Controllers
@@ -14,16 +14,13 @@ namespace WebApi.Controllers
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly IUserService _userService;
-        private readonly ILogger _logger;
 
         public AuthenticationController(
             IAuthenticationService authenticationService,
-            IUserService userService,
-            ILogger logger)
+            IUserService userService)
         {
             _authenticationService = authenticationService;
             _userService = userService;
-            _logger = logger;
         }
 
         [AllowAnonymous]
@@ -33,7 +30,7 @@ namespace WebApi.Controllers
         {
             if (registerRequestDto == null)
             {
-                _logger.LogError(new ArgumentNullException(nameof(registerRequestDto)), "");
+                Logger.LogError(new ArgumentNullException(nameof(registerRequestDto)), "");
                 throw new ArgumentNullException(nameof(registerRequestDto));
             }
 
