@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'awd-logo',
@@ -7,9 +9,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogoComponent implements OnInit {
 
+  public key_a = false;
+  public key_w = false;
+  public key_d = false;
+
+  private $timer_a = new Subject();
+  private $timer_w = new Subject();
+  private $timer_d = new Subject();
+
+  private timer_a = this.$timer_a.asObservable();
+  private timer_w = this.$timer_w.asObservable();
+  private timer_d = this.$timer_d.asObservable();
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    const key = event.key;
+    switch (key) {
+      case 'a':
+        this.key_a = true;
+        this.$timer_a.next();
+        break;
+      case 'w':
+        this.key_w = true;
+        this.$timer_w.next();
+        break;
+      case 'd':
+        this.key_d = true;
+        this.$timer_d.next();
+        break;
+      default:
+        break;
+    }
+  }
+
   constructor() { }
 
   ngOnInit() {
+    this.timer_a.pipe(debounceTime(500)).subscribe(() => this.key_a = false);
+    this.timer_w.pipe(debounceTime(500)).subscribe(() => this.key_w = false);
+    this.timer_d.pipe(debounceTime(500)).subscribe(() => this.key_d = false);
   }
 
 }
