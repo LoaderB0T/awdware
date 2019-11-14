@@ -1,17 +1,10 @@
 ﻿using LedController.Music;
-using NAudio.Dsp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace LedController.Models.Effects
 {
-    //    this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
-    //this.props.push(new LedEffectColorProperty(2, 'Background Color', '#000000'));
-    //this.props.push(new LedEffectBoolProperty(3, 'Music Reactive', false));
-    //this.props.push(new LedEffectNumberProperty(4, 'Speed', 30, 5, 255));
-    //this.props.push(new LedEffectBoolProperty(5, 'Switch Direction', false));
-    //this.props.push(new LedEffectBoolProperty(6, 'Two Sides', false));
     class StripeEffect : LedEffect
     {
         private int _progress = 0;
