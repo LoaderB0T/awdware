@@ -58,7 +58,7 @@ steps:
     command: publish
     publishWebProjects: false
     projects: LedController/LedController/LedController.csproj
-    arguments: '-o LedController/LedController/bin/publish /p:PublishSingleFile=true'
+    arguments: '-o LedController/LedController/bin/publish /p:PublishSingleFile=true -r win-x64'
     zipAfterPublish: false
     modifyOutputPath: false
     configuration: Release
