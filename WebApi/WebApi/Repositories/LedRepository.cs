@@ -105,5 +105,15 @@ namespace WebApi.Repositories
             var settings = _dbContext.LedSettings.Where(x => x.UserId.ToUpper().Equals(userId.ToUpper()));
             return settings;
         }
+
+        public bool DeleteSetting(string userId, Guid settingId)
+        {
+            var setting = _dbContext.LedSettings.FirstOrDefault(x => x.UserId.ToUpper().Equals(userId.ToUpper()) && x.Id.Equals(settingId));
+            if (setting == null)
+                return false;
+            _dbContext.LedSettings.Remove(setting);
+            _dbContext.SaveChanges();
+            return true;
+        }
     }
 }

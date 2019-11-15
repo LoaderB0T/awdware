@@ -9,4 +9,7 @@
     <awd-led-setting (closeDialog)="close()" (deleteSetting)="deleteSetting($event)" [settings]="currentSettings">
     </awd-led-setting>
   </div>
+  <div class="dialog-row" *ngIf="!currentSettings">
+    <button class="button" (click)="close()">Close</button>
+  </div>
 </div>

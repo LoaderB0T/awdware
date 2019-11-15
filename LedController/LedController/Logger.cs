@@ -4,7 +4,7 @@ namespace LedController
 {
     public static class Logger
     {
-        private static ILogger _logger = Init();
+        private static readonly ILogger _logger = Init();
         private static ILoggerFactory _loggerFactory;
 
         private static ILogger Init()

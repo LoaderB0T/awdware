@@ -80,5 +80,11 @@ namespace WebApi.Services
             var result = _ledRepository.GetAllSettings(userId);
             return result;
         }
+
+        public bool DeleteSetting(string userId, Guid settingId)
+        {
+            var success = _ledRepository.DeleteSetting(userId, settingId);
+            return success;
+        }
     }
 }

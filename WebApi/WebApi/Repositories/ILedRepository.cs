@@ -16,5 +16,6 @@ namespace WebApi.Repositories
         bool ChangeSetting(LedSettingsDto config, string userId);
         LedSetting AddSetting(string userId);
         IEnumerable<LedSetting> GetAllSettings(string userId);
+        bool DeleteSetting(string userId, Guid settingId);
     }
 }

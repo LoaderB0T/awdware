@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LedController.Models.Effects
+﻿namespace LedController.Models.Effects
 {
-    public class PixelEffect : LedEffect
+    internal class PixelEffect : LedEffect
     {
         private readonly RgbColor _color;
         private readonly RgbColor _bgcolor;

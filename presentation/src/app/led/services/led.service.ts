@@ -37,11 +37,11 @@ export class LedService {
   }
 
   public updateEffect(newConfig: LedEffect): Observable<void> {
-    return this._apiService.post<void>('led/updateeffect', newConfig.toDto());
+    return this._apiService.put<void>('led/effect', newConfig.toDto());
   }
 
   public addEffect(newConfig: LedEffect): Observable<string> {
-    return this._apiService.post<string>('led/addeffect', newConfig.toDto(), false);
+    return this._apiService.post<string>('led/effect', newConfig.toDto(), false);
   }
 
   public getNewEffect(kind: LedEffectKind, name: string) {
@@ -54,18 +54,22 @@ export class LedService {
   }
 
   public getConfigFile(id: string) {
-    return this._apiService.get<string>(`led/ledConfigFile/${id}`, false);
+    return this._apiService.get<string>(`led/configfile/${id}`, false);
   }
 
   public getAllSettings() {
-    return this._apiService.get<LedSettingsDto[]>(`led/ledSettings`);
+    return this._apiService.get<LedSettingsDto[]>(`led/settings`);
   }
 
   public updateSetting(ledSetting: LedSettingsDto) {
-    return this._apiService.post<boolean>('led/updateLedSettings', ledSetting);
+    return this._apiService.post<boolean>('led/setting', ledSetting);
   }
 
   public addSettings() {
-    return this._apiService.get<LedSettingsDto>('led/newLedSettings');
+    return this._apiService.get<LedSettingsDto>('led/setting');
+  }
+
+  public deleteSetting(id: string) {
+    return this._apiService.delete<boolean>(`led/setting/${id}`);
   }
 }

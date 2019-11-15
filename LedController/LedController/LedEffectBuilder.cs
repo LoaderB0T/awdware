@@ -31,10 +31,14 @@ namespace LedController
                 LedEffectKind.Stripe => new StripeEffect(ledCount, dto.Name,
                     GetColorPropery(props, 1),
                     GetColorPropery(props, 2),
-                    GetBoolPropery(props, 3),
-                    GetIntPropery(props, 4),
-                    GetBoolPropery(props, 5),
-                    GetBoolPropery(props, 6)
+                    GetIntPropery(props, 3),
+                    GetBoolPropery(props, 4),
+                    GetBoolPropery(props, 4)
+                ),
+                LedEffectKind.Music => new MusicEffect(ledCount, dto.Name,
+                    GetColorPropery(props, 1),
+                    GetColorPropery(props, 2),
+                    GetIntPropery(props, 3)
                 ),
                 _ => null,
             };

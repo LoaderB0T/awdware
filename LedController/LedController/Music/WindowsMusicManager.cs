@@ -143,5 +143,12 @@ namespace LedController.Music
         {
             return length;
         }
+
+        public double GetCurrentVolume()
+        {
+            float[] levels = new float[2];
+            var a = BassWasapi.GetLevel(levels, levels.Length, LevelRetrievalFlags.Stereo); // Untested and (obviously) untested
+            return 0;
+        }
     }
 }

@@ -44,6 +44,7 @@ export class LedSettingsComponent implements OnInit {
   }
 
   public deleteSetting(id: string) {
+    this._ledService.deleteSetting(id).subscribe();
     const deleteIndex = this.settingsList.findIndex(x => x.id === id);
     this.settingsList.splice(deleteIndex, 1);
     if (this.settingsList.length > 0) {

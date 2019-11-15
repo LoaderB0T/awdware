@@ -37,8 +37,8 @@ namespace WebApi.Controllers
             return Ok(_ledService.GetEffects(userId).Select(x => x.ToDto()));
         }
 
-        [HttpPost]
-        [Route("updateeffect")]
+        [HttpPut]
+        [Route("effect")]
         public ActionResult UpdateLedEffect([FromHeader] string authorization, [FromBody] LedConfigurationDto newConfig)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
@@ -47,7 +47,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("addeffect")]
+        [Route("effect")]
         public ActionResult<string> AddLedEffect([FromHeader] string authorization, [FromBody] LedConfigurationDto newConfig)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
@@ -80,7 +80,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("updateLedSettings")]
+        [Route("setting")]
         public ActionResult<bool> SetLedSettings([FromHeader] string authorization, [FromBody] LedSettingsDto config)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
@@ -89,7 +89,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("ledSettings")]
+        [Route("settings")]
         public ActionResult<IEnumerable<LedSettingsDto>> GetAllSettings([FromHeader] string authorization)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
@@ -99,7 +99,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("newLedSettings")]
+        [Route("setting")]
         public ActionResult<LedSettingsDto> SetLedSettings([FromHeader] string authorization)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
@@ -109,7 +109,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("ledConfigFile/{configId}")]
+        [Route("configfile/{configId}")]
         public ActionResult<string> GetLedConfigFile([FromHeader] string authorization, string configId)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
@@ -137,6 +137,15 @@ namespace WebApi.Controllers
             var encodedString = StringUtils.Encode(jsonString);
             var moreEncodedString = StringUtils.Caesar(encodedString, 42);
             return Ok(moreEncodedString);
+        }
+
+        [HttpDelete]
+        [Route("setting/{id}")]
+        public ActionResult<bool> DeleteLedSetting([FromHeader] string authorization, string id)
+        {
+            var userId = _authenticationService.GetUserIdFromToken(authorization);
+            var success = _ledService.DeleteSetting(userId, Guid.Parse(id));
+            return Ok(success);
         }
     }
 }

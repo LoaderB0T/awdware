@@ -1,34 +1,24 @@
-﻿using LedController.Music;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 
 namespace LedController.Models.Effects
 {
-    class StripeEffect : LedEffect
+    internal class StripeEffect : LedEffect
     {
         private int _progress = 0;
         private sbyte _direction = 1;
         private readonly RgbColor _color;
         private readonly RgbColor _bgcolor;
-        private readonly bool _musicReactive;
         private readonly int _speed;
         private readonly bool _switchDirection;
         private readonly bool _twoSides;
-        private readonly IMusicManager _musicManager;
 
-        public StripeEffect(int ledCount, string name, RgbColor color, RgbColor bgcolor, bool musicReactive, int speed, bool switchDirection, bool twoSides) : base(ledCount, name)
+        public StripeEffect(int ledCount, string name, RgbColor color, RgbColor bgcolor, int speed, bool switchDirection, bool twoSides) : base(ledCount, name)
         {
             _color = color;
             _bgcolor = bgcolor;
-            _musicReactive = musicReactive;
             _speed = speed;
             _switchDirection = switchDirection;
             _twoSides = twoSides;
-            if (musicReactive)
-            {
-                _musicManager = IMusicManager.GetInstance();
-            }
         }
 
         public override byte[] Render()
@@ -46,40 +36,28 @@ namespace LedController.Models.Effects
             }
             if (TimePassed(_speed))
             {
-                if (_musicReactive)
+                if (_twoSides)
                 {
-                    var spectrum = _musicManager.GetSpectrum(LedCount, 255);
-                    for (int i = 0; i < spectrum.Length; i++)
+                    if (_switchDirection)
                     {
-                        var val = (double)spectrum[i] / 255;
-                        var res = RgbColor.Transition(_bgcolor, _color, val, true);
-                        LEDs[i].SetColor(res);
+                        RenderTwoSidesSwitchedDirection();
+                    }
+                    else
+                    {
+                        RenderTwoSides();
                     }
                 }
                 else
                 {
-                    if (_twoSides)
+                    if (_switchDirection)
                     {
-                        if (_switchDirection)
-                        {
-                            RenderTwoSidesSwitchedDirection();
-                        }
-                        else
-                        {
-                            RenderTwoSides();
-                        }
+                        RenderSwitchedDirection();
                     }
                     else
                     {
-                        if (_switchDirection)
-                        {
-                            RenderSwitchedDirection();
-                        }
-                        else
-                        {
-                            RenderNormal();
-                        }
+                        RenderNormal();
                     }
+
                 }
                 return LEDs.ToByteArray();
             }
