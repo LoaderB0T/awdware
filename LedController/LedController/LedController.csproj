@@ -32,17 +32,6 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <!--<None Update="Deps\bass.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Deps\basswasapi.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>-->
-  </ItemGroup>
-
-
-
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
     <CreateItem Include="Deps\*.dll">
       <Output TaskParameter="Include" ItemName="DependencyFiles" />
