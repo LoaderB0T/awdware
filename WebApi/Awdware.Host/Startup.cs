@@ -65,18 +65,14 @@ namespace Awdware.Host
             services.AddScoped<ILedRepository, LedRepository>();
 
             //Add Services
+            var jwtUserSignature = Configuration.GetSection("Certificates").GetValue<string>("JwtUserSignature");
+            services.AddScoped<IJwtService, JwtService>(s => new JwtService(jwtUserSignature, Environment.ContentRootPath));
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IJwtService, JwtService>(s => new JwtService(s.GetRequiredService<IConfiguration>(), Environment.ContentRootPath));
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ILedService, LedService>();
 
-            using var serviceProvider = services.BuildServiceProvider();
-            var logger = serviceProvider.GetService<ILogger<Startup>>();
-            services.AddSingleton(typeof(ILogger), logger);
-
             ConfigureJwtAuthentication(services);
-
         }
 
         public void Configure(IApplicationBuilder app)

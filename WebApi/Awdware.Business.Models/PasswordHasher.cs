@@ -63,7 +63,7 @@ namespace Awdware.Business.Utils
         /// <returns>Is supported?</returns>
         private static bool IsHashSupported(string hashString)
         {
-            return hashString.Contains("$awdware$v1$", StringComparison.OrdinalIgnoreCase);
+            return hashString.Contains("$awdware$v1$", StringComparison.InvariantCultureIgnoreCase);
         }
 
         /// <summary>
@@ -74,6 +74,8 @@ namespace Awdware.Business.Utils
         /// <returns>Could be verified?</returns>
         public static bool Verify(string password, string hashedPassword)
         {
+            if (string.IsNullOrEmpty(hashedPassword) || string.IsNullOrEmpty(password))
+                return false;
             // Check hash
             if (!IsHashSupported(hashedPassword))
             {
@@ -81,7 +83,7 @@ namespace Awdware.Business.Utils
             }
 
             // Extract iteration and Base64 string
-            var splittedHashString = hashedPassword.Replace("$awdware$v1$", "", StringComparison.OrdinalIgnoreCase).Split('$');
+            var splittedHashString = hashedPassword.Replace("$awdware$v1$", "", StringComparison.InvariantCultureIgnoreCase).Split('$');
             var iterations = int.Parse(splittedHashString[0], NumberStyles.Integer, CultureInfo.InvariantCulture);
             var base64Hash = splittedHashString[1];
 

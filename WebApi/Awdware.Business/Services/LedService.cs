@@ -30,6 +30,8 @@ namespace Awdware.Business.Implementation.Services
 
         public bool UpdateEffect(string userId, LedConfigurationDto newConfig)
         {
+            if (newConfig == null)
+                return false;
             var id = Guid.Parse(newConfig.Id);
             var oldEffects = _ledRepository.GetLedEffects(userId);
             if (!oldEffects.Any(x => x.Id.Equals(id)))
@@ -40,8 +42,10 @@ namespace Awdware.Business.Implementation.Services
             return true;
         }
 
-        public Guid AddEffect(string userId, LedConfigurationDto newConfig)
+        public Guid? AddEffect(string userId, LedConfigurationDto newConfig)
         {
+            if (newConfig == null)
+                return null;
             var newId = Guid.NewGuid();
             var existingOrdinals = _ledRepository.GetLedEffects(userId).Select(x => x.Ordinal);
             var newOrdinal = existingOrdinals.Any() ? existingOrdinals.Max() + 1 : 1;

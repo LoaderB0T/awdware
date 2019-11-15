@@ -38,6 +38,8 @@ namespace Awdware.Data.Implementation.Repositories
 
         public bool ValidatePassword(WebUser user, string password)
         {
+            if (user == null)
+                return false;
             return PasswordHasher.Verify(password, user.PasswordHash);
         }
 
@@ -70,6 +72,8 @@ namespace Awdware.Data.Implementation.Repositories
 
         public bool AddConfirmationKey(WebUser user, string key, ConfirmType type, DateTime? expiration = null)
         {
+            if (user == null || string.IsNullOrEmpty(key))
+                return false;
             Confirmationkey confirm = new Confirmationkey
             {
                 UserId = user.UserId,

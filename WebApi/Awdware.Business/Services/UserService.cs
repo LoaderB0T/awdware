@@ -24,7 +24,8 @@ namespace Awdware.Business.Implementation.Services
 
         public RegisterResult RegisterRequestValid(RegisterRequestDto registerRequestDto)
         {
-
+            if (registerRequestDto == null)
+                return RegisterResult.Unknown;
             if (
                 !PropertyValidation.IsValidEmail(registerRequestDto.Email)
                 || !PropertyValidation.IsValidUsername(registerRequestDto.Username)

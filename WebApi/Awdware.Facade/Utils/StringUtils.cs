@@ -16,9 +16,9 @@ namespace Awdware.Infrastructure.Helper
 
             var s = Convert.ToBase64String(bytes);
             return s
-                .Replace("=", "", StringComparison.OrdinalIgnoreCase)
-                .Replace("/", "_", StringComparison.OrdinalIgnoreCase)
-                .Replace("+", "-", StringComparison.OrdinalIgnoreCase);
+                .Replace("=", "", StringComparison.InvariantCultureIgnoreCase)
+                .Replace("/", "_", StringComparison.InvariantCultureIgnoreCase)
+                .Replace("+", "-", StringComparison.InvariantCultureIgnoreCase);
         }
 
         public static string ToBase64(string arg)
@@ -30,8 +30,8 @@ namespace Awdware.Infrastructure.Helper
 
             var s = arg
                     .PadRight(arg.Length + (4 - arg.Length % 4) % 4, '=')
-                    .Replace("_", "/", StringComparison.OrdinalIgnoreCase)
-                    .Replace("-", "+", StringComparison.OrdinalIgnoreCase);
+                    .Replace("_", "/", StringComparison.InvariantCultureIgnoreCase)
+                    .Replace("-", "+", StringComparison.InvariantCultureIgnoreCase);
 
             return s;
         }
@@ -47,6 +47,8 @@ namespace Awdware.Infrastructure.Helper
 
         public static string Caesar(this string source, short shift)
         {
+            if (source == null)
+                return null;
             var maxChar = Convert.ToInt32(char.MaxValue);
             var minChar = Convert.ToInt32(char.MinValue);
 

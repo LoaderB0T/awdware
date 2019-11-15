@@ -48,6 +48,8 @@ namespace Awdware.Business.Implementation.Services
 
         public LoginResponseDto Login(LoginRequestDto loginRequestDto)
         {
+            if (loginRequestDto == null)
+                return null;
             var potentialUser = _userRepository.TryGetUserByName(loginRequestDto.Username);
             if (potentialUser == null)
             {
@@ -74,6 +76,8 @@ namespace Awdware.Business.Implementation.Services
 
         public RegisterResponseDto CreateUser(RegisterRequestDto registerRequestDto)
         {
+            if (registerRequestDto == null)
+                return null;
             var newUser = new WebUser
             {
                 UserId = "user:" + string.Format(CultureInfo.InvariantCulture, "{0:yyyyMMddHHmmssffff}", DateTime.UtcNow),
@@ -109,11 +113,14 @@ namespace Awdware.Business.Implementation.Services
 
         public bool SendEmailConfirmationLink(WebUser user)
         {
+            if (user == null)
+                return false;
+
             string link = GenerateRandomLink();
             if (_userRepository.AddConfirmationKey(user, link, ConfirmType.EmailConfirmation))
             {
                 string completeLink = _clientUrl + "/account/verify/" + link;
-                MailBuilder builder = new MailBuilder(_configuration);
+                using MailBuilder builder = new MailBuilder(_configuration);
                 MailConfirmEmail model = new MailConfirmEmail
                 {
                     FirstName = user.Firstname,
@@ -122,7 +129,9 @@ namespace Awdware.Business.Implementation.Services
                     To = user.Email,
                     Type = EmailKind.EmailConfirmation
                 };
-                return _mailService.Send(builder.CreateMailConfirmEmail(model));
+                var msg = builder.CreateMailConfirmEmail(model);
+                builder.Dispose();
+                return _mailService.Send(msg);
             }
             Logger.LogInformation("Could not save confirmation link {link} for user {user}", link, user);
             return false;
@@ -143,7 +152,9 @@ namespace Awdware.Business.Implementation.Services
 
         public string GetUserIdFromToken(string token)
         {
-            token = token.Replace("Bearer ", "", StringComparison.OrdinalIgnoreCase);
+            if (string.IsNullOrEmpty(token))
+                return null;
+            token = token.Replace("Bearer ", "", StringComparison.InvariantCultureIgnoreCase);
             var tokenPayloadStr = token.Split('.')[1];
             var tokenPayloadStrDecoded = StringUtils.Decode(tokenPayloadStr);
             var userTokenPayload = JsonConvert.DeserializeObject<UserAuthenticationPayload>(tokenPayloadStrDecoded);
@@ -159,7 +170,7 @@ namespace Awdware.Business.Implementation.Services
                 if (_userRepository.AddConfirmationKey(user, randomLink, ConfirmType.PasswordReset, DateTime.Now.AddHours(1)))
                 {
                     string completeLink = _configuration.GetSection("Links").GetValue<string>("PasswordReset") + "/" + randomLink;
-                    MailBuilder builder = new MailBuilder(_configuration);
+                    using MailBuilder builder = new MailBuilder(_configuration);
                     MailConfirmEmail model = new MailConfirmEmail
                     {
                         FirstName = user.Firstname,
@@ -168,13 +179,14 @@ namespace Awdware.Business.Implementation.Services
                         To = user.Email,
                         Type = EmailKind.PasswordReset
                     };
-                    return _mailService.Send(builder.CreateMailConfirmEmail(model));
+                    var msg = builder.CreateMailConfirmEmail(model);
+                    return _mailService.Send(msg);
                 }
                 return false;
             }
             else
             {
-                MailBuilder builder = new MailBuilder(_configuration);
+                using MailBuilder builder = new MailBuilder(_configuration);
                 return _mailService.Send(builder.CreateUserDoesNotExistMail(email));
             }
         }
@@ -184,7 +196,7 @@ namespace Awdware.Business.Implementation.Services
             if (_userRepository.CheckIfEmailExists(email))
             {
                 var user = _userRepository.TryGetUserByEmail(email);
-                MailBuilder builder = new MailBuilder(_configuration);
+                using MailBuilder builder = new MailBuilder(_configuration);
                 MailConfirmEmail model = new MailConfirmEmail
                 {
                     FirstName = user.Firstname,
@@ -197,7 +209,7 @@ namespace Awdware.Business.Implementation.Services
             }
             else
             {
-                MailBuilder builder = new MailBuilder(_configuration);
+                using MailBuilder builder = new MailBuilder(_configuration);
                 return _mailService.Send(builder.CreateUserDoesNotExistMail(email));
             }
         }
@@ -225,6 +237,8 @@ namespace Awdware.Business.Implementation.Services
 
         public TokenDto RenewToken(string oldToken)
         {
+            if (string.IsNullOrEmpty(oldToken))
+                return null;
             var tokenPayloadStr = oldToken.Split('.')[1];
             var tokenPayloadStrDecoded = StringUtils.Decode(tokenPayloadStr);
             var tokenPayload = JsonConvert.DeserializeObject<UserAuthenticationPayload>(tokenPayloadStrDecoded);

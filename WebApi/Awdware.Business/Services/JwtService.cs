@@ -10,13 +10,10 @@ namespace Awdware.Business.Implementation.Services
 {
     public class JwtService : IJwtService
     {
-        public IConfiguration Configuration { get; }
         private readonly string _userTokenKeyPath;
 
-        public JwtService(IConfiguration configuration, string contentRootPath)
+        public JwtService(string userTokenKeyPath, string contentRootPath)
         {
-            Configuration = configuration;
-            var userTokenKeyPath = Configuration.GetSection("Certificates").GetValue<string>("JwtUserSignature");
             var path = Path.Join(contentRootPath, userTokenKeyPath);
             _userTokenKeyPath = path;
         }

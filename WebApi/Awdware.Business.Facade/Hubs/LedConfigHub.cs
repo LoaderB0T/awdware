@@ -45,7 +45,7 @@ namespace Awdware.Business.Facade.Hubs
 
         public void RemoveUserByConnection(string conId)
         {
-            var keyToDelete = userConnectionMap.FirstOrDefault(x => x.Value.Equals(conId));
+            var keyToDelete = userConnectionMap.FirstOrDefault(x => x.Value.Equals(conId, StringComparison.InvariantCultureIgnoreCase));
             if (keyToDelete.Key != null)
             {
                 userConnectionMap.Remove(keyToDelete.Key);

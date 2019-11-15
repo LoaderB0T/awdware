@@ -116,7 +116,7 @@ namespace Awdware.Business.Facade.Controllers
             if (string.IsNullOrWhiteSpace(authorization))
                 throw new ArgumentNullException(nameof(authorization));
 
-            var oldToken = authorization.Replace("Baerer ", "", StringComparison.OrdinalIgnoreCase);
+            var oldToken = authorization.Replace("Baerer ", "", StringComparison.InvariantCultureIgnoreCase);
             var newTokenDto = _authenticationService.RenewToken(oldToken);
             return Ok(newTokenDto);
         }

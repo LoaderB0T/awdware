@@ -115,7 +115,7 @@ namespace Awdware.Business.Facade.Controllers
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
             var ledConfig = _ledService.GetSetting(Guid.Parse(configId));
-            if(ledConfig == null || !ledConfig.UserId.Equals(userId, StringComparison.OrdinalIgnoreCase))
+            if(ledConfig == null || !ledConfig.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase))
             {
                 return null;
             }

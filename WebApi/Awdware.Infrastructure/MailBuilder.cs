@@ -5,7 +5,7 @@ using Awdware.Infrastructure.Mails;
 
 namespace Awdware.Infrastructure.Helper
 {
-    public class MailBuilder: IDisposable
+    public class MailBuilder : IDisposable
     {
         private MailMessage _message;
         private readonly IConfiguration _configuration;
@@ -60,9 +60,11 @@ namespace Awdware.Infrastructure.Helper
             return _body.Length > 0;
         }
 
-        public MailMessage CreateMailConfirmEmail( MailConfirmEmail model )
+        public MailMessage CreateMailConfirmEmail(MailConfirmEmail model)
         {
-            Init( GetFrom(), new MailAddress(model.To, model.FirstName + model.LastName));
+            if (model == null)
+                return null;
+            Init(GetFrom(), new MailAddress(model.To, model.FirstName + model.LastName));
             if (!LoadTemplate(model.Type))
                 throw new InvalidOperationException("Mail template not found.");
             ReplaceInTemplate("FirstName", model.FirstName);
@@ -84,9 +86,9 @@ namespace Awdware.Infrastructure.Helper
             return _message;
         }
 
-        private void ReplaceInTemplate( string key, string value)
+        private void ReplaceInTemplate(string key, string value)
         {
-            _body = _body.Replace("{{" + key + "}}", value, StringComparison.OrdinalIgnoreCase);
+            _body = _body.Replace("{{" + key + "}}", value, StringComparison.InvariantCultureIgnoreCase);
         }
 
         public void Dispose()

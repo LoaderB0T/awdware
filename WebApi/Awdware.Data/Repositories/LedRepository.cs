@@ -31,13 +31,15 @@ namespace Awdware.Data.Implementation.Repositories
         }
         public void AddLedConfig(Guid id, string userId, LedEffectDto ledEffect, string newName, int ordinal)
         {
-            var ledConfig = new LedEffect();
-            ledConfig.Id = id;
-            ledConfig.UserId = userId;
-            ledConfig.Name = newName;
-            ledConfig.Version = 1;
-            ledConfig.Ordinal = ordinal;
-            ledConfig.ConfigJson = JsonSerializer.Serialize(ledEffect);
+            var ledConfig = new LedEffect
+            {
+                Id = id,
+                UserId = userId,
+                Name = newName,
+                Version = 1,
+                Ordinal = ordinal,
+                ConfigJson = JsonSerializer.Serialize(ledEffect)
+            };
             _dbContext.LedConfigs.Add(ledConfig);
             _dbContext.SaveChanges();
         }
@@ -68,13 +70,15 @@ namespace Awdware.Data.Implementation.Repositories
 
         public bool ChangeSetting(LedSettingsDto config, string userId)
         {
+            if (config == null || string.IsNullOrEmpty(userId))
+                return false;
             var setting = _dbContext.LedSettings.FirstOrDefault(x => Guid.Parse(config.Id).Equals(x.Id));
 
             var settingUserId = setting.UserId;
             var dtoUserId = config.UserId;
             var authUserId = userId;
 
-            if (!settingUserId.Equals(dtoUserId) || !settingUserId.Equals(authUserId))
+            if (!settingUserId.Equals(dtoUserId, StringComparison.InvariantCultureIgnoreCase) || !settingUserId.Equals(authUserId, StringComparison.InvariantCultureIgnoreCase))
             {
                 return false;
             }
