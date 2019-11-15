@@ -36,11 +36,13 @@
 
       &.selected {
         cursor: default;
-        border-bottom-color: var(--colorHighlightColor2);
-        color: var(--colorHighlightColor1);
+        border-bottom-color: var(--colorHighlightColor1);
+        @media only screen and (max-width: 700px) {
+          color: var(--colorHighlightColor2);
+        }
       }
       &:hover:not(.selected) {
-        border-bottom: 3px solid var(--colorHighlightColor1);
+        border-bottom: 3px solid var(--colorHighlightColor2);
       }
     }
   }

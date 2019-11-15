@@ -25,10 +25,12 @@
       transition: transform cubic-bezier(0.26, 0.14, 0.01, 0.98) 500ms;
       padding: 0 2px 2px 0;
       font-size: calc(var(--font-size) * 1.25);
+      color: var(--colorHighlightColor2);
     }
     .icon2 {
       position: absolute;
       transform: translateY(calc(var(--font-size) * -2));
+      color: var(--colorHighlightColor1);
     }
   }
   &.focus {

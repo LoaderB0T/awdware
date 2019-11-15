@@ -52,25 +52,6 @@ input[type="submit"],
   }
 }
 
-.color-svg svg *,
-svg.color-svg * {
-  fill: url(#svg-gradient);
-}
-
-#svg-gradient-element {
-  position: absolute;
-}
-
-#gradient-1 {
-  stop-color: var(--colorHighlightColor1);
-  stop-opacity: 1;
-}
-
-#gradient-2 {
-  stop-color: var(--colorHighlightColor2);
-  stop-opacity: 1;
-}
-
 .no-select {
   user-select: none;
 }

@@ -1,7 +1,7 @@
 <div class="input-container" [class.focus]="isFocused" [class.disabled]="isDisabled" [style]="cssVariablesStyle">
   <div class="icon-container" [class.has-second-icon]="icon2 && true" *ngIf="icon && true">
-    <i class="color-svg  icon fal fa-{{icon}}"></i>
-    <i *ngIf="icon2 && true" class="color-svg  icon2 fal fa-{{icon2}}"></i>
+    <i class="icon fal fa-{{icon}}"></i>
+    <i *ngIf="icon2 && true" class="icon2 fal fa-{{icon2}}"></i>
   </div>
   <div class="input-label-container" [class.no-icon]="icon && false">
     <input #inputField [type]="getInputType" [(ngModel)]="value" [name]="name" [class]="name" [id]="name"

@@ -2,17 +2,17 @@
   <div class="menu-item" id="menu-controls" (click)="toggleMenu()">
     <div class="icon-container">
       <div [class.icon-hidden]="!opened" class="icon-switch" id="close-icon">
-        <i class="color-svg icon fal fa-times"></i>
+        <i class="icon fal fa-times"></i>
       </div>
       <div [class.icon-hidden]="opened" class="icon-switch">
-        <i class="color-svg  icon fal fa-chevron-right"></i>
+        <i class="icon fal fa-chevron-right"></i>
       </div>
     </div>
     <span class="text">Close</span>
   </div>
   <div class="menu-item" *ngFor="let menuItem of enabledMenuItems" (click)="itemClicked(menuItem)">
     <div class="icon-container">
-      <i class="color-svg  icon fal fa-{{menuItem.icon}}" aria-hidden="true"></i>
+      <i class="icon fal fa-{{menuItem.icon}}" aria-hidden="true"></i>
     </div>
     <span class="text">{{menuItem.text}}</span>
   </div>

@@ -32,6 +32,8 @@
       width: 80px;
       display: flex;
       justify-content: center;
+      color: var(--colorHighlightColor1);
+      transition: color 50ms ease-in-out;
       .icon-switch {
         // transition: opacity 0.6s;
         &#close-icon {
@@ -43,6 +45,11 @@
       }
       .icon {
         font-size: 48px;
+      }
+    }
+    &:hover {
+      .icon-container {
+        color: var(--colorHighlightColor2);
       }
     }
   }
