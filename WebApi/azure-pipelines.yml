@@ -61,7 +61,7 @@ steps:
   displayName: 'dotnet test with code coverage'
   inputs:
     command: custom
-    projects: WebApi/UnitTest/UnitTest.csproj
+    projects: WebApi/Awdware.Test.UnitTests/Awdware.Test.UnitTests.csproj
     custom: test
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
 
