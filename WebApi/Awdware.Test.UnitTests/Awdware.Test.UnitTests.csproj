@@ -23,7 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebApi\Awdware.Host.csproj" />
+    <ProjectReference Include="..\Awdware.Business.Facade\Awdware.Business.Facade.csproj" />
+    <ProjectReference Include="..\Awdware.Business\Awdware.Business.Implementation.csproj" />
+    <ProjectReference Include="..\Awdware.Facade\Awdware.Facade.csproj" />
   </ItemGroup>
 
 </Project>
