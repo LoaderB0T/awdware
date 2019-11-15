@@ -51,8 +51,8 @@ steps:
   inputs:
     command: publish
     publishWebProjects: false
-    projects: WebApi/WebApi/WebApi.csproj
-    arguments: '-o WebApi/WebApi/bin/publish --no-build --no-restore'
+    projects: WebApi/Awdware.Host/Awdware.Host.csproj
+    arguments: '-o WebApi/dist/publish --no-build --no-restore'
     zipAfterPublish: false
     modifyOutputPath: false
     configuration: Release
@@ -91,7 +91,7 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: WebApi/WebApi/bin/publish
+    PathtoPublish: WebApi/dist/publish
 
 
 - task: SonarCloudAnalyze@1
