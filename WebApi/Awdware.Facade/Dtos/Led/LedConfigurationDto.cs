@@ -1,5 +1,4 @@
-﻿
-namespace Awdware.Facade.Dtos.Led
+﻿namespace Awdware.Facade.Dtos.Led
 {
     public class LedConfigurationDto
     {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Awdware.Facade.Dtos.Led
+﻿namespace Awdware.Facade.Dtos.Led
 {
     public class LedSettingsDto
     {

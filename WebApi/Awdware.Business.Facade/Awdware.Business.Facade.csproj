@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <ProjectGuid>{da9a33c6-80ba-4f72-b94b-7f37de71d63d}</ProjectGuid>
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
