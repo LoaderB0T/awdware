@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="WebApi">
-      <HintPath>..\..\WebApi\WebApi\bin\$(ConfigurationName)\netcoreapp3.0\WebApi.dll</HintPath>
+    <Reference Include="Awdware.Facade">
+      <HintPath>..\..\WebApi\Awdware.Facade\bin\$(Configuration)\netcoreapp3.0\Awdware.Facade.dll</HintPath>
     </Reference>
   </ItemGroup>
 

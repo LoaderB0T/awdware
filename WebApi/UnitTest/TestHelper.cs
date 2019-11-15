@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Awdware.Business.Facade.Controllers;
+using Awdware.Business.Implementation.Services;
+using Awdware.Data.Implementation.Contexts;
+using Awdware.Data.Implementation.Repositories;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.IO;
-using WebApi.Contexts;
-using WebApi.Controllers;
-using WebApi.Repositories;
-using WebApi.Services;
 
 namespace UnitTest
 {
@@ -85,7 +85,7 @@ namespace UnitTest
         {
             if (_jwtService == null)
             {
-                _jwtService = new JwtService(GetConfiguration(), GetEnvironment());
+                _jwtService = new JwtService(GetConfiguration(), GetEnvironment().ContentRootPath);
             }
             return _jwtService;
         }

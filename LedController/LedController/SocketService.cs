@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using Awdware.Facade.Dtos.Led;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
-using System.Collections.Generic;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
-using WebApi.Dtos.Led;
 
 namespace LedController
 {

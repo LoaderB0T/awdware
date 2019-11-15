@@ -1,6 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using Awdware.Business.Facade.Controllers;
+using Awdware.Business.Facade.Hubs;
+using Awdware.Business.Implementation.Services;
+using Awdware.Data.Implementation.Contexts;
+using Awdware.Data.Implementation.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -12,12 +18,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using WebApi.Contexts;
-using WebApi.Hubs;
-using WebApi.Repositories;
-using WebApi.Services;
 
-namespace WebApi
+namespace Awdware.Host
 {
     public class Startup
     {
@@ -35,9 +37,22 @@ namespace WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var builder = services.AddMvcCore();
+            builder.AddApplicationPart(typeof(AuthenticationController).Assembly);
+            builder.AddApplicationPart(typeof(UserController).Assembly);
+            builder.AddApplicationPart(typeof(LedController).Assembly);
+            builder.AddApplicationPart(typeof(TestController).Assembly);
+
+            var assembly = typeof(UserController).GetTypeInfo().Assembly;
+            services.AddMvc()
+                .AddApplicationPart(assembly);
+
             ConfigureCors(services);
 
-            services.AddControllers().AddJsonOptions(options => {
+            services.AddControllers(builder =>
+            {
+            }).AddJsonOptions(options =>
+            {
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
             services.AddSignalR();
@@ -51,7 +66,7 @@ namespace WebApi
 
             //Add Services
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IJwtService, JwtService>(s => new JwtService(s.GetRequiredService<IConfiguration>(), Environment.ContentRootPath));
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ILedService, LedService>();

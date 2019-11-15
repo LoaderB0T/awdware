@@ -94,7 +94,6 @@ export class LedEffect {
       case LedEffectKind.STRIPE: {
         this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
         this.props.push(new LedEffectColorProperty(2, 'Background Color', '#000000'));
-        this.props.push(new LedEffectBoolProperty(3, 'Music Reactive', false));
         this.props.push(new LedEffectNumberProperty(4, 'Speed', 30, 0, 255));
         this.props.push(new LedEffectBoolProperty(5, 'Switch Direction', false));
         this.props.push(new LedEffectBoolProperty(6, 'Two Sides', false));

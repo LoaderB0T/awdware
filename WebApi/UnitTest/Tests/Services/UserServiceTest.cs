@@ -1,7 +1,7 @@
+using Awdware.Business.Implementation.Services;
+using Awdware.Facade.Dtos;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
-using WebApi.Dtos;
-using WebApi.Services;
 
 namespace UnitTest.Tests
 {

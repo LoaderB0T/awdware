@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WebApi.Controllers;
-using WebApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Awdware.Facade.Dtos;
+using Awdware.Business.Facade.Controllers;
 
 namespace UnitTest.Tests.Controllers
 {
