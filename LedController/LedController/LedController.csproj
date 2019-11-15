@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <ProjectGuid>{6a221b4c-ec66-41d7-93b5-62bcbe7338a9}</ProjectGuid>
     <StartupObject>LedController.Program</StartupObject>
@@ -10,7 +9,20 @@
     <Product>awdware - RgbLedClient</Product>
     <Version>0.0.1.0</Version>
     <NeutralLanguage>en</NeutralLanguage>
+    <ApplicationIcon />
   </PropertyGroup>
+  <Choose>
+    <When Condition=" '$(Configuration)'=='Debug' ">
+      <PropertyGroup>
+        <OutputType>Exe</OutputType>
+      </PropertyGroup>
+    </When>
+    <When Condition=" '$(Configuration)'!='Debug' ">
+      <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+      </PropertyGroup>
+    </When>
+  </Choose>
 
   <ItemGroup>
     <PackageReference Include="ManagedBass" Version="2.0.4" />
@@ -39,10 +51,10 @@
     <Copy SourceFiles="@(DependencyFiles)" DestinationFolder="$(OutDir)" />
   </Target>
   <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
-  <CreateItem Include="Deps\*.dll">
-    <Output TaskParameter="Include" ItemName="DependencyFiles" />
-  </CreateItem>
-    <Copy SourceFiles="@(DependencyFiles)" DestinationFolder="$(PublishDir)"  />
+    <CreateItem Include="Deps\*.dll">
+      <Output TaskParameter="Include" ItemName="DependencyFiles" />
+    </CreateItem>
+    <Copy SourceFiles="@(DependencyFiles)" DestinationFolder="$(PublishDir)" />
   </Target>
 
 </Project>

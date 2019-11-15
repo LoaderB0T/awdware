@@ -4,48 +4,68 @@ using System;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 
 namespace LedController
 {
     class Program
     {
         private static EffectManager mgr;
+        private static ArduinoSerial arduino;
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            if (!File.Exists("./config.led"))
-            {
-                Logger.LogError("Config file not found!");
-                return;
-            }
 
-            var configEncrypted = File.ReadAllText("./config.led");
-            var configLessEncrypted = StringUtils.Caesar(configEncrypted, -42);
-            var configJson = StringUtils.Decode(configLessEncrypted);
-            LedConfigFileDto config;
             try
             {
-                config = JsonSerializer.Deserialize<LedConfigFileDto>(configJson);
-                Console.WriteLine($"Using config {config.ConfigName}!");
+
+                Console.WriteLine("Hello World!");
+                if (!File.Exists("./config.led"))
+                {
+                    Logger.LogError("Config file not found!");
+                    return;
+                }
+
+                var configEncrypted = File.ReadAllText("./config.led");
+                var configLessEncrypted = StringUtils.Caesar(configEncrypted, -42);
+                var configJson = StringUtils.Decode(configLessEncrypted);
+                LedConfigFileDto config;
+                try
+                {
+                    config = JsonSerializer.Deserialize<LedConfigFileDto>(configJson);
+                    Console.WriteLine($"Using config {config.ConfigName}!");
+                }
+                catch (JsonException)
+                {
+                    Logger.LogError("Invalid Config File!");
+                    return;
+                }
+
+                var socket = new SocketService(config.ServerHost, config.ServerPort, config.ServerUseHttps, config.UserId);
+
+                arduino = new ArduinoSerial(config.ComPortName);
+                arduino.Initialized += (sender, ledCount) =>
+                {
+                    StartEffectManagement(socket, ledCount, arduino);
+                };
+
+                while (true)
+                {
+                    Thread.Sleep(int.MaxValue); // This thread is now sleeping "forever"
+                }
+
             }
-            catch (JsonException)
+            catch (Exception ex)
             {
-                Logger.LogError("Invalid Config File!");
-                return;
+                Logger.LogError(ex, "awdware LED Client crashed unexpectedly");
             }
-
-            var socket = new SocketService(config.ServerHost, config.ServerPort, config.ServerUseHttps, config.UserId);
-
-            var arduino = new ArduinoSerial(config.ComPortName);
-            arduino.Initialized += (sender, ledCount) =>
+            finally
             {
-                StartEffectManagement(socket, ledCount, arduino);
-            };
-            Console.ReadLine();
-
-            arduino.Dispose();
-            mgr.Dispose();
+                if (arduino != null)
+                    arduino.Dispose();
+                if (mgr != null)
+                    mgr.Dispose();
+            }
         }
 
         private static void StartEffectManagement(SocketService socket, int ledCount, ArduinoSerial arduino)
