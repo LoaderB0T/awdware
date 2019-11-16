@@ -18,7 +18,9 @@ export class SessionStoreService {
   public get hasToken(): boolean {
     if (!this._tokenString) {
       const cachedToken = localStorage.getItem('access_token');
-      this._tokenString = cachedToken;
+      if (cachedToken && cachedToken !== 'undefined') {
+        this._tokenString = cachedToken;
+      }
     }
 
     return this._tokenString && true;

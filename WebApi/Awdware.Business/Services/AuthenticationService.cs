@@ -235,23 +235,48 @@ namespace Awdware.Business.Implementation.Services
             return _userRepository.UpdatePassword(resetPasswordDto.Token, PasswordHasher.Hash(resetPasswordDto.NewPassword));
         }
 
-        public TokenDto RenewToken(string oldToken)
+        public TokenDto RenewToken(string oldToken, bool validateLifeTime)
         {
             if (string.IsNullOrEmpty(oldToken))
                 return null;
-            var tokenPayloadStr = oldToken.Split('.')[1];
-            var tokenPayloadStrDecoded = StringUtils.Decode(tokenPayloadStr);
-            var tokenPayload = JsonConvert.DeserializeObject<UserAuthenticationPayload>(tokenPayloadStrDecoded);
-            return
-                new TokenDto
-                {
-                    Token = CreateToken(tokenPayload.UserID)
-                };
+
+            if (!_jwtService.IsValidAccessToken(oldToken, validateLifeTime))
+            {
+                return null;
+            }
+
+            var userId = GetUserIdFromToken(oldToken);
+
+            return new TokenDto
+            {
+                Token = CreateToken(userId)
+            };
         }
 
         public bool HasMailConfirmed(string userId)
         {
             return _userRepository.UserHasConfirmedEmail(userId);
+        }
+
+        public string CreateRefreshToken(string userId)
+        {
+            var token = _jwtService.CreateRefreshToken(userId);
+            return token;
+        }
+
+        public string RenewRefreshToken(string oldRefreshToken)
+        {
+            if (string.IsNullOrEmpty(oldRefreshToken))
+                return null;
+
+            if (!_jwtService.IsValidRefreshToken(oldRefreshToken))
+            {
+                return null;
+            }
+
+            var userId = GetUserIdFromToken(oldRefreshToken);
+
+            return CreateRefreshToken(userId);
         }
     }
 }

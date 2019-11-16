@@ -3,6 +3,9 @@
     public interface IJwtService
     {
         string CreateToken(string userId);
-        bool IsValidUserToken(string token);
+        bool IsValidAccessToken(string token, bool validateLifeTime = true);
+        string CreateRefreshToken(string userId);
+        bool IsValidRefreshToken(string token);
+
     }
 }

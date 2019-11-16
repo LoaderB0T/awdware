@@ -54,14 +54,18 @@ export class SessionService {
     console.log('Session token expires on: ' + expireTime);
 
     const diff = expireTime.getTime() - Date.now();
-    return diff < 1000 * 60 * 60 * 24 * 28;
+    return diff < 1000 * 60 * 2; // Expires in less than 2 minutes
   }
 
   public renewSession(): Observable<null> {
     return this.webApiService.get<TokenDto>('authentication/refreshToken')
       .pipe(
         tap(x => {
-          this.sessionStoreService.putToken(x.token);
+          if (!x) {
+            this.sessionStoreService.removeToken();
+          } else {
+            this.sessionStoreService.putToken(x.token);
+          }
         }),
         map(
           () => null

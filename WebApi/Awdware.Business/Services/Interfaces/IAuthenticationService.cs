@@ -13,9 +13,11 @@ namespace Awdware.Business.Implementation.Services
         bool ConfirmEmail(string link);
         bool SendResetPasswordMail(string email);
         bool ResetPassword(ResetPasswordDto resetPasswordDto);
-        TokenDto RenewToken(string oldToken);
+        TokenDto RenewToken(string oldToken, bool validateLifeTime);
         string GetUserIdFromToken(string token);
         bool SendForgottenUsernameMail(string email);
         bool HasMailConfirmed(string userId);
+        string CreateRefreshToken(string userId);
+        string RenewRefreshToken(string oldRefreshToken);
     }
 }

@@ -2,6 +2,7 @@
 using Awdware.Facade.Dtos;
 using Awdware.Infrastructure.Helper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -45,6 +46,9 @@ namespace Awdware.Business.Facade.Controllers
             var token = _authenticationService.CreateToken(registerResponseDto.UserInfo.UserId);
             registerResponseDto.Token = token;
 
+            var refreshToken = _authenticationService.CreateRefreshToken(registerResponseDto.UserInfo.UserId);
+            SetCookie("refresh_token", refreshToken, 60 * 24 * 180); // Lasts 180 days
+
             return Ok(registerResponseDto);
         }
 
@@ -65,6 +69,10 @@ namespace Awdware.Business.Facade.Controllers
 
             var token = _authenticationService.CreateToken(loginResponse.UserInfo.UserId);
             loginResponse.Token = token;
+
+            var refreshToken = _authenticationService.CreateRefreshToken(loginResponse.UserInfo.UserId);
+            SetCookie("refresh_token", refreshToken, 60 * 24 * 180); // Lasts 180 days
+
             return Ok(loginResponse);
         }
 
@@ -110,15 +118,49 @@ namespace Awdware.Business.Facade.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpGet("refreshToken")]
         public ActionResult<TokenDto> GetNewToken([FromHeader] string authorization)
         {
             if (string.IsNullOrWhiteSpace(authorization))
                 throw new ArgumentNullException(nameof(authorization));
 
-            var oldToken = authorization.Replace("Baerer ", "", StringComparison.InvariantCultureIgnoreCase);
-            var newTokenDto = _authenticationService.RenewToken(oldToken);
+            var requestUserId = _authenticationService.GetUserIdFromToken(authorization);
+
+            var savedRefreshToken = Request.Cookies["refresh_token"];
+            if(string.IsNullOrEmpty(savedRefreshToken))
+            {
+                return Ok(null);
+            }
+            var refreshUserId = _authenticationService.GetUserIdFromToken(authorization);
+
+            if (!requestUserId.Equals(refreshUserId, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return Ok(null);
+            }
+
+            var renewedRefreshToken = _authenticationService.RenewRefreshToken(savedRefreshToken);
+
+            var oldToken = authorization.Replace("Bearer ", "", StringComparison.InvariantCultureIgnoreCase);
+            var newTokenDto = _authenticationService.RenewToken(oldToken, false);
+            
+            SetCookie("refresh_token", renewedRefreshToken, 60 * 24 * 180); // Lasts 180 days
+
             return Ok(newTokenDto);
+        }
+
+        private void SetCookie(string key, string value, int? expireInMinutes)
+        {
+            CookieOptions option = new CookieOptions();
+
+            if (expireInMinutes.HasValue)
+                option.Expires = DateTime.Now.AddMinutes(expireInMinutes.Value);
+            else
+                option.Expires = DateTime.Now.AddMilliseconds(10);
+
+            option.IsEssential = true;
+
+            Response.Cookies.Append(key, value, option);
         }
     }
 }

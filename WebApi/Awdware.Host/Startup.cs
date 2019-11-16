@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,14 +66,22 @@ namespace Awdware.Host
             services.AddScoped<ILedRepository, LedRepository>();
 
             //Add Services
-            var jwtUserSignature = Configuration.GetSection("Certificates").GetValue<string>("JwtUserSignature");
-            services.AddScoped<IJwtService, JwtService>(s => new JwtService(jwtUserSignature, Environment.ContentRootPath));
+            var accessTokenKey = Configuration.GetSection("KeyLocations").GetValue<string>("accessTokenKey");
+            var refreshTokenKey = Configuration.GetSection("KeyLocations").GetValue<string>("refreshTokenKey");
+            services.AddScoped<IJwtService, JwtService>(s => new JwtService(Environment.ContentRootPath, accessTokenKey, refreshTokenKey));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ILedService, LedService>();
 
             ConfigureJwtAuthentication(services);
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.Secure = CookieSecurePolicy.SameAsRequest;
+                options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                options.CheckConsentNeeded = context => true;
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -171,7 +180,8 @@ namespace Awdware.Host
             {
                 corsBuilder.AllowAnyHeader();
                 corsBuilder.AllowAnyMethod();
-                corsBuilder.AllowAnyOrigin();
+                corsBuilder.WithOrigins("http://localhost:4200");
+                corsBuilder.AllowCredentials();
             }
             else
             {

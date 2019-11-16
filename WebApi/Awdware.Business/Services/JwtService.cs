@@ -10,12 +10,13 @@ namespace Awdware.Business.Implementation.Services
 {
     public class JwtService : IJwtService
     {
-        private readonly string _userTokenKeyPath;
+        private readonly string _accessTokenKeyPath;
+        private readonly string _refreshTokenKeyPath;
 
-        public JwtService(string userTokenKeyPath, string contentRootPath)
+        public JwtService(string contentRootPath, string accessTokenKeyPath, string refreshTokenKeyPath)
         {
-            var path = Path.Join(contentRootPath, userTokenKeyPath);
-            _userTokenKeyPath = path;
+            _accessTokenKeyPath = Path.Join(contentRootPath, accessTokenKeyPath);
+            _refreshTokenKeyPath = Path.Join(contentRootPath, refreshTokenKeyPath);
         }
 
         /// <summary>
@@ -25,10 +26,10 @@ namespace Awdware.Business.Implementation.Services
         /// <returns>Tokenstring</returns>
         public string CreateToken(string userId)
         {
-            string secretKeyB64 = System.IO.File.ReadAllText(_userTokenKeyPath);
+            string secretKeyB64 = File.ReadAllText(_accessTokenKeyPath);
             var secretKey = new SymmetricSecurityKey(Convert.FromBase64String(secretKeyB64));
             var claims = new Claim[] {
-            new Claim("userId", userId),
+                new Claim("userId", userId),
             };
 
             var token = new JwtSecurityToken(
@@ -36,7 +37,7 @@ namespace Awdware.Business.Implementation.Services
                 audience: "awdware user",
                 claims: claims,
                 notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddDays(30),
+                expires: DateTime.UtcNow.AddMinutes(3),
                 signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature)
             );
 
@@ -44,7 +45,38 @@ namespace Awdware.Business.Implementation.Services
             return jwtToken;
         }
 
-        public bool IsValidUserToken(string token)
+        public bool IsValidAccessToken(string token, bool validateLifeTime = true)
+        {
+            return IsValidToken(token, _accessTokenKeyPath, validateLifeTime);
+        }
+
+        public string CreateRefreshToken(string userId)
+        {
+            string secretKeyB64 = File.ReadAllText(_refreshTokenKeyPath);
+            var secretKey = new SymmetricSecurityKey(Convert.FromBase64String(secretKeyB64));
+            var claims = new Claim[] {
+                new Claim("userId", userId),
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: "awdware",
+                audience: "awdware user",
+                claims: claims,
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddDays(180),
+                signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature)
+            );
+
+            string jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+            return jwtToken;
+        }
+
+        public bool IsValidRefreshToken(string token)
+        {
+            return IsValidToken(token, _refreshTokenKeyPath);
+        }
+
+        private bool IsValidToken(string token, string keyPath, bool validateLifeTime = true)
         {
             var validationParameters = new TokenValidationParameters
             {
@@ -56,11 +88,11 @@ namespace Awdware.Business.Implementation.Services
                 ValidateIssuer = false,
                 ValidateIssuerSigningKey = true,
                 ValidateActor = false,
-                ValidateLifetime = true,
+                ValidateLifetime = validateLifeTime,
                 //ValidIssuer = "awdware",
                 //ValidAudience = "awdware user",
                 IssuerSigningKey = new SymmetricSecurityKey(
-                           Convert.FromBase64String(System.IO.File.ReadAllText(@_userTokenKeyPath)))
+                           Convert.FromBase64String(File.ReadAllText(keyPath)))
             };
             SecurityToken validatedToken;
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();

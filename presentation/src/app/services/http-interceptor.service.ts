@@ -22,9 +22,9 @@ export class HttpInterceptorService implements HttpInterceptor {
     let request: HttpRequest<any>;
     if (this.sessionStoreService.hasToken) {
       const headers = req.headers.set('Authorization', 'Bearer ' + this.sessionStoreService.getTokenString());
-      request = req.clone({ headers });
+      request = req.clone({ headers, withCredentials: true });
     } else {
-      request = req;
+      request = req.clone({ withCredentials: true });
     }
     return next.handle(request).pipe(tap(
       (ev: HttpEvent<any>) => {
