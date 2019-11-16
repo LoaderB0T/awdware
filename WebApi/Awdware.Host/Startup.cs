@@ -113,7 +113,7 @@ namespace Awdware.Host
 
         private void ConfigureJwtAuthentication(IServiceCollection services)
         {
-            var userTokenKeyPath = Configuration.GetSection("Certificates").GetValue<string>("JwtUserSignature");
+            var userTokenKeyPath = Configuration.GetSection("KeyLocations").GetValue<string>("accessTokenKey");
             var contentRoot = Environment.ContentRootPath;
             var path = Path.Join(contentRoot, userTokenKeyPath);
             var userToken = System.IO.File.ReadAllText(path);
