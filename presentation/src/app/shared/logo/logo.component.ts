@@ -23,6 +23,14 @@ export class LogoComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
+
+    const focusedElem = document.activeElement;
+    if (focusedElem) {
+      if ((focusedElem as HTMLInputElement).type === 'password') {
+        return;
+      }
+    }
+
     const key = event.key;
     switch (key) {
       case 'a':
