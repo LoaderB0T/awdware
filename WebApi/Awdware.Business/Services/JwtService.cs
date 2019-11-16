@@ -20,10 +20,9 @@ namespace Awdware.Business.Implementation.Services
         }
 
         /// <summary>
-        /// Creates a new JWT for a specific userId that lasts 30 days.
+        /// Creates a new access JWT for a specific userId that lasts 30 Minutes.
         /// </summary>
-        /// <param name="userId">The UserID.</param>
-        /// <returns>Tokenstring</returns>
+        /// <returns>The generated Token String</returns>
         public string CreateToken(string userId)
         {
             string secretKeyB64 = File.ReadAllText(_accessTokenKeyPath);
@@ -37,7 +36,7 @@ namespace Awdware.Business.Implementation.Services
                 audience: "awdware user",
                 claims: claims,
                 notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddMinutes(3),
+                expires: DateTime.UtcNow.AddMinutes(30),
                 signingCredentials: new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256Signature)
             );
 
@@ -50,6 +49,10 @@ namespace Awdware.Business.Implementation.Services
             return IsValidToken(token, _accessTokenKeyPath, validateLifeTime);
         }
 
+        /// <summary>
+        /// Creates a new refresh JWT for a specific userId that lasts 180 Days.
+        /// </summary>
+        /// <returns>The generated Token String</returns>
         public string CreateRefreshToken(string userId)
         {
             string secretKeyB64 = File.ReadAllText(_refreshTokenKeyPath);
