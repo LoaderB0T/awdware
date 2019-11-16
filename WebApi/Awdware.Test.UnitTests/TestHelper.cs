@@ -85,7 +85,7 @@ namespace UnitTest
         {
             if (_jwtService == null)
             {
-                _jwtService = new JwtService("", GetEnvironment().ContentRootPath);
+                _jwtService = new JwtService(GetEnvironment().ContentRootPath, "", "");
             }
             return _jwtService;
         }
