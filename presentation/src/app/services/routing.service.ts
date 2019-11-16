@@ -1,54 +1,68 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoutingService {
+  private _router: Router;
+  private _returnUrl: string;
 
-  constructor(private router: Router) { }
+  constructor(router: Router, route: ActivatedRoute) {
+    this._router = router;
+    route.queryParams
+      .subscribe(params => this._returnUrl = params.returnUrl);
+  }
 
   public navigateToHomeLanding() {
-    this.router.navigate(['']);
+    this._router.navigate(['']);
   }
 
   public navigateToHomeHello() {
-    this.router.navigate(['hello']);
+    this._router.navigate(['hello']);
   }
 
-  public navigateToAccountLogin(returnAfterLogin: boolean = false) {
-    if (returnAfterLogin) {
-      this.router.navigate(['account', 'login'], { queryParams: { returnUrl: this.router.url } });
+  public navigateToAccountLogin(returnUrl: string = null) {
+    if (returnUrl) {
+      this._router.navigate(['account', 'login'], { queryParams: { returnUrl } });
     } else {
-      this.router.navigate(['account', 'login']);
+      this._router.navigate(['account', 'login']);
+    }
+  }
+
+  public navigateAfterLoggin() {
+    if (this._returnUrl) {
+      this._router.navigate([this._returnUrl]);
+    } else {
+      this.navigateToHomeHello();
     }
   }
 
   public navigateToAccountRegister() {
-    this.router.navigate(['account', 'register']);
+    this._router.navigate(['account', 'register']);
   }
 
   public navigateToAccountHelp() {
-    this.router.navigate(['account', 'help']);
+    this._router.navigate(['account', 'help']);
   }
 
   public navigateToAccount() {
-    this.router.navigate(['me']);
+    this._router.navigate(['me']);
   }
 
   public navigateToVote() {
-    this.router.navigate(['vote']);
+    this._router.navigate(['vote']);
   }
 
   public navigateToMyVotes() {
-    this.router.navigate(['vote', 'my']);
+    this._router.navigate(['vote', 'my']);
   }
 
   public navigateToNewVote() {
-    this.router.navigate(['vote', 'new']);
+    this._router.navigate(['vote', 'new']);
   }
 
   public navigateToLed() {
-    this.router.navigate(['led']);
+    this._router.navigate(['led']);
   }
 }

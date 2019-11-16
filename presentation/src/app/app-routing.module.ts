@@ -13,6 +13,7 @@ import { VoteComponent } from './vote/vote.component';
 import { MyVotesComponent } from './vote/my-votes/my-votes.component';
 import { NewVoteComponent } from './vote/new-vote/new-vote.component';
 import { LedComponent } from './led/led.component';
+import { AuthGuard } from './services/auth.guard';
 
 
 const routes: Routes = [
@@ -53,7 +54,8 @@ const routes: Routes = [
       },
       {
         path: 'me',
-        component: MeComponent
+        component: MeComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'vote',
@@ -76,7 +78,8 @@ const routes: Routes = [
       },
       {
         path: 'led',
-        component: LedComponent
+        component: LedComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: '',

@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private successfullLogin() {
     this.loginSuccessful = true;
-    this._routingService.navigateToHomeHello();
+    this._routingService.navigateAfterLoggin();
   }
 
   public get loginDisabled(): boolean {

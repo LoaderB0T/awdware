@@ -36,6 +36,13 @@ export class SessionService {
     }
   }
 
+  public hasValidToken(): boolean {
+    if (!this.sessionStoreService.hasToken) {
+      return false;
+    }
+    return !this.sessionNeedsRefresh();
+  }
+
   public sessionNeedsRefresh(): boolean {
     if (!this.sessionStoreService.hasToken) {
       return false;

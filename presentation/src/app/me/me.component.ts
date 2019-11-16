@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfoService } from '../services/user-info.service';
 import { UserInfo } from '../models/user-info';
+import { AccountService } from '../account/services/account.service';
 
 @Component({
   selector: 'awd-me',
@@ -9,9 +10,11 @@ import { UserInfo } from '../models/user-info';
 })
 export class MeComponent implements OnInit {
   private _userInfoService: UserInfoService;
+  private _accountService: AccountService;
 
-  constructor(userInfoService: UserInfoService) {
+  constructor(userInfoService: UserInfoService, accountService: AccountService) {
     this._userInfoService = userInfoService;
+    this._accountService = accountService;
   }
 
   ngOnInit() {
@@ -19,6 +22,10 @@ export class MeComponent implements OnInit {
 
   public get userInfo(): UserInfo {
     return this._userInfoService.userInfo;
+  }
+
+  public logout() {
+    this._accountService.logout();
   }
 
 }
