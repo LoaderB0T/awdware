@@ -113,16 +113,16 @@ namespace Awdware.Host
 
         private void ConfigureJwtAuthentication(IServiceCollection services)
         {
-            var userTokenKeyPath = Configuration.GetSection("KeyLocations").GetValue<string>("accessTokenKey");
+            var accessTokenKeyPath = Configuration.GetSection("KeyLocations").GetValue<string>("accessTokenKey");
             var contentRoot = Environment.ContentRootPath;
-            var path = Path.Join(contentRoot, userTokenKeyPath);
-            var userToken = System.IO.File.ReadAllText(path);
+            var path = Path.Join(contentRoot, accessTokenKeyPath);
+            var accessToken = File.ReadAllText(path);
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-               .AddJwtBearer("UserToken", options =>
+               .AddJwtBearer("AccessToken", options =>
                {
                    options.TokenValidationParameters = new TokenValidationParameters
                    {
@@ -137,7 +137,7 @@ namespace Awdware.Host
                        ValidateLifetime = true,
                        //ValidIssuer = "VoteDB",
                        //ValidAudience = "Vote User",
-                       IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(userToken))
+                       IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(accessToken))
                    };
                });
 
@@ -145,7 +145,7 @@ namespace Awdware.Host
             {
                 options.AddPolicy("RegisteredUser", new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
-                    .AddAuthenticationSchemes("UserToken")
+                    .AddAuthenticationSchemes("AccessToken")
                     .Build());
                 options.AddPolicy("ConfirmedUser", new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
@@ -162,7 +162,7 @@ namespace Awdware.Host
                         var authService = provider.GetRequiredService<IAuthenticationService>();
                         return authService.HasMailConfirmed(userId);
                     })
-                        .AddAuthenticationSchemes("UserToken")
+                        .AddAuthenticationSchemes("AccessToken")
                         .Build());
                 options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
                 {
