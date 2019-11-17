@@ -28,7 +28,7 @@ export class ThemeService {
       { name: 'colorPassiveContent', value: 'rgb(140, 138, 133)' },
       { name: 'colorHighlightContentTransparent', value: 'rgba(50, 49, 48, 0.8)' },
       { name: 'colorHighlightContent', value: 'rgba(50, 49, 48)' },
-      { name: 'colorHighlightColor1', value: 'rgb(242, 0, 255)' },
+      { name: 'colorHighlightColor1', value: 'rgb(255, 0, 66)' },
       { name: 'colorHighlightColor2', value: 'rgb(38, 131, 224)' },
       { name: 'colorError', value: 'rgb(238, 31, 16)' },
     ];
