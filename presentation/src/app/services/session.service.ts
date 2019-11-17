@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { interval, Observable, Subscription } from 'rxjs';
+import { interval, Observable, Subscription, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { TokenDto } from '../models/application-facade';
@@ -36,11 +36,16 @@ export class SessionService {
     }
   }
 
-  public hasValidToken(): boolean {
+  public hasValidToken(): Observable<boolean> {
     if (!this.sessionStoreService.hasToken) {
-      return false;
+      return of(false);
     }
-    return !this.sessionNeedsRefresh();
+
+    if (this.sessionNeedsRefresh()) {
+      return this.renewSession();
+    } else {
+      return of(true);
+    }
   }
 
   public sessionNeedsRefresh(): boolean {
@@ -57,7 +62,7 @@ export class SessionService {
     return diff < 1000 * 60 * 2; // Expires in less than 2 minutes
   }
 
-  public renewSession(): Observable<null> {
+  public renewSession(): Observable<boolean> {
     return this.webApiService.get<TokenDto>('authentication/refreshToken')
       .pipe(
         tap(x => {
@@ -68,7 +73,9 @@ export class SessionService {
           }
         }),
         map(
-          () => null
+          (x) => {
+            return x && true;
+          }
         )
       );
   }

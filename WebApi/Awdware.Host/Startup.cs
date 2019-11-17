@@ -10,6 +10,7 @@ using Awdware.Data.Implementation.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -81,6 +82,7 @@ namespace Awdware.Host
                 options.Secure = CookieSecurePolicy.SameAsRequest;
                 options.MinimumSameSitePolicy = SameSiteMode.Lax;
                 options.CheckConsentNeeded = context => true;
+                options.HttpOnly = HttpOnlyPolicy.Always;
             });
         }
 

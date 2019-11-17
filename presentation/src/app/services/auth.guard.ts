@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs';
 import { SessionService } from './session.service';
 import { RoutingService } from './routing.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +21,15 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const hasValidToken = this._sessionService.hasValidToken();
-    if (hasValidToken) {
-      return true;
-    }
-    this._routingService.navigateToAccountLogin(state.url);
-    return false;
-  }
 
+    return this._sessionService.hasValidToken().pipe(
+      map(res => {
+        if (res) {
+          return true;
+        }
+        this._routingService.navigateToAccountLogin(state.url);
+        return false;
+      })
+    );
+  }
 }
