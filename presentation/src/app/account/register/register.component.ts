@@ -108,7 +108,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public get validationDefinitionPassword(): ValidationDefinition[] {
     return [{
       type: ValidationErrorType.TOO_SHORT,
-      translationKey: 'account.register.form.password.validation.pattern'
+      translationKey: 'account.register.form.password.validation.tooshort'
     },
     {
       type: ValidationErrorType.PATTERN_MISMATCH,

@@ -29,7 +29,7 @@
       <awd-textbox [fontSize]="24" #password [inputType]="inputType.PASSWORD"
         [placeholder]="'account.register.form.password.name' | translate" [icon]="'lock'" [icon2]="'lock-open'"
         [name]="'password'" id="password" [(ngModel)]="registerModel.password" [inputTabIndex]="5" required
-        [minLength]="8" [pattern]="'^(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W\\d]).*$'"
+        [minLength]="8" [pattern]="'^(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_\\d]).*$'"
         [validationDefinitions]="validationDefinitionPassword" [disabled]="clickedButton">
       </awd-textbox>
       <awd-textbox [fontSize]="24" [inputType]="inputType.PASSWORD"

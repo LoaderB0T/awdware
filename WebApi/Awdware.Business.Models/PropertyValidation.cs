@@ -36,16 +36,18 @@ namespace Awdware.Business.Utils
         {
             if (string.IsNullOrWhiteSpace(password))
                 return false;
+            if (password.Length < 8)
+                return false;
 
-            var passwordContainsDigitPattern = new Regex("^.*[0-9]+.*$");
             var passwordContainsLowercasePattern = new Regex("^.*[a-z]+.*$");
             var passwordContainsUppercasePattern = new Regex("^.*[A-Z]+.*$");
+            var passwordContainsDigitPattern = new Regex("^.*[0-9]+.*$");
             var passwordContainsSpecialCharPattern = new Regex("^.*[\\W_]+.*$");
             return
-                passwordContainsDigitPattern.IsMatch(password)
-                && passwordContainsLowercasePattern.IsMatch(password)
+                passwordContainsLowercasePattern.IsMatch(password)
                 && passwordContainsUppercasePattern.IsMatch(password)
-                && passwordContainsSpecialCharPattern.IsMatch(password);
+                && (passwordContainsDigitPattern.IsMatch(password)
+                || passwordContainsSpecialCharPattern.IsMatch(password));
         }
     }
 }
