@@ -10,22 +10,22 @@ namespace LedController.Models.Effects
     internal class WebEffect : LedEffect
     {
         private readonly Uri _apiUrl;
-        private readonly HttpClient _httpClient;
         private readonly uint _interval;
 
         public WebEffect(uint ledCount, string name, string apiUrl, uint interval) : base(ledCount, name)
         {
             _apiUrl = new Uri(apiUrl + "/" + ledCount);
             _interval = interval;
-            _httpClient = new HttpClient();
         }
 
         public override byte[] Render()
         {
             if (TimePassed((int)_interval * 1000))
             {
-                var httpTask = _httpClient.GetAsync(_apiUrl);
+                var httpClient = new HttpClient();
+                var httpTask = httpClient.GetAsync(_apiUrl);
                 httpTask.Wait();
+                httpClient.Dispose();
                 var res = httpTask.Result;
                 if (res.IsSuccessStatusCode)
                 {
@@ -39,7 +39,7 @@ namespace LedController.Models.Effects
                             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                         };
                         var ledImage = JsonSerializer.Deserialize<LedImageDto>(jsonString, options);
-                       
+
                         for (int i = 0; i < ledImage.Leds.Length; i++)
                         {
                             Image.Leds[i] = new RgbColor(ledImage.Leds.ElementAt(i));

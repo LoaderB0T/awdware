@@ -25,6 +25,7 @@ namespace LedController
             try
             {
                 _port.Open();
+                Console.WriteLine("Waiting for Arduino to respond with LedCount...");
             }
             catch (Exception ex)
             {
