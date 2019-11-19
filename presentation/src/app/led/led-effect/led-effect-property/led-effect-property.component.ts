@@ -6,6 +6,7 @@ import { LedEffectNumberProperty } from '../../models/led-effect-number-property
 import { InvalidOperationError } from 'src/app/models/invalid-operation-error';
 import { LedEffectBoolProperty } from '../../models/led-effect-bool-property.model';
 import { LedEffectColorProperty } from '../../models/led-effect-color-property.model';
+import { LedEffectStringProperty } from '../../models/led-effect-string-property.model';
 
 @Component({
   selector: 'awd-led-effect-property',
@@ -43,5 +44,11 @@ export class LedEffectPropertyComponent implements OnInit {
       throw new InvalidOperationError('Invalid cast');
     }
     return this.effectProperty as LedEffectColorProperty;
+  }
+  public get stringProp(): LedEffectStringProperty {
+    if (this.effectProperty.effectType !== LedEffectPropertyKind.STRING) {
+      throw new InvalidOperationError('Invalid cast');
+    }
+    return this.effectProperty as LedEffectStringProperty;
   }
 }

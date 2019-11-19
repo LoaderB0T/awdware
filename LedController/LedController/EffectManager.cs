@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace LedController
 {
-    public class EffectManager: IDisposable
+    public class EffectManager : IDisposable
     {
         private ArduinoSerial _arduinoSerial;
+        private byte[] _data;
+        private DateTime _lastRenderTime = DateTime.UtcNow.AddDays(-1);
 
         public uint LedCount { get; private set; }
         public LedEffect CurrentEffect { get; private set; }
@@ -36,8 +38,18 @@ namespace LedController
                     var data = CurrentEffect.Render();
                     if (data != null)
                     {
+                        _data = data;
                         CurrentEffect.Rendered();
-                        _arduinoSerial.WriteToArduino(data);
+                        _lastRenderTime = DateTime.UtcNow;
+                        _arduinoSerial.WriteToArduino(_data);
+                    }
+                    else
+                    {
+                        if(DateTime.UtcNow - _lastRenderTime > TimeSpan.FromMilliseconds(2500))
+                        {
+                            _arduinoSerial.WriteToArduino(_data);
+                            _lastRenderTime = DateTime.UtcNow;
+                        }
                     }
                 }
                 Thread.Sleep(10);

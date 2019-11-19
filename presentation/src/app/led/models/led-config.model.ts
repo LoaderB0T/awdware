@@ -3,6 +3,7 @@ import { LedConfigurationDto, LedEffectDto, LedEffectPropertyDto, LedEffectPrope
 import { LedEffectNumberProperty } from './led-effect-number-property.model';
 import { LedEffectBoolProperty } from './led-effect-bool-property.model';
 import { LedEffectColorProperty } from './led-effect-color-property.model';
+import { LedEffectStringProperty } from './led-effect-string-property.model';
 
 export class LedEffect {
   public name: string;
@@ -32,6 +33,8 @@ export class LedEffect {
             return new LedEffectColorProperty(propDto.id, propDto.name, propDto.value);
           case LedEffectPropertyKind.NUMBER:
             return new LedEffectNumberProperty(propDto.id, propDto.name, Number.parseInt(propDto.value, 10), propDto.minValue, propDto.maxValue);
+          case LedEffectPropertyKind.STRING:
+            return new LedEffectStringProperty(propDto.id, propDto.name, propDto.value);
           default:
             return null;
         }
@@ -97,6 +100,11 @@ export class LedEffect {
         this.props.push(new LedEffectNumberProperty(4, 'Speed', 30, 0, 255));
         this.props.push(new LedEffectBoolProperty(5, 'Switch Direction', false));
         this.props.push(new LedEffectBoolProperty(6, 'Two Sides', false));
+        break;
+      }
+      case LedEffectKind.WEB: {
+        this.props.push(new LedEffectStringProperty(1, 'URL', ''));
+        this.props.push(new LedEffectNumberProperty(2, 'Interval', 30, 5, 300));
         break;
       }
     }

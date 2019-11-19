@@ -55,7 +55,7 @@ namespace Awdware.Facade.Led.Models
         /// <param name="hex">Hex string representation of a RGB Color in the format '#000000'.</param>
         public RgbColor(string hex)
         {
-            ContractCheck.ArgumentMatchesRegex(hex, nameof(hex), @"^#[0-9a-f]{6}$/i");
+            ContractCheck.ArgumentMatchesRegex(hex, nameof(hex), @"^#[0-9a-fA-F]{6}$");
             hex = hex.Replace("#", "", StringComparison.InvariantCultureIgnoreCase);
             var bigint = int.Parse(hex, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
 

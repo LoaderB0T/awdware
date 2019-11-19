@@ -7,6 +7,7 @@
         Stripe = 2,
         Static = 3,
         Pixel = 4,
-        Music = 5
+        Music = 5,
+        Web = 6
     }
 }

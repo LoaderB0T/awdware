@@ -104,14 +104,16 @@ export enum LedEffectKind {
   STRIPE = 2,
   STATIC = 3,
   PIXEL = 4,
-  MUSIC = 5
+  MUSIC = 5,
+  WEB = 6
 }
 
 export enum LedEffectPropertyKind {
   UNKNOWN = 0,
   COLOR = 1,
   NUMBER = 2,
-  BOOL = 3
+  BOOL = 3,
+  STRING = 4
 }
 
 export class LedEffectPropertyDto {

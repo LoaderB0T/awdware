@@ -13,6 +13,7 @@ namespace LedController.Models.Effects
         protected Random Rndm { get; set; }
         protected LedImage Image { get; private set; }
 
+
         public abstract byte[] Render();
         protected LedEffect(uint ledCount, string name)
         {
@@ -36,7 +37,7 @@ namespace LedController.Models.Effects
         internal void Rendered()
         {
             LastRenderTime = DateTime.UtcNow;
-            if(FirstFrame)
+            if (FirstFrame)
             {
                 FirstFrame = false;
             }
@@ -60,16 +61,6 @@ namespace LedController.Models.Effects
             }
 
             return result;
-        }
-
-        public static void SetAll(this List<RgbColor> leds, RgbColor color)
-        {
-            if (leds == null)
-                throw new ArgumentNullException(nameof(leds));
-            if (color == null)
-                throw new ArgumentNullException(nameof(color));
-
-            leds.ForEach(led => led.SetColor(color));
         }
     }
 }

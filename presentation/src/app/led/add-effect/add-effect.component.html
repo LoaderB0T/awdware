@@ -25,6 +25,12 @@
       <i class="icon icon2 fal fa-lightbulb-on"></i>
       <span>Pixel</span>
     </div>
+    <div class="add-item" [class.selected]="selectedAddEffect === LedEffectKind.WEB"
+      (click)="selectAddEffect(LedEffectKind.WEB)">
+      <i class="icon icon1 fal fa-lightbulb"></i>
+      <i class="icon icon2 fal fa-lightbulb-on"></i>
+      <span>Web</span>
+    </div>
   </div>
   <div class="add-effect-lower">
     <awd-textbox class="textbox" [hidePlaceholderOnInput]="true" [fontSize]="32" [placeholder]="'Name'" [minLength]="2"
