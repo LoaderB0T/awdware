@@ -1,4 +1,5 @@
 ﻿using Awdware.Facade.Dtos.Led;
+using Awdware.Facade.Led.Models;
 using LedController.Models.Effects;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace LedController
 {
     public static class LedEffectBuilder
     {
-        public static LedEffect GetEffect(LedConfigurationDto dto, int ledCount)
+        public static LedEffect GetEffect(LedConfigurationDto dto, uint ledCount)
         {
             if (dto == null)
             {

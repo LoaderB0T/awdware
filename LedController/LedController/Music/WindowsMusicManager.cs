@@ -80,7 +80,7 @@ namespace LedController.Music
             }
         }
 
-        public int[] GetSpectrum(int rowCount, int maxValue)
+        public int[] GetSpectrum(uint rowCount, uint maxValue)
         {
             int ret = BassWasapi.GetData(_fft, (int)DataFlags.FFT2048); //get channel fft data
             if (ret < -1) return Array.Empty<int>();

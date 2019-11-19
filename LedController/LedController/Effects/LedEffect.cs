@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Awdware.Facade.Led.Models;
+using System;
 using System.Collections.Generic;
 
 namespace LedController.Models.Effects
@@ -6,29 +7,25 @@ namespace LedController.Models.Effects
     public abstract class LedEffect
     {
         public string Name { get; set; }
-        protected DateTime LastRenderTime { get; set; }
-        protected int LedCount { get; set; }
+        protected DateTime LastRenderTime { get; private set; }
+        protected uint LedCount { get; private set; }
         protected bool FirstFrame { get; set; }
         protected Random Rndm { get; set; }
-        protected List<RgbColor> LEDs { get; private set; }
+        protected LedImage Image { get; private set; }
 
         public abstract byte[] Render();
-        protected LedEffect(int ledCount, string name)
+        protected LedEffect(uint ledCount, string name)
         {
             this.Name = name;
             this.LedCount = ledCount;
             Rndm = new Random();
             LastRenderTime = DateTime.UtcNow.AddDays(-1);
-            LEDs = new List<RgbColor>(ledCount);
+            Image = new LedImage(ledCount);
             FirstFrame = true;
-            for (int i = 0; i < ledCount; i++)
-            {
-                LEDs.Add(new RgbColor(0, 0, 0));
-            }
         }
         protected int RndmIndex()
         {
-            return Rndm.Next(LedCount);
+            return Rndm.Next((int)LedCount);
         }
 
         protected bool TimePassed(int millis)
@@ -48,18 +45,18 @@ namespace LedController.Models.Effects
 
     public static class LedExtentions
     {
-        public static byte[] ToByteArray(this List<RgbColor> leds)
+        public static byte[] ToByteArray(this LedImage image)
         {
-            if (leds == null)
+            if (image == null)
             {
-                throw new ArgumentNullException(nameof(leds));
+                throw new ArgumentNullException(nameof(image));
             }
-            var result = new byte[leds.Count * 3];
-            for (int i = 0; i < leds.Count; i++)
+            var result = new byte[image.Leds.Count * 3];
+            for (int i = 0; i < image.Leds.Count; i++)
             {
-                result[i * 3 + 0] = leds[i].G;
-                result[i * 3 + 1] = leds[i].R;
-                result[i * 3 + 2] = leds[i].B;
+                result[i * 3 + 0] = image.Leds[i].G;
+                result[i * 3 + 1] = image.Leds[i].R;
+                result[i * 3 + 2] = image.Leds[i].B;
             }
 
             return result;

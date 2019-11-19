@@ -1,4 +1,5 @@
-﻿using LedController.Music;
+﻿using Awdware.Facade.Led.Models;
+using LedController.Music;
 
 namespace LedController.Models.Effects
 {
@@ -9,7 +10,7 @@ namespace LedController.Models.Effects
         private readonly RgbColor _bgColor;
         private readonly int _speed;
 
-        public MusicEffect(int ledCount, string name, RgbColor color, RgbColor bgColor, int speed) : base(ledCount, name)
+        public MusicEffect(uint ledCount, string name, RgbColor color, RgbColor bgColor, int speed) : base(ledCount, name)
         {
             _musicManager = IMusicManager.GetInstance();
             _color = color;
@@ -25,12 +26,12 @@ namespace LedController.Models.Effects
                     var spectrum = _musicManager.GetSpectrum(LedCount, 255);
                     for (int i = 0; i < spectrum.Length; i++)
                     {
-                        var val = (double)spectrum[i] / 255;
+                        var val = (float)spectrum[i] / 255;
                         var res = RgbColor.Transition(_bgColor, _color, val, true);
-                        LEDs[i].SetColor(res);
+                        Image.Leds[i].SetColor(res);
                     }
                 }
-                return LEDs.ToByteArray();
+                return Image.ToByteArray();
             }
             return null;
         }

@@ -68,7 +68,7 @@ namespace LedController
             }
         }
 
-        private static void StartEffectManagement(SocketService socket, int ledCount, ArduinoSerial arduino)
+        private static void StartEffectManagement(SocketService socket, uint ledCount, ArduinoSerial arduino)
         {
             mgr = new EffectManager(ledCount, arduino);
             socket.OnEffectSelected += ((sender, effectDto) =>

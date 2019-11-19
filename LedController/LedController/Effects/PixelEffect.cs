@@ -1,16 +1,18 @@
-﻿namespace LedController.Models.Effects
+﻿using Awdware.Facade.Led.Models;
+
+namespace LedController.Models.Effects
 {
     internal class PixelEffect : LedEffect
     {
         private readonly RgbColor _color;
         private readonly RgbColor _bgcolor;
-        private readonly double[] _pixelArray;
+        private readonly float[] _pixelArray;
         private readonly int _speed;
         private readonly int _count;
         private readonly bool _evenColors;
-        public PixelEffect(int ledCount, string name, RgbColor color, RgbColor bgcolor, int speed, int count, bool evenColors) : base(ledCount, name)
+        public PixelEffect(uint ledCount, string name, RgbColor color, RgbColor bgcolor, int speed, int count, bool evenColors) : base(ledCount, name)
         {
-            _pixelArray = new double[ledCount];
+            _pixelArray = new float[ledCount];
             _color = color;
             _bgcolor = bgcolor;
             _speed = speed;
@@ -23,7 +25,7 @@
             {
                 if (FirstFrame)
                 {
-                    LEDs.SetAll(_bgcolor);
+                    Image.SetAll(_bgcolor);
                 }
 
                 for (int i = 0; i < LedCount; i++)
@@ -61,14 +63,14 @@
                         {
                             newColor = RgbColor.Transition(_color, _bgcolor, (_pixelArray[i] + 1) / 256, _evenColors);
                         }
-                        LEDs[i].SetColor(newColor);
+                        Image.Leds[i] = newColor;
                     }
                     else
                     {
-                        LEDs[i].SetColor(_bgcolor);
+                        Image.Leds[i] = _bgcolor;
                     }
                 }
-                return LEDs.ToByteArray();
+                return Image.ToByteArray();
             }
             return null;
         }

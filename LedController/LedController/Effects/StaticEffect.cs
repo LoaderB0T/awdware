@@ -1,9 +1,11 @@
-﻿namespace LedController.Models.Effects
+﻿using Awdware.Facade.Led.Models;
+
+namespace LedController.Models.Effects
 {
     internal class StaticEffect : LedEffect
     {
         private readonly RgbColor _color;
-        public StaticEffect(int ledCount, string name, RgbColor color) : base(ledCount, name)
+        public StaticEffect(uint ledCount, string name, RgbColor color) : base(ledCount, name)
         {
             _color = color;
         }
@@ -11,8 +13,8 @@
         {
             if (TimePassed(1000))
             {
-                LEDs.SetAll(_color);
-                return LEDs.ToByteArray();
+                Image.SetAll(_color);
+                return Image.ToByteArray();
             }
             return null;
         }

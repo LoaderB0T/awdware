@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Awdware.Facade.Led.Models;
+using System;
 
 namespace LedController.Models.Effects
 {
@@ -12,7 +13,7 @@ namespace LedController.Models.Effects
         private readonly bool _switchDirection;
         private readonly bool _twoSides;
 
-        public StripeEffect(int ledCount, string name, RgbColor color, RgbColor bgcolor, int speed, bool switchDirection, bool twoSides) : base(ledCount, name)
+        public StripeEffect(uint ledCount, string name, RgbColor color, RgbColor bgcolor, int speed, bool switchDirection, bool twoSides) : base(ledCount, name)
         {
             _color = color;
             _bgcolor = bgcolor;
@@ -27,11 +28,11 @@ namespace LedController.Models.Effects
             {
                 if (_switchDirection)
                 {
-                    LEDs.SetAll(_color);
+                    Image.SetAll(_color);
                 }
                 else
                 {
-                    LEDs.SetAll(_bgcolor);
+                    Image.SetAll(_bgcolor);
                 }
             }
             if (TimePassed(_speed))
@@ -59,7 +60,7 @@ namespace LedController.Models.Effects
                     }
 
                 }
-                return LEDs.ToByteArray();
+                return Image.ToByteArray();
             }
             return null;
         }
@@ -72,7 +73,7 @@ namespace LedController.Models.Effects
                 _direction *= -1;
                 nextIndex = _progress;
             }
-            LEDs[nextIndex] = _direction == direction ? _color : _bgcolor;
+            Image.Leds[nextIndex] = _direction == direction ? _color : _bgcolor;
             _progress = nextIndex;
         }
 
@@ -84,8 +85,8 @@ namespace LedController.Models.Effects
                 _direction *= -1;
                 nextIndex = _progress;
             }
-            LEDs[nextIndex] = _direction == direction ? _color : _bgcolor;
-            LEDs[LedCount - nextIndex - 1] = _direction == direction ? _color : _bgcolor;
+            Image.Leds[nextIndex] = _direction == direction ? _color : _bgcolor;
+            Image.Leds[(int)LedCount - nextIndex - 1] = _direction == direction ? _color : _bgcolor;
             _progress = nextIndex;
         }
 

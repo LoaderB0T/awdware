@@ -11,10 +11,10 @@ namespace LedController
     {
         private ArduinoSerial _arduinoSerial;
 
-        public int LedCount { get; private set; }
+        public uint LedCount { get; private set; }
         public LedEffect CurrentEffect { get; private set; }
 
-        public EffectManager(int ledCount, ArduinoSerial arduinoSerial)
+        public EffectManager(uint ledCount, ArduinoSerial arduinoSerial)
         {
             this.LedCount = ledCount;
             this._arduinoSerial = arduinoSerial;

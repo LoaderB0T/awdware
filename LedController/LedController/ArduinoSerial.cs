@@ -15,7 +15,7 @@ namespace LedController
         private SerialPort _port;
         private bool fileLogging = false;
         private bool initialized = false;
-        public event EventHandler<int> Initialized;
+        public event EventHandler<uint> Initialized;
 
         public ArduinoSerial(string comPortName)
         {
@@ -60,7 +60,7 @@ namespace LedController
                         var grp = match.Groups[0].Value;
                         var ledCountVal = grp.Split(":")[1];
                         Console.WriteLine("Got Led Count: " + ledCountVal);
-                        this.Initialized?.Invoke(this, int.Parse(ledCountVal, NumberStyles.Integer, CultureInfo.InvariantCulture));
+                        this.Initialized?.Invoke(this, uint.Parse(ledCountVal, NumberStyles.Integer, CultureInfo.InvariantCulture));
                     }
                 }
             }

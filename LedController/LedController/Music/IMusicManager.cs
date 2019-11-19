@@ -17,7 +17,7 @@ namespace LedController.Music
             return _instance;
         }
 
-        public int[] GetSpectrum(int rowCount, int maxValue);
+        public int[] GetSpectrum(uint rowCount, uint maxValue);
         public double GetCurrentVolume();
     }
 }
