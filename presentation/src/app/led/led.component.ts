@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LedService } from './services/led.service';
 import { LedSettingsDto } from '../models/application-facade';
 import { DialogService } from '../shared/services/dialog.service';
 import { LedSettingsComponent } from './led-settings/led-settings.component';
 import { AddEffectComponent } from './add-effect/add-effect.component';
 import { LedEffect } from './models/led-config.model';
+import { SubscriptionManager } from '../shared/models/subscription-manager';
 
 @Component({
   selector: 'awd-led',
   templateUrl: './led.component.html',
   styleUrls: ['./led.component.scss']
 })
-export class LedComponent implements OnInit {
+export class LedComponent implements OnInit, OnDestroy {
   private _ledService: LedService;
+  private _dialogService: DialogService;
+  private _subMgr = new SubscriptionManager();
+
   public ledSettings: LedSettingsDto[];
-  _dialogService: DialogService;
 
   constructor(
     ledService: LedService,
@@ -31,12 +34,18 @@ export class LedComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this._subMgr.unsubscribeAll();
+  }
+
   public get ledConfigs() {
     return this._ledService.ledEffects;
   }
 
   public showAddDialog() {
-    this._dialogService.showComponentDialog<AddEffectComponent>(AddEffectComponent, null, [{ key: 'effectAdded', callback: (e) => this.effectAdded(e) }]);
+    const addEffectDialog = this._dialogService.showComponentDialog<AddEffectComponent>(AddEffectComponent);
+    const sub = addEffectDialog.effectAdded.subscribe(e => this.effectAdded(e));
+    this._subMgr.add(sub);
   }
 
   effectAdded(e: LedEffect): void {
@@ -44,7 +53,8 @@ export class LedComponent implements OnInit {
   }
 
   public showSettingsDialog() {
-    this._dialogService.showComponentDialog<LedSettingsComponent>(LedSettingsComponent, [{ key: 'settingsList', value: this.ledSettings }]);
+    const ledSettingsDialog = this._dialogService.showComponentDialog<LedSettingsComponent>(LedSettingsComponent);
+    ledSettingsDialog.settingsList = this.ledSettings;
   }
 
   public deleteEffect(id: string) {
@@ -52,6 +62,4 @@ export class LedComponent implements OnInit {
     const index = this.ledConfigs.findIndex(x => x.id === id);
     this.ledConfigs.splice(index, 1);
   }
-
-
 }

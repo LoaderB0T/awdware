@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.dialogService.hideDialog();
+          this.dialogService.hideAllDialogs();
         }
       );
   }
