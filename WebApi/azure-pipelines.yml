@@ -104,7 +104,7 @@ steps:
   displayName: 'Publish nuget package'
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/Awdware.Facade.Led*.nupkg'
+    packagesToPush: '$(Build.BinariesDirectory)/**/Awdware.Facade.Led*.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'loaderb0t nuget'
 
