@@ -6,6 +6,12 @@ export class Theme {
     this.name = name;
     this.props = new Array<ThemeProperty>();
   }
+
+  toRules(): string {
+    return this.props.map(prop => {
+      return `--${prop.name}: ${prop.value}`;
+    }).join(';');
+  }
 }
 
 export class ThemeProperty {

@@ -5,14 +5,24 @@ import { Theme } from '../models/theme.model';
   providedIn: 'root',
 })
 export class ThemeService {
+  public selectedTheme: Theme;
+  private _globalStyleSheet: CSSStyleSheet;
+
   constructor() { }
 
-  public selectedTheme: Theme;
+  private init() {
+    if (this._globalStyleSheet) {
+      return;
+    }
+    const styleSheet = document.createElement('style');
+    styleSheet.id = 'global-stylesheet';
+    document.head.appendChild(styleSheet);
+    this._globalStyleSheet = styleSheet.sheet as CSSStyleSheet;
+  }
 
   public changeTheme(theme: Theme) {
-    theme.props.forEach(prop => {
-      document.documentElement.style.setProperty('--' + prop.name, prop.value);
-    });
+    this.init();
+    this._globalStyleSheet.addRule(':root', theme.toRules(), 0);
     this.selectedTheme = theme;
   }
 
