@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <!-- Required elements-->
-        <id></id>
-        <version></version>
+        <id>Awdware.Facade.Led</id>
+        <version>$version$</version>
         <description>Defines a few useful types for the awdware LED feature</description>
         <authors>Janik Schumacher</authors>
 
