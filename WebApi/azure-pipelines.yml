@@ -101,17 +101,10 @@ steps:
     PathtoPublish: WebApi/dist/publish
 
 - task: NuGetCommand@2
-  displayName: 'Build nuget package'
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/Awdware.Facade.Led.csproj'
-    versioningScheme: byBuildNumber
-
-- task: NuGetCommand@2
   displayName: 'Publish nuget package'
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/Release/*.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'loaderb0t nuget'
 

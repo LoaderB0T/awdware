@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://dev.azure.com/loaderb0t/awdware</PackageProjectUrl>
+    <RepositoryUrl>https://dev.azure.com/loaderb0t/_git/awdware?path=%2FWebApi%2FAwdware.Facade.Led</RepositoryUrl>
+    <Authors>Janik Schumacher</Authors>
+    <Company>awdware</Company>
   </PropertyGroup>
 
 </Project>
