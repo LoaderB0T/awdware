@@ -7,7 +7,8 @@
     <input #inputField [type]="getInputType" [(ngModel)]="value" [name]="name" [class]="name" [id]="name"
       [tabindex]="inputTabIndex" [pattern]="pattern" [minlength]="minLength" [maxlength]="maxLength"
       [disabled]="isDisabled" [class.has-icon]="icon && true" (blur)="onBlur()" (focus)="onFocus()"
-      [class.has-error]="validationError && true" [disabled]="isDisabled" [min]="minValue" [max]="maxValue">
+      (input)="inputEvent()" [class.has-error]="validationError && true" [disabled]="isDisabled" [min]="minValue"
+      [max]="maxValue">
     <label for="{{name}}" [class.hide]="showLabel && hidePlaceholderOnInput" [class.moved]="showLabel"
       [class.has-icon]="icon && true">
       {{placeholder}}

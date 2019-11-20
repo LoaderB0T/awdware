@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, HostBinding, Output, EventEmitter } from '@angular/core';
 import { InputType } from '../models/input-type';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
 import { noop } from 'rxjs';
@@ -31,6 +31,8 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   @Input() public minValue: number = -1;
   @Input() public maxValue: number = -1;
 
+  @Output() public valueChanged = new EventEmitter();
+
   @Input()
   public set shouldMatch(value: string) {
     this.shouldMatchValue = value;
@@ -53,6 +55,10 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   }
 
   ngOnInit() {
+  }
+
+  public inputEvent() {
+    this.valueChanged.emit(null);
   }
 
   public get getInputType(): string {
