@@ -100,19 +100,11 @@ steps:
   inputs:
     PathtoPublish: WebApi/dist/publish
 
-- task: PowerShell@2
-  inputs:
-    targetType: inline
-    script: |
-        cd $(Build.SourcesDirectory)
-        cd ..
-        tree /f
-
 - task: NuGetCommand@2
   displayName: 'Publish nuget package'
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.BinariesDirectory)/**/Awdware.Facade.Led*.nupkg'
+    packagesToPush: '$(Build.SourcesDirectory)/**/Awdware.Facade.Led*.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'loaderb0t nuget'
 
