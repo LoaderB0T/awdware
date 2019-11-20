@@ -8,9 +8,14 @@ export class ThemeService {
   public selectedTheme: Theme;
   private _globalStyleSheet: CSSStyleSheet;
 
+  private themes: Theme[] = [
+    this.darkTheme,
+    this.lightTheme
+  ];
+
   constructor() { }
 
-  private init() {
+  public init() {
     if (this._globalStyleSheet) {
       return;
     }
@@ -18,19 +23,39 @@ export class ThemeService {
     styleSheet.id = 'global-stylesheet';
     document.head.appendChild(styleSheet);
     this._globalStyleSheet = styleSheet.sheet as CSSStyleSheet;
+
+    const savedThemeName = localStorage.getItem('theme');
+    if (savedThemeName) {
+      const savedTheme = this.themes.find(x => x.name === savedThemeName);
+      if (savedTheme) {
+        this.setTheme(savedTheme);
+        return;
+      }
+    }
+    this.setTheme(this.darkTheme);
   }
 
-  public changeTheme(theme: Theme) {
-    this.init();
+  public changeTheme(themeName: 'dark' | 'light') {
+    const theme = this.themes.find(x => x.name === themeName);
+    if (theme) {
+      this.setTheme(theme);
+    }
+  }
+
+  private setTheme(theme: Theme) {
+    if (this._globalStyleSheet.rules.length > 0) {
+      this._globalStyleSheet.removeRule(0);
+    }
     this._globalStyleSheet.addRule(':root', theme.toRules(), 0);
     this.selectedTheme = theme;
+    localStorage.setItem('theme', theme.name);
   }
 
   public getColor(key: string) {
     return this.selectedTheme.props.find(x => x.name === key).value;
   }
 
-  public get darkTheme(): Theme {
+  private get darkTheme(): Theme {
     const theme = new Theme('dark');
     theme.props = [
       { name: 'colorMainBg', value: 'rgb(37, 36, 35)' },
@@ -45,7 +70,7 @@ export class ThemeService {
     return theme;
   }
 
-  public get lightTheme(): Theme {
+  private get lightTheme(): Theme {
     const theme = new Theme('light');
     theme.props = [
       { name: 'colorMainBg', value: 'rgb(249, 251, 252)' },

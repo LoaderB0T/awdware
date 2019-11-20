@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     router: Router
   ) {
     this.translationService.init();
-    this.themeService.changeTheme(themeService.darkTheme);
+    this.themeService.init();
     dialogService.setRootViewContainerRef(viewContainerRef);
     router.events
       .pipe(
