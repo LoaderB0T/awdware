@@ -6,7 +6,7 @@
 variables:
   major: 0
   minor: 1
-  patch: $[counter(variables['minor'], 3)]
+  patch: $[counter(variables['minor'], 1)]
 
 
 name: $(SourceBranchName)-$(major).$(minor).$(patch)
