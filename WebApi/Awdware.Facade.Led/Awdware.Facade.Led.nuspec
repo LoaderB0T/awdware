@@ -12,5 +12,4 @@
         <projectUrl>https://dev.azure.com/loaderb0t/awdware</projectUrl>
         <license type="expression">MIT</license>
     </metadata>
-    <!-- Optional 'files' node -->
 </package>
