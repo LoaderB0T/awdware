@@ -3,6 +3,13 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+variables:
+  major: 0
+  minor: 1
+  patch: $[counter(variables['minor'], 3)]
+
+
+name: $(SourceBranchName)-$(major).$(minor).$(patch)
 trigger:
   branches:
     include:
@@ -92,6 +99,21 @@ steps:
   displayName: 'Publish Artifact: drop'
   inputs:
     PathtoPublish: WebApi/dist/publish
+
+- task: NuGetCommand@2
+  displayName: 'Build nuget package'
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/Awdware.Facade.Led.csproj'
+    versioningScheme: byBuildNumber
+
+- task: NuGetCommand@2
+  displayName: 'Publish nuget package'
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'loaderb0t nuget'
 
 
 - task: SonarCloudAnalyze@1

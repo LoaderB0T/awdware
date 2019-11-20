@@ -106,19 +106,6 @@ steps:
   inputs:
     PathtoPublish: LedController/LedController/bin/publish
 
-- task: NuGetCommand@2
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/Awdware.Facade.Led.csproj'
-    versioningScheme: byBuildNumber
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'loaderb0t nuget'
-
 - task: SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
   continueOnError: true
