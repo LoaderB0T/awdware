@@ -9,7 +9,7 @@ variables:
   patch: $[counter(variables['minor'], 1)]
 
 
-name: $(SourceBranchName)_$(major).$(minor).$(patch)
+name: $(SourceBranchName)-$(major).$(minor).$(patch)
 trigger:
   branches:
     include:
