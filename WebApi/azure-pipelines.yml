@@ -106,7 +106,7 @@ steps:
     command: 'pack'
     packagesToPack: '**/Awdware.Facade.Led.csproj'
     versioningScheme: byBuildNumber
-    buildProperties: |
+    buildProperties: >-
       description=Defines a few useful types for the awdware LED feature;
       authors=Janik Schumacher;
       owners=awdware;
