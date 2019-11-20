@@ -107,6 +107,9 @@ steps:
     packagesToPush: '$(Build.SourcesDirectory)/**/Awdware.Facade.Led*.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'loaderb0t nuget'
+    majorVersion: $(major)
+    minorVersion: $(minor)
+    patchVersion: $(patch)
 
 
 - task: SonarCloudAnalyze@1
