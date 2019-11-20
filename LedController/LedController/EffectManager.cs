@@ -25,6 +25,7 @@ namespace LedController
 
         public void StartEffect(LedEffect effect)
         {
+            _lastRenderTime = DateTime.UtcNow.AddDays(-1);
             CurrentEffect = effect ?? throw new ArgumentNullException(nameof(effect));
             Console.WriteLine("Starting Effect " + CurrentEffect.Name);
         }
