@@ -3,6 +3,13 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+variables:
+  major: 0
+  minor: 1
+  patch: $[counter(variables['minor'], 1)]
+
+
+name: $(SourceBranchName)_$(major).$(minor).$(patch)
 trigger:
   branches:
     include:
