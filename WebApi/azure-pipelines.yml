@@ -106,12 +106,7 @@ steps:
     command: 'pack'
     packagesToPack: '**/Awdware.Facade.Led.csproj'
     versioningScheme: byBuildNumber
-    buildProperties: "\
-      description=Defines a few useful types for the awdware LED feature;\
-      authors=Janik Schumacher;\
-      owners=awdware;\
-      projectUrl=https://dev.azure.com/loaderb0t/awdware;\
-      license=MIT;"
+    buildProperties: description=Defines a few useful types for the awdware LED feature;authors=Janik Schumacher;owners=awdware;projectUrl=https://dev.azure.com/loaderb0t/awdware;license=MIT;
 
 - task: NuGetCommand@2
   displayName: 'Publish nuget package'
