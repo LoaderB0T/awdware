@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <!-- Required elements-->
+        <id></id>
+        <version></version>
+        <description>Defines a few useful types for the awdware LED feature</description>
+        <authors>Janik Schumacher</authors>
+
+        <!-- Optional elements -->
+        <owners>awdware</owners>
+        <projectUrl>https://dev.azure.com/loaderb0t/awdware</projectUrl>
+        <license type="expression">MIT</license>
+    </metadata>
+    <!-- Optional 'files' node -->
+</package>
