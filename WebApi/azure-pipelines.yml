@@ -5,8 +5,8 @@
 
 variables:
   major: 0
-  minor: 1
-  patch: $[counter(variables['minor'], 1)]
+  minor: 2
+  patch: $[counter(variables['minor'], 0)]
 
 
 name: $(SourceBranchName)-$(major).$(minor).$(patch)
