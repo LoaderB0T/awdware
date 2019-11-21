@@ -23,10 +23,20 @@ namespace LedController.Models.Effects
             if (TimePassed((int)_interval * 1000))
             {
                 var httpClient = new HttpClient();
-                var httpTask = httpClient.GetAsync(_apiUrl);
-                httpTask.Wait();
-                httpClient.Dispose();
-                var res = httpTask.Result;
+                HttpResponseMessage res;
+                try
+                {
+                    var httpTask = httpClient.GetAsync(_apiUrl);
+                    httpTask.Wait();
+                    res = httpTask.Result;
+                    httpClient.Dispose();
+                }
+                catch (Exception)
+                {
+                    httpClient.Dispose();
+                    Image.SetAll(20, 0, 0);
+                    return Image.ToByteArray();
+                }
                 if (res.IsSuccessStatusCode)
                 {
                     try
