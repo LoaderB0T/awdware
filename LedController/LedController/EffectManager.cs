@@ -46,7 +46,7 @@ namespace LedController
                     }
                     else
                     {
-                        if(DateTime.UtcNow - _lastRenderTime > TimeSpan.FromMilliseconds(2500))
+                        if(DateTime.UtcNow - _lastRenderTime > TimeSpan.FromMilliseconds(500))
                         {
                             _arduinoSerial.WriteToArduino(_data);
                             _lastRenderTime = DateTime.UtcNow;
