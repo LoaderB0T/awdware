@@ -8,9 +8,9 @@ describe('LedEffectPropertyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LedEffectPropertyComponent ]
+      declarations: [LedEffectPropertyComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
