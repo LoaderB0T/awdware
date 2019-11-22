@@ -23,6 +23,13 @@ pool:
   demands: java
 
 steps:
+
+- task: CmdLine@2
+  inputs:
+    script: 'AzureDevOpsTools.exe -s "**/Awdware.Facade.Led/**"'
+    workingDirectory: 'tools'
+    failOnStderr: true
+
 - task: DotNetCoreInstaller@1
   displayName: 'Use .NET Core sdk'
   inputs:
