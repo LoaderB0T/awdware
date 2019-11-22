@@ -26,7 +26,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'AzureDevOpsTools.exe -s "**/Awdware.Facade.Led/**"'
+    script: 'AzureDevOpsTools.exe hasFolderChanged -s "**/Awdware.Facade.Led/**"'
     workingDirectory: 'tools'
     failOnStderr: true
 
