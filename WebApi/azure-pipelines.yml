@@ -31,6 +31,7 @@ steps:
       if($LASTEXITCODE -eq 1) { echo "##vso[task.setvariable variable=PATH_HAS_CHANGES]TRUE" }
     workingDirectory: 'tools'
     failOnStderr: true
+    targetType: inline
 
 - task: DotNetCoreInstaller@1
   displayName: 'Use .NET Core sdk'
