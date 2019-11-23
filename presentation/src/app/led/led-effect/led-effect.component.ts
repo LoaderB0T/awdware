@@ -20,7 +20,6 @@ export class LedEffectComponent implements OnInit {
   }
 
   public madeChanges(evt: any) {
-    awawdawdawd;
     this.effect.hasPendingChanges = true;
   }
 
