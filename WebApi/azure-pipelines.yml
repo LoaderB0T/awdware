@@ -117,7 +117,7 @@ steps:
     packagesToPack: '**/Awdware.Facade.Led.csproj'
     versioningScheme: byBuildNumber
     buildProperties: version=$(major).$(minor).$(patch);
-  condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'refs/heads/master'))
+  condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
 
 - task: NuGetCommand@2
   displayName: 'Publish nuget package'
