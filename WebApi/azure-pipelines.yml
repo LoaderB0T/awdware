@@ -127,7 +127,7 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'loaderb0t nuget'
-
+  condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
 
 - task: SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
