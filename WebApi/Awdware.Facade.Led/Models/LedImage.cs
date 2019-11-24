@@ -1,4 +1,5 @@
 ﻿using Awdware.Facade.Led.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,6 +9,10 @@ namespace Awdware.Facade.Led.Models
     {
         public List<RgbColor> Leds { get; private set; }
         public uint LedCount { get; private set; }
+        /// <summary>
+        /// Time in ms to switch from the old image (default: 0 for instant switch).
+        /// </summary>
+        public int TransitionTime { get; set; } = 0;
 
         /// <summary>
         /// Creates a new led image.
@@ -37,7 +42,8 @@ namespace Awdware.Facade.Led.Models
                         R = x.R,
                         G = x.G,
                         B = x.B,
-                    }).ToArray()
+                    }).ToArray(),
+                TransitionTime = TransitionTime
             };
         }
 
@@ -59,6 +65,18 @@ namespace Awdware.Facade.Led.Models
         public void SetAll(byte r, byte g, byte b)
         {
             this.Leds.ForEach(x => x.SetColor(r,g,b));
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is LedImage image &&
+                   EqualityComparer<List<RgbColor>>.Default.Equals(Leds, image.Leds) &&
+                   LedCount == image.LedCount;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Leds, LedCount);
         }
     }
 }

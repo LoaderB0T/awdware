@@ -226,5 +226,18 @@ namespace Awdware.Facade.Led.Models
                 }
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is RgbColor color &&
+                   R == color.R &&
+                   G == color.G &&
+                   B == color.B;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(R, G, B);
+        }
     }
 }
