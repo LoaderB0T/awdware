@@ -83,7 +83,7 @@ namespace Awdware.Facade.Led.Models
         public override bool Equals(object obj)
         {
             return obj is LedImage image &&
-                   EqualityComparer<List<RgbColor>>.Default.Equals(Leds, image.Leds) &&
+                   Leds.SequenceEqual(image.Leds) &&
                    LedCount == image.LedCount;
         }
 

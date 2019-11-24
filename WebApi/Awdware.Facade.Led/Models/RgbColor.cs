@@ -178,8 +178,8 @@ namespace Awdware.Facade.Led.Models
         /// <summary>
         /// Transitions from color to another.
         /// </summary>
-        /// <param name="colorA">The color to transition from.</param>
-        /// <param name="colorB">The color to transition to.</param>
+        /// <param name="colorB">The color to transition from.</param>
+        /// <param name="colorA">The color to transition to.</param>
         /// <param name="percentage">The percentage of the transition progress (values between 0 and 1).</param>
         /// <param name="evenColors">Color the generated color should differ from.</param>
         /// <returns>The new generated random color.</returns>
@@ -194,16 +194,16 @@ namespace Awdware.Facade.Led.Models
             byte bd;
             if (evenColors)
             {
-                rd = (byte)(colorB.R - ((colorB.R - colorA.R) * percentage));
-                gd = (byte)(colorB.G - ((colorB.G - colorA.G) * percentage));
-                bd = (byte)(colorB.B - (byte)((colorB.B - colorA.B) * percentage));
+                rd = (byte)(colorA.R - ((colorA.R - colorB.R) * percentage));
+                gd = (byte)(colorA.G - ((colorA.G - colorB.G) * percentage));
+                bd = (byte)(colorA.B - (byte)((colorA.B - colorB.B) * percentage));
             }
             else
             {
                 percentage = 1 - percentage;
-                rd = CalcColors(colorB.R, colorA.R, percentage);
-                gd = CalcColors(colorB.G, colorA.G, percentage);
-                bd = CalcColors(colorB.B, colorA.B, percentage);
+                rd = CalcColors(colorA.R, colorB.R, percentage);
+                gd = CalcColors(colorA.G, colorB.G, percentage);
+                bd = CalcColors(colorA.B, colorB.B, percentage);
             }
 
             return new RgbColor(rd, gd, bd);
