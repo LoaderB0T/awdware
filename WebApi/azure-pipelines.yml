@@ -80,6 +80,7 @@ steps:
     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
     tag: '$(Build.BuildNumber)'
     reporttypes: 'htmlInline'
+  continueOnError: true
 
 - task: reportgenerator@4
   displayName: 'Convert coverage.cobertura.xml to sonarQube'
@@ -88,6 +89,7 @@ steps:
     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports\sonar'
     tag: '$(Build.BuildNumber)'
     reporttypes: 'sonarQube'
+  continueOnError: true
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage from $(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
@@ -95,7 +97,8 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
     reportDirectory: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
-
+  continueOnError: true
+  
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   inputs:
