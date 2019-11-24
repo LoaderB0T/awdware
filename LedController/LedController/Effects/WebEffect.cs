@@ -4,6 +4,7 @@ using System;
 using System.Net.Http;
 using System.Linq;
 using System.Text.Json;
+using System.Collections.Generic;
 
 namespace LedController.Models.Effects
 {
@@ -11,6 +12,10 @@ namespace LedController.Models.Effects
     {
         private readonly Uri _apiUrl;
         private readonly uint _interval;
+        private LedImage _ledImageFrom = null;
+        private LedImage _ledImageTo = null;
+        private bool _activeTransition = false;
+        private float _transitionProgress = 0.0f;
 
         public WebEffect(uint ledCount, string name, string apiUrl, uint interval) : base(ledCount, name)
         {
@@ -48,11 +53,36 @@ namespace LedController.Models.Effects
                         {
                             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                         };
-                        var ledImage = JsonSerializer.Deserialize<LedImageDto>(jsonString, options);
-
-                        for (int i = 0; i < ledImage.Leds.Length; i++)
+                        var ledImageDto = JsonSerializer.Deserialize<LedImageDto>(jsonString, options);
+                        var ledImage = LedImage.FromDto(ledImageDto);
+                        if (ledImage.TransitionTime != 0)
                         {
-                            Image.Leds[i] = new RgbColor(ledImage.Leds.ElementAt(i));
+                            if (_ledImageTo == null)
+                            {
+                                _ledImageTo = ledImage;
+                                for (int i = 0; i < ledImage.Leds.Count; i++)
+                                {
+                                    Image.Leds[i] = ledImage.Leds[i];
+                                }
+                            }
+                            else
+                            {
+                                if (!_ledImageTo.Equals(ledImage))
+                                {
+                                    _ledImageFrom = _ledImageTo;
+                                    _ledImageTo = ledImage;
+                                    _activeTransition = true;
+                                    _transitionProgress = 0.0f;
+                                }
+                            }
+                        }
+                        else
+                        {
+
+                            for (int i = 0; i < ledImage.Leds.Count; i++)
+                            {
+                                Image.Leds[i] = ledImage.Leds[i];
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -64,6 +94,28 @@ namespace LedController.Models.Effects
                 {
                     Image.SetAll(20, 0, 0);
                 }
+                if (!_activeTransition)
+                {
+                    return Image.ToByteArray();
+                }
+            }
+            if (_activeTransition)
+            {
+                _transitionProgress += (float)5 / _ledImageTo.TransitionTime;
+                if (_transitionProgress > 1.0f)
+                {
+                    _transitionProgress = 1.0f;
+                    _activeTransition = false;
+                }
+
+                for (int i = 0; i < LedCount; i++)
+                {
+                    var oldC = _ledImageFrom.Leds[i];
+                    var newC = _ledImageTo.Leds[i];
+                    var resC = RgbColor.Transition(oldC, newC, _transitionProgress);
+                    Image.Leds[i] = resC;
+                }
+
                 return Image.ToByteArray();
             }
             return null;
