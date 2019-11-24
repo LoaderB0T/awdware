@@ -65,6 +65,15 @@ namespace Awdware.Facade.Led.Models
         }
 
         /// <summary>
+        /// Returns a new instance created from a dto.
+        /// </summary>
+        /// <returns>The new instance.</returns>
+        internal static RgbColor FromDto(RgbColorDto dto)
+        {
+            return new RgbColor(dto);
+        }
+
+        /// <summary>
         /// Checks whether two colors are similar to each other.
         /// </summary>
         /// <param name="colorA">First color for comparison.</param>

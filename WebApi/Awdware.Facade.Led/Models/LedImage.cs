@@ -48,6 +48,19 @@ namespace Awdware.Facade.Led.Models
         }
 
         /// <summary>
+        /// Returns a new instance created from a dto.
+        /// </summary>
+        /// <returns>The new instance.</returns>
+        public static LedImage FromDto(LedImageDto dto)
+        {
+            return new LedImage((uint)dto.Leds.Length)
+            {
+                Leds = dto.Leds.Select(x => RgbColor.FromDto(x)).ToList(),
+                TransitionTime = dto.TransitionTime
+            };
+        }
+
+        /// <summary>
         /// Sets all colors of the image to a new color.
         /// </summary>
         /// <param name="color">The new color.</param>
