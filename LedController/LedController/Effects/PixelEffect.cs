@@ -57,11 +57,11 @@ namespace LedController.Models.Effects
 
                         if (_pixelArray[i] > 255)
                         {
-                            newColor = RgbColor.Transition(_color, _bgcolor, 1 - ((_pixelArray[i] - 255) + 1) / 256, _evenColors);
+                            newColor = RgbColor.Transition(_color, _bgcolor, ((_pixelArray[i] - 255) + 1) / 256, _evenColors);
                         }
                         else
                         {
-                            newColor = RgbColor.Transition(_color, _bgcolor, (_pixelArray[i] + 1) / 256, _evenColors);
+                            newColor = RgbColor.Transition(_bgcolor, _color, (_pixelArray[i] + 1) / 256, _evenColors);
                         }
                         Image.Leds[i] = newColor;
                     }
