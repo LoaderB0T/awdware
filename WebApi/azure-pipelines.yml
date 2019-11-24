@@ -71,6 +71,7 @@ steps:
     projects: WebApi/Awdware.Test.UnitTests/Awdware.Test.UnitTests.csproj
     custom: test
     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+  continueOnError: true
 
 - task: reportgenerator@4
   displayName: 'Convert coverage.cobertura.xml to htmlInline'
