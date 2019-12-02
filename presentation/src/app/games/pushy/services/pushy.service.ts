@@ -12,7 +12,7 @@ export class PushyService {
 
   constructor(signalrService: SignalrService) {
     this._signalrService = signalrService;
-    this._signalrHub = signalrService.getHubConnection('/hardwaredata');
+    this._signalrHub = signalrService.getHubConnection('/pushyhub');
   }
 
   public registerMovementCallback(): Observable<any> {
@@ -21,6 +21,6 @@ export class PushyService {
   }
 
   public createLobby(lobbyName: string, lobbyPassword: string) {
-    // this._signalrService.
+    this._signalrService.sendData(this._signalrHub, 'CreateLobby', lobbyName, lobbyPassword).subscribe();
   }
 }

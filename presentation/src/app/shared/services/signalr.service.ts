@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder, LogLevel, HubConnectionState } from '@aspnet/signalr';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, of, from, concat } from 'rxjs';
+import { catchError, concatMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,15 +26,27 @@ export class SignalrService {
     return returnVal;
   }
 
-  public sendData<T>(hub: HubConnection, methodName: string, data: T) {
-    hub.send(methodName, data);
+  public sendData(hub: HubConnection, methodName: string, ...args: any[]): Observable<void> {
+    return this.ensureConnection(hub).pipe(
+      concatMap(() => from(hub.invoke(methodName, ...args)))
+    );
   }
 
   public getHubConnection(hubUrl: string): HubConnection {
     const hubConnection = new HubConnectionBuilder()
-      .configureLogging(LogLevel.Trace)
+      .configureLogging(LogLevel.Debug)
       .withUrl(environment.apiUrl + hubUrl).build();
 
     return hubConnection;
+  }
+
+  public ensureConnection(hub: HubConnection): Observable<void> {
+    if (hub.state === HubConnectionState.Connected) {
+      return of(null);
+    }
+    return from(hub.start()).pipe(catchError(err => {
+      console.error(err);
+      return of(null);
+    }));
   }
 }

@@ -57,7 +57,9 @@ namespace Awdware.Host
             {
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
-            services.AddSignalR();
+            services.AddSignalR(options => {
+                options.EnableDetailedErrors = true;
+            });
 
             var connectionString = Configuration.GetConnectionString("awdwareDB");
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(connectionString));
@@ -110,6 +112,7 @@ namespace Awdware.Host
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<LedConfigHub>("LedHub");
+                endpoints.MapHub<PushyHub>("PushyHub");
             });
         }
 

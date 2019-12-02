@@ -31,6 +31,11 @@ namespace Awdware.Business.Facade.Hubs
             _gameScope.AddLobby(newLobby);
         }
 
+        public void Test(string abc)
+        {
+            Console.WriteLine(abc);
+        }
+
         public IEnumerable<GameLobbyInformationDto> GetGameLobbies()
         {
             var lobbies = _gameScope.GetJoinableLobbies(GameType.PUSHY);
