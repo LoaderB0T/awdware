@@ -8,7 +8,7 @@ namespace Awdware.Business.Implementation.Models
 {
     public class GameLobby
     {
-        private List<GameConnection> _connections = new List<GameConnection>();
+        private readonly List<GameConnection> _connections = new List<GameConnection>();
 
         public string Name { get; private set; }
         public GameType GameType { get; private set; }
@@ -30,7 +30,7 @@ namespace Awdware.Business.Implementation.Models
 
         internal bool IsConnectionIdPresent(string conId)
         {
-            return this._connections.FindByConnectionId(conId) != null;
+            return _connections.FindByConnectionId(conId) != null;
         }
 
         public IEnumerable<string> GetUserIds()

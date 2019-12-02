@@ -25,9 +25,9 @@ namespace Awdware.Business.Facade.Hubs
             return base.OnDisconnectedAsync(exception);
         }
 
-        public void CreateLobby(string userId)
+        public void CreateLobby(string userId, string lobbyName)
         {
-            var newLobby = new GameLobby("awd", userId, Context.ConnectionId, GameType.PUSHY, 2);
+            var newLobby = new GameLobby(lobbyName, userId, Context.ConnectionId, GameType.PUSHY, 2);
             _gameScope.AddLobby(newLobby);
         }
 
