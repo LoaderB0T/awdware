@@ -25,6 +25,10 @@ export class SignalrService {
     return returnVal;
   }
 
+  public sendData<T>(hub: HubConnection, methodName: string, data: T) {
+    hub.send(methodName, data);
+  }
+
   public getHubConnection(hubUrl: string): HubConnection {
     const hubConnection = new HubConnectionBuilder()
       .configureLogging(LogLevel.Trace)
