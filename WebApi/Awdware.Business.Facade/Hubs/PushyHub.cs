@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Awdware.Business.Implementation.Models;
 using Awdware.Facade.Dtos.Games;
 using Awdware.Business.Implementation.Services;
+using Awdware.Facade.Dtos;
 
 namespace Awdware.Business.Facade.Hubs
 {
@@ -25,15 +26,17 @@ namespace Awdware.Business.Facade.Hubs
             return base.OnDisconnectedAsync(exception);
         }
 
-        public void CreateLobby(string userId, string lobbyName)
+        public GameLobbyInformationDto CreateLobby(string userId, string lobbyName, string password = null)
         {
-            var newLobby = new GameLobby(lobbyName, userId, Context.ConnectionId, GameType.PUSHY, 2);
+            var newLobby = new GameLobby(lobbyName, userId, Context.ConnectionId, GameType.PUSHY, 2, password);
             _gameScope.AddLobby(newLobby);
-        }
-
-        public void Test(string abc)
-        {
-            Console.WriteLine(abc);
+            var userInfo = _userService.GetUserInfo(userId);
+            return new GameLobbyInformationDto()
+            {
+                Id = newLobby.Id.ToString(),
+                Name = newLobby.Name,
+                Users = new UserInfoDto[] { userInfo }
+            };
         }
 
         public IEnumerable<GameLobbyInformationDto> GetGameLobbies()
@@ -45,10 +48,28 @@ namespace Awdware.Business.Facade.Hubs
                 var users = userIds.Select(x => _userService.GetUserInfo(x));
                 return new GameLobbyInformationDto()
                 {
-                    LobbyName = lobby.Name,
+                    Id = lobby.Id.ToString(),
+                    Name = lobby.Name,
                     Users = users
                 };
             });
+        }
+
+        public bool JoinLobby(string lobbyId, string userId, string password)
+        {
+            var lobby = _gameScope.GetJoinableLobbies(GameType.PUSHY).FirstOrDefault(x => x.Id.Equals(Guid.Parse(lobbyId)));
+            if (lobby == null)
+                return false;
+
+            bool success = lobby.TryJoin(userId, Context.ConnectionId, password);
+            if (!success)
+                return false;
+
+            var userInfo = _userService.GetUserInfo(userId);
+
+            var conIds = lobby.GetConnectionIds().ToList().AsReadOnly();
+            Clients.Clients(conIds).SendAsync("PlayerJoined", userInfo);
+            return true;
         }
     }
 }

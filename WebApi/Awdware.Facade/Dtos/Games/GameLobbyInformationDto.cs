@@ -6,7 +6,8 @@ namespace Awdware.Facade.Dtos.Games
 {
     public class GameLobbyInformationDto
     {
-        public string LobbyName { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
         public IEnumerable<UserInfoDto> Users { get; set; }
     }
 }

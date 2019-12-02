@@ -8,7 +8,7 @@ import { LoginHelpComponent } from './account/login-help/login-help.component';
 import { VerifyMailComponent } from './account/verify-mail/verify-mail.component';
 import { NewPasswordComponent } from './account/new-password/new-password.component';
 import { MeComponent } from './me/me.component';
-import { UserInfoResolverService } from './account/services/user-info-resolver.service';
+import { UserDetailsResolverService } from './account/services/user-info-resolver.service';
 import { VoteComponent } from './vote/vote.component';
 import { MyVotesComponent } from './vote/my-votes/my-votes.component';
 import { NewVoteComponent } from './vote/new-vote/new-vote.component';
@@ -17,12 +17,13 @@ import { AuthGuard } from './services/auth.guard';
 import { GamesComponent } from './games/games.component';
 import { PushyComponent } from './games/pushy/pushy.component';
 import { GameHomeComponent } from './games/game-home/game-home.component';
+import { LobbyComponent } from './games/pushy/lobby/lobby.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    resolve: { userInfo: UserInfoResolverService },
+    resolve: { userInfo: UserDetailsResolverService },
     children: [
       {
         path: 'account',
@@ -94,7 +95,16 @@ const routes: Routes = [
           },
           {
             path: 'pushy',
-            component: PushyComponent
+            children: [
+              {
+                path: 'lobby',
+                component: LobbyComponent
+              },
+              {
+                path: '',
+                component: PushyComponent,
+              }
+            ]
           }
         ]
       },

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../../shared/services/dialog.service';
 import { CreatePushyLobbyComponent } from './create-pushy-lobby/create-pushy-lobby.component';
+import { JoinPushyLobbyComponent } from './join-pushy-lobby/join-pushy-lobby.component';
 
 @Component({
   selector: 'awd-pushy',
@@ -22,7 +23,7 @@ export class PushyComponent implements OnInit {
   }
 
   public joinLobbyDialog() {
-
+    const joinLobbyComponent = this._dialogService.showComponentDialog(JoinPushyLobbyComponent);
   }
 
 }

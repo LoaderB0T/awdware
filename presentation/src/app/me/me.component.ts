@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserInfoService } from '../services/user-info.service';
-import { UserInfo } from '../models/user-info';
+import { UserDetailsService } from '../services/user-details.service';
+import { UserDetails } from '../models/user-details';
 import { AccountService } from '../account/services/account.service';
 import { ThemeService } from '../shared/services/theme.service';
 
@@ -10,11 +10,11 @@ import { ThemeService } from '../shared/services/theme.service';
   styleUrls: ['./me.component.scss']
 })
 export class MeComponent implements OnInit {
-  private _userInfoService: UserInfoService;
+  private _userInfoService: UserDetailsService;
   private _accountService: AccountService;
   private _themeService: ThemeService;
 
-  constructor(userInfoService: UserInfoService, accountService: AccountService, themeService: ThemeService) {
+  constructor(userInfoService: UserDetailsService, accountService: AccountService, themeService: ThemeService) {
     this._userInfoService = userInfoService;
     this._accountService = accountService;
     this._themeService = themeService;
@@ -23,7 +23,7 @@ export class MeComponent implements OnInit {
   ngOnInit() {
   }
 
-  public get userInfo(): UserInfo {
+  public get userInfo(): UserDetails {
     return this._userInfoService.userInfo;
   }
 

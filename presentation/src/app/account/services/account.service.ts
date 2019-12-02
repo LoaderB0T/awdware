@@ -4,7 +4,7 @@ import { SessionStoreService } from 'src/app/services/session-store.service';
 import {
   LoginRequestDto,
   LoginResponseDto,
-  UserInfoDto,
+  UserDetailsDto,
   LoginResult,
   RegisterResult,
   LoginHelpRequestDto,
@@ -17,7 +17,7 @@ import { EventService } from 'src/app/services/event.service';
 import { ToolbarInvalidatedEvent } from 'src/app/events/toolbar-invalidated.event';
 import { SessionService } from 'src/app/services/session.service';
 import { RoutingService } from 'src/app/services/routing.service';
-import { UserInfoService } from 'src/app/services/user-info.service';
+import { UserDetailsService } from 'src/app/services/user-details.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class AccountService {
   private _sessionStoreService: SessionStoreService;
   private _eventService: EventService;
   private _sessionService: SessionService;
-  private _userInfoService: UserInfoService;
+  private _userInfoService: UserDetailsService;
 
   constructor(
     webApiService: WebApiService,
@@ -36,7 +36,7 @@ export class AccountService {
     eventService: EventService,
     sessionService: SessionService,
     routingService: RoutingService,
-    userInfoService: UserInfoService
+    userInfoService: UserDetailsService
   ) {
     this._webApiService = webApiService;
     this._sessionStoreService = sessionStoreService;
@@ -90,8 +90,8 @@ export class AccountService {
     return this._webApiService.post<void>('authentication/loginhelp', loginHelpRequestDto);
   }
 
-  public loadUserInfo(): Observable<UserInfoDto> {
-    return this._webApiService.get<UserInfoDto>('user/getMyUserInfo')
+  public loadUserDetails(): Observable<UserDetailsDto> {
+    return this._webApiService.get<UserDetailsDto>('user/getMyUserDetails')
       .pipe(
         tap(x => {
           this._userInfoService.setUser(x);

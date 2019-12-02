@@ -11,7 +11,7 @@ export class LoginRequestDto {
 
 export class LoginResponseDto {
   public loginSuccess: LoginResult;
-  public userInfo: UserInfoDto;
+  public userInfo: UserDetailsDto;
   public token: string;
 }
 
@@ -26,7 +26,7 @@ export class RegisterRequestDto {
 
 export class RegisterResponseDto {
   public registerSuccess: RegisterResult;
-  public userInfo: UserInfoDto;
+  public userInfo: UserDetailsDto;
   public token: string;
 }
 
@@ -39,12 +39,16 @@ export class TokenDto {
   public token: string;
 }
 
-export class UserInfoDto {
+export class UserDetailsDto {
   public userId: string;
   public username: string;
   public firstname: string;
   public lastname: string;
   public email: string;
+}
+
+export class UserInfoDto {
+  public username: string;
 }
 
 export enum ConfirmEmailStatus {
@@ -130,4 +134,10 @@ export class LedSettingsDto {
   public settingName: string;
   public comPortName: string;
   public id: string;
+}
+
+export class GameLobbyInformationDto {
+  public id: string;
+  public name: string;
+  public users: Array<UserInfoDto>;
 }

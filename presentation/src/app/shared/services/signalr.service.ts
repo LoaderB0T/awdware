@@ -26,9 +26,9 @@ export class SignalrService {
     return returnVal;
   }
 
-  public sendData(hub: HubConnection, methodName: string, ...args: any[]): Observable<void> {
+  public sendData<T>(hub: HubConnection, methodName: string, ...args: any[]): Observable<T> {
     return this.ensureConnection(hub).pipe(
-      concatMap(() => from(hub.invoke(methodName, ...args)))
+      concatMap(() => from(hub.invoke<T>(methodName, ...args)))
     );
   }
 

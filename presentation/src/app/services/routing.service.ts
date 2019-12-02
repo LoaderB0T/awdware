@@ -70,7 +70,10 @@ export class RoutingService {
     this._router.navigate(['games', 'home']);
   }
 
-  navigateToGamesPushy() {
+  public navigateToGamesPushy() {
     this._router.navigate(['games', 'pushy']);
+  }
+  public navigateToGamesPushyLobby() {
+    this._router.navigate(['games', 'pushy', 'lobby']);
   }
 }

@@ -29,7 +29,7 @@ export class DialogService {
     this._rootViewContainer = viewContainerRef;
   }
 
-  public showComponentDialog<T>(componentType: new (args) => T): T {
+  public showComponentDialog<T>(componentType: new (...args) => T): T {
     this._subMgrs.push(new SubscriptionManager());
     const factory = this._factoryResolver
       .resolveComponentFactory<T>(componentType);

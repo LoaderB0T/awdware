@@ -20,8 +20,8 @@ namespace Awdware.Business.Facade.Controllers
         }
 
         [HttpGet]
-        [Route("getMyUserInfo")]
-        public ActionResult<UserDetailsDto> GetMyUserInfo([FromHeader] string authorization)
+        [Route("getMyUserDetails")]
+        public ActionResult<UserDetailsDto> GetMyUserDetails([FromHeader] string authorization)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
             return Ok(_userService.GetMyUserDetails(userId));

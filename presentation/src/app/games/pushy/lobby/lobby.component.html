@@ -1,0 +1,6 @@
+<div *ngIf="lobby">
+  <p>lobby works!</p>
+  <span>{{lobby.name}}</span>
+  <h2>Player:</h2>
+  <span *ngFor="let user of lobby.users">{{user.username}}</span>
+</div>

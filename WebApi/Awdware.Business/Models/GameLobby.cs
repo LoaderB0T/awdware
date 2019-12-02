@@ -10,6 +10,7 @@ namespace Awdware.Business.Implementation.Models
     {
         private readonly List<GameConnection> _connections = new List<GameConnection>();
 
+        public Guid Id { get; set; }
         public string Name { get; private set; }
         public GameType GameType { get; private set; }
         public bool IsGameRunning { get; private set; }
@@ -21,6 +22,7 @@ namespace Awdware.Business.Implementation.Models
 
         public GameLobby(string name, string userId, string conId, GameType type, int maxPlayerCount, string password = null)
         {
+            Id = Guid.NewGuid();
             Name = name;
             GameType = type;
             IsGameRunning = false;
@@ -50,6 +52,22 @@ namespace Awdware.Business.Implementation.Models
             {
                 _connections.First().MakeOwner();
             }
+        }
+
+        public bool TryJoin(string userId, string connectionId, string password = null)
+        {
+            if(this.Password != null && !this.Password.Equals(password, StringComparison.InvariantCulture))
+            {
+                return false;
+            }
+            var con = new GameConnection(userId, connectionId);
+            _connections.Add(con);
+            return true;
+        }
+
+        public IEnumerable<string> GetConnectionIds()
+        {
+            return _connections.Select(x => x.ConenctionId);
         }
     }
 }
