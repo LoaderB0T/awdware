@@ -14,6 +14,8 @@ import { MyVotesComponent } from './vote/my-votes/my-votes.component';
 import { NewVoteComponent } from './vote/new-vote/new-vote.component';
 import { LedComponent } from './led/led.component';
 import { AuthGuard } from './services/auth.guard';
+import { GamesComponent } from './games/games.component';
+import { PushyComponent } from './games/pushy/pushy.component';
 
 
 const routes: Routes = [
@@ -80,6 +82,16 @@ const routes: Routes = [
         path: 'led',
         component: LedComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'games',
+        component: GamesComponent,
+        children: [
+          {
+            path: 'pushy',
+            component: PushyComponent
+          }
+        ]
       },
       {
         path: '',

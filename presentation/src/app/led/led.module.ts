@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { LedComponent } from './led.component';
-import { LedRoutingModule } from './account-routing.module';
+import { LedRoutingModule } from './led-routing.module';
 import { LedEffectComponent } from './led-effect/led-effect.component';
 import { LedEffectPropertyComponent } from './led-effect/led-effect-property/led-effect-property.component';
 import { LedSettingsComponent } from './led-settings/led-settings.component';

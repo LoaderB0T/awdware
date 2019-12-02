@@ -11,14 +11,14 @@ namespace Awdware.Data.Facade.Utils
         {
             return new LoginResponseDto()
             {
-                UserInfo = user.ToUserInfoDto(),
+                UserInfo = user.ToUserDetailsDto(),
                 LoginSuccess = LoginResult.Success
             };
         }
 
-        public static UserInfoDto ToUserInfoDto(this WebUser user)
+        public static UserDetailsDto ToUserDetailsDto(this WebUser user)
         {
-            return new UserInfoDto()
+            return new UserDetailsDto()
             {
                 UserId = user.UserId,
                 Username = user.Username,
@@ -28,12 +28,20 @@ namespace Awdware.Data.Facade.Utils
             };
         }
 
+        public static UserInfoDto ToUserInfoDto(this WebUser user)
+        {
+            return new UserInfoDto()
+            {
+                Username = user.Username
+            };
+        }
+
         public static RegisterResponseDto ToRegisterResponseDto(this WebUser user)
         {
             return new RegisterResponseDto()
             {
                 RegisterSuccess = RegisterResult.Success,
-                UserInfo = user.ToUserInfoDto()
+                UserInfo = user.ToUserDetailsDto()
             };
         }
 

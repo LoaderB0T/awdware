@@ -4,7 +4,8 @@ namespace Awdware.Business.Implementation.Services
 {
     public interface IUserService
     {
-        UserInfoDto GetMyUserInfo(string userId);
+        UserDetailsDto GetMyUserDetails(string userId);
         RegisterResult RegisterRequestValid(RegisterRequestDto registerRequestDto);
+        UserInfoDto GetUserInfo(string userId);
     }
 }

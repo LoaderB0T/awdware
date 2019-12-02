@@ -3,7 +3,7 @@
     public class LoginResponseDto
     {
         public LoginResult LoginSuccess { get; set; }
-        public UserInfoDto UserInfo { get; set; }
+        public UserDetailsDto UserInfo { get; set; }
         public string Token { get; set; }
     }
 }

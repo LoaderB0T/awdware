@@ -9,7 +9,7 @@ namespace Awdware.Business.Facade.Controllers
     {
         public IActionResult Index()
         {
-            var a = new UserInfoDto
+            var a = new UserDetailsDto
             {
                 Email = "works@yes.de",
                 UserId = "123123123",

@@ -1,4 +1,5 @@
-﻿using Awdware.Business.Utils;
+﻿using System;
+using Awdware.Business.Utils;
 using Awdware.Data.Facade.Utils;
 using Awdware.Data.Implementation.Repositories;
 using Awdware.Facade.Dtos;
@@ -15,10 +16,10 @@ namespace Awdware.Business.Implementation.Services
             _userRepository = userRepository;
         }
 
-        public UserInfoDto GetMyUserInfo(string userId)
+        public UserDetailsDto GetMyUserDetails(string userId)
         {
             var userEntity = _userRepository.GetUserById(userId);
-            var foreignUserDto = userEntity.ToUserInfoDto();
+            var foreignUserDto = userEntity.ToUserDetailsDto();
             return foreignUserDto;
         }
 
@@ -52,6 +53,12 @@ namespace Awdware.Business.Implementation.Services
                 return RegisterResult.EmailTaken;
 
             return RegisterResult.Success;
+        }
+
+        public UserInfoDto GetUserInfo(string userId)
+        {
+            var user = _userRepository.GetUserById(userId);
+            return user.ToUserInfoDto();
         }
     }
 }
