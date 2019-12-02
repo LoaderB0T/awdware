@@ -6,8 +6,6 @@ import { VoteRoutingModule } from './vote-routing.module';
 import { NewVoteComponent } from './new-vote/new-vote.component';
 import { MyVotesComponent } from './my-votes/my-votes.component';
 
-
-
 @NgModule({
   declarations: [
     VoteComponent,

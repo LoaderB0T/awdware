@@ -26,7 +26,8 @@
     "ng-click-outside": "^5.1.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "@aspnet/signalr": "^1.1.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.801.3",
