@@ -19,4 +19,8 @@ export class PushyService {
     const obs = this._signalrService.onDataRecieved(this._signalrHub, 'onMovement');
     return obs;
   }
+
+  public createLobby(lobbyName: string, lobbyPassword: string) {
+    // this._signalrService.
+  }
 }

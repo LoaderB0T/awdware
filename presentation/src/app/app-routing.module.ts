@@ -16,6 +16,7 @@ import { LedComponent } from './led/led.component';
 import { AuthGuard } from './services/auth.guard';
 import { GamesComponent } from './games/games.component';
 import { PushyComponent } from './games/pushy/pushy.component';
+import { GameHomeComponent } from './games/game-home/game-home.component';
 
 
 const routes: Routes = [
@@ -87,6 +88,10 @@ const routes: Routes = [
         path: 'games',
         component: GamesComponent,
         children: [
+          {
+            path: 'home',
+            component: GameHomeComponent
+          },
           {
             path: 'pushy',
             component: PushyComponent

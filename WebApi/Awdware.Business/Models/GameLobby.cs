@@ -14,16 +14,18 @@ namespace Awdware.Business.Implementation.Models
         public GameType GameType { get; private set; }
         public bool IsGameRunning { get; private set; }
         public int MaxPlayerCount { get; private set; }
+        public string Password { get; private set; }
 
         public int PlayerCount { get => _connections.Count; }
         public bool IsJoinable { get => !IsGameRunning && PlayerCount < MaxPlayerCount; }
 
-        public GameLobby(string name, string userId, string conId, GameType type, int maxPlayerCount)
+        public GameLobby(string name, string userId, string conId, GameType type, int maxPlayerCount, string password = null)
         {
             Name = name;
             GameType = type;
             IsGameRunning = false;
             MaxPlayerCount = maxPlayerCount;
+            Password = password;
             var gameConnection = new GameConnection(userId, conId, true);
             _connections.Add(gameConnection);
         }

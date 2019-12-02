@@ -1,0 +1,11 @@
+<div class="dialog">
+  <div class="dialog-row">
+    <awd-textbox placeholder="Lobby Name" required [(ngModel)]="lobbyName"></awd-textbox>
+  </div>
+  <div class="dialog-row">
+    <awd-textbox placeholder="Lobby Password (Optional)" [(ngModel)]="lobbyPassword"></awd-textbox>
+  </div>
+  <div class="dialog-row">
+    <button class="button" (click)="createLobby()">Create</button>
+  </div>
+</div>

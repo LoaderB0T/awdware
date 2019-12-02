@@ -65,4 +65,12 @@ export class RoutingService {
   public navigateToLed() {
     this._router.navigate(['led']);
   }
+
+  public navigateToGames(): void {
+    this._router.navigate(['games', 'home']);
+  }
+
+  navigateToGamesPushy() {
+    this._router.navigate(['games', 'pushy']);
+  }
 }

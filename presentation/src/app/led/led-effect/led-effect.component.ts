@@ -35,5 +35,4 @@ export class LedEffectComponent implements OnInit {
     this._ledService.updateEffect(this.effect).subscribe();
     this.effect.hasPendingChanges = false;
   }
-
 }

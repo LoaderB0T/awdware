@@ -4,9 +4,10 @@ import { GamesComponent } from './games.component';
 import { GamesRoutingModule } from './games-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { PushyModule } from './pushy/pushy.module';
+import { GameHomeComponent } from './game-home/game-home.component';
 
 @NgModule({
-  declarations: [GamesComponent],
+  declarations: [GamesComponent, GameHomeComponent],
   imports: [
     CommonModule,
     SharedModule,
