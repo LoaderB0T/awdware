@@ -14,6 +14,7 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
 import { MeComponent } from './me/me.component';
 import { VoteModule } from './vote/vote.module';
 import { LedModule } from './led/led.module';
+import { GamesModule } from './games/games.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LedModule } from './led/led.module';
     AccountModule,
     HomeModule,
     VoteModule,
-    LedModule
+    LedModule,
+    GamesModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
   bootstrap: [AppComponent]
