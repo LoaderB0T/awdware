@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <ProjectGuid>{da9a33c6-80ba-4f72-b94b-7f37de71d63d}</ProjectGuid>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\..\bin\Debug\Core</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Awdware.Core.Business.Implementation\Awdware.Core.Business.Implementation.csproj" />
+    <ProjectReference Include="..\Awdware.Core.Facade\Awdware.Core.Facade.csproj" />
+    <ProjectReference Include="..\Awdware.Core.Infrastructure\Awdware.Core.Infrastructure.csproj" />
+  </ItemGroup>
+ 
+
+</Project>
