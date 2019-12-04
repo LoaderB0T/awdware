@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Awdware.Core.Business.Implementation.Models
+namespace Awdware.Games.Business.Implementation.Models
 {
     public class GameConnection
     {

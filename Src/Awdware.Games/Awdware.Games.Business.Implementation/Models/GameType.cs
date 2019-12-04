@@ -1,4 +1,4 @@
-﻿namespace Awdware.Core.Business.Implementation.Models
+﻿namespace Awdware.Games.Business.Implementation.Models
 {
     public enum GameType
     {

@@ -28,6 +28,7 @@
     <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Business.Facade\Awdware.Core.Business.Facade.csproj" />
     <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Facade\Awdware.Core.Facade.csproj" />
     <ProjectReference Include="..\..\Awdware.Led\Awdware.Led\Awdware.Led.Business.Facade\Awdware.Led.Business.Facade.csproj" />
+    <ProjectReference Include="..\..\Awdware.Games\Awdware.Games.Business.Facade\Awdware.Games.Business.Facade.csproj" />
   </ItemGroup>
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Awdware.Core.Business.Implementation.Models
+namespace Awdware.Games.Business.Implementation.Models
 {
     public class GameScope
     {
@@ -30,7 +30,7 @@ namespace Awdware.Core.Business.Implementation.Models
             affectedLobbies.ToList().ForEach(lobby =>
             {
                 lobby.RemovePlayerByConnectionId(connectionId);
-                if(lobby.PlayerCount == 0)
+                if (lobby.PlayerCount == 0)
                 {
                     _lobbies.Remove(lobby);
                 }

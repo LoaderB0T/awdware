@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Awdware.Core.Facade.Dtos;
 
-namespace Awdware.Core.Business.Implementation.Models
+namespace Awdware.Games.Business.Implementation.Models
 {
     public class GameLobby
     {
@@ -39,16 +38,16 @@ namespace Awdware.Core.Business.Implementation.Models
 
         public IEnumerable<string> GetUserIds()
         {
-            return this._connections.Select(x => x.UserId);
+            return _connections.Select(x => x.UserId);
         }
 
         internal void RemovePlayerByConnectionId(string connectionId)
         {
-            var connection = this._connections.FindByConnectionId(connectionId);
+            var connection = _connections.FindByConnectionId(connectionId);
             if (connection == null)
                 return;
             _connections.Remove(connection);
-            if(connection.IsOwner && PlayerCount > 0)
+            if (connection.IsOwner && PlayerCount > 0)
             {
                 _connections.First().MakeOwner();
             }
@@ -56,7 +55,7 @@ namespace Awdware.Core.Business.Implementation.Models
 
         public bool TryJoin(string userId, string connectionId, string password = null)
         {
-            if(this.Password != null && !this.Password.Equals(password, StringComparison.InvariantCulture))
+            if (Password != null && !Password.Equals(password, StringComparison.InvariantCulture))
             {
                 return false;
             }

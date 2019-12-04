@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\..\bin\$(Configuration)\Games</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Awdware.Games.Business.Implementation\Awdware.Games.Business.Implementation.csproj" />
+    <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Business.Implementation\Awdware.Core.Business.Implementation.csproj" />
+    <ProjectReference Include="..\Awdware.Games.Facade\Awdware.Games.Facade.csproj" />
+  </ItemGroup>
+
+</Project>

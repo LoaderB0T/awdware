@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Awdware.Core.Facade.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Awdware.Core.Facade.Dtos.Games
+namespace Awdware.Games.Facade.Dtos
 {
     public class GameLobbyInformationDto
     {

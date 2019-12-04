@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Awdware.Core.Business.Implementation.Services;
+using Awdware.Core.Facade.Dtos;
+using Awdware.Games.Business.Implementation.Models;
+using Awdware.Games.Facade.Dtos;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Awdware.Core.Business.Implementation.Models;
-using Awdware.Core.Facade.Dtos.Games;
-using Awdware.Core.Business.Implementation.Services;
-using Awdware.Core.Facade.Dtos;
 
-namespace Awdware.Core.Business.Facade.Hubs
+namespace Awdware.Games.Business.Facade.Hubs
 {
     public class PushyHub : Hub
     {

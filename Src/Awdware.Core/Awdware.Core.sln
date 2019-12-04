@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Core.Data.Facade", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Core.Infrastructure", "Awdware.Core.Infrastructure\Awdware.Core.Infrastructure.csproj", "{293B76AA-1A18-421C-A4C7-D43B58C8E40C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Core.Business.Utils", "Awdware.Core.Business.Models\Awdware.Core.Business.Utils.csproj", "{70FAC72D-CF51-43B3-A5C2-1F85E707973C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Core.Business.Utils", "Awdware.Core.Business.Utils\Awdware.Core.Business.Utils.csproj", "{70FAC72D-CF51-43B3-A5C2-1F85E707973C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
