@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awdware.Led.Business.Implem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awdware.Led.Data.Facade", "Awdware.Led.Data.Facade\Awdware.Led.Data.Facade.csproj", "{F88BA753-5B3A-404C-9DAF-24A3D80C1574}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awdware.Led.Data.Implementation", "Awdware.Led.Dataa.Implementation\Awdware.Led.Data.Implementation.csproj", "{B6790B25-C46E-4E4A-9569-4177DA826A41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awdware.Led.Data.Implementation", "Awdware.Led.Data.Implementation\Awdware.Led.Data.Implementation.csproj", "{B6790B25-C46E-4E4A-9569-4177DA826A41}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Awdware.Led.Business.Facade", "Awdware.Led.Business.Facade\Awdware.Led.Business.Facade.csproj", "{D43AC208-64A9-4E55-A970-451B67210BD4}"
 EndProject

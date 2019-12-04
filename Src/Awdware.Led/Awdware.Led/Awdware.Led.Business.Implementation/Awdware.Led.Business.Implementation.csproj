@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Awdware.Led.Dataa.Implementation\Awdware.Led.Data.Implementation.csproj" />
+    <ProjectReference Include="..\Awdware.Led.Data.Implementation\Awdware.Led.Data.Implementation.csproj" />
   </ItemGroup>
 
 </Project>
