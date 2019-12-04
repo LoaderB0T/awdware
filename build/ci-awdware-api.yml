@@ -24,19 +24,19 @@ pool:
 
 steps:
 - task: DotNetCoreInstaller@1
-  displayName: 'Use .NET Core sdk'
+  displayName: '\U00002699 Use .NET Core sdk'
   inputs:
     version: 3.0.100
 
 - task: NuGetToolInstaller@1
-  displayName: 'Use NuGet 4.9.2'
+  displayName: '\U00002699 Use NuGet 4.9.2'
   inputs:
     versionSpec: 4.9.2
     checkLatest: true
 
 - task: SonarCloudPrepare@1
   continueOnError: true
-  displayName: 'Prepare analysis on SonarCloud'
+  displayName: '\U0001F50E Prepare analysis on SonarCloud'
   inputs:
     SonarCloud: 'sonarcloud'
     organization: 'awdware'
@@ -48,32 +48,32 @@ steps:
       sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
 - task: DotNetCoreCLI@2
-  displayName: '\0001F6E0 build core'
+  displayName: '\U0001F6E0 build core'
   inputs:
     projects: Src/Awdware.Core/Awdware.Core.sln
     configuration: Release
 
 - task: DotNetCoreCLI@2
-  displayName: 'build led'
+  displayName: '\U0001F6E0 build led'
   inputs:
     projects: Src/Awdware.Led/Awdware.Led/Awdware.Led.sln
     configuration: Release
 
 - task: DotNetCoreCLI@2
-  displayName: 'build games'
+  displayName: '\U0001F6E0 build games'
   inputs:
     projects: Src/Awdware.Games/Awdware.Games.sln
     configuration: Release
 
 - task: DotNetCoreCLI@2
-  displayName: 'build host'
+  displayName: '\U0001F6E0 build host'
   inputs:
     projects: Src/Awdware.Host/Awdware.Host.sln
     configuration: Release
 
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet publish'
+  displayName: '\U0001F446 dotnet publish'
   inputs:
     command: publish
     publishWebProjects: false
@@ -118,7 +118,7 @@ steps:
 #   continueOnError: true
   
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
+  displayName: '\U0001F446 Publish Awdware Api'
   inputs:
     PathtoPublish: dist/publish
 
