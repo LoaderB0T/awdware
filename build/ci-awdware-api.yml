@@ -24,163 +24,163 @@ pool:
 
 jobs:
 - job: init
-    steps:
-    - task: DotNetCoreInstaller@1
-      displayName: 'Use .NET Core sdk'
-      inputs:
-        version: 3.0.100
+  steps:
+  - task: DotNetCoreInstaller@1
+    displayName: 'Use .NET Core sdk'
+    inputs:
+      version: 3.0.100
 
-    - task: NuGetToolInstaller@1
-      displayName: 'Use NuGet 4.9.2'
-      inputs:
-        versionSpec: 4.9.2
-        checkLatest: true
+  - task: NuGetToolInstaller@1
+    displayName: 'Use NuGet 4.9.2'
+    inputs:
+      versionSpec: 4.9.2
+      checkLatest: true
 
-    - task: SonarCloudPrepare@1
-      continueOnError: true
-      displayName: 'Prepare analysis on SonarCloud'
-      inputs:
-        SonarCloud: 'sonarcloud'
-        organization: 'awdware'
-        scannerMode: 'MSBuild'
-        projectKey: 'awdware:webapi'
-        extraProperties: |
-        sonar.exclusions=**/bin/**,**/obj/**,**/Template/**
-        sonar.test.exclusions=**/bin/**,**/obj/**
-        sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
+  - task: SonarCloudPrepare@1
+    continueOnError: true
+    displayName: 'Prepare analysis on SonarCloud'
+    inputs:
+      SonarCloud: 'sonarcloud'
+      organization: 'awdware'
+      scannerMode: 'MSBuild'
+      projectKey: 'awdware:webapi'
+      extraProperties: |
+      sonar.exclusions=**/bin/**,**/obj/**,**/Template/**
+      sonar.test.exclusions=**/bin/**,**/obj/**
+      sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
 - job: build core
-    dependsOn:
-    - init
-    steps:
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet build'
-      inputs:
-        projects: Src/Awdware.Core/Awdware.Core.sln
-        configuration: Release
+  dependsOn:
+  - init
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    inputs:
+      projects: Src/Awdware.Core/Awdware.Core.sln
+      configuration: Release
 
 - job: build led
-    dependsOn:
-    - build core
-    steps:
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet build'
-      inputs:
-        projects: Src/Awdware.Led/Awdware.Led/Awdware.Led.sln
-        configuration: Release
+  dependsOn:
+  - build core
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    inputs:
+      projects: Src/Awdware.Led/Awdware.Led/Awdware.Led.sln
+      configuration: Release
 
 - job: build games
-    dependsOn:
-    - build core
-    steps:
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet build'
-      inputs:
-        projects: Src/Awdware.Games/Awdware.Games.sln
-        configuration: Release
+  dependsOn:
+  - build core
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    inputs:
+      projects: Src/Awdware.Games/Awdware.Games.sln
+      configuration: Release
 
 - job: build host
-    dependsOn:
-    - build core
-    - build led
-    - build games
-    steps:
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet build'
-      inputs:
-        projects: Src/Awdware.Host/Awdware.Host.sln
-        configuration: Release
+  dependsOn:
+  - build core
+  - build led
+  - build games
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    inputs:
+      projects: Src/Awdware.Host/Awdware.Host.sln
+      configuration: Release
 
 
 - job: finish
-    dependsOn:
-    - build host
-    steps:
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet publish'
-      inputs:
-        command: publish
-        publishWebProjects: false
-        projects: Src/Awdware.Host/Awdware.Host/Awdware.Host.csproj
-        arguments: '-o dist/publish --no-build --no-restore'
-        zipAfterPublish: false
-        modifyOutputPath: false
-        configuration: Release
+  dependsOn:
+  - build host
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet publish'
+    inputs:
+      command: publish
+      publishWebProjects: false
+      projects: Src/Awdware.Host/Awdware.Host/Awdware.Host.csproj
+      arguments: '-o dist/publish --no-build --no-restore'
+      zipAfterPublish: false
+      modifyOutputPath: false
+      configuration: Release
 
-    # - task: DotNetCoreCLI@2
-    #   displayName: 'dotnet test with code coverage'
-    #   inputs:
-    #     command: custom
-    #     custom: test
-    #     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
-    #   continueOnError: true
+  # - task: DotNetCoreCLI@2
+  #   displayName: 'dotnet test with code coverage'
+  #   inputs:
+  #     command: custom
+  #     custom: test
+  #     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+  #   continueOnError: true
 
-    # - task: reportgenerator@4
-    #   displayName: 'Convert coverage.cobertura.xml to htmlInline'
-    #   inputs:
-    #     reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
-    #     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
-    #     tag: '$(Build.BuildNumber)'
-    #     reporttypes: 'htmlInline'
-    #   continueOnError: true
+  # - task: reportgenerator@4
+  #   displayName: 'Convert coverage.cobertura.xml to htmlInline'
+  #   inputs:
+  #     reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
+  #     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
+  #     tag: '$(Build.BuildNumber)'
+  #     reporttypes: 'htmlInline'
+  #   continueOnError: true
 
-    # - task: reportgenerator@4
-    #   displayName: 'Convert coverage.cobertura.xml to sonarQube'
-    #   inputs:
-    #     reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
-    #     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports\sonar'
-    #     tag: '$(Build.BuildNumber)'
-    #     reporttypes: 'sonarQube'
-    #   continueOnError: true
+  # - task: reportgenerator@4
+  #   displayName: 'Convert coverage.cobertura.xml to sonarQube'
+  #   inputs:
+  #     reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
+  #     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports\sonar'
+  #     tag: '$(Build.BuildNumber)'
+  #     reporttypes: 'sonarQube'
+  #   continueOnError: true
 
-    # - task: PublishCodeCoverageResults@1
-    #   displayName: 'Publish code coverage from $(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
-    #   inputs:
-    #     codeCoverageTool: Cobertura
-    #     summaryFileLocation: '$(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
-    #     reportDirectory: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
-    #   continueOnError: true
-      
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
-      inputs:
-        PathtoPublish: dist/publish
+  # - task: PublishCodeCoverageResults@1
+  #   displayName: 'Publish code coverage from $(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
+  #   inputs:
+  #     codeCoverageTool: Cobertura
+  #     summaryFileLocation: '$(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
+  #     reportDirectory: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
+  #   continueOnError: true
+    
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      PathtoPublish: dist/publish
 
-    - task: PowerShell@2
-      inputs:
-        script: |
-          .\AzureDevOpsTools.exe hasFolderChanged -s "**/Awdware.Led/Awdware.Led.Facade/**"
-          if($LASTEXITCODE -eq 1) { echo "##vso[task.setvariable variable=PATH_HAS_CHANGES]TRUE" }
-        workingDirectory: 'tools'
-        failOnStderr: true
-        targetType: inline
-        ignoreLASTEXITCODE: true
-      displayName: Check whether nuget package has to be updated
+  - task: PowerShell@2
+    inputs:
+      script: |
+        .\AzureDevOpsTools.exe hasFolderChanged -s "**/Awdware.Led/Awdware.Led.Facade/**"
+        if($LASTEXITCODE -eq 1) { echo "##vso[task.setvariable variable=PATH_HAS_CHANGES]TRUE" }
+      workingDirectory: 'tools'
+      failOnStderr: true
+      targetType: inline
+      ignoreLASTEXITCODE: true
+    displayName: Check whether nuget package has to be updated
 
-    - task: NuGetCommand@2
-      displayName: 'Build nuget package'
-      inputs:
-        command: 'pack'
-        packagesToPack: '**/Awdware.Led/Awdware.Led.Facade.csproj'
-        versioningScheme: byBuildNumber
-        buildProperties: version=$(major).$(minor).$(patch);
-      condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
+  - task: NuGetCommand@2
+    displayName: 'Build nuget package'
+    inputs:
+      command: 'pack'
+      packagesToPack: '**/Awdware.Led/Awdware.Led.Facade.csproj'
+      versioningScheme: byBuildNumber
+      buildProperties: version=$(major).$(minor).$(patch);
+    condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
 
-    - task: NuGetCommand@2
-      displayName: 'Publish nuget package'
-      inputs:
-        command: 'push'
-        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-        nuGetFeedType: 'external'
-        publishFeedCredentials: 'loaderb0t nuget'
-      condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
+  - task: NuGetCommand@2
+    displayName: 'Publish nuget package'
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+      nuGetFeedType: 'external'
+      publishFeedCredentials: 'loaderb0t nuget'
+    condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
 
-    - task: SonarCloudAnalyze@1
-      displayName: 'Run Code Analysis'
-      continueOnError: true
+  - task: SonarCloudAnalyze@1
+    displayName: 'Run Code Analysis'
+    continueOnError: true
 
-    - task: SonarCloudPublish@1
-      displayName: 'Publish Quality Gate Result'
-      continueOnError: true
-      inputs:
-        pollingTimeoutSec: '300'
+  - task: SonarCloudPublish@1
+    displayName: 'Publish Quality Gate Result'
+    continueOnError: true
+    inputs:
+      pollingTimeoutSec: '300'
