@@ -17,6 +17,7 @@ trigger:
   paths:
     include:
     - Src/Awdware.*/*
+    - build/ci-awdware-api.yml
     exclude:
     - Src/Awdware.Presentation/*
 
@@ -26,19 +27,19 @@ pool:
 
 steps:
 - task: DotNetCoreInstaller@1
-  displayName: '\U00002699 Use .NET Core sdk'
+  displayName: "\U00002699 Use .NET Core sdk"
   inputs:
     version: 3.0.100
 
 - task: NuGetToolInstaller@1
-  displayName: '\U00002699 Use NuGet 4.9.2'
+  displayName: "\U00002699 Use NuGet 4.9.2"
   inputs:
     versionSpec: 4.9.2
     checkLatest: true
 
 - task: SonarCloudPrepare@1
   continueOnError: true
-  displayName: '\U0001F50E Prepare analysis on SonarCloud'
+  displayName: "\U0001F50E Prepare analysis on SonarCloud"
   inputs:
     SonarCloud: 'sonarcloud'
     organization: 'awdware'
@@ -50,32 +51,32 @@ steps:
       sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
 - task: DotNetCoreCLI@2
-  displayName: '\U0001F6E0 build core'
+  displayName: "\U0001F6E0 build core"
   inputs:
     projects: Src/Awdware.Core/Awdware.Core.sln
     configuration: Release
 
 - task: DotNetCoreCLI@2
-  displayName: '\U0001F6E0 build led'
+  displayName: "\U0001F6E0 build led"
   inputs:
     projects: Src/Awdware.Led/Awdware.Led/Awdware.Led.sln
     configuration: Release
 
 - task: DotNetCoreCLI@2
-  displayName: '\U0001F6E0 build games'
+  displayName: "\U0001F6E0 build games"
   inputs:
     projects: Src/Awdware.Games/Awdware.Games.sln
     configuration: Release
 
 - task: DotNetCoreCLI@2
-  displayName: '\U0001F6E0 build host'
+  displayName: "\U0001F6E0 build host"
   inputs:
     projects: Src/Awdware.Host/Awdware.Host.sln
     configuration: Release
 
 
 - task: DotNetCoreCLI@2
-  displayName: '\U0001F446 dotnet publish'
+  displayName: "\U0001F446 dotnet publish"
   inputs:
     command: publish
     publishWebProjects: false
@@ -120,7 +121,7 @@ steps:
 #   continueOnError: true
   
 - task: PublishBuildArtifacts@1
-  displayName: '\U0001F446 Publish Awdware Api'
+  displayName: "\U0001F446 Publish Awdware Api"
   inputs:
     PathtoPublish: dist/publish
 
@@ -136,7 +137,7 @@ steps:
   displayName: Check whether nuget package has to be updated
 
 - task: NuGetCommand@2
-  displayName: 'Build nuget package'
+  displayName: "Build nuget package"
   inputs:
     command: 'pack'
     packagesToPack: '**/Awdware.Led/Awdware.Led.Facade.csproj'
@@ -145,7 +146,7 @@ steps:
   condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
 
 - task: NuGetCommand@2
-  displayName: 'Publish nuget package'
+  displayName: "Publish nuget package"
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
@@ -154,11 +155,11 @@ steps:
   condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
 
 - task: SonarCloudAnalyze@1
-  displayName: 'Run Code Analysis'
+  displayName: "Run Code Analysis"
   continueOnError: true
 
 - task: SonarCloudPublish@1
-  displayName: 'Publish Quality Gate Result'
+  displayName: "Publish Quality Gate Result"
   continueOnError: true
   inputs:
     pollingTimeoutSec: '300'
