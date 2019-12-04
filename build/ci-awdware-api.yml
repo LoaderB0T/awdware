@@ -49,7 +49,7 @@ jobs:
         sonar.test.exclusions=**/bin/**,**/obj/**
         sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
-- job: build core
+- job: build_core
   dependsOn:
   - init
   steps:
@@ -59,9 +59,9 @@ jobs:
       projects: Src/Awdware.Core/Awdware.Core.sln
       configuration: Release
 
-- job: build led
+- job: build_led
   dependsOn:
-  - build core
+  - build_core
   steps:
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
@@ -69,9 +69,9 @@ jobs:
       projects: Src/Awdware.Led/Awdware.Led/Awdware.Led.sln
       configuration: Release
 
-- job: build games
+- job: build_games
   dependsOn:
-  - build core
+  - build_core
   steps:
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
@@ -79,11 +79,11 @@ jobs:
       projects: Src/Awdware.Games/Awdware.Games.sln
       configuration: Release
 
-- job: build host
+- job: build_host
   dependsOn:
-  - build core
-  - build led
-  - build games
+  - build_core
+  - build_led
+  - build_games
   steps:
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
@@ -94,7 +94,7 @@ jobs:
 
 - job: finish
   dependsOn:
-  - build host
+  - build_host
   steps:
   - task: DotNetCoreCLI@2
     displayName: 'dotnet publish'
