@@ -16,7 +16,7 @@ trigger:
     - master
   paths:
     include:
-    - Src/*
+    - Src/**
 
 pool:
   name: Hosted VS2017
