@@ -76,7 +76,7 @@ steps:
 
 
 - task: DotNetCoreCLI@2
-  displayName: "\U0001F446 dotnet publish"
+  displayName: "\U0001F446 build package to publish"
   inputs:
     command: publish
     publishWebProjects: false
@@ -86,12 +86,22 @@ steps:
     modifyOutputPath: false
     configuration: Release
 
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: custom
+    custom: vstest
+    arguments: ../../bin/Debug/Tests/**/Awdware*Tests.dll
+  continueOnError: true
+
+
 # - task: DotNetCoreCLI@2
 #   displayName: 'dotnet test with code coverage'
 #   inputs:
 #     command: custom
-#     custom: test
-#     arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+#     custom: vstest
+#     arguments: ../../bin/Debug/Tests/**/*Tests.dll /Enablecodecoverage /Settings:Awdware.Core.Test.UnitTests/CodeCoverage.runsettings
+#     # arguments: '/Enablecodecoverage /Settings:CodeCoverage.runsettings /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
 #   continueOnError: true
 
 # - task: reportgenerator@4

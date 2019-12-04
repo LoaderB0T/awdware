@@ -122,7 +122,7 @@ namespace UnitTest
             if (_configuration == null)
             {
                 IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-                configurationBuilder.SetBasePath(Directory.GetCurrentDirectory() + "../../../..");
+                //configurationBuilder.SetBasePath(Directory.GetCurrentDirectory() + "../../../..");
                 configurationBuilder.AddJsonFile("appsettings.json");
                 _configuration = configurationBuilder.Build();
             }

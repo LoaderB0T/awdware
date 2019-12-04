@@ -4,19 +4,21 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <ProjectGuid>{f8ecae46-f4d8-4aea-8478-5965e44b792b}</ProjectGuid>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\..\bin\Debug\Tests\Core</OutputPath>
+  <PropertyGroup>
+    <OutputPath>..\..\..\bin\$(Configuration)\Tests\Core</OutputPath>
+    <RunSettingsFilePath>$(SolutionDir)\..\build\CodeCoverage.runsettings</RunSettingsFilePath>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="coverlet.msbuild" Version="2.7.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.0.0" />
+    <PackageReference Include="Microsoft.CodeCoverage" Version="16.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
@@ -30,6 +32,12 @@
     <ProjectReference Include="..\Awdware.Core.Business.Facade\Awdware.Core.Business.Facade.csproj" />
     <ProjectReference Include="..\Awdware.Core.Business.Implementation\Awdware.Core.Business.Implementation.csproj" />
     <ProjectReference Include="..\Awdware.Core.Facade\Awdware.Core.Facade.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
