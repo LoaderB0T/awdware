@@ -91,7 +91,7 @@ steps:
   inputs:
     command: custom
     custom: vstest
-    arguments: bin/Debug/Tests/**/Awdware*Tests.dll
+    arguments: bin/Debug/Tests/**/Awdware*Test.dll
   continueOnError: true
 
 
