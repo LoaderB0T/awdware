@@ -16,7 +16,9 @@ trigger:
     - master
   paths:
     include:
-    - Src/**
+    - Src/Awdware.*/*
+    exclude:
+    - Src/Awdware.Presentation/*
 
 pool:
   name: Hosted VS2017
