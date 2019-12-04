@@ -48,7 +48,7 @@ steps:
     extraProperties: |
       sonar.exclusions=**/bin/**,**/obj/**,**/Template/**
       sonar.test.exclusions=**/bin/**,**/obj/**
-      sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
+      # sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
 - task: DotNetCoreCLI@2
   displayName: "\U0001F6E0 build core"
@@ -91,7 +91,7 @@ steps:
   inputs:
     command: custom
     custom: vstest
-    arguments: ../../bin/Debug/Tests/**/Awdware*Tests.dll
+    arguments: bin/Debug/Tests/**/Awdware*Tests.dll
   continueOnError: true
 
 
