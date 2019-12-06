@@ -2,6 +2,8 @@
 using System;
 using System.Net.Mail;
 using Awdware.Core.Infrastructure.Mails;
+using System.Reflection;
+using System.IO;
 
 namespace Awdware.Core.Infrastructure.Helper
 {
@@ -55,8 +57,9 @@ namespace Awdware.Core.Infrastructure.Helper
                 default:
                     throw new NotImplementedException();
             }
-
-            _body = System.IO.File.ReadAllText(path);
+            var assemblyPath = Assembly.GetExecutingAssembly().Location;
+            var assemblyDirectory = Directory.GetParent(assemblyPath);
+            _body = File.ReadAllText(assemblyDirectory.FullName + '\\' + path);
             return _body.Length > 0;
         }
 
