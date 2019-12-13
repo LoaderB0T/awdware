@@ -1,4 +1,4 @@
-﻿using Awdware.Facade.Dtos.Led;
+﻿using Awdware.Led.Facade.Dtos;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Net.Sockets;

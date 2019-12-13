@@ -39,12 +39,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Awdware.Facade">
-      <HintPath>..\..\WebApi\Awdware.Facade\bin\$(Configuration)\netcoreapp3.0\Awdware.Facade.dll</HintPath>
-    </Reference>
-    <Reference Include="Awdware.Facade.Led">
-      <HintPath>..\..\WebApi\Awdware.Facade.Led\bin\$(Configuration)\netcoreapp3.0\Awdware.Facade.Led.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\Awdware.Led\Awdware.Led.Facade\Awdware.Led.Facade.csproj" />
+    <ProjectReference Include="..\..\..\Awdware.Core\Awdware.Core.Facade\Awdware.Core.Facade.csproj" />
   </ItemGroup>
 
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">

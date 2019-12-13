@@ -1,5 +1,5 @@
-﻿using Awdware.Facade.Dtos.Led;
-using Awdware.Facade.Led.Models;
+﻿using Awdware.Led.Facade.Dtos;
+using Awdware.Led.Facade.Models;
 using LedController.Models.Effects;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using Awdware.Facade.Led.Models;
+﻿using Awdware.Led.Facade.Models;
 using LedController.Music;
 
 namespace LedController.Models.Effects
