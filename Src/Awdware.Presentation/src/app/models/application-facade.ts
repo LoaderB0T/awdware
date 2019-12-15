@@ -176,6 +176,14 @@ export class PushyFigureDto {
   public userId: string;
 }
 
+export enum PushyMoveDirection {
+  UNKNOWN = 0,
+  UP = 1,
+  RIGHT = 2,
+  DOWN = 3,
+  LEFT = 4
+}
+
 export class PushySquareDto {
   public squareType: PushySquareType;
   public childSquares: Array<PushySquareDto>;

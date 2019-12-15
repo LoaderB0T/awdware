@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Awdware.Games.Facade.Dtos.Pushy;
 
 namespace Awdware.Games.Business.Implementation.Models.Pushy
 {
@@ -14,6 +16,13 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
         public override bool CollidesWithFigure(PushyField field, PushyFigure figure)
         {
             return true;
+        }
+
+        public override PushySquareDto ToDto()
+        {
+            var dto = base.ToDto();
+            dto.SquareType = PushySquareTypeDto.Wall;
+            return dto;
         }
     }
 }

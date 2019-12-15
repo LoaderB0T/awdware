@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Awdware.Games.Business.Implementation.Models
 {
-    public class GameLobby
+    public class GameLobby<GameClass>
     {
         private readonly List<GameConnection> _connections = new List<GameConnection>();
+        private GameClass _gameClass;
 
         public Guid Id { get; set; }
         public string Name { get; private set; }
@@ -15,6 +16,7 @@ namespace Awdware.Games.Business.Implementation.Models
         public bool IsGameRunning { get; set; }
         public int MaxPlayerCount { get; private set; }
         public string Password { get; private set; }
+        public GameClass GameData { get => this._gameClass; }
 
         public int PlayerCount { get => _connections.Count; }
         public bool IsJoinable { get => !IsGameRunning && PlayerCount < MaxPlayerCount; }
@@ -29,8 +31,9 @@ namespace Awdware.Games.Business.Implementation.Models
             return connection.IsOwner;
         }
 
-        public GameLobby(string name, string userId, string conId, GameType type, int maxPlayerCount, string password = null)
+        public GameLobby(GameClass gameClass, string name, string userId, string conId, GameType type, int maxPlayerCount, string password = null)
         {
+            this._gameClass = gameClass;
             Id = Guid.NewGuid();
             Name = name;
             GameType = type;

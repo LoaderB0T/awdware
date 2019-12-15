@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Awdware.Games.Business.Implementation.Models.Pushy
+namespace Awdware.Games.Facade.Dtos.Pushy
 {
-    public enum PushyMoveDirection
+    public enum PushyMoveDirectionDto
     {
         Unknown = 0,
         Up = 1,

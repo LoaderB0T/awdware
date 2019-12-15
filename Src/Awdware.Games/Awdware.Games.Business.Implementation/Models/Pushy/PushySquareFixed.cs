@@ -10,5 +10,14 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
         {
             return false;
         }
+
+        public override void StepOnField(PushyField field, PushyFigure figure, PushyMoveDirection dir)
+        {
+            if(this.ChildSquares?.Count > 0)
+            {
+                this.ChildSquares.ForEach(s => s.StepOnField(field, figure, dir));
+            }
+            this.Figures.Add(figure);
+        }
     }
 }

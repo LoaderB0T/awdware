@@ -10,7 +10,7 @@ namespace Awdware.Games.Facade.Utils
 {
     public static class GameLobbyExtensions
     {
-        public static GameLobbyInformationDto ToDto(this GameLobby gameLobby, IUserService userService)
+        public static GameLobbyInformationDto ToDto<GameClass>(this GameLobby<GameClass> gameLobby, IUserService userService)
         {
             var userIds = gameLobby.GetActiveUserIds();
             var players = userIds.Select(userId =>

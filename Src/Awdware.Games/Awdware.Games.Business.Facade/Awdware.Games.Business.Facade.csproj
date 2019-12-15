@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Awdware.Games.Facade.Utils\Awdware.Games.Facade.Utils.csproj" />
     <ProjectReference Include="..\Awdware.Games.Business.Implementation\Awdware.Games.Business.Implementation.csproj" />
     <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Business.Implementation\Awdware.Core.Business.Implementation.csproj" />
     <ProjectReference Include="..\Awdware.Games.Facade\Awdware.Games.Facade.csproj" />

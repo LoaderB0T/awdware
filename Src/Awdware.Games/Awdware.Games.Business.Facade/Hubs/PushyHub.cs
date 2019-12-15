@@ -1,7 +1,9 @@
 ﻿using Awdware.Core.Business.Implementation.Services;
 using Awdware.Core.Facade.Dtos;
 using Awdware.Games.Business.Implementation.Models;
+using Awdware.Games.Business.Implementation.Models.Pushy;
 using Awdware.Games.Facade.Dtos;
+using Awdware.Games.Facade.Dtos.Pushy;
 using Awdware.Games.Facade.Utils;
 using Microsoft.AspNetCore.SignalR;
 using System;
@@ -13,7 +15,8 @@ namespace Awdware.Games.Business.Facade.Hubs
 {
     public class PushyHub : Hub
     {
-        private static GameScope _gameScope = new GameScope();
+        private static GameScope<PushyGame> _gameScope = new GameScope<PushyGame>();
+
         private IUserService _userService;
 
         public PushyHub(IUserService userService)
@@ -38,7 +41,8 @@ namespace Awdware.Games.Business.Facade.Hubs
 
         public GameLobbyInformationDto CreateLobby(string userId, string lobbyName, string password = null)
         {
-            var newLobby = new GameLobby(lobbyName, userId, Context.ConnectionId, GameType.PUSHY, 2, password);
+            var pushygame = new PushyGame();
+            var newLobby = new GameLobby<PushyGame>(pushygame, lobbyName, userId, Context.ConnectionId, GameType.PUSHY, 2, password);
             _gameScope.AddLobby(newLobby);
             return newLobby.ToDto(this._userService);
         }
@@ -103,6 +107,27 @@ namespace Awdware.Games.Business.Facade.Hubs
 
             var conns = lobby.GetConnectionIds().ToList().AsReadOnly();
             Clients.Clients(conns).SendAsync("GameStarted");
+            return true;
+        }
+
+        public bool SendMove(string lobbyId, string userId, PushyMoveDirectionDto dir)
+        {
+            var lobby = _gameScope.GetLobbiesForUser(GameType.PUSHY, userId).FirstOrDefault(x => x.Id.Equals(Guid.Parse(lobbyId)));
+            if (lobby == null)
+                return false;
+
+
+            var figData = lobby.GameData.Field.GetFigureData(userId);
+            var sucess = lobby.GameData.Field.CanMove(figData.Figure, figData.X, figData.Y, (PushyMoveDirection)dir);
+            if (!sucess)
+                return false;
+
+            lobby.GameData.Field.DoMove(figData.Figure, figData.X, figData.Y, (PushyMoveDirection)dir);
+
+            var fieldDto = lobby.GameData.Field.ToDto();
+
+            var conns = lobby.GetConnectionIds().ToList().AsReadOnly();
+            Clients.Clients(conns).SendAsync("GetMove", fieldDto);
             return true;
         }
     }

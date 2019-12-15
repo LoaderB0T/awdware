@@ -15,12 +15,19 @@
 
 <div class="field">
   <svg id="pushy-field">
-    <svg *ngFor="let row of field.squares; let y = index" [attr.y]="y * 55">
-      <svg *ngFor="let square of row; let x = index" [attr.x]="x * 55">
-        <rect width="50" height="50" style="fill:rgb(200,200,200);">
+    <svg *ngFor="let row of field.squares; let x = index" [attr.x]="x * 55">
+      <svg *ngFor="let square of row; let y = index" [attr.y]="y * 55">
+        <rect width="50" height="50" style="fill:rgb(200,200,200);" *ngIf="square.squareType === PushySquareType.AIR">
+
+        </rect>
+        <rect width="50" height="50" style="fill:rgb(100,100,100);" *ngIf="square.squareType === PushySquareType.WALL">
+
+        </rect>
+        <rect x="5" y="5" width="40" height="40" style="fill:rgb(100,200,100);" *ngIf="square.figures?.length > 0">
 
         </rect>
       </svg>
     </svg>
+
   </svg>
 </div>

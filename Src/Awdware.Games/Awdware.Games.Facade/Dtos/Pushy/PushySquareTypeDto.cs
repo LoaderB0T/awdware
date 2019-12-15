@@ -1,6 +1,6 @@
 ﻿namespace Awdware.Games.Facade.Dtos.Pushy
 {
-    public enum PushySquareType
+    public enum PushySquareTypeDto
     {
         Unknown = 0,
         Air = 1,

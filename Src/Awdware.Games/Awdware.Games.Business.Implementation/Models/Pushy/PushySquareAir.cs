@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Awdware.Games.Facade.Dtos.Pushy;
 
 namespace Awdware.Games.Business.Implementation.Models.Pushy
 {
@@ -16,7 +17,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
             if (colliders.Count == 0)
                 return true;
 
-            var myCoords = field.GetmyCoords(this);
+            var myCoords = field.GetSquareCoords(this);
             var movedCoords = PushyField.GetNewCoords(myCoords.Item1, myCoords.Item2, dir);
             var next = field.Squares[movedCoords.Item1][movedCoords.Item2];
 
@@ -28,6 +29,13 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
         public override bool CollidesWithFigure(PushyField field, PushyFigure figure)
         {
             return false;
+        }
+
+        public override PushySquareDto ToDto()
+        {
+            var dto = base.ToDto();
+            dto.SquareType = PushySquareTypeDto.Air;
+            return dto;
         }
     }
 }

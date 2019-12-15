@@ -5,31 +5,31 @@ using System.Text;
 
 namespace Awdware.Games.Business.Implementation.Models
 {
-    public class GameScope
+    public class GameScope<GameClass>
     {
-        private List<GameLobby> _lobbies = new List<GameLobby>();
+        private List<GameLobby<GameClass>> _lobbies = new List<GameLobby<GameClass>>();
 
-        public void AddLobby(GameLobby lobby)
+        public void AddLobby(GameLobby<GameClass> lobby)
         {
             _lobbies.Add(lobby);
         }
 
-        public IEnumerable<GameLobby> GetJoinableLobbies(GameType type)
+        public IEnumerable<GameLobby<GameClass>> GetJoinableLobbies(GameType type)
         {
             return _lobbies.Where(lobby => lobby.GameType == type && lobby.IsJoinable);
         }
 
-        public IEnumerable<GameLobby> GetLobbiesForUser(GameType type, string userId)
+        public IEnumerable<GameLobby<GameClass>> GetLobbiesForUser(GameType type, string userId)
         {
             return _lobbies.Where(lobby => lobby.GameType == type && lobby.GetUserIds().Any(x => x.Equals(userId, StringComparison.InvariantCultureIgnoreCase)));
         }
 
-        private IEnumerable<GameLobby> GetLobbiesForConnectionId(string conId)
+        private IEnumerable<GameLobby<GameClass>> GetLobbiesForConnectionId(string conId)
         {
             return _lobbies.Where(lobby => lobby.IsConnectionIdPresent(conId));
         }
 
-        public IEnumerable<GameLobby> UserDisconnected(string connectionId)
+        public IEnumerable<GameLobby<GameClass>> UserDisconnected(string connectionId)
         {
             var affectedLobbies = GetLobbiesForConnectionId(connectionId);
             affectedLobbies.ToList().ForEach(lobby =>

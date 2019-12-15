@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Facade\Awdware.Core.Facade.csproj" />
-    <ProjectReference Include="..\Awdware.Games.Business.Implementation\Awdware.Games.Business.Implementation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

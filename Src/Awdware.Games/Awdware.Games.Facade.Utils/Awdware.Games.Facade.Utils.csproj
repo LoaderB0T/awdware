@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Awdware.Games.Business.Implementation\Awdware.Games.Business.Implementation.csproj" />
+    <ProjectReference Include="..\Awdware.Games.Facade\Awdware.Games.Facade.csproj" />
+    <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Business.Implementation\Awdware.Core.Business.Implementation.csproj" />
+  </ItemGroup>
+  
+</Project>

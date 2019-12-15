@@ -8,4 +8,8 @@
     <OutputPath>..\..\..\bin\Debug\Games</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Awdware.Games.Facade\Awdware.Games.Facade.csproj" />
+  </ItemGroup>
+
 </Project>
