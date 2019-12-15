@@ -191,7 +191,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: "\U0001F6E0 build led controller"
   inputs:
-    projects: LedController/LedController/LedController.csproj
+    projects: Src/Awdware.Led/LedController/LedController/LedController.csproj
     configuration: Release
 
 - task: DotNetCoreCLI@2
