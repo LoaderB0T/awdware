@@ -173,3 +173,55 @@ steps:
   continueOnError: true
   inputs:
     pollingTimeoutSec: '300'
+
+
+- task: SonarCloudPrepare@1
+  continueOnError: true
+  displayName: 'Prepare analysis on SonarCloud'
+  inputs:
+    SonarCloud: 'sonarcloud'
+    organization: 'awdware'
+    scannerMode: 'MSBuild'
+    projectKey: 'awdware:ledcontroller'
+    extraProperties: |
+     sonar.exclusions=**/bin/**,**/obj/**,**/WebApi/**
+     sonar.test.exclusions=**/bin/**,**/obj/**
+    #  sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
+
+- task: DotNetCoreCLI@2
+  displayName: 'build dependency (web api)'
+  inputs:
+    projects: WebApi/**/*.csproj
+    configuration: Release
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: LedController/LedController/LedController.csproj
+    configuration: Release
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: LedController/LedController/LedController.csproj
+    arguments: '-o LedController/LedController/bin/publish /p:PublishSingleFile=true -r win-x64'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    configuration: Release
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+  inputs:
+    PathtoPublish: LedController/LedController/bin/publish
+
+- task: SonarCloudAnalyze@1
+  displayName: 'Run Code Analysis'
+  continueOnError: true
+
+- task: SonarCloudPublish@1
+  displayName: 'Publish Quality Gate Result'
+  continueOnError: true
+  inputs:
+    pollingTimeoutSec: '300'
