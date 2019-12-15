@@ -159,3 +159,18 @@ export class GamePlayerDto {
   public name: string;
   public lobbyOwner: boolean;
 }
+
+export class PushyFieldDto {
+  public squares: Array<Array<PushySquareDto>>;
+}
+
+export class PushySquareDto {
+  public squareType: PushySquareType;
+  public childSquares: Array<PushySquareDto>;
+}
+
+export enum PushySquareType {
+  UNKNOWN = 0,
+  AIR = 1,
+  WALL = 2
+}

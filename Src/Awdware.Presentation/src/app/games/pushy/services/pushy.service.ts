@@ -53,6 +53,14 @@ export class PushyService {
     return this._signalrService.onDataRecieved<GamePlayerDto[]>(this._signalrHub, 'PlayersChanged');
   }
 
+  public gameStarted(): Observable<void> {
+    return this._signalrService.onDataRecieved<void>(this._signalrHub, 'GameStarted');
+  }
+
+  public startGame(): Observable<boolean> {
+    return this._signalrService.sendData<boolean>(this._signalrHub, 'StartGame', this.currentLobby.id, this._userDetailsService.userInfo.userId);
+  }
+
   public getLobbyInfo(userId: string, lobbyId: string) {
     return this._signalrService.sendData<GameLobbyInformationDto>(this._signalrHub, 'GetLobbyInfo', lobbyId, userId);
   }

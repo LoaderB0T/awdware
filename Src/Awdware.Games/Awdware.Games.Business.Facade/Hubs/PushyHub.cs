@@ -89,5 +89,21 @@ namespace Awdware.Games.Business.Facade.Hubs
 
             return lobby.ToDto(this._userService);
         }
+
+        public bool StartGame(string lobbyId, string userId)
+        {
+            var lobby = _gameScope.GetLobbiesForUser(GameType.PUSHY, userId).FirstOrDefault(x => x.Id.Equals(Guid.Parse(lobbyId)));
+            if (lobby == null)
+                return false;
+
+            if (!lobby.IsOwner(userId))
+                return false;
+
+            lobby.IsGameRunning = true;
+
+            var conns = lobby.GetConnectionIds().ToList().AsReadOnly();
+            Clients.Clients(conns).SendAsync("GameStarted");
+            return true;
+        }
     }
 }

@@ -73,7 +73,12 @@ export class RoutingService {
   public navigateToGamesPushy() {
     this._router.navigate(['games', 'pushy']);
   }
+
   public navigateToGamesPushyLobby(id: string) {
     this._router.navigate(['games', 'pushy', 'lobby', id]);
+  }
+
+  public navigateToGamesPushyField(id: string) {
+    this._router.navigate(['games', 'pushy', 'field', id]);
   }
 }

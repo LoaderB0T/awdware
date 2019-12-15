@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameLobbyInformationDto } from '../../../models/application-facade';
 import { PushyService } from '../services/pushy.service';
 import { UserDetailsService } from '../../../services/user-details.service';
+import { RoutingService } from '../../../services/routing.service';
 
 @Component({
   selector: 'awd-lobby',
@@ -10,18 +11,25 @@ import { UserDetailsService } from '../../../services/user-details.service';
 })
 export class LobbyComponent implements OnInit {
   private _pushyService: PushyService;
+  private _routingService: RoutingService;
 
   public get lobby(): GameLobbyInformationDto {
     return this._pushyService.currentLobby;
   }
 
-  constructor(pushyService: PushyService) {
+  constructor(pushyService: PushyService, routingService: RoutingService) {
     this._pushyService = pushyService;
+    this._routingService = routingService;
   }
 
   ngOnInit() {
     this._pushyService.playersChanged().subscribe(players => {
       this.lobby.players = players;
+    });
+    this._pushyService.gameStarted().subscribe({
+      next: () => {
+        this._routingService.navigateToGamesPushyField(this._pushyService.currentLobby.id);
+      }
     });
   }
 
@@ -31,6 +39,10 @@ export class LobbyComponent implements OnInit {
 
   public get canStartGame(): boolean {
     return this._pushyService.validPlayerCount;
+  }
+
+  public start() {
+    this._pushyService.startGame().subscribe();
   }
 
 }

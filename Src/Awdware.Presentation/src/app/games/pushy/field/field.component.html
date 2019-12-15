@@ -1,0 +1,26 @@
+<div>
+  <div *ngFor="let player of lobby.players">
+    <div *ngIf="player.lobbyOwner" class="role-icon">
+      <i class="fal fa-crown"></i>
+    </div>
+    <div *ngIf="!player.lobbyOwner" class="role-icon">
+      <i class="fal fa-user"></i>
+    </div>
+    <span>
+      {{player.name}}
+    </span>
+  </div>
+</div>
+
+
+<div class="field">
+  <svg id="pushy-field">
+    <svg *ngFor="let row of field.squares; let y = index" [attr.y]="y * 55">
+      <svg *ngFor="let square of row; let x = index" [attr.x]="x * 55">
+        <rect width="50" height="50" style="fill:rgb(200,200,200);">
+
+        </rect>
+      </svg>
+    </svg>
+  </svg>
+</div>

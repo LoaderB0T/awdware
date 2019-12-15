@@ -6,11 +6,16 @@ import { SharedModule } from '../../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { JoinPushyLobbyComponent } from './join-pushy-lobby/join-pushy-lobby.component';
 import { LobbyComponent } from './lobby/lobby.component';
-
-
+import { FieldComponent } from './field/field.component';
 
 @NgModule({
-  declarations: [PushyComponent, CreatePushyLobbyComponent, JoinPushyLobbyComponent, LobbyComponent],
+  declarations: [
+    PushyComponent,
+    CreatePushyLobbyComponent,
+    JoinPushyLobbyComponent,
+    LobbyComponent,
+    FieldComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,

@@ -12,7 +12,7 @@ namespace Awdware.Games.Business.Implementation.Models
         public Guid Id { get; set; }
         public string Name { get; private set; }
         public GameType GameType { get; private set; }
-        public bool IsGameRunning { get; private set; }
+        public bool IsGameRunning { get; set; }
         public int MaxPlayerCount { get; private set; }
         public string Password { get; private set; }
 

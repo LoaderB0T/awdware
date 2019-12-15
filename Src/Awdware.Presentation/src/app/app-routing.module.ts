@@ -19,6 +19,7 @@ import { PushyComponent } from './games/pushy/pushy.component';
 import { GameHomeComponent } from './games/game-home/game-home.component';
 import { LobbyComponent } from './games/pushy/lobby/lobby.component';
 import { PushyLobbyResolverService } from './games/pushy/services/lobby-resolver.service';
+import { FieldComponent } from './games/pushy/field/field.component';
 
 
 const routes: Routes = [
@@ -100,6 +101,14 @@ const routes: Routes = [
               {
                 path: 'lobby/:lobbyId',
                 component: LobbyComponent,
+                resolve:
+                {
+                  lobbyInfo: PushyLobbyResolverService
+                }
+              },
+              {
+                path: 'field/:lobbyId',
+                component: FieldComponent,
                 resolve:
                 {
                   lobbyInfo: PushyLobbyResolverService

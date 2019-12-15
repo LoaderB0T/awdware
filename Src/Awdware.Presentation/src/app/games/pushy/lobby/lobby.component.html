@@ -16,6 +16,6 @@
     </div>
   </div>
   <div *ngIf="isOwner">
-    <button [disabled]="!canStartGame">Start Game</button>
+    <button [disabled]="!canStartGame" (click)="start()">Start Game</button>
   </div>
 </div>
