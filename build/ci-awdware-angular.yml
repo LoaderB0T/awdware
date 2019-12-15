@@ -4,7 +4,7 @@ trigger:
     - master
   paths:
     include:
-    - Awdware.Presentation/*
+    -Src/Awdware.Presentation/*
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -22,7 +22,7 @@ steps:
 
 - task: Yarn@3
   inputs:
-    projectDirectory: 'Awdware.Presentation/'
+    projectDirectory: 'Src/Awdware.Presentation/'
     arguments: 'install'
   displayName: 'yarn install'
 
@@ -38,18 +38,18 @@ steps:
     cliProjectKey: 'awdware:presentation'
     cliSources: presentation
     extraProperties: |
-     sonar.sources=Awdware.Presentation/src
+     sonar.sources=Src/Awdware.Presentation/src
      sonar.sourceEncoding=UTF-8
      sonar.exclusions=**/node_modules/**,**/*.spec.ts
-     sonar.tests=Awdware.Presentation/src
+     sonar.tests=Src/Awdware.Presentation/src
      sonar.test.inclusions=**/*.spec.ts
-     sonar.ts.tslintconfigpath=Awdware.Presentation/tslint.json
+     sonar.ts.tslintconfigpath=Src/Awdware.Presentation/tslint.json
      sonar.exclusions=**/node_modules/**,**/*.spec.ts
 
 
 - task: Yarn@3
   inputs:
-    projectDirectory: 'Awdware.Presentation/'
+    projectDirectory: 'Src/Awdware.Presentation/'
     arguments: 'run build-prod'
   displayName: 'build productive'
 
@@ -62,14 +62,14 @@ steps:
 
 - task: Yarn@3
   inputs:
-    projectDirectory: 'Awdware.Presentation/'
+    projectDirectory: 'Src/Awdware.Presentation/'
     arguments: 'run lint-build'
   displayName: 'linting'
   continueOnError: true
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'Awdware.Presentation/dist/presentation/'
+    PathtoPublish: 'Src/Awdware.Presentation/dist/presentation/'
     ArtifactName: 'drop'
     publishLocation: 'Container'
   displayName: publish build
