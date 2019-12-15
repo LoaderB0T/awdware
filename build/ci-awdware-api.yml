@@ -76,12 +76,12 @@ steps:
 
 
 - task: DotNetCoreCLI@2
-  displayName: "\U0001F446 build package to publish"
+  displayName: "\U0001F446 build package to publish awdware api"
   inputs:
     command: publish
     publishWebProjects: false
     projects: Src/Awdware.Host/Awdware.Host/Awdware.Host.csproj
-    arguments: '-o dist/publish --no-build --no-restore'
+    arguments: '-o publish/AwdwareApi --no-build --no-restore'
     zipAfterPublish: false
     modifyOutputPath: false
     configuration: Release
@@ -133,7 +133,7 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: "\U0001F446 Publish Awdware Api"
   inputs:
-    PathtoPublish: dist/publish
+    PathtoPublish: publish/AwdwareApi
 
 - task: PowerShell@2
   inputs:
@@ -189,32 +189,26 @@ steps:
     #  sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
 - task: DotNetCoreCLI@2
-  displayName: 'build dependency (web api)'
-  inputs:
-    projects: WebApi/**/*.csproj
-    configuration: Release
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet build'
+  displayName: "\U0001F6E0 build led controller"
   inputs:
     projects: LedController/LedController/LedController.csproj
     configuration: Release
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet publish'
+  displayName: "\U0001F446 build package to publish led controller"
   inputs:
     command: publish
     publishWebProjects: false
-    projects: LedController/LedController/LedController.csproj
-    arguments: '-o LedController/LedController/bin/publish /p:PublishSingleFile=true -r win-x64'
+    projects: Src/Awdware.Led/LedController/LedController/LedController.csproj
+    arguments: '-o publish/LedController /p:PublishSingleFile=true -r win-x64'
     zipAfterPublish: false
     modifyOutputPath: false
     configuration: Release
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
+  displayName: "\U0001F446 Publish led Controller"
   inputs:
-    PathtoPublish: LedController/LedController/bin/publish
+    PathtoPublish: publish/LedController
 
 - task: SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
