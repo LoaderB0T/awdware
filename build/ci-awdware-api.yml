@@ -16,10 +16,10 @@ trigger:
     - master
   paths:
     include:
-    - Src/Awdware.*/*
+    - Src/Awdware.*/**
     - build/ci-awdware-api.yml
     exclude:
-    - Src/Awdware.Presentation/*
+    - Src/Awdware.Presentation/**
 
 pool:
   name: Hosted VS2017
