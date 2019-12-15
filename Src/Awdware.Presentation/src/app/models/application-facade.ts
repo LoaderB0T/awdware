@@ -160,13 +160,27 @@ export class GamePlayerDto {
   public lobbyOwner: boolean;
 }
 
+export enum PushyColor {
+  UNKNOWN = 0,
+  RED = 1,
+  BLUE = 2,
+  GREEN = 3,
+  YELLOW = 4
+}
+
 export class PushyFieldDto {
   public squares: Array<Array<PushySquareDto>>;
+}
+
+export class PushyFigureDto {
+  public userId: string;
 }
 
 export class PushySquareDto {
   public squareType: PushySquareType;
   public childSquares: Array<PushySquareDto>;
+  public figures: Array<PushyFigureDto>;
+  public color?: PushyColor;
 }
 
 export enum PushySquareType {
