@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SignalrService } from '../../../shared/services/signalr.service';
 import { HubConnection } from '@aspnet/signalr';
 import { Observable, Subject } from 'rxjs';
-import { GameLobbyInformationDto, UserInfoDto } from '../../../models/application-facade';
+import { GameLobbyInformationDto, UserInfoDto, GamePlayerDto } from '../../../models/application-facade';
 import { UserDetailsService } from '../../../services/user-details.service';
 import { tap } from 'rxjs/operators';
 
@@ -22,6 +22,10 @@ export class PushyService {
     this._signalrHub = signalrService.getHubConnection('/pushyhub');
   }
 
+  public get myPlayer(): GamePlayerDto {
+    return this.currentLobby.players.find(x => x.id === this._userDetailsService.userInfo.userId);
+  }
+
   public registerMovementCallback(): Observable<any> {
     const obs = this._signalrService.onDataRecieved(this._signalrHub, 'onMovement');
     return obs;
@@ -39,10 +43,25 @@ export class PushyService {
 
   public joinLobby(lobbyInfo: GameLobbyInformationDto, password: string) {
     this.currentLobby = lobbyInfo;
-    return this._signalrService.sendData<void>(this._signalrHub, 'JoinLobby', lobbyInfo.id, this._userDetailsService.userInfo.userId, password);
+    return this._signalrService.sendData<GamePlayerDto[]>(this._signalrHub, 'JoinLobby', lobbyInfo.id, this._userDetailsService.userInfo.userId, password)
+      .pipe(
+        tap(users => this.currentLobby.players = users)
+      );
   }
 
-  public playerJoined(): Observable<UserInfoDto> {
-    return this._signalrService.onDataRecieved<UserInfoDto>(this._signalrHub, 'PlayerJoined');
+  public playersChanged(): Observable<GamePlayerDto[]> {
+    return this._signalrService.onDataRecieved<GamePlayerDto[]>(this._signalrHub, 'PlayersChanged');
+  }
+
+  public getLobbyInfo(userId: string, lobbyId: string) {
+    return this._signalrService.sendData<GameLobbyInformationDto>(this._signalrHub, 'GetLobbyInfo', lobbyId, userId);
+  }
+
+  public reJoinLobby(userId: string, lobbyId: string) {
+    return this._signalrService.sendData<GameLobbyInformationDto>(this._signalrHub, 'ReJoinLobby', lobbyId, userId);
+  }
+
+  public get validPlayerCount(): boolean {
+    return this.currentLobby.players.length === 2;
   }
 }

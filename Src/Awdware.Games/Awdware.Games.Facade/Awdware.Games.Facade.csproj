@@ -10,6 +10,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Facade\Awdware.Core.Facade.csproj" />
+    <ProjectReference Include="..\Awdware.Games.Business.Implementation\Awdware.Games.Business.Implementation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Awdware.Core.Business.Implementation">
+      <HintPath>..\..\..\bin\Debug\Core\netcoreapp3.0\Awdware.Core.Business.Implementation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   
 </Project>

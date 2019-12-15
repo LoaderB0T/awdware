@@ -1,14 +1,13 @@
-﻿using Awdware.Core.Facade.Dtos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Awdware.Games.Facade.Dtos
 {
-    public class GameLobbyInformationDto
+    public class GamePlayerDto
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<GamePlayerDto> Players { get; set; }
+        public bool LobbyOwner { get; set; }
     }
 }

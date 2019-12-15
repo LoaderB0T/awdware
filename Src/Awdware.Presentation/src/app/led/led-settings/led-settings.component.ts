@@ -2,21 +2,22 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LedSettingsDto } from 'src/app/models/application-facade';
 import { SelectOption } from 'src/app/shared/models/select-option.model';
 import { LedService } from '../services/led.service';
+import { BaseDialog } from '../../shared/models/base-dialog.model';
 
 @Component({
   selector: 'awd-led-settings',
   templateUrl: './led-settings.component.html',
   styleUrls: ['./led-settings.component.scss']
 })
-export class LedSettingsComponent implements OnInit {
+export class LedSettingsComponent extends BaseDialog implements OnInit {
 
   @Input() public settingsList: LedSettingsDto[];
-  @Output() public closeDialog = new EventEmitter();
 
   public selectedOptionName: string;
   private _ledService: LedService;
 
   constructor(ledService: LedService) {
+    super();
     this._ledService = ledService;
   }
 
@@ -65,7 +66,7 @@ export class LedSettingsComponent implements OnInit {
   }
 
   public close() {
-    this.closeDialog.next();
+    this.$closeDialog.next();
   }
 }
 

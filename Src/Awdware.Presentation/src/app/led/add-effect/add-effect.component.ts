@@ -3,24 +3,25 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LedService } from '../services/led.service';
 import { LedEffect } from '../models/led-config.model';
 import { LedEffectKind } from 'src/app/models/application-facade';
+import { BaseDialog } from '../../shared/models/base-dialog.model';
 
 @Component({
   selector: 'awd-add-effect',
   templateUrl: './add-effect.component.html',
   styleUrls: ['./add-effect.component.scss']
 })
-export class AddEffectComponent implements OnInit {
+export class AddEffectComponent extends BaseDialog implements OnInit {
   LedEffectKind = LedEffectKind;
   private _ledService: LedService;
   public selectedAddEffect: LedEffectKind;
   public addEffectName: string;
 
   constructor(ledService: LedService) {
+    super();
     this._ledService = ledService;
   }
 
   @Output() effectAdded = new EventEmitter<LedEffect>();
-  @Output() closeDialog = new EventEmitter();
 
   ngOnInit() {
   }
@@ -34,11 +35,11 @@ export class AddEffectComponent implements OnInit {
     this._ledService.addEffect(newEffect).subscribe(effectId => {
       newEffect.id = effectId;
     });
-    this.closeDialog.emit();
+    this.$closeDialog.next();
   }
 
   public cancelAddEffect() {
-    this.closeDialog.emit();
+    this.$closeDialog.next();
   }
 
   public get canConfirmAddEffect(): boolean {

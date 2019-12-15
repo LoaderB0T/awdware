@@ -18,6 +18,16 @@ namespace Awdware.Games.Business.Implementation.Models
 
         public int PlayerCount { get => _connections.Count; }
         public bool IsJoinable { get => !IsGameRunning && PlayerCount < MaxPlayerCount; }
+        public int ActivePlayerCount { get => this._connections.Count(x => x.Disconnected == false); }
+
+        public bool IsOwner(string userId)
+        {
+            var  connection = _connections.FindByUserId(userId);
+            if (connection == null)
+                return false;
+
+            return connection.IsOwner;
+        }
 
         public GameLobby(string name, string userId, string conId, GameType type, int maxPlayerCount, string password = null)
         {
@@ -31,6 +41,27 @@ namespace Awdware.Games.Business.Implementation.Models
             _connections.Add(gameConnection);
         }
 
+        internal bool PlayerDisconnected(string connectionId)
+        {
+            var connection = _connections.FindByConnectionId(connectionId);
+            if (connection == null)
+                return true;
+
+            connection.Disconnected = true;
+
+            if (connection.IsOwner && ActivePlayerCount > 0)
+            {
+                var newOwner = _connections.FirstOrDefault(x => x.Disconnected == false);
+                if(newOwner == null)
+                {
+                    return false;
+                }
+                connection.IsOwner = false;
+                newOwner.IsOwner = true;
+            }
+            return true;
+        }
+
         internal bool IsConnectionIdPresent(string conId)
         {
             return _connections.FindByConnectionId(conId) != null;
@@ -41,16 +72,9 @@ namespace Awdware.Games.Business.Implementation.Models
             return _connections.Select(x => x.UserId);
         }
 
-        internal void RemovePlayerByConnectionId(string connectionId)
+        public IEnumerable<string> GetActiveUserIds()
         {
-            var connection = _connections.FindByConnectionId(connectionId);
-            if (connection == null)
-                return;
-            _connections.Remove(connection);
-            if (connection.IsOwner && PlayerCount > 0)
-            {
-                _connections.First().MakeOwner();
-            }
+            return _connections.Where(x => x.Disconnected == false).Select(x => x.UserId);
         }
 
         public bool TryJoin(string userId, string connectionId, string password = null)
@@ -66,7 +90,17 @@ namespace Awdware.Games.Business.Implementation.Models
 
         public IEnumerable<string> GetConnectionIds()
         {
-            return _connections.Select(x => x.ConenctionId);
+            return _connections.Select(x => x.ConnectionId);
+        }
+
+        public bool RefreshConnectionId(string userId, string connectionId)
+        {
+            var conn = this._connections.FirstOrDefault(x => x.UserId.Equals(userId, StringComparison.InvariantCultureIgnoreCase));
+            if (conn == null)
+                return false;
+            conn.Disconnected = false;
+            conn.UserHasNewConnectionId(connectionId);
+            return true;
         }
     }
 }

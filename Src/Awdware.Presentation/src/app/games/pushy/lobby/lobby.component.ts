@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameLobbyInformationDto } from '../../../models/application-facade';
 import { PushyService } from '../services/pushy.service';
+import { UserDetailsService } from '../../../services/user-details.service';
 
 @Component({
   selector: 'awd-lobby',
@@ -19,9 +20,17 @@ export class LobbyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._pushyService.playerJoined().subscribe(playerInfo => {
-      this.lobby.users.push(playerInfo);
+    this._pushyService.playersChanged().subscribe(players => {
+      this.lobby.players = players;
     });
+  }
+
+  public get isOwner(): boolean {
+    return this._pushyService.myPlayer.lobbyOwner;
+  }
+
+  public get canStartGame(): boolean {
+    return this._pushyService.validPlayerCount;
   }
 
 }

@@ -8,4 +8,7 @@
   <div class="dialog-row" *ngFor="let lobby of lobbies">
     <button class="button" (click)="joinLobby(lobby.id)">{{ lobby.name }}</button>
   </div>
+  <div class="dialog-row">
+    <button class="button" (click)="cancel()">Cancel</button>
+  </div>
 </div>

@@ -2,5 +2,20 @@
   <p>lobby works!</p>
   <span>{{lobby.name}}</span>
   <h2>Player:</h2>
-  <span *ngFor="let user of lobby.users">{{user.username}}</span>
+  <div id="pushy-lobby-players">
+    <div *ngFor="let player of lobby.players" class="player">
+      <div *ngIf="player.lobbyOwner" class="role-icon">
+        <i class="fal fa-crown"></i>
+      </div>
+      <div *ngIf="!player.lobbyOwner" class="role-icon">
+        <i class="fal fa-user"></i>
+      </div>
+      <span>
+        {{player.name}}
+      </span>
+    </div>
+  </div>
+  <div *ngIf="isOwner">
+    <button [disabled]="!canStartGame">Start Game</button>
+  </div>
 </div>

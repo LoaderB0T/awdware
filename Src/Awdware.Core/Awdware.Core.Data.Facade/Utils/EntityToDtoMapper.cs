@@ -31,6 +31,7 @@ namespace Awdware.Core.Data.Facade.Utils
         {
             return new UserInfoDto()
             {
+                Id = user.UserId,
                 Username = user.Username
             };
         }

@@ -48,6 +48,7 @@ export class UserDetailsDto {
 }
 
 export class UserInfoDto {
+  public id: string;
   public username: string;
 }
 
@@ -129,6 +130,11 @@ export class LedEffectPropertyDto {
   public maxValue?: number;
 }
 
+export class LedImageDto {
+  public leds: RgbColorDto;
+  public transitionTime: number;
+}
+
 export class LedSettingsDto {
   public userId: string;
   public settingName: string;
@@ -136,8 +142,20 @@ export class LedSettingsDto {
   public id: string;
 }
 
+export class RgbColorDto {
+  public r: number;
+  public g: number;
+  public b: number;
+}
+
 export class GameLobbyInformationDto {
   public id: string;
   public name: string;
-  public users: Array<UserInfoDto>;
+  public players: Array<GamePlayerDto>;
+}
+
+export class GamePlayerDto {
+  public id: string;
+  public name: string;
+  public lobbyOwner: boolean;
 }
