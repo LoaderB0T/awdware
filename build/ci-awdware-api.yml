@@ -134,6 +134,7 @@ steps:
   displayName: "\U0001F446 Publish Awdware Api"
   inputs:
     PathtoPublish: publish/AwdwareApi
+    ArtifactName: awdwareApi
 
 - task: PowerShell@2
   inputs:
@@ -209,6 +210,7 @@ steps:
   displayName: "\U0001F446 Publish led Controller"
   inputs:
     PathtoPublish: publish/LedController
+    ArtifactName: ledController
 
 - task: SonarCloudAnalyze@1
   displayName: 'Run Code Analysis'
