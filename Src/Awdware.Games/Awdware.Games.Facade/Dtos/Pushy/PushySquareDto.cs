@@ -6,5 +6,6 @@ namespace Awdware.Games.Facade.Dtos.Pushy
     {
         public PushySquareType SquareType { get; set; }
         public IEnumerable<PushySquareDto> ChildSquares { get; set; }
+        public PushyColor? Color { get; set; }
     }
 }
