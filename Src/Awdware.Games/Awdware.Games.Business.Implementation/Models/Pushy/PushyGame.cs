@@ -8,7 +8,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
     {
         public PushyField Field { get; set; }
 
-        public PushyGame()
+        public PushyGame(string userId)
         {
             Field = new PushyField();
             Field.Squares = new List<List<PushySquare>>();
@@ -28,7 +28,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
                 }
             }
             var fig = new PushyFigure();
-            fig.UserId = "user:201911020202236614";
+            fig.UserId = userId;
             Field.Squares[5][5].Figures.Add(fig);
         }
     }

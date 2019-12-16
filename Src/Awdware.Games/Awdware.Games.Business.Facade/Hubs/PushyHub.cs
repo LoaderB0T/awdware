@@ -41,7 +41,7 @@ namespace Awdware.Games.Business.Facade.Hubs
 
         public GameLobbyInformationDto CreateLobby(string userId, string lobbyName, string password = null)
         {
-            var pushygame = new PushyGame();
+            var pushygame = new PushyGame(userId);
             var newLobby = new GameLobby<PushyGame>(pushygame, lobbyName, userId, Context.ConnectionId, GameType.PUSHY, 2, password);
             _gameScope.AddLobby(newLobby);
             return newLobby.ToDto(this._userService);
