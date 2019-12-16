@@ -32,13 +32,13 @@ export class FieldComponent implements OnInit {
     this.field = new PushyFieldDto();
     this.field.squares = new Array<Array<PushySquareDto>>();
     for (let i = 0; i < 10; i++) {
-      this.field.squares.push(new Array<PushySquareDto>())
+      this.field.squares.push(new Array<PushySquareDto>());
       for (let j = 0; j < 10; j++) {
         this.field.squares[i].push(new PushySquareDto());
-        this.field.squares[i][j].squareType = i === 0 || j == 0 ? PushySquareType.WALL : PushySquareType.AIR;
+        this.field.squares[i][j].squareType = i === 0 || j === 0 ? PushySquareType.WALL : PushySquareType.AIR;
       }
     }
-    this.field.squares[5][5].figures = [{ userId: this._pushyService.myPlayer.id }]
+    this.field.squares[5][5].figures = [{ userId: this._pushyService.myPlayer.id }];
   }
 
   public get lobby(): GameLobbyInformationDto {
