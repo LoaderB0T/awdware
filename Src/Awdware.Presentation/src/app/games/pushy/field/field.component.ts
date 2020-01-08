@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { PushyService } from '../services/pushy.service';
-import { GameLobbyInformationDto, PushyMoveDirection } from '../../../models/application-facade';
-import { PushyFieldDto, PushySquareType, PushySquareDto } from '../../../models/application-facade';
+import { GameLobbyInformationDto, PushyMoveDirectionDto } from '../../../models/application-facade';
+import { PushyFieldDto, PushySquareTypeDto, PushySquareDto } from '../../../models/application-facade';
 
 @Component({
   selector: 'awd-field',
@@ -11,17 +11,17 @@ import { PushyFieldDto, PushySquareType, PushySquareDto } from '../../../models/
 export class FieldComponent implements OnInit {
   private _pushyService: PushyService;
   public field: PushyFieldDto;
-  PushySquareType = PushySquareType;
+  PushySquareType = PushySquareTypeDto;
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
 
     const key = event.key;
     switch (key) {
-      case 'w': this._pushyService.sendMove(PushyMoveDirection.UP).subscribe(); break;
-      case 'd': this._pushyService.sendMove(PushyMoveDirection.RIGHT).subscribe(); break;
-      case 's': this._pushyService.sendMove(PushyMoveDirection.DOWN).subscribe(); break;
-      case 'a': this._pushyService.sendMove(PushyMoveDirection.LEFT).subscribe(); break;
+      case 'w': this._pushyService.sendMove(PushyMoveDirectionDto.UP).subscribe(); break;
+      case 'd': this._pushyService.sendMove(PushyMoveDirectionDto.RIGHT).subscribe(); break;
+      case 's': this._pushyService.sendMove(PushyMoveDirectionDto.DOWN).subscribe(); break;
+      case 'a': this._pushyService.sendMove(PushyMoveDirectionDto.LEFT).subscribe(); break;
     }
 
   }
@@ -35,7 +35,7 @@ export class FieldComponent implements OnInit {
       this.field.squares.push(new Array<PushySquareDto>());
       for (let j = 0; j < 10; j++) {
         this.field.squares[i].push(new PushySquareDto());
-        this.field.squares[i][j].squareType = i === 0 || j === 0 ? PushySquareType.WALL : PushySquareType.AIR;
+        this.field.squares[i][j].squareType = i === 0 || j === 0 ? PushySquareTypeDto.WALL : PushySquareTypeDto.AIR;
       }
     }
     this.field.squares[5][5].figures = [{ userId: this._pushyService.myPlayer.id }];

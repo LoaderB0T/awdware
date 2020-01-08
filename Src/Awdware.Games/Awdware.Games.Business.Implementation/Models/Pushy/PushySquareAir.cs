@@ -18,10 +18,10 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
                 return true;
 
             var myCoords = field.GetSquareCoords(this);
-            var movedCoords = PushyField.GetNewCoords(myCoords.Item1, myCoords.Item2, dir);
-            var next = field.Squares[movedCoords.Item1][movedCoords.Item2];
+            var movedCoords = PushyField.GetNewCoords(myCoords.X, myCoords.Y, dir);
+            var next = field.Squares[movedCoords.X][movedCoords.Y];
 
-            var blocked = colliders.Any(x => !x.CanBeMovedToField(field, next));
+            var blocked = colliders.Any(x => !x.CanBeMovedToField(field, next, dir));
 
             return !blocked;
         }

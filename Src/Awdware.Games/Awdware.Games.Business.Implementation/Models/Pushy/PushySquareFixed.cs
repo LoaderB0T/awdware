@@ -6,7 +6,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
 {
     public abstract class PushySquareFixed : PushySquare
     {
-        public override bool CanBeMovedToField(PushyField field, PushySquare square)
+        public override bool CanBeMovedToField(PushyField field, PushySquare square, PushyMoveDirection dir)
         {
             return false;
         }

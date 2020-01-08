@@ -176,7 +176,7 @@ export class PushyFigureDto {
   public userId: string;
 }
 
-export enum PushyMoveDirection {
+export enum PushyMoveDirectionDto {
   UNKNOWN = 0,
   UP = 1,
   RIGHT = 2,
@@ -185,14 +185,16 @@ export enum PushyMoveDirection {
 }
 
 export class PushySquareDto {
-  public squareType: PushySquareType;
+  public squareType: PushySquareTypeDto;
   public childSquares: Array<PushySquareDto>;
   public figures: Array<PushyFigureDto>;
   public color?: PushyColor;
 }
 
-export enum PushySquareType {
+export enum PushySquareTypeDto {
   UNKNOWN = 0,
   AIR = 1,
-  WALL = 2
+  WALL = 2,
+  BOX = 3,
+  BOX_FIELD = 4
 }

@@ -25,24 +25,24 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
             return newDto;
         }
 
-        public static Tuple<int, int> GetNewCoords(int x, int y, PushyMoveDirection dir)
+        public static PushyPosition GetNewCoords(int x, int y, PushyMoveDirection dir)
         {
             switch (dir)
             {
                 case PushyMoveDirection.Up:
-                    return Tuple.Create(x, y - 1);
+                    return new PushyPosition(x, y - 1);
                 case PushyMoveDirection.Right:
-                    return Tuple.Create(x + 1, y);
+                    return new PushyPosition(x + 1, y);
                 case PushyMoveDirection.Down:
-                    return Tuple.Create(x, y + 1);
+                    return new PushyPosition(x, y + 1);
                 case PushyMoveDirection.Left:
-                    return Tuple.Create(x - 1, y);
+                    return new PushyPosition(x - 1, y);
                 default:
                     throw new InvalidOperationException("unknown move direction");
             }
         }
 
-        internal Tuple<int, int> GetSquareCoords(PushySquare pushySquare)
+        internal PushyPosition GetSquareCoords(PushySquare pushySquare)
         {
             for (int x = 0; x < Width; x++)
             {
@@ -50,7 +50,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
                 {
                     if (this.Squares[x][y] == pushySquare)
                     {
-                        return Tuple.Create(x, y);
+                        return new PushyPosition(x, y);
                     }
                 }
             }
@@ -61,7 +61,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
         {
             var from = Squares[x][y];
             var newCoords = GetNewCoords(x, y, dir);
-            var to = Squares[newCoords.Item1][newCoords.Item2];
+            var to = Squares[newCoords.X][newCoords.Y];
 
             if (!from.HasFigure(fig))
                 return false;
@@ -91,8 +91,8 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
             return new PushyFigureData()
             {
                 Figure = square.GetFigure(userId),
-                X = squarePos.Item1,
-                Y = squarePos.Item2
+                X = squarePos.X,
+                Y = squarePos.Y
             };
         }
 
@@ -100,7 +100,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
         {
             var from = Squares[x][y];
             var newCoords = GetNewCoords(x, y, dir);
-            var to = Squares[newCoords.Item1][newCoords.Item2];
+            var to = Squares[newCoords.X][newCoords.Y];
 
             if (!from.HasFigure(figure))
                 throw new InvalidOperationException("Figure not found");

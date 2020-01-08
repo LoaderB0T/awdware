@@ -10,7 +10,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
     {
         public List<PushyFigure> Figures { get; private set; }
         protected List<PushySquare> ChildSquares { get; private set; }
-        public abstract bool CanBeMovedToField(PushyField field, PushySquare square);
+        public abstract bool CanBeMovedToField(PushyField field, PushySquare square, PushyMoveDirection dir);
         public abstract bool CanStepOnField(PushyField field, PushyFigure figure, PushyMoveDirection dir);
         public abstract bool CollidesWithFigure(PushyField field, PushyFigure figure);
         public abstract void StepOnField(PushyField pushyField, PushyFigure figure, PushyMoveDirection dir);

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SignalrService } from '../../../shared/services/signalr.service';
 import { HubConnection } from '@aspnet/signalr';
 import { Observable, Subject } from 'rxjs';
-import { GameLobbyInformationDto, UserInfoDto, GamePlayerDto, PushyMoveDirection, PushyFieldDto } from '../../../models/application-facade';
+import { GameLobbyInformationDto, UserInfoDto, GamePlayerDto, PushyMoveDirectionDto, PushyFieldDto } from '../../../models/application-facade';
 import { UserDetailsService } from '../../../services/user-details.service';
 import { tap } from 'rxjs/operators';
 
@@ -77,7 +77,7 @@ export class PushyService {
     return this.currentLobby.players.length === 2;
   }
 
-  public sendMove(dir: PushyMoveDirection) {
+  public sendMove(dir: PushyMoveDirectionDto) {
     return this._signalrService.sendData<boolean>(this._signalrHub, 'SendMove', this.currentLobby.id, this._userDetailsService.userInfo.userId, dir);
   }
 }
