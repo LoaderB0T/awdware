@@ -20,10 +20,11 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
         }
 
 
-        public PushySquareDto ToDto()
+        public override PushySquareDto ToDto()
         {
             var newDto = new PushySquareDto();
             newDto.UserId = this.UserId;
+            newDto.SquareType = PushySquareTypeDto.Figure;
             return newDto;
         }
 

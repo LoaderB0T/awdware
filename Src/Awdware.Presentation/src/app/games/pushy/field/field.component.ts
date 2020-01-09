@@ -38,7 +38,6 @@ export class FieldComponent implements OnInit {
         this.field.squares[i][j].squareType = i === 0 || j === 0 ? PushySquareTypeDto.WALL : PushySquareTypeDto.AIR;
       }
     }
-    this.field.squares[5][5].figures = [{ userId: this._pushyService.myPlayer.id }];
   }
 
   public get lobby(): GameLobbyInformationDto {

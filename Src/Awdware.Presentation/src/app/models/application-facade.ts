@@ -172,10 +172,6 @@ export class PushyFieldDto {
   public squares: Array<Array<PushySquareDto>>;
 }
 
-export class PushyFigureDto {
-  public userId: string;
-}
-
 export enum PushyMoveDirectionDto {
   UNKNOWN = 0,
   UP = 1,
@@ -187,14 +183,15 @@ export enum PushyMoveDirectionDto {
 export class PushySquareDto {
   public squareType: PushySquareTypeDto;
   public childSquares: Array<PushySquareDto>;
-  public figures: Array<PushyFigureDto>;
   public color?: PushyColor;
+  public userId: string;
 }
 
 export enum PushySquareTypeDto {
   UNKNOWN = 0,
-  AIR = 1,
-  WALL = 2,
-  BOX = 3,
-  BOX_FIELD = 4
+  FIGURE = 1,
+  AIR = 2,
+  WALL = 3,
+  BOX = 4,
+  BOX_FIELD = 5
 }

@@ -3,9 +3,10 @@
     public enum PushySquareTypeDto
     {
         Unknown = 0,
-        Air = 1,
-        Wall = 2,
-        Box = 3,
-        BoxField = 4
+        Figure = 1,
+        Air = 2,
+        Wall = 3,
+        Box = 4,
+        BoxField = 5
     }
 }

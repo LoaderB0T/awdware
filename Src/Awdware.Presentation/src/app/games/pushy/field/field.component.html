@@ -23,10 +23,12 @@
         <rect width="50" height="50" style="fill:rgb(100,100,100);" *ngIf="square.squareType === PushySquareType.WALL">
 
         </rect>
-        <rect width="50" height="50" style="fill:rgb(102, 43, 32);" *ngIf="square.squareType === PushySquareType.BOX">
+        <rect width="50" height="50" style="fill:rgb(102, 43, 32);"
+          *ngIf="square.childSquares?.length > 0 && square.childSquares[0].squareType === PushySquareType.BOX">
 
         </rect>
-        <rect x="5" y="5" width="40" height="40" style="fill:rgb(100,200,100);" *ngIf="square.figures?.length > 0">
+        <rect x="5" y="5" width="40" height="40" style="fill:rgb(100,200,100);"
+          *ngIf="square.childSquares?.length > 0 && square.childSquares[0].squareType === PushySquareType.FIGURE">
 
         </rect>
       </svg>
