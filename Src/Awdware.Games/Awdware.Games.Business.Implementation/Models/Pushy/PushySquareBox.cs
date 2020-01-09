@@ -29,12 +29,20 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
 
         public override bool CollidesWithFigure(PushyField field, PushyFigure figure)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
-        public override void StepOnField(PushyField pushyField, PushyFigure figure, PushyMoveDirection dir)
+        public override void StepOnField(PushyField field, PushyFigure figure, PushyMoveDirection dir)
         {
-            throw new NotImplementedException();
+            var myCoords = field.GetSquareCoords(this);
+            var relativePos = myCoords.GetRelativePos(dir, field);
+            if (relativePos == null)
+                throw new InvalidOperationException("Invalid move!");
+
+            var targetSquare = field.Squares[relativePos.X][relativePos.Y];
+            
+
+            return this.CanBeMovedToField(field, targetSquare, dir);
         }
 
         public override PushySquareDto ToDto()
