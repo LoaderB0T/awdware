@@ -25,6 +25,33 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
             return newDto;
         }
 
+        internal PushySquare GetParent(PushySquare pushySquare)
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    var parent = TryFindParentInSquare(this.Squares[x][y], pushySquare);
+                    if (parent != null)
+                    {
+                        return parent;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private PushySquare TryFindParentInSquare(PushySquare searchLocation, PushySquare toBeFound)
+        {
+            if (searchLocation == toBeFound)
+                return null;
+            if (searchLocation.ChildSquares.Any(x => x == toBeFound) || searchLocation.Figures.Any(x => x == toBeFound))
+            {
+                return searchLocation;
+            }
+            return searchLocation.ChildSquares.FirstOrDefault(x => TryFindParentInSquare(x, toBeFound) != null);
+        }
+
         public static PushyPosition GetNewCoords(int x, int y, PushyMoveDirection dir)
         {
             switch (dir)
@@ -48,7 +75,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    if (this.Squares[x][y] == pushySquare)
+                    if (CheckIfSquareIsPresent(this.Squares[x][y], pushySquare))
                     {
                         return new PushyPosition(x, y);
                     }
@@ -57,20 +84,12 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
             return null;
         }
 
-        public bool CanMove(PushyFigure fig, int x, int y, PushyMoveDirection dir)
+        private bool CheckIfSquareIsPresent(PushySquare searchLocation, PushySquare toBeFound)
         {
-            var from = Squares[x][y];
-            var newCoords = GetNewCoords(x, y, dir);
-            var to = Squares[newCoords.X][newCoords.Y];
-
-            if (!from.HasFigure(fig))
-                return false;
-
-            var allowed = to.CanStepOnField(this, fig, dir);
-            if (!allowed)
-                return false;
-
-            return true;
+            if (searchLocation == toBeFound)
+                return true;
+            return searchLocation.ChildSquares.Any(x => CheckIfSquareIsPresent(x, toBeFound))
+                || searchLocation.Figures.Any(x => CheckIfSquareIsPresent(x, toBeFound));
         }
 
         public PushyFigure GetFigure(string userId)
@@ -96,18 +115,22 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
             };
         }
 
-        public void DoMove(PushyFigure figure, int x, int y, PushyMoveDirection dir)
+        public bool TryMove(PushyFigure figure, int x, int y, PushyMoveDirection dir)
         {
             var from = Squares[x][y];
-            var newCoords = GetNewCoords(x, y, dir);
-            var to = Squares[newCoords.X][newCoords.Y];
 
             if (!from.HasFigure(figure))
                 throw new InvalidOperationException("Figure not found");
 
-            from.RemoveFigure(figure);
+            return figure.Move(this, dir);
+        }
 
-            to.StepOnField(this, figure, dir);
+        public PushyField Copy()
+        {
+            return new PushyField()
+            {
+                Squares = Squares.Select(row => row.Select(square => square.Copy()).ToList()).ToList()
+            };
         }
     }
 }

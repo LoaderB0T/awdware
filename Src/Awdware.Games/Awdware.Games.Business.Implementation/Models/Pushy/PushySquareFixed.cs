@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Awdware.Games.Business.Implementation.Models.Pushy
 {
     public abstract class PushySquareFixed : PushySquare
     {
-        public override bool CanBeMovedToField(PushyField field, PushySquare square, PushyMoveDirection dir)
+        public override bool Move(PushyField field, PushyMoveDirection dir)
         {
             return false;
         }
 
-        public override void StepOnField(PushyField field, PushyFigure figure, PushyMoveDirection dir)
+        public override bool Entered(PushyField field, PushySquare square, PushyMoveDirection dir)
         {
-            if(this.ChildSquares?.Count > 0)
+            if (this.ChildSquares?.Count > 0)
             {
-                this.ChildSquares.ForEach(s => s.StepOnField(field, figure, dir));
+                var oldSquares = new List<PushySquare>(this.ChildSquares);
+                var failed = oldSquares.Any(s => !s.Entered(field, square, dir));
+                if (failed)
+                    return false;
             }
-            this.Figures.Add(figure);
+
+            this.ChildSquares.Add(square);
+            return true;
         }
     }
 }

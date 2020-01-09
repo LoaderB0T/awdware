@@ -12,12 +12,16 @@ namespace Awdware.Games.UnitTest.Pushy
     {
         private bool DoMove(PushyGame game, PushyMoveDirection dir)
         {
-            var figData = game.Field.GetFigureData("awd");
-            var sucess = game.Field.CanMove(figData.Figure, figData.X, figData.Y, (PushyMoveDirection)dir);
-            if (!sucess)
-                return false;
 
-            game.Field.DoMove(figData.Figure, figData.X, figData.Y, (PushyMoveDirection)dir);
+            var fieldCopy = game.Field.Copy();
+
+            var figData = fieldCopy.GetFigureData("awd");
+            var success = fieldCopy.TryMove(figData.Figure, figData.X, figData.Y, (PushyMoveDirection)dir);
+
+            if (success)
+                game.Field = fieldCopy;
+
+            game.Field.TryMove(figData.Figure, figData.X, figData.Y, (PushyMoveDirection)dir);
             var gameStr = game.ToString();
             Console.WriteLine(gameStr);
             return true;
@@ -32,6 +36,15 @@ namespace Awdware.Games.UnitTest.Pushy
             Console.WriteLine(gameStr);
             DoMove(game, PushyMoveDirection.Down);
             DoMove(game, PushyMoveDirection.Down);
+
+            DoMove(game, PushyMoveDirection.Right);
+            DoMove(game, PushyMoveDirection.Down);
+            DoMove(game, PushyMoveDirection.Left);
+            DoMove(game, PushyMoveDirection.Left);
+            DoMove(game, PushyMoveDirection.Left);
+            DoMove(game, PushyMoveDirection.Left);
+
+            DoMove(game, PushyMoveDirection.Left);
         }
     }
 }

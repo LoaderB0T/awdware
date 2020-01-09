@@ -29,7 +29,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
             }
             var fig = new PushyFigure();
             fig.UserId = userId;
-            Field.Squares[5][5].Figures.Add(fig);
+            Field.Squares[5][5].ChildSquares.Add(fig);
             Field.Squares[5][7].ChildSquares.Add(new PushySquareBox());
             Field.Squares[6][7].ChildSquares.Add(new PushySquareBox());
         }
@@ -37,10 +37,11 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
         public override string ToString()
         {
             var a = "";
-            Field.Squares.ForEach(row =>
+            for (int j = 0; j < Field.Height; j++)
             {
-                row.ForEach(col =>
+                for (int i = 0; i < Field.Width; i++)
                 {
+                    var col = Field.Squares[i][j];
                     if (col.Figures.Count > 0)
                     {
                         a += "ö";
@@ -53,7 +54,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
                                 a += "?";
                                 break;
                             case Facade.Dtos.Pushy.PushySquareTypeDto.Air:
-                                if(col.ChildSquares.Count > 0)
+                                if (col.ChildSquares.Count > 0)
                                 {
                                     switch (col.ChildSquares[0].ToDto().SquareType)
                                     {
@@ -67,9 +68,10 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
                                             a += "?";
                                             break;
                                     }
-                                } else
+                                }
+                                else
                                 {
-                                a += " ";
+                                    a += " ";
                                 }
                                 break;
                             case Facade.Dtos.Pushy.PushySquareTypeDto.Wall:
@@ -83,9 +85,10 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
                                 break;
                         }
                     }
-                });
+                }
+
                 a += "\n";
-            });
+            }
             return a;
         }
     }

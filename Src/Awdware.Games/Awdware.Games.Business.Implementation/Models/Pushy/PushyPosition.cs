@@ -22,7 +22,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
                 case PushyMoveDirection.Up:
                     if (X == 0)
                         return null;
-                    return new PushyPosition(X - 1, Y);
+                    return new PushyPosition(X, Y - 1);
                 case PushyMoveDirection.Right:
                     if (X == field.Width - 1)
                         return null;
@@ -34,7 +34,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
                 case PushyMoveDirection.Left:
                     if (Y == 0)
                         return null;
-                    return new PushyPosition(X, Y - 1);
+                    return new PushyPosition(X - 1, Y);
                 case PushyMoveDirection.Unknown:
                 default:
                     return null;

@@ -116,13 +116,13 @@ namespace Awdware.Games.Business.Facade.Hubs
             if (lobby == null)
                 return false;
 
+            var fieldCopy = lobby.GameData.Field.Copy();
 
-            var figData = lobby.GameData.Field.GetFigureData(userId);
-            var sucess = lobby.GameData.Field.CanMove(figData.Figure, figData.X, figData.Y, (PushyMoveDirection)dir);
-            if (!sucess)
-                return false;
+            var figData = fieldCopy.GetFigureData(userId);
+            var success = fieldCopy.TryMove(figData.Figure, figData.X, figData.Y, (PushyMoveDirection)dir);
 
-            lobby.GameData.Field.DoMove(figData.Figure, figData.X, figData.Y, (PushyMoveDirection)dir);
+            if (success)
+                lobby.GameData.Field = fieldCopy;
 
             var fieldDto = lobby.GameData.Field.ToDto();
 

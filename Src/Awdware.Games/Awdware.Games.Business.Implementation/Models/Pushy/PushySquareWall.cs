@@ -8,11 +8,6 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
 {
     public class PushySquareWall : PushySquareFixed
     {
-        public override bool CanStepOnField(PushyField field, PushyFigure figure, PushyMoveDirection dir)
-        {
-            return false;
-        }
-
         public override bool CollidesWithFigure(PushyField field, PushyFigure figure)
         {
             return true;
@@ -23,6 +18,16 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
             var dto = base.ToDto();
             dto.SquareType = PushySquareTypeDto.Wall;
             return dto;
+        }
+
+        public override bool Entered(PushyField field, PushySquare square, PushyMoveDirection dir)
+        {
+            return false;
+        }
+
+        internal override PushySquare Copy()
+        {
+            return new PushySquareWall() { ChildSquares = CopyChildren() };
         }
     }
 }

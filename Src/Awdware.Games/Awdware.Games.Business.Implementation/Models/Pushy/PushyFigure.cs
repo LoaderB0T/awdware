@@ -5,15 +5,31 @@ using Awdware.Games.Facade.Dtos.Pushy;
 
 namespace Awdware.Games.Business.Implementation.Models.Pushy
 {
-    public class PushyFigure
+    public class PushyFigure: PushySquareMoveable
     {
         public string UserId { get; set; }
 
-        public PushyFigureDto ToDto()
+        public override bool CollidesWithFigure(PushyField field, PushyFigure figure)
         {
-            var newDto = new PushyFigureDto();
+            return true;
+        }
+
+        public override bool Entered(PushyField field, PushySquare square, PushyMoveDirection dir)
+        {
+            return false;
+        }
+
+
+        public PushySquareDto ToDto()
+        {
+            var newDto = new PushySquareDto();
             newDto.UserId = this.UserId;
             return newDto;
+        }
+
+        internal override PushySquare Copy()
+        {
+            return new PushyFigure() { ChildSquares = CopyChildren(), UserId = UserId };
         }
     }
 }
