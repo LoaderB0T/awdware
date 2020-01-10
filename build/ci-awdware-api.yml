@@ -16,8 +16,7 @@ trigger:
     - master
   paths:
     include:
-    - Src/Awdware.*/**
-    - build/ci-awdware-api.yml
+    - /Src/Awdware.*/**
     exclude:
     - Src/Awdware.Presentation/**
 
