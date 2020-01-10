@@ -13,6 +13,10 @@
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <OutputPath>..\..\..\bin\$(Configuration)\Tests\Games</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Awdware.Games.Business.Implementation\Awdware.Games.Business.Implementation.csproj" />
   </ItemGroup>
