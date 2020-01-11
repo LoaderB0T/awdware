@@ -90,7 +90,7 @@ steps:
   inputs:
     command: custom
     custom: vstest
-    arguments: bin/Debug/Tests/**/Awdware*Test.dll
+    arguments: bin/Debug/**/Awdware*Test.dll
   continueOnError: true
 
 
@@ -99,7 +99,7 @@ steps:
 #   inputs:
 #     command: custom
 #     custom: vstest
-#     arguments: ../../bin/Debug/Tests/**/*Tests.dll /Enablecodecoverage /Settings:Awdware.Core.Test.UnitTests/CodeCoverage.runsettings
+#     arguments: ../../bin/Debug/**/*Tests.dll /Enablecodecoverage /Settings:Awdware.Core.Test.UnitTests/CodeCoverage.runsettings
 #     # arguments: '/Enablecodecoverage /Settings:CodeCoverage.runsettings /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
 #   continueOnError: true
 

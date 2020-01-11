@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Games.Facade", "..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Games.Facade.Utils", "..\Src\Awdware.Games\Awdware.Games.Facade.Utils\Awdware.Games.Facade.Utils.csproj", "{4D54762F-EE97-4FB1-98AA-05BDBEE81513}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Games.UnitTest", "..\Src\Awdware.Games\Awdware.Games.UnitTest\Awdware.Games.UnitTest.csproj", "{4BC1F672-90DB-43FC-8D3D-54213E590079}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Games.UnitTests", "..\Src\Awdware.Games\Awdware.Games.UnitTests\Awdware.Games.UnitTests.csproj", "{4BC1F672-90DB-43FC-8D3D-54213E590079}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
