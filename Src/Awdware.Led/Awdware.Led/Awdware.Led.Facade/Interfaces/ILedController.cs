@@ -4,6 +4,6 @@ namespace Awdware.Led.Facade.Interfaces
 {
     public interface ILedController
     {
-        public LedImageDto GetLedImage(uint ledCount);
+        LedImageDto GetLedImage(uint ledCount);
     }
 }

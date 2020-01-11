@@ -5,6 +5,6 @@ namespace Awdware.Led.Facade.Interfaces
 {
     public interface IAsyncLedController
     {
-        public Task<LedImageDto> GetLedImage(uint ledCount);
+        Task<LedImageDto> GetLedImage(uint ledCount);
     }
 }

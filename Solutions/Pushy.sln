@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Host", "..\Src\Awdware.Host\Awdware.Host\Awdware.Host.csproj", "{e830cbe8-ff01-4d69-8888-fa1ba483ee1e}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Games.Business.Facade", "..\Src\Awdware.Games\Awdware.Games.Business.Facade\Awdware.Games.Business.Facade.csproj", "{3D6F7558-5BC5-440D-97C5-5A3232E204CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Games.Business.Implementation", "..\Src\Awdware.Games\Awdware.Games.Business.Implementation\Awdware.Games.Business.Implementation.csproj", "{CB6275FF-8BCD-483C-9148-A9B7025EDD9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Games.Facade", "..\Src\Awdware.Games\Awdware.Games.Facade\Awdware.Games.Facade.csproj", "{BFDCBF03-CCEA-4E5F-BB7D-EB80D4E80116}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Games.Facade.Utils", "..\Src\Awdware.Games\Awdware.Games.Facade.Utils\Awdware.Games.Facade.Utils.csproj", "{4D54762F-EE97-4FB1-98AA-05BDBEE81513}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Games.UnitTest", "..\Src\Awdware.Games\Awdware.Games.UnitTest\Awdware.Games.UnitTest.csproj", "{4BC1F672-90DB-43FC-8D3D-54213E590079}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EBBD6185-192A-452F-8C26-8B9RD0B98F82}
+	EndGlobalSection
+EndGlobal
