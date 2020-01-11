@@ -30,6 +30,7 @@ namespace Awdware.Games.Business.Implementation.Models.Pushy
             var fig = new PushyFigure();
             fig.UserId = userId;
             Field.Squares[5][5].ChildSquares.Add(fig);
+            Field.Squares[1][1].ChildSquares.Add(new PushySquareHouse());
             Field.Squares[5][7].ChildSquares.Add(new PushySquareBox());
             Field.Squares[6][7].ChildSquares.Add(new PushySquareBox());
         }

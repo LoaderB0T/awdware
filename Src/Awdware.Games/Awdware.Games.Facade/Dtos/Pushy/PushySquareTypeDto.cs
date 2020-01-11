@@ -7,6 +7,7 @@
         Air = 2,
         Wall = 3,
         Box = 4,
-        BoxField = 5
+        BoxField = 5,
+        House = 6
     }
 }
