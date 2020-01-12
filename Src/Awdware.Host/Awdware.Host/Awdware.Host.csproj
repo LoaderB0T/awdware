@@ -41,7 +41,7 @@
 
   <ItemGroup>
     <None Update="cert\user_key.key">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
