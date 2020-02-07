@@ -1,4 +1,4 @@
-<div class="input-container" [class.focus]="isFocused" [class.disabled]="isDisabled" [style]="cssVariablesStyle">
+<div class="input-container" [class.focus]="isFocused" [class.disabled]="isDisabled" [attr.style]="cssVariablesStyle">
   <div class="icon-container" [class.has-second-icon]="icon2 && true" *ngIf="icon && true">
     <i class="icon fal fa-{{icon}}"></i>
     <i *ngIf="icon2 && true" class="icon2 fal fa-{{icon2}}"></i>

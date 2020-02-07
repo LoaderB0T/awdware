@@ -29,8 +29,8 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
 
-  @ViewChild('selectButton', { static: false }) selectButton: ElementRef<HTMLButtonElement>;
-  @ViewChild('selectContent', { static: false }) selectContent: ElementRef<HTMLDivElement>;
+  @ViewChild('selectButton') selectButton: ElementRef<HTMLButtonElement>;
+  @ViewChild('selectContent') selectContent: ElementRef<HTMLDivElement>;
 
   @Input() public options: SelectOption[];
   @Input() public isReadOnly: boolean;
