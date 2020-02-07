@@ -28,7 +28,7 @@ steps:
 
 - task: SonarCloudPrepare@1
   continueOnError: true
-  displayName: "\U0001F50E Prepare analysis on SonarCloud"
+  displayName: "\U0001F50E Prepare analysis on SonarCloud - API"
   inputs:
     SonarCloud: 'sonarcloud'
     organization: 'awdware'
@@ -38,6 +38,7 @@ steps:
       sonar.exclusions=**/bin/**,**/obj/**,**/Template/**
       sonar.test.exclusions=**/bin/**,**/obj/**
     # sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
+  condition: and(succeeded(), or(eq(variables['patch', 0]), eq(variables['forceSonarQube'])))
 
 - task: DotNetCoreCLI@2
   displayName: "\U0001F6E0 build core"
@@ -154,6 +155,30 @@ steps:
     publishFeedCredentials: 'loaderb0t nuget'
   condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
 
+- task: SonarCloudAnalyze@1
+  displayName: "Run Code Analysis - API"
+  continueOnError: true
+
+- task: SonarCloudPublish@1
+  displayName: "Publish Quality Gate Result - API"
+  continueOnError: true
+  inputs:
+    pollingTimeoutSec: '300'
+
+- task: SonarCloudPrepare@1
+  continueOnError: true
+  displayName: '\U0001F50E Prepare analysis on SonarCloud - LED'
+  inputs:
+    SonarCloud: 'sonarcloud'
+    organization: 'awdware'
+    scannerMode: 'MSBuild'
+    projectKey: 'awdware:ledcontroller'
+    extraProperties: |
+     sonar.exclusions=**/bin/**,**/obj/**,**/WebApi/**
+     sonar.test.exclusions=**/bin/**,**/obj/**
+    #  sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
+
+
 - task: DotNetCoreCLI@2
   displayName: "\U0001F6E0 build led controller"
   inputs:
@@ -178,25 +203,11 @@ steps:
     ArtifactName: ledController
 
 - task: SonarCloudAnalyze@1
-  displayName: 'Run Code Analysis'
+  displayName: 'Run Code Analysis - LED'
   continueOnError: true
 
 - task: SonarCloudPublish@1
-  displayName: 'Publish Quality Gate Result'
+  displayName: 'Publish Quality Gate Result - LED'
   continueOnError: true
   inputs:
     pollingTimeoutSec: '300'
-
-
-- task: CreatePullRequest@1
-  inputs:
-    repoType: Azure DevOps
-    sourceBranch: 'develop'
-    targetBranch: 'master'
-    title: 'dev -> master'
-    #reviewers: 'test@test.com;MyTeam'
-    autoComplete: true
-    mergeStrategy: 'rebase'
-  env:
-    System_AccessToken: $(System.AccessToken)
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'develop'))
