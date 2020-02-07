@@ -1,5 +1,8 @@
 name: PR develop - master $(Build.BuildId)
 
+variables:
+- system.debug = true
+
 pool:
   name: Hosted VS2017
 
@@ -15,6 +18,5 @@ steps:
     mergeStrategy: 'rebase'
   env:
     System_AccessToken: $(System.AccessToken)
-    system.debug: true
   condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'develop'))
   displayName: 'Trigger pull request'
