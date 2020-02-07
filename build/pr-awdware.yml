@@ -15,5 +15,6 @@ steps:
     mergeStrategy: 'rebase'
   env:
     System_AccessToken: $(System.AccessToken)
+    system.debug: true
   condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'develop'))
   displayName: 'Trigger pull request'
