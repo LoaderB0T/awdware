@@ -38,7 +38,6 @@ steps:
       sonar.exclusions=**/bin/**,**/obj/**,**/Template/**
       sonar.test.exclusions=**/bin/**,**/obj/**
     # sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
-  condition: and(succeeded(), or(eq(variables['patch', 0]), eq(variables['forceSonarQube'])))
 
 - task: DotNetCoreCLI@2
   displayName: "\U0001F6E0 build core"
