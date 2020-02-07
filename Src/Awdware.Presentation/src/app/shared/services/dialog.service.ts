@@ -1,5 +1,6 @@
 import { Injectable, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { SubscriptionManager } from '../models/subscription-manager';
+import { BaseDialog } from '../models/base-dialog.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +8,9 @@ import { SubscriptionManager } from '../models/subscription-manager';
 export class DialogService {
   private _factoryResolver: ComponentFactoryResolver;
   private _rootViewContainer: ViewContainerRef;
-  private _subMgrs = new Array<SubscriptionManager>();
+  private _subMgrs = new Array<{ id: string, mgr: SubscriptionManager }>();
 
   public dialogVisible: boolean;
-
-  private _dialogIndex: number = 0;
 
   constructor(factoryResolver: ComponentFactoryResolver) {
     this._factoryResolver = factoryResolver;
@@ -19,9 +18,10 @@ export class DialogService {
 
   public hideAllDialogs() {
     this._rootViewContainer.clear();
-    this._subMgrs.forEach(_subMgr => {
-      _subMgr.unsubscribeAll();
+    this._subMgrs.forEach(subMgr => {
+      subMgr.mgr.unsubscribeAll();
     });
+    this._subMgrs.length = 0;
     this.dialogVisible = false;
   }
 
@@ -29,27 +29,39 @@ export class DialogService {
     this._rootViewContainer = viewContainerRef;
   }
 
-  public showComponentDialog<T>(componentType: new (...args) => T): T {
-    this._subMgrs.push(new SubscriptionManager());
+  public showComponentDialog<T extends BaseDialog>(componentType: new (...args) => T): T {
+    const newId = this.getRandomId();
+
+    this._subMgrs.push({ id: newId, mgr: new SubscriptionManager() });
     const factory = this._factoryResolver
       .resolveComponentFactory<T>(componentType);
     const component = factory
       .create(this._rootViewContainer.parentInjector);
-    // tslint:disable-next-line:no-string-literal
-    if (component.instance['closeDialog']) {
-      // tslint:disable-next-line:no-string-literal
-      const hideSub = component.instance['closeDialog'].subscribe(() => {
-        this._rootViewContainer.remove(this._dialogIndex--);
-        this._subMgrs[this._dialogIndex].unsubscribeAll();
-        if (this._dialogIndex === 0) {
+
+    if (component.instance.closeDialog) {
+      const hideSub = component.instance.closeDialog.subscribe((id: string) => {
+
+        const indexToRemove = this._rootViewContainer.indexOf(component.hostView);
+
+        this._rootViewContainer.remove(indexToRemove);
+        this._subMgrs.find(subMgr => subMgr.id === id)?.mgr?.unsubscribeAll();
+        if (this._rootViewContainer.length === 0) {
           this.dialogVisible = false;
         }
       });
-      this._subMgrs[this._dialogIndex].add(hideSub);
+      this._subMgrs.find(subMgr => subMgr.id === newId)?.mgr?.add(hideSub);
+    } else {
+      // should rather not happen I hope
+      console.warn('This Component does not implement the BaseDialog Class:')
+      console.warn(component.instance);
     }
+
     this._rootViewContainer.insert(component.hostView);
     this.dialogVisible = true;
-    this._dialogIndex++;
     return component.instance;
+  }
+
+  private getRandomId(): string {
+    return Math.random().toString(36).substr(2, 9);
   }
 }
