@@ -199,4 +199,4 @@ steps:
     mergeStrategy: 'rebase'
   env:
     System_AccessToken: $(System.AccessToken)
-  condition: eq($(Build.SourceBranch), 'develop')
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'develop'))
