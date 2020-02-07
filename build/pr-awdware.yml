@@ -2,7 +2,8 @@ name: PR develop -> master $(Build.BuildId)
 
 pool:
   name: Hosted VS2017
-
+  
+steps:
 - task: CreatePullRequest@1
   inputs:
     repoType: Azure DevOps
