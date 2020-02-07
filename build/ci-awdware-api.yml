@@ -8,17 +8,7 @@ variables:
   minor: 2
   patch: $[counter(variables['minor'], 0)]
 
-
 name: $(SourceBranchName)-$(major).$(minor).$(patch)
-trigger:
-  branches:
-    include:
-    - master
-  paths:
-    include:
-    - /Src/Awdware.*/**
-    exclude:
-    - Src/Awdware.Presentation/**
 
 pool:
   name: Hosted VS2017
@@ -47,7 +37,7 @@ steps:
     extraProperties: |
       sonar.exclusions=**/bin/**,**/obj/**,**/Template/**
       sonar.test.exclusions=**/bin/**,**/obj/**
-      # sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
+    # sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
 - task: DotNetCoreCLI@2
   displayName: "\U0001F6E0 build core"
@@ -164,30 +154,6 @@ steps:
     publishFeedCredentials: 'loaderb0t nuget'
   condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
 
-- task: SonarCloudAnalyze@1
-  displayName: "Run Code Analysis"
-  continueOnError: true
-
-- task: SonarCloudPublish@1
-  displayName: "Publish Quality Gate Result"
-  continueOnError: true
-  inputs:
-    pollingTimeoutSec: '300'
-
-
-- task: SonarCloudPrepare@1
-  continueOnError: true
-  displayName: 'Prepare analysis on SonarCloud'
-  inputs:
-    SonarCloud: 'sonarcloud'
-    organization: 'awdware'
-    scannerMode: 'MSBuild'
-    projectKey: 'awdware:ledcontroller'
-    extraProperties: |
-     sonar.exclusions=**/bin/**,**/obj/**,**/WebApi/**
-     sonar.test.exclusions=**/bin/**,**/obj/**
-    #  sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
-
 - task: DotNetCoreCLI@2
   displayName: "\U0001F6E0 build led controller"
   inputs:
@@ -220,3 +186,17 @@ steps:
   continueOnError: true
   inputs:
     pollingTimeoutSec: '300'
+
+
+- task: CreatePullRequest@1
+  inputs:
+    repoType: Azure DevOps
+    sourceBranch: 'develop'
+    targetBranch: 'master'
+    title: 'dev -> master'
+    #reviewers: 'test@test.com;MyTeam'
+    autoComplete: true
+    mergeStrategy: 'rebase'
+  env:
+    System_AccessToken: $(System.AccessToken)
+  condition: $(Build.SourceBranch) -eq 'develop'

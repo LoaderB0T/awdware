@@ -1,18 +1,10 @@
-trigger:
-  branches:
-    include:
-    - master
-  paths:
-    include:
-    - /Src/Awdware.Presentation/*
-
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '12.x'
   displayName: 'Install Node.js'
 
 - task: YarnInstaller@3
@@ -83,3 +75,16 @@ steps:
   continueOnError: true
   inputs:
     pollingTimeoutSec: '300'
+
+- task: CreatePullRequest@1
+  inputs:
+    repoType: Azure DevOps
+    sourceBranch: 'develop'
+    targetBranch: 'master'
+    title: 'dev -> master'
+    #reviewers: 'test@test.com;MyTeam'
+    autoComplete: true
+    mergeStrategy: 'rebase'
+  env:
+    System_AccessToken: $(System.AccessToken)
+  condition: $(Build.SourceBranch) -eq 'develop'
