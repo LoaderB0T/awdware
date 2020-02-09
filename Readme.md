@@ -10,7 +10,7 @@ Just for fun & learning and mostly for myself. However some of the current or fu
 ## Contributing?
 If you really want to contribute feel free to [contact me](mailto:rndmb0t@gmail.com).
 
-As I do not pay for this project the number of contributors is limited. This would not be a problem if you have a Visual Studio Subscription.
+As I do not pay for this project the number of contributors is limited. This would not be a problem if you have a Visual Studio Subscription...
 
 ## Build and run
 
