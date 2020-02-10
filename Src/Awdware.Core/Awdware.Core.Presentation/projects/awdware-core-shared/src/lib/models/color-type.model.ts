@@ -1,5 +1,5 @@
 export class ColorType {
-  private static colorRegex = /rgba?\((\d{1,3}), (\d{1,3}), (\d{1,3})(, \d?\.?\d)?\)/;
+  private static colorRegex = new RegExp('rgba?\((\d{1,3}), (\d{1,3}), (\d{1,3})(, \d?\.?\d)?\)');
 
   public r: number;
   public g: number;
