@@ -2,7 +2,6 @@
  * Public API Surface of awdware-core-shared
  */
 
-
 export * from './lib/awdware-core-shared.module';
 
 export * from './lib/checkbox/checkbox.component';
@@ -14,10 +13,13 @@ export * from './lib/select/select.component';
 export * from './lib/tab-view/tab-view.component';
 export * from './lib/textbox/textbox.component';
 
+export * from './lib/models/awdware-config';
+export * from './lib/models/awdware-facade';
 export * from './lib/models/base-dialog.model';
 export * from './lib/models/color-type.model';
 export * from './lib/models/input-type';
 export * from './lib/models/invalid-operation-error';
+export * from './lib/models/menu-item';
 export * from './lib/models/select-option.model';
 export * from './lib/models/subscription-manager';
 export * from './lib/models/tab-view-content';
@@ -28,6 +30,7 @@ export * from './lib/models/validation-error-type';
 
 export * from './lib/services/dialog.service';
 export * from './lib/services/download.service';
+export * from './lib/services/facade.service';
 export * from './lib/services/signalr.service';
 export * from './lib/services/theme.service';
 export * from './lib/services/translation.service';

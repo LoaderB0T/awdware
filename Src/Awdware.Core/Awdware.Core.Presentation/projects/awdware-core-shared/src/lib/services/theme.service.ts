@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Theme } from '../models/theme.model';
+import { InvalidOperationError } from '../models/invalid-operation-error';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +44,10 @@ export class ThemeService {
   }
 
   private setTheme(theme: Theme) {
+    if (!this._globalStyleSheet) {
+      throw new InvalidOperationError('Theme service has not been initialized. Call \'init\' method before setting the theme');
+    }
+
     if (this._globalStyleSheet.rules.length > 0) {
       this._globalStyleSheet.removeRule(0);
     }

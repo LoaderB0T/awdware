@@ -1,7 +1,10 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../../../bin/Debug/angular/awdware-core-shared",
+  "dest": "../../dist/awdware-core-shared",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [
+    "src/lib/styles"
+  ]
 }

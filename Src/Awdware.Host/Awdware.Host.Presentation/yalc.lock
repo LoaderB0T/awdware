@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "packages": {
+    "awdware-core-shared": {
+      "signature": "c17f473a30377f5ec466b87e496a2e7f",
+      "file": true
+    },
+    "awdware-core": {
+      "signature": "c48725212d3d9d4de6121cccdb45ca10",
+      "file": true
+    }
+  }
+}

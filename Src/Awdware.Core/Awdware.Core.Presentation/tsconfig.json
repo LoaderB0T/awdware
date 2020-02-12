@@ -18,19 +18,10 @@
       "es2018",
       "dom"
     ],
-    "paths": {
-      "awdware-core": [
-        "dist/awdware-core/awdware-core",
-        "dist/awdware-core"
-      ],
-      "awdware-core-shared": [
-        "dist/awdware-core-shared/awdware-core-shared",
-        "dist/awdware-core-shared"
-      ]
-    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "enableIvy": false
   }
 }

@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "build-core": "ng build awdware-core",
-    "build-core-shared": "ng build awdware-core-shared",
-    "build": "yarn build-core && yarn build-core-shared"
+    "build-core-shared": "ng build awdware-core-shared && cd dist/awdware-core-shared && yalc publish",
+    "pre-build-core": "yalc add awdware-core-shared",
+    "build-core": "yarn run pre-build-core && ng build awdware-core && cd dist/awdware-core && yalc publish",
+    "build": "yarn build-core-shared && yarn build-core"
   },
   "private": true,
   "dependencies": {
@@ -17,13 +18,14 @@
     "@angular/platform-browser": "~9.0.0",
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
-    "rxjs": "~6.5.4",
-    "tslib": "^1.10.0",
-    "zone.js": "~0.10.2",
+    "@aspnet/signalr": "^1.1.4",
     "@ngx-translate/core": "^12.0.0",
     "@ngx-translate/http-loader": "^4.0.0",
+    "awdware-core-shared": "file:.yalc/awdware-core-shared",
     "ng-click-outside": "^5.3.0",
-    "@aspnet/signalr": "^1.1.4"
+    "rxjs": "~6.5.4",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.1",
@@ -31,9 +33,9 @@
     "@angular/cli": "~9.0.1",
     "@angular/compiler-cli": "~9.0.0",
     "@angular/language-service": "~9.0.0",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
