@@ -1631,7 +1631,7 @@ autoprefixer@^9.6.5:
     postcss "^7.0.26"
     postcss-value-parser "^4.0.2"
 
-"awdware-core-shared@file:.yalc/awdware-core-shared":
+"awdware-shared@file:.yalc/awdware-shared":
   version "0.0.1-1dbb4dab"
 
 "awdware-core@file:.yalc/awdware-core":

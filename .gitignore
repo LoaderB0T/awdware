@@ -339,6 +339,7 @@ ASALocalRun/
 
 .DS_STORE
 
+**/.yalc/**
 /dist/
 /bazel-*
 e2e_test.*

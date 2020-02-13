@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { AwdwareCoreSharedModule } from 'awdware-core-shared';
+import { AwdwareCoreSharedModule } from 'awdware-shared';
 import { ModuleResoverService } from './services/module-resolver.service';
 
 @NgModule({
@@ -26,6 +26,10 @@ import { ModuleResoverService } from './services/module-resolver.service';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    console.log('Host constructor called');
+  }
+}
 
 

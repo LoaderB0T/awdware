@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserDetailsService } from '../services/user-details.service';
 import { UserDetails } from '../models/user-details';
 import { AccountService } from '../account/services/account.service';
-import { ThemeService } from 'awdware-core-shared';
+import { ThemeService } from 'awdware-shared';
 
 @Component({
   selector: 'awd-me',

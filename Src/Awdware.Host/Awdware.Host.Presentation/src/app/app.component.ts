@@ -2,7 +2,7 @@ import { Component, OnInit, ViewContainerRef, ComponentFactoryResolver } from '@
 import { Router, ActivatedRoute } from '@angular/router';
 import '@angular/compiler';
 import { environment } from '../environments/environment';
-import { FacadeService } from 'awdware-core-shared';
+import { FacadeService } from 'awdware-shared';
 import { AppService } from './services/app.service';
 
 @Component({

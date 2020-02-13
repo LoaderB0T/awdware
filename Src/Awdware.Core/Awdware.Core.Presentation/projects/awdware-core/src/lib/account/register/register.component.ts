@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { InputType, SubscriptionManager, ValidationDefinition, ValidationErrorType } from 'awdware-core-shared';
+import { InputType, SubscriptionManager, ValidationDefinition, ValidationErrorType } from 'awdware-shared';
 import { RegisterRequestDto, RegisterResult } from '../../models/application-facade';
 
 import { AccountService } from '../services/account.service';

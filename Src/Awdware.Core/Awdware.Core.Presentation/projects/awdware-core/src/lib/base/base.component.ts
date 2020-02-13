@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, ViewContainerRef } from '@angular/core';
-import { MenuItem, AwdwareConfig, FacadeService, ThemeService, TranslationService, DialogService } from 'awdware-core-shared';
-import { RoutingService } from '../services/routing.service';
-import { SessionStoreService } from '../services/session-store.service';
+import { ThemeService, TranslationService, DialogService } from 'awdware-shared';
 import { NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -11,9 +9,6 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./base.component.scss']
 })
 export class BaseComponent implements OnInit {
-  private _facadeService: FacadeService;
-  private _routingService: RoutingService;
-  private _sessionStoreService: SessionStoreService;
   private _themeService: ThemeService;
   private _translationService: TranslationService;
   private _dialogService: DialogService;
@@ -26,16 +21,10 @@ export class BaseComponent implements OnInit {
   constructor(
     viewContainerRef: ViewContainerRef,
     router: Router,
-    facadeService: FacadeService,
-    routingService: RoutingService,
-    sessionStoreService: SessionStoreService,
     themeService: ThemeService,
     translationService: TranslationService,
     dialogService: DialogService
   ) {
-    this._facadeService = facadeService;
-    this._routingService = routingService;
-    this._sessionStoreService = sessionStoreService;
     this._themeService = themeService;
     this._translationService = translationService;
     this._dialogService = dialogService;
@@ -60,27 +49,8 @@ export class BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.previousScroll = this._mainContent.nativeElement.scrollTop;
-
-    const config = new AwdwareConfig();
-    config.menuItems = [
-      new MenuItem('Home', 'home', () => this._routingService.navigateToHomeHello(), () => true),
-      // new MenuItem('Vote', 'ballot', () => this._routingService.navigateToVote(), () => true),
-      // new MenuItem('Short URL', 'link', () => { }, () => true),
-      // new MenuItem('Game', 'gamepad', () => this._routingService.navigateToGames(), () => true),
-      // new MenuItem('LED', 'lightbulb', () => this._routingService.navigateToLed(), () => true),
-      new MenuItem('Login', 'sign-in', () => this._routingService.navigateToAccountLogin(), () => this.showLoginButton()),
-      new MenuItem('Account', 'user', () => this._routingService.navigateToAccount(), () => this.showAccountButton())
-    ];
-    this._facadeService.addOrUpdateConfiguration('awdware-core', config);
   }
 
-  private showLoginButton(): boolean {
-    return !this._sessionStoreService.hasToken;
-  }
-
-  private showAccountButton(): boolean {
-    return this._sessionStoreService.hasToken;
-  }
 
 
   public get dialogVisible() {

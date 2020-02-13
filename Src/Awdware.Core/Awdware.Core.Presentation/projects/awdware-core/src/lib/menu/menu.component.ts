@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MenuItem, FacadeService } from 'awdware-core-shared';
-import { AwdwareConfig } from 'awdware-core-shared';
+import { MenuItem, FacadeService } from 'awdware-shared';
+import { AwdwareConfig } from 'awdware-shared';
 
 @Component({
   selector: 'awd-menu',

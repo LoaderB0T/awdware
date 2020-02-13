@@ -1,0 +1,12 @@
+#pushy-lobby-players {
+  padding-left: 30px;
+  .player {
+    padding-bottom: 10px;
+    display: flex;
+    .role-icon {
+      width: 30px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
