@@ -7,7 +7,6 @@ export * from './lib/facade';
 
 export * from './lib/core.module';
 export * from './lib/core-routing.module';
-export * from './lib/core-init.service';
 
 export * from './lib/base/base.component';
 

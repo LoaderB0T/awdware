@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AwdwareCoreSharedModule } from 'awdware-shared';
+import { AwdwareCoreSharedModule, FacadeService, AwdwareConfig, MenuItem } from 'awdware-shared';
 
 import { GamesComponent } from './games.component';
 import { GamesRoutingModule } from './games-routing.module';
 import { PushyModule } from './pushy/pushy.module';
 import { GameHomeComponent } from './game-home/game-home.component';
+import { RoutingService } from 'awdware-core';
 
 
 @NgModule({
@@ -18,4 +19,13 @@ import { GameHomeComponent } from './game-home/game-home.component';
     PushyModule
   ]
 })
-export class GamesModule { }
+export class GamesModule {
+  constructor(routingService: RoutingService, facadeService: FacadeService) {
+    console.log('constructor: GamesModule');
+    const config = new AwdwareConfig();
+    config.menuItems = [
+      new MenuItem('Game', 'gamepad', () => routingService.navigateToGames(), () => true),
+    ];
+    facadeService.addOrUpdateConfiguration('awdware-games', config);
+  }
+}

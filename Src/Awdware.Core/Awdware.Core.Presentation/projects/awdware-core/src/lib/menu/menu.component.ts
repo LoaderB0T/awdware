@@ -32,7 +32,7 @@ export class MenuComponent implements OnInit {
 
   private getMenuItemsFromConfigs(cfg: AwdwareConfig[]): MenuItem[] {
     const returnValue = new Array<MenuItem>();
-    cfg.forEach(x => returnValue.push(...x.menuItems));
+    cfg?.forEach(x => returnValue.push(...x.menuItems));
     return returnValue;
   }
 

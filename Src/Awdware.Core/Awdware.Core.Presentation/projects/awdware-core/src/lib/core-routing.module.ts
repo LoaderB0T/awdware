@@ -10,12 +10,14 @@ import { NewPasswordComponent } from './account/new-password/new-password.compon
 import { MeComponent } from './me/me.component';
 import { UserDetailsResolverService } from './account/services/user-info-resolver.service';
 import { AuthGuard } from './services/auth.guard';
+import { BaseComponent } from './base/base.component';
 
 
 export const routes: Routes = [
   {
     path: '',
     resolve: { userInfo: UserDetailsResolverService },
+    component: BaseComponent,
     children: [
       {
         path: 'account',
@@ -61,13 +63,18 @@ export const routes: Routes = [
       {
         path: 'hello',
         component: HomeComponent
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'hello'
       }
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class CoreRoutingModule { }

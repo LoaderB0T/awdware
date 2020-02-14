@@ -52,7 +52,11 @@ import { LogoComponent } from './logo/logo.component';
     LogoComponent
   ]
 })
-export class AwdwareCoreSharedModule { }
+export class AwdwareCoreSharedModule {
+  constructor() {
+    console.log('constructor: AwdwareCoreSharedModule');
+  }
+}
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

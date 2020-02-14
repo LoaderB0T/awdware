@@ -1,7 +1,6 @@
 export class AwdwareFacade {
-  public initServiceName: string;
+  public baseModuleName: string;
   public apiUrl?: string;
-  public test: boolean = false;
-  public entryComponentName?: string;
-  public services?: { export?: string[], import?: string[] };
+  public test?: boolean = false;
+  public isEntryComponent?: boolean = false;
 }
