@@ -21,6 +21,11 @@
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "paths": {
+      "awdware-games": [
+        "./.yalc/awdware-games/public_api"
+      ]
+    }
   }
 }

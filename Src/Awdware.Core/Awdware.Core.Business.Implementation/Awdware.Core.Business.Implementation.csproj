@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Awdware.Core.Data.Facade\Awdware.Core.Data.Facade.csproj" />
-    <ProjectReference Include="..\Awdware.Core.Data\Awdware.Core.Data.Implementation.csproj" />
+    <ProjectReference Include="..\Awdware.Core.Data.Implementation\Awdware.Core.Data.Implementation.csproj" />
     <ProjectReference Include="..\Awdware.Core.Facade\Awdware.Core.Facade.csproj" />
     <ProjectReference Include="..\Awdware.Core.Infrastructure\Awdware.Core.Infrastructure.csproj" />
   </ItemGroup>

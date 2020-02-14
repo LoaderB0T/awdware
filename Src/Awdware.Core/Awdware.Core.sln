@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Core.Business.Imple
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Core.Business.Facade", "Awdware.Core.Business.Facade\Awdware.Core.Business.Facade.csproj", "{DA9A33C6-80BA-4F72-B94B-7F37DE71D63D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Core.Data.Implementation", "Awdware.Core.Data\Awdware.Core.Data.Implementation.csproj", "{F91A9E2E-8668-4560-92CF-73EE96541925}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Core.Data.Implementation", "Awdware.Core.Data.Implementation\Awdware.Core.Data.Implementation.csproj", "{F91A9E2E-8668-4560-92CF-73EE96541925}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Core.Data.Facade", "Awdware.Core.Data.Facade\Awdware.Core.Data.Facade.csproj", "{21AEB70F-84FA-4B0E-82D0-C4DCF32D3251}"
 EndProject

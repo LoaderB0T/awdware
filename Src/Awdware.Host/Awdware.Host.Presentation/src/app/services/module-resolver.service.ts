@@ -1,56 +1,47 @@
-import { Injectable, ComponentFactoryResolver, Injector, NgModuleFactoryLoader, Compiler, Type } from '@angular/core';
-import { Resolve, Router, ActivatedRoute, Routes, Route } from '@angular/router';
+import { Injectable, Injector, Compiler, Provider } from '@angular/core';
+import { Resolve, Router, Routes } from '@angular/router';
 import { Observable } from 'rxjs';
+
+import { AwdwareFacade } from 'awdware-shared';
+
 import { environment } from '../../environments/environment';
-import { AppService } from './app.service';
-import { AwdwareFacade, FacadeService } from 'awdware-shared';
-import { SessionStoreService, RoutingService } from 'awdware-core';
 
 
 @Injectable({ providedIn: 'root' })
 export class ModuleResoverService implements Resolve<null> {
   private _router: Router;
-  private _activatedRoute: ActivatedRoute;
-  private _factoryResolver: ComponentFactoryResolver;
-  private _appService: AppService;
   private _injector: Injector;
   private modules = new Array<any>();
   private facadeRoutes: Routes = [];
   private routes: Routes = [];
-
-  private pkgCount = 2;
+  private providers = new Array<Provider>();
 
   constructor(
     router: Router,
-    activatedRoute: ActivatedRoute,
-    factoryResolver: ComponentFactoryResolver,
-    appService: AppService,
     injector: Injector,
     private compiler: Compiler
   ) {
     this._router = router;
-    this._activatedRoute = activatedRoute;
-    this._factoryResolver = factoryResolver;
-    this._appService = appService;
     this._injector = injector;
   }
 
-
+  private setFacadeValues(facade: AwdwareFacade) {
+    facade.apiUrl = environment.apiUrl;
+  }
 
   resolve(): Observable<null> {
     return new Observable<null>(obs => {
       this.loadModules().subscribe(() => {
         this.modules.forEach(m => {
           const facade = m.facade as AwdwareFacade;
-          facade.apiUrl = environment.apiUrl;
-          if (m.routes as any[]) {
-            const routes = m.routes as any[];
-            if (facade.isEntryComponent) {
-              this.facadeRoutes = routes;
-            } else {
-              this.routes.push(...routes);
-            }
-          }
+
+          this.setFacadeValues(facade);
+
+          // This creates an instance of the module, needed to have its constructor called with correct dependency injection
+          const _ = this.compiler.compileModuleSync(m[facade.baseModuleName]).create(this._injector);
+
+          this.readModuleRoutes(m, facade);
+          this.readFacadeProviders(facade);
         });
 
         this.facadeRoutes[0].children.push(...this.routes);
@@ -68,22 +59,35 @@ export class ModuleResoverService implements Resolve<null> {
       });
     });
   }
+  readFacadeProviders(facade: AwdwareFacade) {
+    if (facade.provider) {
+      this.providers.push(...facade.provider);
+    }
+  }
+
+  private readModuleRoutes(mod: any, facade: AwdwareFacade) {
+    if (mod.routes) {
+      const routes = mod.routes;
+      if (facade.isEntryComponent) {
+        this.facadeRoutes = routes;
+      } else {
+        this.routes.push(...routes);
+      }
+    }
+  }
 
   private loadModules() {
+    const moduleImports = [import('awdware-games'), import('awdware-core')];
+
+
     return new Observable<void>(obs => {
-      import('awdware-core').then(lazyModule => {
-        const _ = this.compiler.compileModuleSync(lazyModule.CoreModule).create(this._injector);
-        this.modules.push(lazyModule);
-        if (this.modules.length === this.pkgCount) {
-          obs.next(null);
-        }
-      });
-      import('awdware-games').then(lazyModule => {
-        const _ = this.compiler.compileModuleSync(lazyModule.GamesModule).create(this._injector);
-        this.modules.push(lazyModule);
-        if (this.modules.length === this.pkgCount) {
-          obs.next(null);
-        }
+      moduleImports.forEach((moduleImport: any) => {
+        moduleImport.then(lazyModule => {
+          this.modules.push(lazyModule);
+          if (this.modules.length === moduleImports.length) {
+            obs.next(null);
+          }
+        });
       });
     });
   }

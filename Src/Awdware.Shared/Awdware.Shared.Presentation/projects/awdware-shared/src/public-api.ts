@@ -31,6 +31,7 @@ export * from './lib/models/validation-error-type';
 export * from './lib/services/dialog.service';
 export * from './lib/services/download.service';
 export * from './lib/services/facade.service';
+export * from './lib/services/noop-interceptor.service';
 export * from './lib/services/signalr.service';
 export * from './lib/services/theme.service';
 export * from './lib/services/translation.service';

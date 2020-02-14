@@ -2,15 +2,15 @@
   "version": "v1",
   "packages": {
     "awdware-core": {
-      "signature": "648e078daa8a88441181cd30c48efdba",
+      "signature": "04525da65bdf1c573bce445b8907d3e6",
       "file": true
     },
     "awdware-shared": {
-      "signature": "cafb206041c171d27b833fa594ca09bd",
+      "signature": "66c5d345f113ccb8a38a3ce609ebf273",
       "file": true
     },
     "awdware-games": {
-      "signature": "e6877f739c733143e0f685ba99413062",
+      "signature": "67740d0bf011b005018edecaf443a54d",
       "file": true
     }
   }
