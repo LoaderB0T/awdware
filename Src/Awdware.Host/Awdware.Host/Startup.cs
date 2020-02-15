@@ -191,7 +191,7 @@ namespace Awdware.Host
             {
                 corsBuilder.AllowAnyHeader();
                 corsBuilder.AllowAnyMethod();
-                corsBuilder.WithOrigins("http://localhost:4200");
+                corsBuilder.WithOrigins("http://localhost:4200", "http://localhost");
                 corsBuilder.AllowCredentials();
             }
             else

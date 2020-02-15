@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "pre-build": "yalc add awdware-shared && yalc add awdware-core && yalc add awdware-games",
+    "build": "yarn pre-build && ng build",
     "start": "yarn pre-build && ng serve"
   },
   "private": true,
