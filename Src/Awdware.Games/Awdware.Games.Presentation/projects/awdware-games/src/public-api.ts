@@ -5,6 +5,7 @@
 export * from './lib/games.module';
 export * from './lib/games.component';
 export * from './lib/games-routing.module';
+export * from './lib/games-routes';
 
 export * from './lib/facade';
 

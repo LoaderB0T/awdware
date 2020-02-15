@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "awdware-shared": {
-      "signature": "dc6b2546dffab45446d8e8af153a1543",
+      "signature": "66c5d345f113ccb8a38a3ce609ebf273",
       "file": true
     },
     "awdware-core": {

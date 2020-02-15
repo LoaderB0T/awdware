@@ -41,7 +41,6 @@ export class ModuleResoverService implements Resolve<null> {
           const _ = this.compiler.compileModuleSync(m[facade.baseModuleName]).create(this._injector);
 
           this.readModuleRoutes(m, facade);
-          this.readFacadeProviders(facade);
         });
 
         this.facadeRoutes[0].children.push(...this.routes);
@@ -58,11 +57,6 @@ export class ModuleResoverService implements Resolve<null> {
         obs.next(null);
       });
     });
-  }
-  readFacadeProviders(facade: AwdwareFacade) {
-    if (facade.provider) {
-      this.providers.push(...facade.provider);
-    }
   }
 
   private readModuleRoutes(mod: any, facade: AwdwareFacade) {
