@@ -1651,13 +1651,16 @@ autoprefixer@^9.6.5:
     postcss-value-parser "^4.0.2"
 
 "awdware-core@file:.yalc/awdware-core":
-  version "0.0.1-f3c90c05"
+  version "0.0.1-baf7a144"
 
 "awdware-games@file:.yalc/awdware-games":
-  version "0.0.1-67740d0b"
+  version "0.0.1-2d76c402"
+
+"awdware-led@file:.yalc/awdware-led":
+  version "0.0.1-97f7cb68"
 
 "awdware-shared@file:.yalc/awdware-shared":
-  version "0.0.1-dc6b2546"
+  version "0.0.1-6b9e179d"
 
 aws-sign2@~0.7.0:
   version "0.7.0"

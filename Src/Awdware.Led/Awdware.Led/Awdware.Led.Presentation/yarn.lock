@@ -1709,8 +1709,11 @@ autoprefixer@^9.6.5:
     postcss "^7.0.26"
     postcss-value-parser "^4.0.2"
 
+"awdware-core@file:.yalc/awdware-core":
+  version "0.0.1-e152f06a"
+
 "awdware-shared@file:.yalc/awdware-shared":
-  version "0.0.1-f858d4da"
+  version "0.0.1-6b9e179d"
 
 aws-sign2@~0.7.0:
   version "0.7.0"
