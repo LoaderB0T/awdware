@@ -1,16 +1,29 @@
+$shaddowDefault: 0px 0px 12px 0px rgba(0, 0, 0, 0.9);
+$shaddowFocus: 0px 0px 22px 0px rgba(0, 0, 0, 0.9);
+
+$fontSizeSmall: 14px;
+$fontSizeNormal: 16px;
+$fontSizeLarge: 18px;
+$fontSizeGiant: 24px;
+
+$fontWeightNormal: 400;
+$fontWeightBold: 700;
+
+$fontMain: "Montserrat", sans-serif;
+
 html {
-  --shaddowDefault: 0px 0px 12px 0px rgba(0, 0, 0, 0.9);
-  --shaddowFocus: 0px 0px 22px 0px rgba(0, 0, 0, 0.9);
+  #{--shaddowDefault}: $shaddowDefault;
+  #{--shaddowFocus}: $shaddowFocus;
 
-  --fontSizeSmall: 14px;
-  --fontSizeNormal: 16px;
-  --fontSizeLarge: 18px;
-  --fontSizeGiant: 24px;
+  #{--fontSizeSmall}: $fontSizeSmall;
+  #{--fontSizeNormal}: $fontSizeNormal;
+  #{--fontSizeLarge}: $fontSizeLarge;
+  #{--fontSizeGiant}: $fontSizeGiant;
 
-  --fontWeightNormal: 400;
-  --fontWeightBold: 700;
+  #{--fontWeightNormal}: $fontWeightNormal;
+  #{--fontWeightBold}: $fontWeightBold;
 
-  --fontMain: "Montserrat", sans-serif;
+  #{--fontMain}: $fontMain;
 }
 
 @mixin content-color {

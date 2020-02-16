@@ -27,6 +27,9 @@ export * from './lib/account/services/user-info-resolver.service';
 export * from './lib/home/home.module';
 export * from './lib/home/home.component';
 
+export * from './lib/error/error.module';
+export * from './lib/error/error.component';
+
 export * from './lib/me/me.component';
 
 export * from './lib/menu/menu.component';
@@ -49,4 +52,3 @@ export * from './lib/services/session-store.service';
 export * from './lib/services/session.service';
 export * from './lib/services/toolbar-provider.service';
 export * from './lib/services/user-details.service';
-export * from './lib/services/web-api.service';

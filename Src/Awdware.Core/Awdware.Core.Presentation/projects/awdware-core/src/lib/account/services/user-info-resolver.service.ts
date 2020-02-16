@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { AccountService } from './account.service';
 import { SessionStoreService } from '../../services/session-store.service';
@@ -30,38 +30,37 @@ export class UserDetailsResolverService implements Resolve<UserDetailsDto> {
   }
 
   resolve() {
-    return new Observable<UserDetailsDto>(obs => {
-
+    return new Promise<UserDetailsDto>((resolve, reject) => {
       if (this._sessionStoreService.hasToken) {
         if (this._sessionService.sessionNeedsRefresh()) {
           this._sessionService.renewSession().subscribe(
             () => {
               this._accountService.loadUserDetails().subscribe(x => {
-                obs.next(x);
-                obs.complete();
+                resolve(x);
               });
             },
             err => {
               console.log('HTTP Error', err);
-              obs.next(null);
-              obs.complete();
+              resolve(null);
             });
         } else {
-          this._accountService.loadUserDetails().subscribe(
-            x => {
-              obs.next(x);
-              obs.complete();
-            },
-            err => {
-              console.log('HTTP Error', err);
-              obs.next(null);
-              obs.complete();
-            });
+          if (this._userInfoService.userInfo?.userId) {
+            resolve(this._userInfoService.userInfo);
+          } else {
+            this._accountService.loadUserDetails().subscribe(
+              x => {
+                resolve(x);
+              },
+              err => {
+                console.log('HTTP Error', err);
+                resolve(null);
+              }
+            );
+          }
         }
       } else {
         this._userInfoService.clearUser();
-        obs.next(null);
-        obs.complete();
+        resolve(null);
       }
     });
   }

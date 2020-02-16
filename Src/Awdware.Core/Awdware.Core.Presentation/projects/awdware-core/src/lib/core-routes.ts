@@ -11,53 +11,63 @@ import { NewPasswordComponent } from './account/new-password/new-password.compon
 import { MeComponent } from './me/me.component';
 import { AuthGuard } from './services/auth.guard';
 import { HomeComponent } from './home/home.component';
+import { ErrorComponent } from './error/error.component';
 
 export const routes: Routes = [
   {
     path: '',
-    resolve: { userInfo: UserDetailsResolverService },
     component: BaseComponent,
     children: [
       {
-        path: 'account',
-        component: AccountComponent,
+        path: '',
+        resolve: { userInfo: UserDetailsResolverService },
         children: [
           {
-            path: 'login',
-            component: LoginComponent
+            path: 'account',
+            component: AccountComponent,
+            children: [
+              {
+                path: 'login',
+                component: LoginComponent
+              },
+              {
+                path: 'register',
+                component: RegisterComponent
+              },
+              {
+                path: 'help',
+                component: LoginHelpComponent
+              },
+              {
+                path: 'verify/:token',
+                component: VerifyMailComponent
+              },
+              {
+                path: 'resetpw/:token',
+                component: NewPasswordComponent
+              },
+              {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: '/account/login'
+              }
+            ]
           },
           {
-            path: 'register',
-            component: RegisterComponent
+            path: 'me',
+            component: MeComponent,
+            canActivate: [AuthGuard]
           },
           {
-            path: 'help',
-            component: LoginHelpComponent
+            path: 'hello',
+            component: HomeComponent
           },
-          {
-            path: 'verify/:token',
-            component: VerifyMailComponent
-          },
-          {
-            path: 'resetpw/:token',
-            component: NewPasswordComponent
-          },
-          {
-            path: '',
-            pathMatch: 'full',
-            redirectTo: '/account/login'
-          }
         ]
       },
       {
-        path: 'me',
-        component: MeComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'hello',
-        component: HomeComponent
-      },
+        path: 'error/:error',
+        component: ErrorComponent
+      }
     ]
   },
   {

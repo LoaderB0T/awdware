@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { AwdwareCoreSharedModule, FacadeService, AwdwareConfig, MenuItem, NoopInterceptorService } from 'awdware-shared';
+import { AwdwareCoreSharedModule, FacadeService, AwdwareConfig, MenuItem, WebApiService, TranslationService, ThemeService } from 'awdware-shared';
 
 import { MenuComponent } from './menu/menu.component';
 import { MeComponent } from './me/me.component';
@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 import { SessionStoreService } from './services/session-store.service';
 import { RoutingService } from './services/routing.service';
 import { HttpInterceptorService } from './services/http-interceptor.service';
+import { ErrorModule } from './error/error.module';
+import { facade } from './facade';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
     CoreRoutingModule,
     AwdwareCoreSharedModule,
     AccountModule,
-    HomeModule
+    HomeModule,
+    ErrorModule
   ],
 })
 export class CoreModule {
@@ -34,11 +37,18 @@ export class CoreModule {
     routingService: RoutingService,
     facadeService: FacadeService,
     sessionStoreService: SessionStoreService,
-    httpInterceptorService: HttpInterceptorService
+    httpInterceptorService: HttpInterceptorService,
+    apiService: WebApiService,
+    themeService: ThemeService,
+    translationService: TranslationService,
   ) {
     console.log('constructor: CoreModule');
 
     facadeService.intercept = (req, next) => httpInterceptorService.intercept(req, next);
+
+    apiService.init(facade.apiUrl);
+    translationService.init();
+    themeService.init();
 
     this._sessionStoreService = sessionStoreService;
     const config = new AwdwareConfig();

@@ -81,4 +81,8 @@ export class RoutingService {
   public navigateToGamesPushyField(id: string) {
     this._router.navigate(['games', 'pushy', 'field', id]);
   }
+
+  navigateToError(status: number) {
+    this._router.navigate(['error', status]);
+  }
 }

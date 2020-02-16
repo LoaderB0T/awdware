@@ -6,19 +6,21 @@ import {
   HttpEvent,
   HttpResponse,
   HttpErrorResponse,
-  HTTP_INTERCEPTORS
+  HTTP_INTERCEPTORS,
+  HttpEventType
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { SessionStoreService } from './session-store.service';
+import { RoutingService } from './routing.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-  constructor(private sessionStoreService: SessionStoreService) { }
+  constructor(private sessionStoreService: SessionStoreService, private routingService: RoutingService) { }
 
   private logResponse(ev: HttpEvent<any>) {
     if (ev instanceof HttpResponse) {
@@ -38,21 +40,21 @@ export class HttpInterceptorService implements HttpInterceptor {
       (ev: HttpEvent<any>) => {
         this.logResponse(ev);
       },
-      (err: any) => {
+      (err: HttpErrorResponse) => {
         this.handleResponse(err);
       })
     );
   }
 
-  private handleResponse(error: any): void {
-    const respError = error as HttpErrorResponse;
-    if (respError && (respError.status === 401 || respError.status === 403)) {
+  private handleResponse(error: HttpErrorResponse): void {
+    console.log(error);
+    if (error && (error.status === 401 || error.status === 403)) {
       // this.routingService.navigateToAccountLogin();
       // TODO: Implement redirect, except ypu already are on login pare or are currently beeing redirected
+    } else if (error.status === 404 || error.status >= 500 || !error.status) {
+      this.routingService.navigateToError(error.status ?? 0);
     } else {
       // Todo: Visualize Error?
     }
   }
 }
-
-export const httpInterceptorProvider: Provider = { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true };

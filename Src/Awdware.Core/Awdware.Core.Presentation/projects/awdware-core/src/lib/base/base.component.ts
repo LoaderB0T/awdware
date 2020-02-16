@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, ViewContainerRef } from '@angular/core';
-import { ThemeService, TranslationService, DialogService } from 'awdware-shared';
+import { DialogService } from 'awdware-shared';
 import { NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -9,8 +9,6 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./base.component.scss']
 })
 export class BaseComponent implements OnInit {
-  private _themeService: ThemeService;
-  private _translationService: TranslationService;
   private _dialogService: DialogService;
   private previousScroll: number;
   public hideMenu: boolean = false;
@@ -21,16 +19,10 @@ export class BaseComponent implements OnInit {
   constructor(
     viewContainerRef: ViewContainerRef,
     router: Router,
-    themeService: ThemeService,
-    translationService: TranslationService,
     dialogService: DialogService
   ) {
-    this._themeService = themeService;
-    this._translationService = translationService;
     this._dialogService = dialogService;
 
-    this._translationService.init();
-    this._themeService.init();
     this._dialogService.setRootViewContainerRef(viewContainerRef);
     router.events
       .pipe(

@@ -2,7 +2,7 @@
   "name": "awdware-host",
   "version": "0.0.0",
   "scripts": {
-    "pre-build": "yalc add awdware-shared && yalc add awdware-core && yalc add awdware-games",
+    "pre-build": "yalc add awdware-shared && yalc add awdware-core && yalc add awdware-games && yalc add awdware-led",
     "build": "yarn pre-build && ng build",
     "start": "yarn pre-build && ng serve"
   },
@@ -21,6 +21,7 @@
     "@ngx-translate/http-loader": "^4.0.0",
     "awdware-core": "file:.yalc/awdware-core",
     "awdware-games": "file:.yalc/awdware-games",
+    "awdware-led": "file:.yalc/awdware-led",
     "awdware-shared": "file:.yalc/awdware-shared",
     "ng-click-outside": "^5.3.0",
     "rxjs": "~6.5.4",

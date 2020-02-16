@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { WebApiService } from '../../services/web-api.service';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+
+import { WebApiService } from 'awdware-shared';
+
 import { SessionStoreService } from '../../services/session-store.service';
 import {
   LoginRequestDto,
@@ -10,9 +14,7 @@ import {
   LoginHelpRequestDto,
   ResetPasswordDto
 } from '../../models/application-facade';
-import { Observable } from 'rxjs';
 import { RegisterRequestDto, RegisterResponseDto } from '../../models/application-facade';
-import { map, tap } from 'rxjs/operators';
 import { EventService } from '../../services/event.service';
 import { ToolbarInvalidatedEvent } from '../../events/toolbar-invalidated.event';
 import { SessionService } from '../../services/session.service';

@@ -14,7 +14,6 @@ export class ModuleResoverService implements Resolve<null> {
   private modules = new Array<any>();
   private facadeRoutes: Routes = [];
   private routes: Routes = [];
-  private providers = new Array<Provider>();
 
   constructor(
     router: Router,
@@ -71,7 +70,7 @@ export class ModuleResoverService implements Resolve<null> {
   }
 
   private loadModules() {
-    const moduleImports = [import('awdware-games'), import('awdware-core')];
+    const moduleImports = [import('awdware-games'), import('awdware-core'), import('awdware-led')];
 
 
     return new Observable<void>(obs => {

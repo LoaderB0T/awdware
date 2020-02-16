@@ -14,23 +14,27 @@ export class TranslationService {
     this.setLanguage(this.getLanguageId());
   }
 
-  private setLanguage(lenId: string) {
+  public setLanguage(lenId: LenID) {
     localStorage.setItem('language', lenId);
     this.translateService.use(lenId);
   }
 
-  private getLanguageId(): string {
+  private getLanguageId(): LenID {
     const lenId = localStorage.getItem('language');
     if (lenId && this.isSupportedLanguage(lenId)) {
-      return lenId;
+      return lenId as LenID;
     } else {
       return 'en_US';
     }
   }
 
-  private isSupportedLanguage(len: string) {
-    return (len === 'en_US'
-      || len === 'de_DE');
+  private isSupportedLanguage(len: any): boolean {
+    return internalLenId.hasOwnProperty(len);
   }
-
 }
+
+export declare type LenID = keyof typeof internalLenId;
+const internalLenId = {
+  en_US: '',
+  de_DE: ''
+};
