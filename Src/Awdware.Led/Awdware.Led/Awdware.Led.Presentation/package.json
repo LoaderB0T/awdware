@@ -5,7 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "pre-build": "yalc add awdware-shared",
-    "build": "yarn run pre-build && ng build awdware-led && cd dist/awdware-led && yalc publish"
+    "build": "yarn run pre-build && ng build awdware-led && cd dist/awdware-led && yalc publish",
+    "build-prod": "yarn run pre-build && ng build awdware-led --prod && cd dist/awdware-led && yalc publish"
   },
   "private": true,
   "dependencies": {

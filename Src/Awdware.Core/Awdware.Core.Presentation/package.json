@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "pre-build": "yalc add awdware-shared",
-    "build": "yarn run pre-build && ng build awdware-core && cd dist/awdware-core && yalc publish"
+    "build": "yarn run pre-build && ng build awdware-core && cd dist/awdware-core && yalc publish",
+    "build-prod": "yarn run pre-build && ng build awdware-core --prod && cd dist/awdware-core && yalc publish"
   },
   "private": true,
   "dependencies": {

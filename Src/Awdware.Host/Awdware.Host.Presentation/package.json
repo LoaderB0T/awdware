@@ -4,6 +4,7 @@
   "scripts": {
     "pre-build": "yalc add awdware-shared && yalc add awdware-core && yalc add awdware-games && yalc add awdware-led",
     "build": "yarn pre-build && ng build",
+    "build-prod": "yarn pre-build && ng build --prod",
     "start": "yarn pre-build && ng serve"
   },
   "private": true,
