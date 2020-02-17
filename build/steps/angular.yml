@@ -1,0 +1,21 @@
+parameters:
+  projects:
+    - path: ""
+      name: ""
+      lint: true
+
+steps:
+  - ${{ each project in parameters.projects }}:
+      - task: Yarn@3
+        inputs:
+          projectDirectory: ${{ project.path }}
+          arguments: "run build-prod"
+        displayName: "build ${{ project.name }}"
+
+  - ${{ each project in parameters.projects }}:
+      - task: Yarn@3
+        inputs:
+          projectDirectory: ${{ project.path }}
+          arguments: "run lint-build"
+        displayName: "lint ${{ project.name }}"
+        continueOnError: true

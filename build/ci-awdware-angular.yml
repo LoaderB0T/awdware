@@ -50,27 +50,25 @@ steps:
         sonar.test.inclusions=**/*.spec.ts
         sonar.ts.tslintconfigpath=Src/Awdware.Host/Awdware.Host.Presentation/tslint.json
 
-  - ${{ each module in parameters.modules }}:
-      - task: Yarn@3
-        inputs:
-          projectDirectory: ${{ module.path }}
-          arguments: "run build-prod"
-        displayName: "build ${{ module.key }}"
-
+  - template: ./steps/angular.yml
+    parameters:
+      projects:
+        - path: "Src/Awdware.Shared/Awdware.Shared.Presentation/"
+          name: awdware-shared
+        - path: "Src/Awdware.Core/Awdware.Core.Presentation/"
+          name: awdware-core
+        - path: "Src/Awdware.Ganes/Awdware.Games.Presentation/"
+          name: awdware-games
+        - path: "Src/Awdware.Led/Awdware.Led/Awdware.Led.Presentation/"
+          name: awdware-leds
+        - path: "Src/Awdware.Host/Awdware.Host.Presentation/"
+          name: awdware-host
   # - task: Yarn@3
   #   inputs:
   #     projectDirectory: 'presentation/'
   #     arguments: 'run test-unit'
   #   displayName: 'unit test'
   #   continueOnError: true
-
-  - ${{ each module in parameters.modules }}:
-      - task: Yarn@3
-        inputs:
-          projectDirectory: ${{ module.path }}
-          arguments: "run lint-build"
-        displayName: "lint ${{ module.key }}"
-        continueOnError: true
   # - task: PublishBuildArtifacts@1
   #   inputs:
   #     PathtoPublish: "Src/Awdware.Presentation/dist/presentation/"
