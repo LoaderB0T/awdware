@@ -1,17 +1,3 @@
-parameters:
-  bla: true
-  modules:
-    - path: "Src/Awdware.Shared/Awdware.Shared.Presentation/"
-      key: awdware-shared
-    - path: "Src/Awdware.Core/Awdware.Core.Presentation/"
-      key: awdware-core
-    - path: "Src/Awdware.Ganes/Awdware.Games.Presentation/"
-      key: awdware-games
-    - path: "Src/Awdware.Led/Awdware.Led/Awdware.Led.Presentation/"
-      key: awdware-leds
-    - path: "Src/Awdware.Host/Awdware.Host.Presentation/"
-      key: awdware-host
-
 pool:
   vmImage: "ubuntu-latest"
 
