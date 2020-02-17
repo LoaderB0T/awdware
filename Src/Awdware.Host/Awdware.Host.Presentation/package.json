@@ -2,9 +2,9 @@
   "name": "awdware-host",
   "version": "0.0.0",
   "scripts": {
-    "pre-build": "yalc add awdware-shared && yalc add awdware-core && yalc add awdware-games && yalc add awdware-led",
-    "build": "yarn pre-build && ng build",
-    "build-prod": "yarn pre-build && ng build --prod",
+    "pre-build": "yalc add awdware-shared && yalc add awdware-core && yalc add awdware-games && yalc add awdware-led && yarn",
+    "build": "yarn pre-build && yarn ng build",
+    "build-prod": "yarn pre-build && yarn ng build --prod",
     "start": "yarn pre-build && ng serve"
   },
   "private": true,
