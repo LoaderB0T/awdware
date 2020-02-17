@@ -2,6 +2,7 @@ pool:
   vmImage: "ubuntu-latest"
 
 parameters:
+  bla: true
   modules:
     - path: "Src/Awdware.Shared/Awdware.Shared.Presentation/"
       key: awdware-shared
