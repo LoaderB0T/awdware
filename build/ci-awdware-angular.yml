@@ -18,6 +18,11 @@ steps:
       arguments: "install"
     displayName: "yarn install"
 
+  - task: Yarn@3
+    inputs:
+      projectDirectory: '/'
+      arguments: 'global add yalc'
+
   - task: SonarCloudPrepare@1
     continueOnError: true
     displayName: "Prepare analysis on SonarCloud"
