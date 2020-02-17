@@ -1,6 +1,3 @@
-pool:
-  vmImage: "ubuntu-latest"
-
 parameters:
   bla: true
   modules:
@@ -14,6 +11,9 @@ parameters:
       key: awdware-leds
     - path: "Src/Awdware.Host/Awdware.Host.Presentation/"
       key: awdware-host
+
+pool:
+  vmImage: "ubuntu-latest"
 
 steps:
   - task: NodeTool@0
