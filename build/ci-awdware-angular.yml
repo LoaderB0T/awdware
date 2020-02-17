@@ -2,21 +2,16 @@ pool:
   vmImage: "ubuntu-latest"
 
 variables:
-  modules:
-    - awdware-shared:
-        path: "Src/Awdware.Shared/Awdware.Shared.Presentation/"
+  - modules:
+      - path: "Src/Awdware.Shared/Awdware.Shared.Presentation/"
         key: awdware-shared
-    - awdware-core:
-        path: "Src/Awdware.Core/Awdware.Core.Presentation/"
+      - path: "Src/Awdware.Core/Awdware.Core.Presentation/"
         key: awdware-core
-    - awdware-games:
-        path: "Src/Awdware.Ganes/Awdware.Games.Presentation/"
+      - path: "Src/Awdware.Ganes/Awdware.Games.Presentation/"
         key: awdware-games
-    - awdware-leds:
-        path: "Src/Awdware.Led/Awdware.Led/Awdware.Led.Presentation/"
+      - path: "Src/Awdware.Led/Awdware.Led/Awdware.Led.Presentation/"
         key: awdware-leds
-    - awdware-host:
-        path: "Src/Awdware.Host/Awdware.Host.Presentation/"
+      - path: "Src/Awdware.Host/Awdware.Host.Presentation/"
         key: awdware-host
 
 steps:
