@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "pre-build": "yarn add yalc -D && yalc add awdware-shared && yarn",
+    "pre-build": "yalc add awdware-shared && yarn",
     "build": "yarn pre-build && yarn ng build awdware-games && cd dist/awdware-games && yalc publish",
     "build-prod": "yarn pre-build && yarn ng build awdware-games --prod && cd dist/awdware-games && yalc publish"
   },
