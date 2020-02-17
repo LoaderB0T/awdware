@@ -1,77 +1,91 @@
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
+
+variables:
+  modules:
+    - awdware-shared:
+        path: "Src/Awdware.Shared/Awdware.Shared.Presentation/"
+        key: awdware-shared
+    - awdware-core:
+        path: "Src/Awdware.Core/Awdware.Core.Presentation/"
+        key: awdware-core
+    - awdware-games:
+        path: "Src/Awdware.Ganes/Awdware.Games.Presentation/"
+        key: awdware-games
+    - awdware-leds:
+        path: "Src/Awdware.Led/Awdware.Led/Awdware.Led.Presentation/"
+        key: awdware-leds
+    - awdware-host:
+        path: "Src/Awdware.Host/Awdware.Host.Presentation/"
+        key: awdware-host
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '12.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "12.x"
+    displayName: "Install Node.js"
 
-- task: YarnInstaller@3
-  inputs:
-    versionSpec: '1.x'
-    checkLatest: true
+  - task: YarnInstaller@3
+    inputs:
+      versionSpec: "1.x"
+      checkLatest: true
 
-- task: Yarn@3
-  inputs:
-    projectDirectory: 'Src/Awdware.Presentation/'
-    arguments: 'install'
-  displayName: 'yarn install'
+  - task: Yarn@3
+    inputs:
+      projectDirectory: "Src/Awdware.Presentation/"
+      arguments: "install"
+    displayName: "yarn install"
 
+  - task: SonarCloudPrepare@1
+    continueOnError: true
+    displayName: "Prepare analysis on SonarCloud"
+    inputs:
+      SonarCloud: "sonarcloud"
+      organization: "awdware"
+      scannerMode: CLI
+      configMode: manual
+      cliProjectKey: "awdware:presentation"
+      cliSources: presentation
+      extraProperties: |
+        sonar.sources=Src/**/Awdware.*.Presentation/src/projects/awdware-*/src
+        sonar.sourceEncoding=UTF-8
+        sonar.exclusions=**/node_modules/**,**/*.spec.ts
+        sonar.tests=Src/**/Awdware.*.Presentation/src/projects/awdware-*/src
+        sonar.test.inclusions=**/*.spec.ts
+        sonar.ts.tslintconfigpath=Src/Awdware.Host/Awdware.Host.Presentation/tslint.json
 
-- task: SonarCloudPrepare@1
-  continueOnError: true
-  displayName: 'Prepare analysis on SonarCloud'
-  inputs:
-    SonarCloud: 'sonarcloud'
-    organization: 'awdware'
-    scannerMode: CLI
-    configMode: manual
-    cliProjectKey: 'awdware:presentation'
-    cliSources: presentation
-    extraProperties: |
-     sonar.sources=Src/Awdware.Presentation/src
-     sonar.sourceEncoding=UTF-8
-     sonar.exclusions=**/node_modules/**,**/*.spec.ts
-     sonar.tests=Src/Awdware.Presentation/src
-     sonar.test.inclusions=**/*.spec.ts
-     sonar.ts.tslintconfigpath=Src/Awdware.Presentation/tslint.json
-     sonar.exclusions=**/node_modules/**,**/*.spec.ts
+  - ${{ each module in variables.modules }}:
+      - task: Yarn@3
+        inputs:
+          projectDirectory: ${{ module.path }}
+          arguments: "run build-prod"
+        displayName: "build ${{ module.key }}"
 
+  # - task: Yarn@3
+  #   inputs:
+  #     projectDirectory: 'presentation/'
+  #     arguments: 'run test-unit'
+  #   displayName: 'unit test'
+  #   continueOnError: true
 
-- task: Yarn@3
-  inputs:
-    projectDirectory: 'Src/Awdware.Presentation/'
-    arguments: 'run build-prod'
-  displayName: 'build productive'
-
-# - task: Yarn@3
-#   inputs:
-#     projectDirectory: 'presentation/'
-#     arguments: 'run test-unit'
-#   displayName: 'unit test'
-#   continueOnError: true
-
-- task: Yarn@3
-  inputs:
-    projectDirectory: 'Src/Awdware.Presentation/'
-    arguments: 'run lint-build'
-  displayName: 'linting'
-  continueOnError: true
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: 'Src/Awdware.Presentation/dist/presentation/'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-  displayName: publish build
-
-- task: SonarCloudAnalyze@1
-  displayName: 'Run Code Analysis'
-  continueOnError: true
-
-- task: SonarCloudPublish@1
-  displayName: 'Publish Quality Gate Result'
-  continueOnError: true
-  inputs:
-    pollingTimeoutSec: '300'
+  - ${{ each module in variables.modules }}:
+      - task: Yarn@3
+        inputs:
+          projectDirectory: ${{ module.path }}
+          arguments: "run lint-build"
+        displayName: "lint ${{ module.key }}"
+        continueOnError: true
+  # - task: PublishBuildArtifacts@1
+  #   inputs:
+  #     PathtoPublish: "Src/Awdware.Presentation/dist/presentation/"
+  #     ArtifactName: "drop"
+  #     publishLocation: "Container"
+  #   displayName: publish build
+  # - task: SonarCloudAnalyze@1
+  #   displayName: "Run Code Analysis"
+  #   continueOnError: true
+  # - task: SonarCloudPublish@1
+  #   displayName: "Publish Quality Gate Result"
+  #   continueOnError: true
+  #   inputs:
+  #     pollingTimeoutSec: "300"
