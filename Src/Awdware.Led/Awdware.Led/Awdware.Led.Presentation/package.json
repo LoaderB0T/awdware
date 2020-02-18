@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "pre-build": "yalc add awdware-shared && yalc add awdware-led && yarn",
+    "pre-build": "yalc add awdware-shared && yalc add awdware-core && yarn",
     "build": "yarn run pre-build && yarn ng build awdware-led && cd dist/awdware-led && yalc publish",
     "build-prod": "yarn run pre-build && yarn ng build awdware-led --prod && cd dist/awdware-led && yalc publish"
   },
