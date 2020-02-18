@@ -14,7 +14,7 @@ steps:
 
   - task: Yarn@3
     inputs:
-      projectDirectory: "Src/Awdware.Presentation/"
+      projectDirectory: "Src/"
       arguments: "install"
     displayName: "yarn install"
 
@@ -48,7 +48,7 @@ steps:
           name: awdware-shared
         - path: "Src/Awdware.Core/Awdware.Core.Presentation/"
           name: awdware-core
-        - path: "Src/Awdware.Ganes/Awdware.Games.Presentation/"
+        - path: "Src/Awdware.Games/Awdware.Games.Presentation/"
           name: awdware-games
         - path: "Src/Awdware.Led/Awdware.Led/Awdware.Led.Presentation/"
           name: awdware-leds
