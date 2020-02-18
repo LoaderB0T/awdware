@@ -1,0 +1,13 @@
+<div id="app-main" [class.blur]="dialogVisible">
+  <div id="app-menu">
+    <awd-menu [hideToTop]="hideMenu"></awd-menu>
+  </div>
+  <div #mainContent id="main-content" (scroll)="handleScroll()">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="bg">
+    <awd-logo></awd-logo>
+  </div>
+</div>
+
+<div [class.shown]="dialogVisible" class="dialog-bg dialog-bg-blurred"></div>

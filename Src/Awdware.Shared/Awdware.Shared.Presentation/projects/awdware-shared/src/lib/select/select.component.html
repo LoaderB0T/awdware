@@ -1,0 +1,24 @@
+<label *ngIf="label">{{label}}</label>
+<div class="select-container noselect" id="" (clickOutside)="onClickedOutside()">
+  <button #selectButton class="drop-button" (click)="toggleSelect(id)" (keypress)="toggleSelect(id)"
+    [class.selected]="isVisible" [class.is-read-only]="isReadOnly">
+    <span class="select-selected-option-text">{{displayText}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <div class="select-arrow-div" *ngIf="!isReadOnly">
+      <div class="select-arrow-offset">
+        <i class="fal fa-caret-down select-arrow"></i>
+      </div>
+    </div>
+  </button>
+  <div #selectContent class="select-content" [hidden]="!isVisible" [style.width.px]="contentWidth">
+    <!-- [style.top.px]="contentTop" [style.left.px]="contentLeft" -->
+    <ng-container *ngIf="hasOptions">
+      <div class="select-option" id="{{option.key}}" *ngFor="let option of options" (click)="selectOption(option)"
+        (keypress)="selectOption(option)">
+        <span *ngIf="option.icon" class="drop-down-option-icon bs-icon bs-icon-{{option.icon}}"></span>
+        <span class="select-option-text">&nbsp;{{option.text}}</span>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<span id="ruler"></span>
