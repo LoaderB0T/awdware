@@ -60,17 +60,17 @@ steps:
   #     arguments: 'run test-unit'
   #   displayName: 'unit test'
   #   continueOnError: true
-  # - task: PublishBuildArtifacts@1
-  #   inputs:
-  #     PathtoPublish: "Src/Awdware.Presentation/dist/presentation/"
-  #     ArtifactName: "drop"
-  #     publishLocation: "Container"
-  #   displayName: publish build
-  # - task: SonarCloudAnalyze@1
-  #   displayName: "Run Code Analysis"
-  #   continueOnError: true
-  # - task: SonarCloudPublish@1
-  #   displayName: "Publish Quality Gate Result"
-  #   continueOnError: true
-  #   inputs:
-  #     pollingTimeoutSec: "300"
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: "Src/Awdware.Host/Awdware.Host.Presentation/dist/awdware-host/"
+      ArtifactName: "drop"
+      publishLocation: "Container"
+    displayName: publish build
+  - task: SonarCloudAnalyze@1
+    displayName: "Run Code Analysis"
+    continueOnError: true
+  - task: SonarCloudPublish@1
+    displayName: "Publish Quality Gate Result"
+    continueOnError: true
+    inputs:
+      pollingTimeoutSec: "300"
