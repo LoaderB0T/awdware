@@ -1,0 +1,10 @@
+{
+  "isHost": false,
+  "modules": [
+    {
+      "name": "Awdware.Shared.Presentation",
+      "facadePath": "./projects/awdware-shared/src/lib",
+      "publicApiPath": "./projects/awdware-shared/src/public-api.ts"
+    }
+  ]
+}

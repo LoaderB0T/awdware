@@ -1,0 +1,19 @@
+{
+  "isHost": false,
+  "modules": [
+    {
+      "name": "Awdware.Core.Presentation",
+      "facadePath": "./projects/awdware-core/src/facade",
+      "publicApiPath": "./projects/awdware-core/src/public-api.ts",
+      "baseNgModuleName": "CoreModule",
+      "dependencies": [
+        {
+          "path": "..\\..\\Awdware.Shared\\Awdware.Shared.Presentation\\gah-config.json",
+          "names": [
+            "Awdware.Shared.Presentation"
+          ]
+        }
+      ]
+    }
+  ]
+}

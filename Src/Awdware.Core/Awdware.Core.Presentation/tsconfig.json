@@ -18,6 +18,11 @@
       "es2018",
       "dom"
     ],
+    "paths": {
+      "@gah/Awdware.Shared.Presentation/*": [
+        "projects\\awdware-core\\src\\.deps\\Awdware.Shared.Presentation/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

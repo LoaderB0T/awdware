@@ -26,6 +26,12 @@
       "awdware-games": [
         "dist/awdware-games/awdware-games",
         "dist/awdware-games"
+      ],
+      "@gah/Awdware.Core.Presentation/*": [
+        "projects\\awdware-games\\src\\.deps\\Awdware.Core.Presentation/*"
+      ],
+      "@gah/Awdware.Shared.Presentation/*": [
+        "projects\\awdware-games\\src\\.deps\\Awdware.Shared.Presentation/*"
       ]
     }
   },

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { AwdwareCoreSharedModule, FacadeService, AwdwareConfig, MenuItem, WebApiService, TranslationService, ThemeService } from 'awdware-shared';
+import { AwdwareCoreSharedModule, FacadeService, WebApiService, ThemeService, TranslationService, AwdwareConfig, MenuItem } from '@gah/Awdware.Shared.Presentation/public-api';
 
 import { MenuComponent } from './menu/menu.component';
 import { MeComponent } from './me/me.component';

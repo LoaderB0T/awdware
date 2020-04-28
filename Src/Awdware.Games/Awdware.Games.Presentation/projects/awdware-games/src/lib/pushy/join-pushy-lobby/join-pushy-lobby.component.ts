@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BaseDialog } from 'awdware-shared';
-import { RoutingService } from 'awdware-core';
+import { BaseDialog } from '@gah/Awdware.Shared.Presentation/public-api';
+import { RoutingService } from '@gah/Awdware.Core.Presentation/public-api';
 
 import { PushyService } from '../services/pushy.service';
 import { GameLobbyInformationDto } from '../../models/application-facade';

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AwdwareCoreSharedModule } from 'awdware-shared';
+import { AwdwareCoreSharedModule } from '@gah/Awdware.Shared.Presentation/public-api';
 
 import { PushyComponent } from './pushy.component';
 import { CreatePushyLobbyComponent } from './create-pushy-lobby/create-pushy-lobby.component';

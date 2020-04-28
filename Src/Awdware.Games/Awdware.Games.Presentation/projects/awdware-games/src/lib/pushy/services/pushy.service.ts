@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HubConnection } from '@aspnet/signalr';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { SignalrService } from 'awdware-shared';
-import { UserDetailsService } from 'awdware-core';
+import { SignalrService } from '@gah/Awdware.Shared.Presentation/public-api';
+import { UserDetailsService } from '@gah/Awdware.Core.Presentation/public-api';
 import {
   GameLobbyInformationDto,
   GamePlayerDto,

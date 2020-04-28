@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ThemeService, TranslationService } from 'awdware-shared';
+import { ThemeService, TranslationService } from '@gah/Awdware.Shared.Presentation/public-api';
 
 import { UserDetailsService } from '../services/user-details.service';
 import { UserDetails } from '../models/user-details';
@@ -46,10 +46,10 @@ export class MeComponent implements OnInit {
     this._themeService.changeTheme('light');
   }
   public german() {
-    this._translationService['setLanguage']('de_DE');
+    this._translationService.setLanguage('de_DE');
   }
   public english() {
-    this._translationService['setLanguage']('en_US');
+    this._translationService.setLanguage('en_US');
   }
 
 }

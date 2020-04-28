@@ -1,0 +1,24 @@
+{
+  "isHost": false,
+  "modules": [
+    {
+      "name": "Awdware.Led.Presentation",
+      "facadePath": "./projects/awdware-led/src/facade",
+      "publicApiPath": "./projects/awdware-led/src/public-api.ts",
+      "dependencies": [
+        {
+          "path": "..\\..\\..\\Awdware.Core\\Awdware.Core.Presentation\\gah-config.json",
+          "names": [
+            "Awdware.Core.Presentation"
+          ]
+        },
+        {
+          "path": "..\\..\\..\\Awdware.Shared\\Awdware.Shared.Presentation\\gah-config.json",
+          "names": [
+            "Awdware.Shared.Presentation"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "isHost": false,
+  "modules": [
+    {
+      "name": "Awdware.Games.Presentation",
+      "facadePath": "./projects/awdware-games/src/facade",
+      "publicApiPath": "./projects/awdware-games/src/public-api.ts",
+      "dependencies": [
+        {
+          "path": "..\\..\\Awdware.Core\\Awdware.Core.Presentation\\gah-config.json",
+          "names": [
+            "Awdware.Core.Presentation"
+          ]
+        },
+        {
+          "path": "..\\..\\Awdware.Shared\\Awdware.Shared.Presentation\\gah-config.json",
+          "names": [
+            "Awdware.Shared.Presentation"
+          ]
+        }
+      ]
+    }
+  ]
+}
