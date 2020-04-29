@@ -2,6 +2,7 @@
  * Public API Surface of awdware-core
  */
 
+export * from './environment';
 
 export * from './lib/core.module';
 export * from './lib/core-routes';

@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AwdwareConfig } from '../models/awdware-config';
-import { HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class FacadeService {
   private $updated = new Subject<AwdwareConfig[]>();
   public configurations: { key: string, config: AwdwareConfig }[];
   public updated = this.$updated.asObservable();
-
-  public intercept: (req: HttpRequest<any>, next: HttpHandler) => Observable<HttpEvent<any>>;
 
   public addOrUpdateConfiguration(name: string, config: AwdwareConfig) {
     if (!this.configurations) {

@@ -17,6 +17,7 @@ import { RoutingService } from './services/routing.service';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ErrorModule } from './error/error.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { environment } from '../environment';
 
 @NgModule({
   declarations: [
@@ -41,16 +42,14 @@ export class CoreModule {
     routingService: RoutingService,
     facadeService: FacadeService,
     sessionStoreService: SessionStoreService,
-    httpInterceptorService: HttpInterceptorService,
     apiService: WebApiService,
     themeService: ThemeService,
     translationService: TranslationService,
   ) {
     console.log('constructor: CoreModule');
 
-    facadeService.intercept = (req, next) => httpInterceptorService.intercept(req, next);
-
-    apiService.init('http://localhost:5555'); // TODO add environment variables
+    // apiService.init(environment.apiUrl);
+    // TODO add event hook for after initialization is done (Environment is not available at this point in time!)
     translationService.init();
     themeService.init();
 
@@ -58,10 +57,6 @@ export class CoreModule {
     const config = new AwdwareConfig();
     config.menuItems = [
       new MenuItem('Home', 'home', () => routingService.navigateToHomeHello(), () => true),
-      // new MenuItem('Vote', 'ballot', () => this._routingService.navigateToVote(), () => true),
-      // new MenuItem('Short URL', 'link', () => { }, () => true),
-      // new MenuItem('Game', 'gamepad', () => this._routingService.navigateToGames(), () => true),
-      // new MenuItem('LED', 'lightbulb', () => this._routingService.navigateToLed(), () => true),
       new MenuItem('Login', 'sign-in', () => routingService.navigateToAccountLogin(), () => this.showLoginButton()),
       new MenuItem('Account', 'user', () => routingService.navigateToAccount(), () => this.showAccountButton())
     ];

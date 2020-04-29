@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { InvalidOperationError } from '../models/invalid-operation-error';
+import { environment } from '../../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class WebApiService {
   private baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
+    console.log('web api service constructor called');
   }
 
   public init(apiUrl: string) {
@@ -19,7 +21,8 @@ export class WebApiService {
 
   private checkInit() {
     if (!this.baseUrl) {
-      throw new InvalidOperationError('This Service has to be initialized before the first use!');
+      this.init(environment.apiUrl);
+      // throw new InvalidOperationError('This Service has to be initialized before the first use!');
     }
   }
 
