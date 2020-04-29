@@ -3,8 +3,9 @@
   "modules": [
     {
       "name": "Awdware.Led.Presentation",
-      "facadePath": "./projects/awdware-led/src/facade",
-      "publicApiPath": "./projects/awdware-led/src/public-api.ts",
+      "facadePath": "projects\\awdware-led\\src\\facade",
+      "publicApiPath": "projects\\awdware-led\\src\\public-api.ts",
+      "baseNgModuleName": "LedModule",
       "dependencies": [
         {
           "path": "..\\..\\..\\Awdware.Core\\Awdware.Core.Presentation\\gah-config.json",

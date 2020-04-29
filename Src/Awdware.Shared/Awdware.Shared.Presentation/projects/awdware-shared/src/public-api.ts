@@ -14,7 +14,6 @@ export * from './lib/tab-view/tab-view.component';
 export * from './lib/textbox/textbox.component';
 
 export * from './lib/models/awdware-config';
-export * from './lib/models/awdware-facade';
 export * from './lib/models/base-dialog.model';
 export * from './lib/models/color-type.model';
 export * from './lib/models/input-type';

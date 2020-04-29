@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { BaseDialog, SelectOption } from 'awdware-shared';
+import { BaseDialog, SelectOption } from '@gah/Awdware.Shared.Presentation/public-api';
 
 import { LedService } from '../services/led.service';
 import { LedSettingsDto } from '../models/application-facade';
@@ -70,4 +70,3 @@ export class LedSettingsComponent extends BaseDialog implements OnInit {
     this.$closeDialog.next();
   }
 }
-

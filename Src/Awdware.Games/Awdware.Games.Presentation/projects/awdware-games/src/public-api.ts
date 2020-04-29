@@ -7,8 +7,6 @@ export * from './lib/games.component';
 export * from './lib/games-routing.module';
 export * from './lib/games-routes';
 
-export * from './lib/facade';
-
 export * from './lib/game-home/game-home.component';
 
 export * from './lib/pushy/pushy.module';

@@ -9,7 +9,6 @@ import {
   GamePlayerDto,
   PushyMoveDirectionDto, PushyFieldDto
 } from '../../models/application-facade';
-import { facade } from '../../facade';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +23,7 @@ export class PushyService {
   constructor(signalrService: SignalrService, userDetailsService: UserDetailsService) {
     this._signalrService = signalrService;
     this._userDetailsService = userDetailsService;
-    this._signalrHub = signalrService.getHubConnection(facade.apiUrl, '/pushyhub');
+    this._signalrHub = signalrService.getHubConnection('localhost:5555', '/pushyhub'); // TODO: Add environment variables
   }
 
   public get myPlayer(): GamePlayerDto {

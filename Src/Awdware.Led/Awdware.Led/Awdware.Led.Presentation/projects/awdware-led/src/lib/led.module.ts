@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { AwdwareCoreSharedModule, FacadeService, AwdwareConfig, MenuItem } from 'awdware-shared';
-import { RoutingService } from 'awdware-core';
+import { RoutingService } from '@gah/Awdware.Core.Presentation/public-api';
+import { AwdwareCoreSharedModule, FacadeService, AwdwareConfig, MenuItem } from '@gah/Awdware.Shared.Presentation/public-api';
 
 import { LedComponent } from './led.component';
 import { LedRoutingModule } from './led-routing.module';

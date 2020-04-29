@@ -23,11 +23,11 @@
         "dist/awdware-led/awdware-led",
         "dist/awdware-led"
       ],
-      "@gah-deps/Awdware.Core.Presentation/*": [
-        "..\\..\\..\\Awdware.Core\\Awdware.Core.Presentation\\projects\\awdware-core\\src\\facade/*"
+      "@gah/Awdware.Core.Presentation/*": [
+        "projects\\awdware-led\\src\\.gah-dependencies\\Awdware.Core.Presentation/*"
       ],
-      "@gah-deps/Awdware.Shared.Presentation/*": [
-        "..\\..\\..\\Awdware.Shared\\Awdware.Shared.Presentation\\projects\\awdware-sahred\\src\\lib/*"
+      "@gah/Awdware.Shared.Presentation/*": [
+        "projects\\awdware-led\\src\\.gah-dependencies\\Awdware.Shared.Presentation/*"
       ]
     }
   },

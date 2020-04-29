@@ -5,6 +5,7 @@
       "name": "Awdware.Games.Presentation",
       "facadePath": "./projects/awdware-games/src/facade",
       "publicApiPath": "./projects/awdware-games/src/public-api.ts",
+      "baseNgModuleName": "GamesModule",
       "dependencies": [
         {
           "path": "..\\..\\Awdware.Core\\Awdware.Core.Presentation\\gah-config.json",

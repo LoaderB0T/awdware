@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 
-import { AwdwareCoreSharedModule, FacadeService, WebApiService, ThemeService, TranslationService, AwdwareConfig, MenuItem } from '@gah/Awdware.Shared.Presentation/public-api';
+import {
+  AwdwareCoreSharedModule, FacadeService, WebApiService,
+  ThemeService, TranslationService, AwdwareConfig, MenuItem
+} from '@gah/Awdware.Shared.Presentation/public-api';
 
 import { MenuComponent } from './menu/menu.component';
 import { MeComponent } from './me/me.component';
@@ -13,7 +16,7 @@ import { SessionStoreService } from './services/session-store.service';
 import { RoutingService } from './services/routing.service';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ErrorModule } from './error/error.module';
-import { facade } from './facade';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { facade } from './facade';
     HomeModule,
     ErrorModule
   ],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
 })
 export class CoreModule {
   private _sessionStoreService: SessionStoreService;
@@ -46,7 +50,7 @@ export class CoreModule {
 
     facadeService.intercept = (req, next) => httpInterceptorService.intercept(req, next);
 
-    apiService.init(facade.apiUrl);
+    apiService.init('http://localhost:5555'); // TODO add environment variables
     translationService.init();
     themeService.init();
 

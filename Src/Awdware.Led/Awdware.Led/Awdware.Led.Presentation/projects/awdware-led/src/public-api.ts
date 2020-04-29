@@ -5,7 +5,6 @@
 export * from './lib/led.module';
 export * from './lib/led-routing.module';
 export * from './lib/led.component';
-export * from './lib/facade';
 
 export * from './lib/add-effect/add-effect.component';
 
