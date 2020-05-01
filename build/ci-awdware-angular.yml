@@ -21,7 +21,7 @@ steps:
   - task: Yarn@3
     inputs:
       projectDirectory: "Src/Awdware.Host/Awdware.Host.Presentation"
-      arguments: "global add @adwware/gah-cli"
+      arguments: "global add @awdware/gah-cli"
 
   - task: SonarCloudPrepare@1
     continueOnError: true
