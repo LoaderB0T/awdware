@@ -9,17 +9,17 @@ import { modulePackages } from '../.gah-generated/gah-modules';
 @Injectable({ providedIn: 'root' })
 export class ModuleInitializerService implements Resolve<null> {
   private _router: Router;
-  private _injector: Injector;
+  // private _injector: Injector;
   private _modules = new Array<any>();
   private _facadeRoutes: Routes = [];
   private _routes: Routes = [];
 
   constructor(
     router: Router,
-    injector: Injector
+    // injector: Injector
   ) {
     this._router = router;
-    this._injector = injector;
+    // this._injector = injector;
   }
 
   private setEnvironmentValues(env: any) {
