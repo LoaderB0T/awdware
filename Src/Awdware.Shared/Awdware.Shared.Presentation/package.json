@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "pre-build": "yarn && gah install",
+    "pre-build": "yarn && gah i",
     "build": "yarn pre-build && yarn ng build awdware-shared",
     "build-prod": "yarn pre-build && yarn ng build awdware-shared --prod"
   },

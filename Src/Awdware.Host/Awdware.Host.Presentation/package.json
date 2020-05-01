@@ -2,7 +2,7 @@
   "name": "awdware-host",
   "version": "0.0.0",
   "scripts": {
-    "pre-build": "yarn",
+    "pre-build": "yarn && gah i",
     "build": "yarn pre-build && yarn ng build",
     "build-prod": "yarn pre-build && yarn ng build --prod",
     "start": "yarn pre-build && ng serve"
