@@ -9,7 +9,7 @@
       "baseNgModuleName": "CoreModule",
       "dependencies": [
         {
-          "path": "..\\..\\Awdware.Shared\\Awdware.Shared.Presentation\\gah-config.json",
+          "path": "../../Awdware.Shared/Awdware.Shared.Presentation/gah-config.json",
           "names": [
             "Awdware.Shared.Presentation"
           ]
