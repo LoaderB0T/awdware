@@ -1,0 +1,43 @@
+{
+  "isHost": true,
+  "modules": [
+    {
+      "name": "Awdware.Host.Presentation",
+      "dependencies": [
+        {
+          "path": "..\\..\\Awdware.Shared\\Awdware.Shared.Presentation\\gah-config.json",
+          "names": [
+            "Awdware.Shared.Presentation"
+          ]
+        },
+        {
+          "path": "..\\..\\Awdware.Core\\Awdware.Core.Presentation\\gah-config.json",
+          "names": [
+            "Awdware.Core.Presentation"
+          ]
+        },
+        {
+          "path": "..\\..\\Awdware.Games\\Awdware.Games.Presentation\\gah-config.json",
+          "names": [
+            "Awdware.Games.Presentation"
+          ]
+        },
+        {
+          "path": "..\\..\\Awdware.Led\\Awdware.Led\\Awdware.Led.Presentation\\gah-config.json",
+          "names": [
+            "Awdware.Led.Presentation"
+          ]
+        }
+      ]
+    }
+  ],
+  "plugins": [
+    {
+      "name": "@awdware/gah-translation-merger",
+      "settings": {
+        "searchGlobPattern": "src/assets/**/translations/*.json",
+        "destinationPath": "src/assets/i18n"
+      }
+    }
+  ]
+}

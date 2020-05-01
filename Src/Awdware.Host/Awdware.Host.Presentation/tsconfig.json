@@ -17,15 +17,24 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@gah/Awdware.Shared.Presentation/*": [
+        "src\\app\\.gah-dependencies\\Awdware.Shared.Presentation/*"
+      ],
+      "@gah/Awdware.Core.Presentation/*": [
+        "src\\app\\.gah-dependencies\\Awdware.Core.Presentation/*"
+      ],
+      "@gah/Awdware.Games.Presentation/*": [
+        "src\\app\\.gah-dependencies\\Awdware.Games.Presentation/*"
+      ],
+      "@gah/Awdware.Led.Presentation/*": [
+        "src\\app\\.gah-dependencies\\Awdware.Led.Presentation/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
-    "paths": {
-      "awdware-games": [
-        "./.yalc/awdware-games/public_api"
-      ]
-    }
+    "strictInjectionParameters": true
   }
 }

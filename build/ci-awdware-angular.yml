@@ -21,7 +21,7 @@ steps:
   - task: Yarn@3
     inputs:
       projectDirectory: "Src/Awdware.Host/Awdware.Host.Presentation"
-      arguments: "global add yalc"
+      arguments: "global add @adwware/gah-cli"
 
   - task: SonarCloudPrepare@1
     continueOnError: true
@@ -36,7 +36,7 @@ steps:
       extraProperties: |
         sonar.sources=Src/**/Awdware.*.Presentation/src/projects/awdware-*/src
         sonar.sourceEncoding=UTF-8
-        sonar.exclusions=**/node_modules/**,**/*.spec.ts
+        sonar.exclusions=**/node_modules/**,**/*.spec.ts,**/.deps/**
         sonar.tests=Src/**/Awdware.*.Presentation/src/projects/awdware-*/src
         sonar.test.inclusions=**/*.spec.ts
         sonar.ts.tslintconfigpath=Src/Awdware.Host/Awdware.Host.Presentation/tslint.json

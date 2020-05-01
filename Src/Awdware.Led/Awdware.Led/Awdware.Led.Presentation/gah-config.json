@@ -8,15 +8,15 @@
       "baseNgModuleName": "LedModule",
       "dependencies": [
         {
-          "path": "..\\..\\..\\Awdware.Core\\Awdware.Core.Presentation\\gah-config.json",
-          "names": [
-            "Awdware.Core.Presentation"
-          ]
-        },
-        {
           "path": "..\\..\\..\\Awdware.Shared\\Awdware.Shared.Presentation\\gah-config.json",
           "names": [
             "Awdware.Shared.Presentation"
+          ]
+        },
+        {
+          "path": "..\\..\\..\\Awdware.Core\\Awdware.Core.Presentation\\gah-config.json",
+          "names": [
+            "Awdware.Core.Presentation"
           ]
         }
       ]

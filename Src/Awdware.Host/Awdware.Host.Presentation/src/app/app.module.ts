@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
-import { AwdwareCoreSharedModule, NoopInterceptorService } from 'awdware-shared';
-import { ModuleResoverService } from './services/module-resolver.service';
+import { RouterModule, Router } from '@angular/router';
+import { ModuleInitializerService } from './services/module-initializer.service';
+import { gahModules } from './.gah-generated/gah-modules';
 
 @NgModule({
   declarations: [
@@ -14,23 +14,22 @@ import { ModuleResoverService } from './services/module-resolver.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AwdwareCoreSharedModule,
-    RouterModule.forRoot([
-      {
-        path: '**',
-        resolve: { modules: ModuleResoverService },
-        component: AppComponent
-      }
-    ]),
+    RouterModule.forRoot([]),
+    gahModules
   ],
   exports: [HttpClientModule],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: NoopInterceptorService, multi: true }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor() {
-    console.log('Host constructor called');
+  constructor(router: Router) {
+    router.resetConfig(
+      [
+        {
+          path: '**',
+          resolve: { awd: ModuleInitializerService },
+          component: AppComponent
+        }
+      ]
+    );
   }
 }
-
-
