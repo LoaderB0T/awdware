@@ -1,11 +1,10 @@
 {
   "isHost": false,
-  "isEntry": true,
   "modules": [
     {
       "name": "Awdware.Core.Presentation",
-      "facadePath": "./projects/awdware-core/src/facade",
-      "publicApiPath": "./projects/awdware-core/src/public-api.ts",
+      "facadePath": "projects/awdware-core/src/facade",
+      "publicApiPath": "projects/awdware-core/src/public-api.ts",
       "baseNgModuleName": "CoreModule",
       "dependencies": [
         {

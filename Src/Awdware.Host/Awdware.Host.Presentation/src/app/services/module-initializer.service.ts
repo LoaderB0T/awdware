@@ -20,7 +20,6 @@ export class ModuleInitializerService implements Resolve<null> {
   ) {
     this._router = router;
     this._injector = injector;
-    console.log('awdawd');
   }
 
   private setEnvironmentValues(env: any) {
