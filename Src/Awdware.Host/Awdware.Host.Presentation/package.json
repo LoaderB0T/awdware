@@ -18,12 +18,12 @@
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
     "@aspnet/signalr": "^1.1.4",
-    "@ngx-translate/core": "^12.0.0",
-    "@ngx-translate/http-loader": "^4.0.0",
-    "ng-click-outside": "^5.3.0",
+    "ng-click-outside": "^6.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "@ngx-translate/core": "^12.0.0",
+    "@ngx-translate/http-loader": "^4.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.2",
@@ -34,6 +34,7 @@
     "@awdware/gah-translation-merger": "0.0.5",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
+    "ng-packagr": "^9.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
     "typescript": "~3.7.5"
