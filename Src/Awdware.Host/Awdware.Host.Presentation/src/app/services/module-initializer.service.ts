@@ -3,7 +3,7 @@ import { Resolve, Router, Routes } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { modulePackages } from '../.gah-generated/gah-modules';
+import { modulePackages } from '../.gah/generated/gah-modules';
 
 
 @Injectable({ providedIn: 'root' })

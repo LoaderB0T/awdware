@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RouterModule, Router } from '@angular/router';
 import { ModuleInitializerService } from './services/module-initializer.service';
-import { gahModules } from './.gah-generated/gah-modules';
+import { gahModules } from './.gah/generated/gah-modules';
 
 @NgModule({
   declarations: [
