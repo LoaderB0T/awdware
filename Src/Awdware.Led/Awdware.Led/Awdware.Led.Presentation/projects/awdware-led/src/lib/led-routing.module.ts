@@ -5,7 +5,7 @@ import { AuthGuard } from '@gah/Awdware.Core.Presentation/public-api';
 
 export const routes: Routes = [
   {
-    path: 'led',
+    path: '',
     component: LedComponent,
     canActivate: [AuthGuard]
   },
