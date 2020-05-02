@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LedComponent } from './led.component';
-
+import { AuthGuard } from '@gah/Awdware.Core.Presentation/public-api';
 
 export const routes: Routes = [
   {
     path: 'led',
     component: LedComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
 ];
 
