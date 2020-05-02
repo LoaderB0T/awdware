@@ -44,6 +44,14 @@ steps:
   - template: ./steps/angular.yml
     parameters:
       projects:
+        - path: "Src/Awdware.Shared/Awdware.Shared.Presentation/"
+          name: awdware-shared
+        - path: "Src/Awdware.Core/Awdware.Core.Presentation/"
+          name: awdware-core
+        - path: "Src/Awdware.Games/Awdware.Games.Presentation/"
+          name: awdware-games
+        - path: "Src/Awdware.Led/Awdware.Led/Awdware.Led.Presentation/"
+          name: awdware-leds
         - path: "Src/Awdware.Host/Awdware.Host.Presentation/"
           name: awdware-host
   # - task: Yarn@3
