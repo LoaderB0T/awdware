@@ -24,10 +24,10 @@
         "dist/awdware-led"
       ],
       "@gah/Awdware.Core.Presentation/*": [
-        "projects\\awdware-led\\src\\.gah-dependencies\\Awdware.Core.Presentation/*"
+        "projects/awdware-led/src/.gah-dependencies/Awdware.Core.Presentation/*"
       ],
       "@gah/Awdware.Shared.Presentation/*": [
-        "projects\\awdware-led\\src\\.gah-dependencies\\Awdware.Shared.Presentation/*"
+        "projects/awdware-led/src/.gah-dependencies/Awdware.Shared.Presentation/*"
       ]
     }
   },

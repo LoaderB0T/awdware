@@ -47,3 +47,6 @@ Thumbs.db
 
 # Ignoring gah dependency folder
 **/.gah-dependencies
+
+# Ignoring gah styles folder
+**/.gah-styles
