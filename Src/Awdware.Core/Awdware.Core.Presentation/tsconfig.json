@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@gah/Awdware.Shared.Presentation/*": [
-        "projects/awdware-core/src/.gah-dependencies/Awdware.Shared.Presentation/*"
+        "projects/awdware-core/src/.gah/dependencies/Awdware.Shared.Presentation/*"
       ]
     }
   },

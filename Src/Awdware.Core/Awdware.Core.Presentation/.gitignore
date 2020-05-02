@@ -51,3 +51,6 @@ Thumbs.db
 
 # Ignoring gah styles folder
 **/.gah-styles
+
+# Ignoring gah generated files
+**/.gah/**
