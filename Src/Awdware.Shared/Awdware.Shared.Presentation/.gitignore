@@ -48,3 +48,6 @@ Thumbs.db
 
 # Ignoring gah generated files
 **/.gah/**
+
+# Ignoring gah generated files
+**/.gah/**

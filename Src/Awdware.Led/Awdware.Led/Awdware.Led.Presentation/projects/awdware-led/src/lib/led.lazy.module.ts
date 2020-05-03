@@ -1,3 +1,5 @@
+// @dynamic
+
 import { NgModule } from '@angular/core';
 
 import { RoutingService } from '@gah/Awdware.Core.Presentation/public-api';

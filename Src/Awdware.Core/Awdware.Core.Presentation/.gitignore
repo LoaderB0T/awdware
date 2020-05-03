@@ -46,11 +46,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Ignoring gah dependency folder
-**/.gah-dependencies
-
-# Ignoring gah styles folder
-**/.gah-styles
-
 # Ignoring gah generated files
 **/.gah/**

@@ -19,19 +19,11 @@
       "dom"
     ],
     "paths": {
-      "my-lib": [
-        "dist/my-lib/my-lib",
-        "dist/my-lib"
-      ],
-      "awdware-games": [
-        "dist/awdware-games/awdware-games",
-        "dist/awdware-games"
-      ],
       "@gah/Awdware.Core.Presentation/*": [
-        "projects/awdware-games/src/.gah-dependencies/Awdware.Core.Presentation/*"
+        "projects/awdware-games/src/.gah/dependencies/Awdware.Core.Presentation/*"
       ],
       "@gah/Awdware.Shared.Presentation/*": [
-        "projects/awdware-games/src/.gah-dependencies/Awdware.Shared.Presentation/*"
+        "projects/awdware-games/src/.gah/dependencies/Awdware.Shared.Presentation/*"
       ]
     }
   },
