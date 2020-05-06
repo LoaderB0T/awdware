@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/awdware/gah/master/assets/gah-config-schema.json",
   "isHost": false,
   "modules": [
     {
