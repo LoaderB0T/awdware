@@ -4,7 +4,15 @@
     {
       "name": "Awdware.Led.Presentation",
       "publicApiPath": "projects/awdware-led/src/public-api.ts",
-      "baseNgModuleName": "LedLazyModule"
+      "baseNgModuleName": "LedLazyModule",
+      "dependencies": [
+        {
+          "path": "../../../Awdware.Core/Awdware.Core.Presentation/gah-module.json",
+          "names": [
+            "Awdware.Core.Presentation"
+          ]
+        }
+      ]
     }
   ]
 }
