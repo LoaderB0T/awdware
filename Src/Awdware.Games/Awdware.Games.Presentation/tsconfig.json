@@ -20,10 +20,10 @@
     ],
     "paths": {
       "@gah/Awdware.Core.Presentation/*": [
-        "projects/awdware-games/src/.gah/dependencies/Awdware.Core.Presentation/*"
+        "projects/awdware-games/src/.gah/dependencies/Awdware.Core.Presentation/public-api"
       ],
       "@gah/Awdware.Shared.Presentation/*": [
-        "projects/awdware-games/src/.gah/dependencies/Awdware.Shared.Presentation/*"
+        "projects/awdware-games/src/.gah/dependencies/Awdware.Shared.Presentation/public-api"
       ]
     }
   },

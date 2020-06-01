@@ -20,16 +20,16 @@
     ],
     "paths": {
       "@gah/Awdware.Shared.Presentation/*": [
-        "src/app/.gah/dependencies/Awdware.Shared.Presentation/*"
+        "src/app/.gah/dependencies/Awdware.Shared.Presentation/public-api"
       ],
       "@gah/Awdware.Core.Presentation/*": [
-        "src/app/.gah/dependencies/Awdware.Core.Presentation/*"
+        "src/app/.gah/dependencies/Awdware.Core.Presentation/public-api"
       ],
       "@gah/Awdware.Games.Presentation/*": [
-        "src/app/.gah/dependencies/Awdware.Games.Presentation/*"
+        "src/app/.gah/dependencies/Awdware.Games.Presentation/public-api"
       ],
       "@gah/Awdware.Led.Presentation/*": [
-        "src/app/.gah/dependencies/Awdware.Led.Presentation/*"
+        "src/app/.gah/dependencies/Awdware.Led.Presentation/public-api"
       ]
     }
   },
