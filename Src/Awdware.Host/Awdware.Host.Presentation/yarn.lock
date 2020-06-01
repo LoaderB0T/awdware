@@ -246,10 +246,10 @@
   resolved "https://registry.yarnpkg.com/@awdware/gah-shared/-/gah-shared-0.0.5.tgz#6a130b976d3009d01be92112367a2633fb910b8e"
   integrity sha512-vMNchcUeAC64kX7SqV2e8JmjOG4fQoR7ec/QPvXjelFPmzgU2St5gSy/6Wxk1oy8esd1+x8EWoTJoTSsZ6ukDw==
 
-"@awdware/gah-translation-merger@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@awdware/gah-translation-merger/-/gah-translation-merger-0.0.11.tgz#c19177ac9d4311bf65ea9e40904f1196b1637c2b"
-  integrity sha512-yePS5dPgSjqNm8f5vQsWd2OIUG7FrrM3lvAH5TmQXzZqne4qpBMf0wK3Fv9Wd8U2896icum/7ZmZG9XwEkP/yw==
+"@awdware/gah-translation-merger@0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@awdware/gah-translation-merger/-/gah-translation-merger-0.0.12.tgz#c6822b605799ca10d97ff0bcbc4b57261a8ed1ca"
+  integrity sha512-SedstCBTtId/1lVUaejg4a/1VpARayDFId7Dl4frzN/GaDnN5ilM0LwAdlIXt7z1KAC1QKZC2XjDXf9n1jVwWw==
   dependencies:
     "@awdware/gah-shared" "^0.0.5"
 

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/awdware/gah/master/assets/gah-module-schema.json",
+  "modules": [
+    {
+	  "isEntry": true,
+      "name": "Awdware.Core.Presentation",
+      "facadePath": "projects/awdware-core/src/facade",
+      "publicApiPath": "projects/awdware-core/src/public-api.ts",
+      "baseNgModuleName": "CoreModule"
+    }
+  ]
+}

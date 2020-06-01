@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/awdware/gah/master/assets/gah-module-schema.json",
+  "modules": [
+    {
+      "name": "Awdware.Games.Presentation",
+      "publicApiPath": "projects/awdware-games/src/public-api.ts",
+      "baseNgModuleName": "GamesModule",
+      "dependencies": [
+        {
+          "path": "../../Awdware.Shared/Awdware.Shared.Presentation/gah-module.json",
+          "names": [
+            "Awdware.Shared.Presentation"
+          ]
+        },
+        {
+          "path": "../../Awdware.Core/Awdware.Core.Presentation/gah-module.json",
+          "names": [
+            "Awdware.Core.Presentation"
+          ]
+        }
+      ]
+    }
+  ]
+}

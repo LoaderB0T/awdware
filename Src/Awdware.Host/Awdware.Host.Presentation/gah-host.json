@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/awdware/gah/master/assets/gah-host-schema.json",
+  "modules": [
+    {
+      "path": "../../Awdware.Core/Awdware.Core.Presentation/gah-module.json",
+      "names": [
+        "Awdware.Core.Presentation"
+      ]
+    },
+    {
+      "path": "../../Awdware.Games/Awdware.Games.Presentation/gah-module.json",
+      "names": [
+        "Awdware.Games.Presentation"
+      ]
+    },
+    {
+      "path": "../../Awdware.Led/Awdware.Led/Awdware.Led.Presentation/gah-module.json",
+      "names": [
+        "Awdware.Led.Presentation"
+      ]
+    }
+  ]
+}
