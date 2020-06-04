@@ -21,9 +21,6 @@
     "paths": {
       "@gah/Awdware.Shared.Presentation/*": [
         "projects/awdware-core/src/.gah/dependencies/Awdware.Shared.Presentation/public-api"
-      ],
-      "@gah/Awdware.Core.Presentation/*": [
-        "src/app/.gah/dependencies/Awdware.Core.Presentation/public-api"
       ]
     }
   },
