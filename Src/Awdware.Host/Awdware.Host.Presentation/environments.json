@@ -1,0 +1,17 @@
+{
+  "default": {
+    "production": false,
+    "apiUrl": "http://localhost:5555",
+    "test": false
+  },
+  "test": {
+    "production": false,
+    "apiUrl": "http://localhost:5555",
+    "test": true
+  },
+  "prod": {
+    "production": true,
+    "apiUrl": "https://api.awdware.de",
+    "test": true
+  }
+}
