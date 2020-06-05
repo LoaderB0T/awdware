@@ -46,15 +46,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# Ignoring gah generated files
-**/.gah/**
-
-# Ignoring asset files copied by gah install command
-src/assets
-
-# Ignoring gah generated files
-**/.gah/**
-
-# Ignoring asset files copied by gah install command
-src/assets

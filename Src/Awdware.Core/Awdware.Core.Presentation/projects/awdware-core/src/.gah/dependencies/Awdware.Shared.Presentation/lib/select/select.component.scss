@@ -1,0 +1,92 @@
+div.select-container {
+  background-color: var(--colorMainBg);
+  position: relative;
+  display: inline-block;
+  padding: 0px;
+  height: 28px;
+  width: 100%;
+  button.drop-button {
+    position: relative;
+    background-color: var(--colorMainBg);
+    color: var(--colorMainContent);
+    padding-left: 8px;
+    border: none;
+    z-index: 2;
+    width: 100%;
+    height: 28px;
+    text-align: left;
+    border: 1px solid gray;
+    overflow: hidden;
+    span.select-selected-option-text {
+      padding-right: 15px;
+    }
+    div.select-arrow-div {
+      width: 28px;
+      height: 28px;
+      position: absolute;
+      display: inline-block;
+      right: 0px;
+      top: 0px;
+      background-color: var(--colorMainBg);
+      font-size: 26px;
+      .select-arrow-offset {
+        position: absolute;
+        left: 5px;
+        .select-arrow {
+          position: absolute;
+          color: var(--colorMainContent);
+        }
+      }
+    }
+    &.is-read-only .select-arrow {
+      color: gray;
+    }
+    &:not(.is-read-only) {
+      cursor: pointer;
+    }
+    &:hover:not(.is-read-only),
+    &.selected {
+      border: 1px solid var(--colorHighlightColor1);
+      div.select-arrow-div {
+        background-color: var(--colorHighlightColor1);
+        span {
+          color: var(--colorMainBg);
+        }
+      }
+    }
+  }
+  div.select-content {
+    position: fixed;
+    background-color: var(--colorHighlightContent);
+    overflow: auto;
+    z-index: 3;
+    border: 1px solid var(--colorPassiveContent);
+    max-height: 50vh;
+    .select-option {
+      cursor: pointer;
+      color: var(--colorMainContent);
+      display: flex;
+      padding: 2px;
+      min-height: 20px;
+      padding-left: 15px;
+      .drop-down-option-icon {
+        color: darkgray;
+        font-size: 18px;
+        align-items: center;
+      }
+      &:hover {
+        background-color: var(--colorHighlightColor1);
+        color: var(--colorMainBg);
+      }
+    }
+  }
+}
+
+#ruler {
+  visibility: hidden;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
