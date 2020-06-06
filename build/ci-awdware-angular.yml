@@ -41,20 +41,19 @@ steps:
         sonar.test.inclusions=**/*.spec.ts
         sonar.ts.tslintconfigpath=Src/Awdware.Host/Awdware.Host.Presentation/.gah/tslint.json
 
-  - task: CmdLine@2
+  - task: PowerShell@2
     inputs:
+      targetType: 'inline'
       script: |
         gah -h
         gah install
       workingDirectory: 'Src/Awdware.Host/Awdware.Host.Presentation'
-      failOnStderr: true
     displayName: "Gah install"
-
-  - task: CmdLine@2
+  - task: PowerShell@2
     inputs:
+      targetType: 'inline'
       script: 'gah run -e prod ng build --prod'
       workingDirectory: 'Src/Awdware.Host/Awdware.Host.Presentation'
-      failOnStderr: true
     displayName: "Build host and dependencies"
 
   - task: PublishBuildArtifacts@1
