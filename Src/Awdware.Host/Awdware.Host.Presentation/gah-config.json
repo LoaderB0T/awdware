@@ -4,8 +4,8 @@
     {
       "name": "@awdware/gah-translation-merger",
       "settings": {
-        "searchGlobPattern": "src/assets/**/translations/*.json",
-        "destinationPath": "src/assets/i18n"
+        "searchGlobPattern": ".gah/src/assets/**/translations/*.json",
+        "destinationPath": ".gah/src/assets/i18n"
       }
     }
   ]

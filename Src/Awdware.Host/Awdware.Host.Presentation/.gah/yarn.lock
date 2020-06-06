@@ -223,17 +223,10 @@
     request "^2.88.0"
     ws "^6.0.0"
 
-"@awdware/gah-shared@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@awdware/gah-shared/-/gah-shared-0.0.5.tgz#6a130b976d3009d01be92112367a2633fb910b8e"
-  integrity sha512-vMNchcUeAC64kX7SqV2e8JmjOG4fQoR7ec/QPvXjelFPmzgU2St5gSy/6Wxk1oy8esd1+x8EWoTJoTSsZ6ukDw==
-
-"@awdware/gah-translation-merger@0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@awdware/gah-translation-merger/-/gah-translation-merger-0.0.12.tgz#c6822b605799ca10d97ff0bcbc4b57261a8ed1ca"
-  integrity sha512-SedstCBTtId/1lVUaejg4a/1VpARayDFId7Dl4frzN/GaDnN5ilM0LwAdlIXt7z1KAC1QKZC2XjDXf9n1jVwWw==
-  dependencies:
-    "@awdware/gah-shared" "^0.0.5"
+"@awdware/gah-shared@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@awdware/gah-shared/-/gah-shared-0.0.9.tgz#717b44b84148aba8f6ea6d4525520731cdf9fa1f"
+  integrity sha512-7lhJb+UjYHzmjhBgs2VDBgGWo2feKz1fm+EA/ZSE48w3S+HiS2VHNMV8aCyGnCsUaozZzSAyWSvrwY6owQCHtQ==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.1", "@babel/code-frame@^7.5.5":
   version "7.10.1"
