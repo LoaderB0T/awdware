@@ -39,7 +39,7 @@ steps:
         sonar.exclusions=**/node_modules/**,**/*.spec.ts,**/.deps/**
         sonar.tests=Src/**/Awdware.*.Presentation/src/projects/awdware-*/src
         sonar.test.inclusions=**/*.spec.ts
-        sonar.ts.tslintconfigpath=Src/Awdware.Host/Awdware.Host.Presentation/tslint.json
+        sonar.ts.tslintconfigpath=Src/Awdware.Host/Awdware.Host.Presentation/.gah/tslint.json
 
   - template: ./steps/angular.yml
     parameters:
@@ -54,7 +54,7 @@ steps:
   #   continueOnError: true
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: "Src/Awdware.Host/Awdware.Host.Presentation/dist/awdware-host/"
+      PathtoPublish: "Src/Awdware.Host/Awdware.Host.Presentation/dist/"
       ArtifactName: "drop"
       publishLocation: "Container"
     displayName: publish build

@@ -9,13 +9,12 @@ steps:
       - task: Yarn@3
         inputs:
           projectDirectory: ${{ project.path }}
-          arguments: "run build-prod"
-        displayName: "build ${{ project.name }}"
+          arguments: "run install"
+        displayName: "installing ${{ project.name }}"
 
   - ${{ each project in parameters.projects }}:
       - task: Yarn@3
         inputs:
           projectDirectory: ${{ project.path }}
-          arguments: "run lint-build"
-        displayName: "lint ${{ project.name }}"
-        continueOnError: true
+          arguments: "run gah -e prod run ng build --prod"
+        displayName: "build ${{ project.name }}"
