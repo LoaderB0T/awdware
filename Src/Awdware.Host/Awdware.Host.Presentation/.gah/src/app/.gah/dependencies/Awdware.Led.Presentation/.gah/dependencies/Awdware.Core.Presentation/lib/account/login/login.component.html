@@ -1,0 +1,22 @@
+<form class="login" #login="ngForm" (ngSubmit)="onSubmit()">
+  <span class="description">
+    {{'account.login.description' | translate}}
+  </span>
+  <div class="input-loading-container">
+    <div class="input-container">
+      <awd-textbox [fontSize]="24" [inputType]="inputType.TEXT"
+        [placeholder]="'account.login.form.username.name' | translate" [name]="'username'"
+        [(ngModel)]="loginModel.username" [inputTabIndex]="1" [icon]="'user'" [icon2]="'user-ninja'" required
+        [disabled]="clickedButton"></awd-textbox>
+      <awd-textbox [fontSize]="24" [inputType]="inputType.PASSWORD"
+        [placeholder]="'account.login.form.password.name' | translate" [name]="'password'"
+        [(ngModel)]="loginModel.password" [inputTabIndex]="2" [icon]="'lock'" [icon2]="'lock-open'" required
+        [disabled]="clickedButton"></awd-textbox>
+    </div>
+    <awd-loading class="awd-loading" [class.hidden]="!clickedButton" [scale]="2"></awd-loading>
+  </div>
+  <input type="submit" tabindex="3" [disabled]="loginDisabled" value="{{'account.login.form.submit.name' | translate}}">
+</form>
+<span *ngIf="errorMessageKey">
+  {{'account.login.error.' + errorMessageKey | translate}}
+</span>
