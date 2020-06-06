@@ -43,7 +43,9 @@ steps:
 
   - task: CmdLine@2
     inputs:
-      script: 'gah install'
+      script: |
+        gah -h
+        gah install
       workingDirectory: 'Src/Awdware.Host/Awdware.Host.Presentation'
       failOnStderr: true
     displayName: "Gah install"
