@@ -41,26 +41,31 @@ steps:
         sonar.test.inclusions=**/*.spec.ts
         sonar.ts.tslintconfigpath=Src/Awdware.Host/Awdware.Host.Presentation/.gah/tslint.json
 
-  - template: ./steps/angular.yml
-    parameters:
-      projects:
-        - path: "Src/Awdware.Host/Awdware.Host.Presentation/"
-          name: awdware-host
-  # - task: Yarn@3
-  #   inputs:
-  #     projectDirectory: 'presentation/'
-  #     arguments: 'run test-unit'
-  #   displayName: 'unit test'
-  #   continueOnError: true
+  - task: CmdLine@2
+    inputs:
+      script: 'gah install'
+      workingDirectory: 'Src/Awdware.Host/Awdware.Host.Presentation'
+      failOnStderr: true
+    displayName: "Gah install"
+
+  - task: CmdLine@2
+    inputs:
+      script: 'gah run -e prod ng build --prod'
+      workingDirectory: 'Src/Awdware.Host/Awdware.Host.Presentation'
+      failOnStderr: true
+    displayName: "Build host and dependencies"
+
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: "Src/Awdware.Host/Awdware.Host.Presentation/dist/"
       ArtifactName: "drop"
       publishLocation: "Container"
     displayName: publish build
+
   - task: SonarCloudAnalyze@1
     displayName: "Run Code Analysis"
     continueOnError: true
+
   - task: SonarCloudPublish@1
     displayName: "Publish Quality Gate Result"
     continueOnError: true
