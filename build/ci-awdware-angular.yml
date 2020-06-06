@@ -12,17 +12,6 @@ steps:
       versionSpec: "1.x"
       checkLatest: true
 
-  - task: Yarn@3
-    inputs:
-      projectDirectory: "Src/"
-      arguments: "install"
-    displayName: "yarn install"
-
-  - task: Yarn@3
-    inputs:
-      projectDirectory: "Src/Awdware.Host/Awdware.Host.Presentation"
-      arguments: "global add @awdware/gah"
-
   - task: SonarCloudPrepare@1
     continueOnError: true
     displayName: "Prepare analysis on SonarCloud"
@@ -44,12 +33,16 @@ steps:
   - task: PowerShell@2
     inputs:
       targetType: 'inline'
-      script: |
-        sudo yarn global add @awdware/gah
-        gah -h
-        gah install
+      script: sudo yarn global add @awdware/gah
+    displayName: "Installing gah globally"
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: gah install
       workingDirectory: 'Src/Awdware.Host/Awdware.Host.Presentation'
     displayName: "Gah install"
+
   - task: PowerShell@2
     inputs:
       targetType: 'inline'
