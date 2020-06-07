@@ -24,7 +24,10 @@ export class BaseComponent implements OnInit {
     title: Title
   ) {
     this._dialogService = dialogService;
-    title.setTitle('awdware ■▀■');
+
+    // Another one of those very useless but stil lvery fun details :)
+    const rndmTitleEmojis = ['*^____^*', 'O(∩_∩)O', '(～￣▽￣)～', '（*＾-＾*）', '(*^_^*)', '(❁´◡`❁)', '(´▽`ʃ♡ƪ)', '♪(^∇^*)', '(oﾟvﾟ)ノ', '(☆▽☆)', '(o゜▽゜)o', '☆ヾ(•ω•`)o', '\\(￣︶￣*\\)', ')(￣o￣) . z Z', '\\(@^0^@)/', 'ヾ(^▽^*)))', '✪ ω ✪', '♪(´▽｀)', 'ヽ(✿ﾟ▽ﾟ)ノ', '（。＾▽＾）', '(☞ﾟヮﾟ)☞', '☜(ﾟヮﾟ☜)', '(⌐■_■)', '(•_•)', '¯\\_(ツ)_/¯', '( ͡• ͜ʖ ͡• )'];
+    title.setTitle('awdware   ' + rndmTitleEmojis[Math.random() * (rndmTitleEmojis.length) | 0]); // bitwise operator floors a (very tiny) bit faster
     this._dialogService.setRootViewContainerRef(viewContainerRef);
     router.events
       .pipe(
