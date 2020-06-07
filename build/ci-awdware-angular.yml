@@ -23,7 +23,7 @@ steps:
       cliProjectKey: "awdware:presentation"
       cliSources: presentation
       extraProperties: |
-        sonar.sources=Src/**/Awdware.*.Presentation/src/projects/awdware-*/src
+        sonar.sources=Src/**/Awdware.*.Presentation/projects/awdware-*/src
         sonar.sourceEncoding=UTF-8
         sonar.exclusions=**/node_modules/**,**/*.spec.ts,**/.deps/**
         sonar.tests=Src/**/Awdware.*.Presentation/src/projects/awdware-*/src
