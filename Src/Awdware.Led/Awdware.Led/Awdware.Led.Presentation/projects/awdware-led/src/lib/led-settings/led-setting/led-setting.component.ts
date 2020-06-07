@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { InputType, DownloadService } from '@gah/Awdware.Shared.Presentation/public-api';
+import { InputType, DownloadService } from '@gah/Awdware.Shared.Presentation';
 
 import { LedService } from '../../services/led.service';
 import { LedSettingsDto } from '../../models/application-facade';

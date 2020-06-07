@@ -2,8 +2,8 @@
 
 import { NgModule } from '@angular/core';
 
-import { RoutingService } from '@gah/Awdware.Core.Presentation/public-api';
-import { FacadeService, AwdwareConfig, MenuItem } from '@gah/Awdware.Shared.Presentation/public-api';
+import { RoutingService } from '@gah/Awdware.Core.Presentation';
+import { FacadeService, AwdwareConfig, MenuItem } from '@gah/Awdware.Shared.Presentation';
 import { Routes, RouterModule } from '@angular/router';
 
 export const routes: Routes = [

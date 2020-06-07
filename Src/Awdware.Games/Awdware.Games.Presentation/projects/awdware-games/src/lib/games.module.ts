@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AwdwareCoreSharedModule, FacadeService, AwdwareConfig, MenuItem } from '@gah/Awdware.Shared.Presentation/public-api';
+import { AwdwareCoreSharedModule, FacadeService, AwdwareConfig, MenuItem } from '@gah/Awdware.Shared.Presentation';
 
 import { GamesComponent } from './games.component';
 import { GamesRoutingModule } from './games-routing.module';
 import { PushyModule } from './pushy/pushy.module';
 import { GameHomeComponent } from './game-home/game-home.component';
-import { RoutingService } from '@gah/Awdware.Core.Presentation/public-api';
+import { RoutingService } from '@gah/Awdware.Core.Presentation';
 
 
 @NgModule({

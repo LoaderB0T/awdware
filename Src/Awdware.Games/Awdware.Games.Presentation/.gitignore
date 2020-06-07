@@ -46,4 +46,4 @@ testem.log
 Thumbs.db
 
 # Ignoring gah generated files
-**/.gah/**
+**/.gah

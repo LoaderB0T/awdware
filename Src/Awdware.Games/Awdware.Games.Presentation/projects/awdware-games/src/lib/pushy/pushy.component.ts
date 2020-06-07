@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from '@gah/Awdware.Shared.Presentation/public-api';
+import { DialogService } from '@gah/Awdware.Shared.Presentation';
 
 import { CreatePushyLobbyComponent } from './create-pushy-lobby/create-pushy-lobby.component';
 import { JoinPushyLobbyComponent } from './join-pushy-lobby/join-pushy-lobby.component';

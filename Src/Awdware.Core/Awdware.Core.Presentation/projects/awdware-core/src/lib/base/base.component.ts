@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, ViewContainerRef } from '@angular/core';
-import { DialogService } from '@gah/Awdware.Shared.Presentation/public-api';
+import { DialogService } from '@gah/Awdware.Shared.Presentation';
 import { NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'awd-base',
@@ -19,10 +20,11 @@ export class BaseComponent implements OnInit {
   constructor(
     viewContainerRef: ViewContainerRef,
     router: Router,
-    dialogService: DialogService
+    dialogService: DialogService,
+    title: Title
   ) {
     this._dialogService = dialogService;
-
+    title.setTitle('awdware ■▀■');
     this._dialogService.setRootViewContainerRef(viewContainerRef);
     router.events
       .pipe(

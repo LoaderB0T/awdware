@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { WebApiService } from '@gah/Awdware.Shared.Presentation/public-api';
+import { WebApiService } from '@gah/Awdware.Shared.Presentation';
 
 import { SessionStoreService } from '../../services/session-store.service';
 import {

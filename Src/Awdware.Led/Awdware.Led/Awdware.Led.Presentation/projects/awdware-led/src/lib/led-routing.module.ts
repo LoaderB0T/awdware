@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LedComponent } from './led.component';
-import { AuthGuard } from '@gah/Awdware.Core.Presentation/public-api';
+import { AuthGuard } from '@gah/Awdware.Core.Presentation';
 
 export const routes: Routes = [
   {

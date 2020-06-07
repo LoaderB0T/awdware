@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ThemeService, TranslationService } from '@gah/Awdware.Shared.Presentation/public-api';
+import { ThemeService, TranslationService } from '@gah/Awdware.Shared.Presentation';
 
 import { UserDetailsService } from '../services/user-details.service';
 import { UserDetails } from '../models/user-details';

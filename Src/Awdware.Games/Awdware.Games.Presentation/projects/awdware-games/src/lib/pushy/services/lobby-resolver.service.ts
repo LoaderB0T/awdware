@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import { RoutingService, UserDetailsService } from '@gah/Awdware.Core.Presentation/public-api';
+import { RoutingService, UserDetailsService } from '@gah/Awdware.Core.Presentation';
 
 import { PushyService } from './pushy.service';
 

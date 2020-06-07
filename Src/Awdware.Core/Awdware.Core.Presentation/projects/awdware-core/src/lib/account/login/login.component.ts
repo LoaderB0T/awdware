@@ -5,7 +5,7 @@ import { AccountService } from '../services/account.service';
 import { LoginRequestDto, LoginResult } from '../../models/application-facade';
 import { RoutingService } from '../../services/routing.service';
 
-import { SubscriptionManager, InputType } from '@gah/Awdware.Shared.Presentation/public-api';
+import { SubscriptionManager, InputType } from '@gah/Awdware.Shared.Presentation';
 
 @Component({
   selector: 'awd-login',
