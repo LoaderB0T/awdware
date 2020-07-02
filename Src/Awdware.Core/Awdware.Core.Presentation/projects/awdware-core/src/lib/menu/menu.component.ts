@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AwdwareConfig, MenuItem, FacadeService } from '@gah/Awdware.Shared.Presentation';
+import { AwdwareConfig, MenuItem, FacadeService } from '@awdware/awdware-shared';
 
 @Component({
   selector: 'awd-menu',

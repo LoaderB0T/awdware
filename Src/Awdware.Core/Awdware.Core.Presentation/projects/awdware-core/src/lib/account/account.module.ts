@@ -9,7 +9,7 @@ import { LoginHelpComponent } from './login-help/login-help.component';
 import { NewPasswordComponent } from './new-password/new-password.component';
 import { RegisterComponent } from './register/register.component';
 import { VerifyMailComponent } from './verify-mail/verify-mail.component';
-import { AwdwareCoreSharedModule } from '@gah/Awdware.Shared.Presentation';
+import { AwdwareCoreSharedModule } from '@awdware/awdware-shared';
 
 
 @NgModule({

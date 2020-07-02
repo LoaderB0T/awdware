@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BaseDialog } from '@gah/Awdware.Shared.Presentation';
-import { RoutingService } from '@gah/Awdware.Core.Presentation';
+import { BaseDialog } from '@awdware/awdware-shared';
+import { RoutingService } from '@awdware/awdware-core';
 
 import { PushyService } from '../services/pushy.service';
 

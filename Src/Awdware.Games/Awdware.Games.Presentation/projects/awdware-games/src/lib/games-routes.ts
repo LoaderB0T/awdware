@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { UserDetailsResolverService } from '@gah/Awdware.Core.Presentation';
+import { UserDetailsResolverService } from '@awdware/awdware-core';
 
 import { GamesComponent } from './games.component';
 import { GameHomeComponent } from './game-home/game-home.component';

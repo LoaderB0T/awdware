@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RoutingService } from '@gah/Awdware.Core.Presentation';
+import { RoutingService } from '@awdware/awdware-core';
 
 import { PushyService } from '../services/pushy.service';
 import { GameLobbyInformationDto } from '../../models/application-facade';

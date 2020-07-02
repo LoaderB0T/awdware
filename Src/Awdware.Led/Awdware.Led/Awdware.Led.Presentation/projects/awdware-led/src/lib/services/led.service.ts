@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { WebApiService } from '@gah/Awdware.Shared.Presentation';
+import { WebApiService } from '@awdware/awdware-shared';
 
 import { LedEffect } from '../models/led-config.model';
 import { LedConfigurationDto, LedEffectKind, LedSettingsDto } from '../models/application-facade';

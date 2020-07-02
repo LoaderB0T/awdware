@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { BaseDialog } from '@gah/Awdware.Shared.Presentation';
+import { BaseDialog } from '@awdware/awdware-shared';
 
 import { LedService } from '../services/led.service';
 import { LedEffect } from '../models/led-config.model';

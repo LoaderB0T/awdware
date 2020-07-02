@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { RoutingService } from '../services/routing.service';
 import { ToolbarProviderService } from '../services/toolbar-provider.service';
-import { TabViewContent } from '@gah/Awdware.Shared.Presentation';
+import { TabViewContent } from '@awdware/awdware-shared';
 
 @Component({
   selector: 'awd-account',

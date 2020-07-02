@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RoutingService } from '@gah/Awdware.Core.Presentation';
+import { RoutingService } from '@awdware/awdware-core';
 
 @Component({
   selector: 'awd-game-home',
