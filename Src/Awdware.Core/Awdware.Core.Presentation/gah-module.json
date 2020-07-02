@@ -2,16 +2,17 @@
   "$schema": "https://raw.githubusercontent.com/awdware/gah/master/assets/gah-module-schema.json",
   "modules": [
     {
-      "isEntry": true,
-      "name": "Awdware.Core.Presentation",
+      "name": "awdware-core",
       "facadePath": "projects/awdware-core/src/facade",
+      "packageName": "awdware",
       "publicApiPath": "projects/awdware-core/src/public-api.ts",
       "baseNgModuleName": "CoreModule",
+      "isEntry": true,
       "dependencies": [
         {
           "path": "../../Awdware.Shared/Awdware.Shared.Presentation/gah-module.json",
           "names": [
-            "Awdware.Shared.Presentation"
+            "awdware-shared"
           ]
         }
       ]
