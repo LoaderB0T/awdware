@@ -47,7 +47,7 @@ export class BaseComponent implements OnInit {
   ngOnInit(): void {
     this.previousScroll = this._mainContent.nativeElement.scrollTop;
 
-    this.addScript('./assets/Awdware.Core.Presentation/js/fontawesome.all.min.js', { defer: true });
+    this.addScript('./assets/awdware-core/js/fontawesome.all.min.js', { defer: true });
     this.addLink('https://fonts.googleapis.com/css?family=Montserrat:400,700', { rel: 'stylesheet' });
     this.addLink('https://fonts.googleapis.com/css?family=Aleo:700', { rel: 'stylesheet' });
 
