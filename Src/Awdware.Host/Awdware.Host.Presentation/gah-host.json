@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/awdware/gah/master/assets/gah-host-schema.json",
+  "$schema": "https://raw.githubusercontent.com/awdware/gah/master/shared/assets/gah-host-schema.json",
   "modules": [
     {
       "path": "../../Awdware.Games/Awdware.Games.Presentation/gah-module.json",
@@ -19,5 +19,12 @@
         "awdware-core"
       ]
     }
-  ]
+  ],
+  "htmlHeadContent": [
+    "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Aleo:700\">",
+    "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Montserrat:400,700\">",
+    "<script defer src=\"./assets/awdware-core/js/fontawesome.all.min.js\"></script>",
+	"<link rel=\"icon\" href=\"assets/awdware-core/favicon.ico\" type=\"image/x-icon\"/>"
+  ],
+  "title": "awdware"
 }

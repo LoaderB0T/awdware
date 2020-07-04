@@ -47,10 +47,6 @@ export class BaseComponent implements OnInit {
   ngOnInit(): void {
     this.previousScroll = this._mainContent.nativeElement.scrollTop;
 
-    this.addScript('./assets/awdware-core/js/fontawesome.all.min.js', { defer: true });
-    this.addLink('https://fonts.googleapis.com/css?family=Montserrat:400,700', { rel: 'stylesheet' });
-    this.addLink('https://fonts.googleapis.com/css?family=Aleo:700', { rel: 'stylesheet' });
-
     if ((window.document as any).documentMode) {
       // Do IE stuff
       document.body.innerHTML = 'THIS WEBSITE IS NOT SUPPORTED IN INTERNET EXPLORER'
@@ -72,23 +68,4 @@ export class BaseComponent implements OnInit {
     }
     this.previousScroll = newScrollTop;
   }
-
-  private addScript(src: string, extraProperties: { [key: string]: any }) {
-    const script = document.createElement('script');
-    Object.keys(extraProperties).forEach(key => {
-      script[key] = extraProperties[key];
-    });
-    script.src = src;
-    document.head.appendChild(script);
-  }
-
-  private addLink(rhef: string, extraProperties: { [key: string]: any }) {
-    const link = document.createElement('link');
-    Object.keys(extraProperties).forEach(key => {
-      link[key] = extraProperties[key];
-    });
-    link.href = rhef;
-    document.head.appendChild(link);
-  }
-
 }
