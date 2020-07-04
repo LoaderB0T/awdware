@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/awdware/gah/master/assets/gah-config-schema.json",
+  "$schema": "https://raw.githubusercontent.com/awdware/gah/master/shared/assets/gah-config-schema.json",
   "plugins": [
     {
       "name": "@awdware/gah-translation-merger",
