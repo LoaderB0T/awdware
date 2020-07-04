@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ProjectGuid>275c007c-ba08-4bea-a42b-f98cfd653d9e</ProjectGuid>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
