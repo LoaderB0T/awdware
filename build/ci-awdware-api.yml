@@ -40,12 +40,6 @@ steps:
     # sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
 - task: DotNetCoreCLI@2
-  displayName: "\U0001F4E6 Restore Nuget packages"
-  inputs:
-    command: 'restore'
-    projects: 'Src/Awdware.*/**/Awdware.*.csproj'
-
-- task: DotNetCoreCLI@2
   displayName: "\U0001F6E0 build core"
   inputs:
     projects: Src/Awdware.Core/Awdware.Core.sln

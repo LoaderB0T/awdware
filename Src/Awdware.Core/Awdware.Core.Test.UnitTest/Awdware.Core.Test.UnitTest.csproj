@@ -10,6 +10,7 @@
 
   <PropertyGroup>
     <OutputPath>..\..\..\bin\$(Configuration)</OutputPath>
+    <RestorePackages>true</RestorePackages>
     <RunSettingsFilePath>$(SolutionDir)\..\build\CodeCoverage.runsettings</RunSettingsFilePath>
   </PropertyGroup>
 
