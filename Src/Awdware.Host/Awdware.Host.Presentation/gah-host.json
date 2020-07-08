@@ -1,10 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/awdware/gah/master/shared/assets/gah-host-schema.json",
+  "aot": true,
   "modules": [
     {
-      "path": "../../Awdware.Games/Awdware.Games.Presentation/gah-module.json",
+      "path": "../../Awdware.Core/Awdware.Core.Presentation/gah-module.json",
       "names": [
-        "awdware-games"
+        "awdware-core"
       ]
     },
     {
@@ -14,9 +15,9 @@
       ]
     },
     {
-      "path": "../../Awdware.Core/Awdware.Core.Presentation/gah-module.json",
+      "path": "../../Awdware.Games/Awdware.Games.Presentation/gah-module.json",
       "names": [
-        "awdware-core"
+        "awdware-games"
       ]
     }
   ],
@@ -24,7 +25,7 @@
     "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Aleo:700\">",
     "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Montserrat:400,700\">",
     "<script defer src=\"./assets/awdware-core/js/fontawesome.all.min.js\"></script>",
-	"<link rel=\"icon\" href=\"assets/awdware-core/favicon.ico\" type=\"image/x-icon\"/>"
+    "<link rel=\"icon\" href=\"assets/awdware-core/favicon.ico\" type=\"image/x-icon\"/>"
   ],
   "title": "awdware"
 }
