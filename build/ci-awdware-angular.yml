@@ -21,16 +21,10 @@ steps:
       scannerMode: CLI
       configMode: manual
       cliProjectKey: "awdware:presentation"
-      cliSources: presentation
+      cliSources: Src
       extraProperties: |
-        sonar.sources=
-          Src/Awdware.Core/Awdware.Core.Presentation/projects/awdware-core/src,
-          Src/Awdware.Led/Awdware.Led/Awdware.Led.Presentation/projects/awdware-led/src,
-          Src/Awdware.Games/Awdware.Games.Presentation/projects/awdware-games/src,
-          Src/Awdware.Shared/Awdware.Shared.Presentation/projects/awdware-shared/src
         sonar.sourceEncoding=UTF-8
         sonar.exclusions=**/node_modules/**,**/*.spec.ts,**/.gah/**
-        sonar.tests=Src
         sonar.test.inclusions=**/*.spec.ts
         sonar.ts.tslintconfigpath=Src/Awdware.Host/Awdware.Host.Presentation/.gah/tslint.json
 
@@ -43,7 +37,7 @@ steps:
   - task: PowerShell@2
     inputs:
       targetType: 'inline'
-      script: gah install
+      script: gah install --debug
       workingDirectory: 'Src/Awdware.Host/Awdware.Host.Presentation'
     displayName: "Gah install"
 
