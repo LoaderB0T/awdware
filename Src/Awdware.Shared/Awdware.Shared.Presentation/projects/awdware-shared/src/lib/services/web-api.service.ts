@@ -21,8 +21,7 @@ export class WebApiService {
 
   private checkInit() {
     if (!this.baseUrl) {
-      this.init(environment.apiUrl);
-      // throw new InvalidOperationError('This Service has to be initialized before the first use!');
+      throw new Error('This service has to be initialized by calling the init method before usage.')
     }
   }
 

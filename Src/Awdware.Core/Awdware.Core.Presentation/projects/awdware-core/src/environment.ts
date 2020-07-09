@@ -1,3 +1,4 @@
 export const environment = {
-  test: false
+  test: false,
+  apiUrl: ''
 };

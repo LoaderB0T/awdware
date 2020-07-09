@@ -48,8 +48,7 @@ export class CoreModule {
   ) {
     console.log('constructor: CoreModule');
 
-    // apiService.init(environment.apiUrl);
-    // TODO add event hook for after initialization is done (Environment is not available at this point in time!)
+    apiService.init(environment.apiUrl);
     translationService.init();
     themeService.init();
 
