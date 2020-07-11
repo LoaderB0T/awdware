@@ -3,7 +3,8 @@
   "modules": [
     {
       "name": "awdware-core",
-      "facadePath": "projects/awdware-core/src/facade",
+      "assetsPath": "projects/awdware-core/src/assets",
+      "stylesPath": "projects/awdware-core/src/styles.scss",
       "packageName": "awdware",
       "publicApiPath": "projects/awdware-core/src/public-api.ts",
       "baseNgModuleName": "CoreModule",
