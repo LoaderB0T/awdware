@@ -20,6 +20,11 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        pathMatch: 'full',
+        redirectTo: 'hello'
+      },
+      {
+        path: '',
         resolve: { userInfo: UserDetailsResolverService },
         children: [
           {
