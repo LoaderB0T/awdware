@@ -4,6 +4,7 @@
 
 export * from './lib/awdware-shared.module';
 export * from './environment';
+export * from './assets';
 
 export * from './lib/checkbox/checkbox.component';
 export * from './lib/slider/slider.component';

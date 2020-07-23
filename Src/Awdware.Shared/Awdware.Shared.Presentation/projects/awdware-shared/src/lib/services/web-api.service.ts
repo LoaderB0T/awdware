@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { InvalidOperationError } from '../models/invalid-operation-error';
-import { environment } from '../../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +9,17 @@ import { environment } from '../../environment';
 export class WebApiService {
   private baseUrl: string;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient) {
     console.log('web api service constructor called');
   }
 
   public init(apiUrl: string) {
-    this.baseUrl = apiUrl + '/api/';
+    this.baseUrl = `${apiUrl  }/api/`;
   }
 
   private checkInit() {
     if (!this.baseUrl) {
-      throw new Error('This service has to be initialized by calling the init method before usage.')
+      throw new Error('This service has to be initialized by calling the init method before usage.');
     }
   }
 
