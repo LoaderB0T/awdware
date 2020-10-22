@@ -25,12 +25,12 @@ import { UserDetailsService } from '../../services/user-details.service';
   providedIn: 'root'
 })
 export class AccountService {
-  private _routingService: RoutingService;
-  private _webApiService: WebApiService;
-  private _sessionStoreService: SessionStoreService;
-  private _eventService: EventService;
-  private _sessionService: SessionService;
-  private _userInfoService: UserDetailsService;
+  private readonly _routingService: RoutingService;
+  private readonly _webApiService: WebApiService;
+  private readonly _sessionStoreService: SessionStoreService;
+  private readonly _eventService: EventService;
+  private readonly _sessionService: SessionService;
+  private readonly _userInfoService: UserDetailsService;
 
   constructor(
     webApiService: WebApiService,
@@ -111,7 +111,7 @@ export class AccountService {
   }
 
   public verifyMail(token: string): Observable<void> {
-    return this._webApiService.get('authentication/emailconfirmation/' + token);
+    return this._webApiService.get(`authentication/emailconfirmation/${token}`);
   }
 
 }

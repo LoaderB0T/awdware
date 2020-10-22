@@ -21,11 +21,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public registerSuccessful: boolean = false;
   public clickedButton: boolean = false;
 
-  private _subMgr = new SubscriptionManager();
-  private _accountService: AccountService;
-  private _routingService: RoutingService;
+  private readonly _subMgr = new SubscriptionManager();
+  private readonly _accountService: AccountService;
+  private readonly _routingService: RoutingService;
   @ViewChild('register', { static: true })
-  private _formElement: NgForm;
+  private readonly _formElement: NgForm;
 
   constructor(accountService: AccountService, routingService: RoutingService) {
     this._accountService = accountService;

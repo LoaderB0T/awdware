@@ -9,7 +9,7 @@ export class ThemeService {
   public selectedTheme: Theme;
   private _globalStyleSheet: CSSStyleSheet;
 
-  private themes: Theme[] = [
+  private readonly themes: Theme[] = [
     this.darkTheme,
     this.lightTheme
   ];
@@ -63,7 +63,7 @@ export class ThemeService {
   private get darkTheme(): Theme {
     const theme = new Theme('dark');
     theme.props = [
-      { name: 'colorMainBg', value: 'rgb(37, 36, 35)' },
+      { name: 'colorMainBg', value: 'rgb(37, 41, 52)' },
       { name: 'colorMainContent', value: 'rgb(242, 239, 234)' },
       { name: 'colorPassiveContent', value: 'rgb(140, 138, 133)' },
       { name: 'colorHighlightContentTransparent', value: 'rgba(50, 49, 48, 0.8)' },

@@ -10,12 +10,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./base.component.scss']
 })
 export class BaseComponent implements OnInit {
-  private _dialogService: DialogService;
-  private previousScroll: number;
-  public hideMenu: boolean = false;
-
-  @ViewChild('mainContent', { static: true }) private _mainContent: ElementRef<HTMLDivElement>;
-
+  private readonly _dialogService: DialogService;
 
   constructor(
     viewContainerRef: ViewContainerRef,
@@ -26,8 +21,13 @@ export class BaseComponent implements OnInit {
     this._dialogService = dialogService;
 
     // Another one of those very useless but stil lvery fun details :)
-    const rndmTitleEmojis = ['*^____^*', 'O(∩_∩)O', '(～￣▽￣)～', '（*＾-＾*）', '(*^_^*)', '(❁´◡`❁)', '(´▽`ʃ♡ƪ)', '♪(^∇^*)', '(oﾟvﾟ)ノ', '(☆▽☆)', '(o゜▽゜)o', '☆ヾ(•ω•`)o', '\\(￣︶￣*\\)', ')(￣o￣) . z Z', '\\(@^0^@)/', 'ヾ(^▽^*)))', '✪ ω ✪', '♪(´▽｀)', 'ヽ(✿ﾟ▽ﾟ)ノ', '（。＾▽＾）', '(☞ﾟヮﾟ)☞', '☜(ﾟヮﾟ☜)', '(⌐■_■)', '(•_•)', '¯\\_(ツ)_/¯', '( ͡• ͜ʖ ͡• )'];
-    title.setTitle('awdware   ' + rndmTitleEmojis[Math.random() * (rndmTitleEmojis.length) | 0]); // bitwise operator floors a (very tiny) bit faster
+    const rndmTitleEmojis = [
+      '*^____^*', 'O(∩_∩)O', '(～￣▽￣)～', '（*＾-＾*）', '(*^_^*)', '(❁´◡`❁)', '(´▽`ʃ♡ƪ)', '♪(^∇^*)', '(oﾟvﾟ)ノ', '(☆▽☆)', '(o゜▽゜)o',
+      '☆ヾ(•ω•`)o', '\\(￣︶￣*\\)', ')(￣o￣) . z Z', '\\(@^0^@)/', 'ヾ(^▽^*)))', '✪ ω ✪', '♪(´▽｀)', 'ヽ(✿ﾟ▽ﾟ)ノ', '（。＾▽＾）', '(☞ﾟヮﾟ)☞',
+      '☜(ﾟヮﾟ☜)', '(⌐■_■)', '(•_•)', '¯\\_(ツ)_/¯', '( ͡• ͜ʖ ͡• )'
+    ];
+    // bitwise operator floors a (very tiny) bit faster, very unnecessary 
+    title.setTitle(`awdware   ${rndmTitleEmojis[Math.random() * (rndmTitleEmojis.length) | 0]}`);
     this._dialogService.setRootViewContainerRef(viewContainerRef);
     router.events
       .pipe(
@@ -45,27 +45,13 @@ export class BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.previousScroll = this._mainContent.nativeElement.scrollTop;
-
     if ((window.document as any).documentMode) {
       // Do IE stuff
-      document.body.innerHTML = 'THIS WEBSITE IS NOT SUPPORTED IN INTERNET EXPLORER'
+      document.body.innerHTML = 'THIS WEBSITE IS NOT SUPPORTED IN INTERNET EXPLORER';
     }
   }
 
   public get dialogVisible() {
     return this._dialogService.dialogVisible;
-  }
-
-  public handleScroll() {
-    const newScrollTop = this._mainContent.nativeElement.scrollTop;
-    if (newScrollTop === 0) {
-      this.hideMenu = false;
-    } else if (this.previousScroll < newScrollTop) {
-      this.hideMenu = true;
-    } else {
-      this.hideMenu = false;
-    }
-    this.previousScroll = newScrollTop;
   }
 }

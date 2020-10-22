@@ -9,9 +9,9 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./verify-mail.component.scss']
 })
 export class VerifyMailComponent implements OnInit, OnDestroy {
-  public verifyComplete: boolean = false;
-  private _activatedRoute: ActivatedRoute;
-  private _accountService: AccountService;
+  public verifyComplete = false;
+  private readonly _activatedRoute: ActivatedRoute;
+  private readonly _accountService: AccountService;
 
   constructor(accountService: AccountService, activatedRoute: ActivatedRoute) {
     this._activatedRoute = activatedRoute;

@@ -24,7 +24,7 @@ export class GamesModule {
     console.log('constructor: GamesModule');
     const config = new AwdwareConfig();
     config.menuItems = [
-      new MenuItem('Game', 'gamepad', () => routingService.navigateToGames(), () => true),
+      new MenuItem('games', 'Game', 'gamepad', () => routingService.navigateToGames(), () => true),
     ];
     facadeService.addOrUpdateConfiguration('awdware-games', config);
   }

@@ -1,30 +1,38 @@
 #menu-container {
-  height: 100vh;
-  width: 80px;
-  border-right: 2px solid transparent;
-  transition: width 0.6s, border-color 0.6s;
+  height: 80px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  transition: height 0.6s, border-color 0.6s;
   background-color: var(--colorMainBg);
-  @media only screen and (max-width: 700px) {
-    width: 0;
-    opacity: 0;
-    position: absolute;
-    z-index: 10;
-    transition: opacity 0.6s;
+  .spacer {
+    width: 100%;
+    height: 75px;
+    border-top: 4px solid var(--colorHighlightColor1);
   }
   .menu-item {
     cursor: pointer;
     display: flex;
     align-items: center;
-    flex-direction: row-reverse;
-    padding-bottom: 20px;
+    flex-direction: column-reverse;
+    padding-bottom: 12.5px;
+    border-top: 4px solid var(--colorHighlightColor1);
+    &.selected {
+      border-color: var(--colorHighlightColor2);
+    }
     .text {
-      position: absolute;
-      padding-right: 170px;
-      @media only screen and (max-width: 700px) {
-        padding-right: 100px;
-      }
-      transition: padding-right 0.6s;
+      opacity: 0;
+      padding: 10px;
+      background-color: var(--colorMainBg);
+      transition: opacity 0.3s;
       font-size: 32px;
+      position: absolute;
+    }
+    &:hover {
+      .text {
+        opacity: 1;
+        transition: opacity 0.3s 0.5s;
+      }
     }
     .icon-container {
       width: 80px;
@@ -53,19 +61,38 @@
   }
   #menu-controls {
     padding-top: 10px;
+    display: none;
   }
-  &.opened {
-    border-color: white;
-    width: 300px;
-    @media only screen and (max-width: 700px) {
-      opacity: 1;
-      width: 100vw;
-      border-color: transparent;
-    }
+}
+
+@media only screen and (max-width: 700px) {
+  #menu-container {
+    opacity: 0;
+    position: fixed;
+    z-index: 10;
+    transition: opacity 0.6s;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     .menu-item {
+      flex-direction: row;
+      padding: 20px;
       .text {
-        padding-right: 100px;
+        position: relative;
+        opacity: 1;
       }
+    }
+    #menu-controls {
+      display: flex;
+    }
+    &.opened {
+      opacity: 1;
+      border-color: transparent;
+      height: 100vh;
     }
   }
 }
@@ -108,8 +135,5 @@
       height: fit-content;
       width: fit-content;
     }
-  }
-  &.hide {
-    top: -85px;
   }
 }

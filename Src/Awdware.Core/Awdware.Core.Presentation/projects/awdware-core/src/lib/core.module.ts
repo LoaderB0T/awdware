@@ -55,9 +55,9 @@ export class CoreModule {
     this._sessionStoreService = sessionStoreService;
     const config = new AwdwareConfig();
     config.menuItems = [
-      new MenuItem('Home', 'home', () => routingService.navigateToHomeHello(), () => true),
-      new MenuItem('Login', 'sign-in', () => routingService.navigateToAccountLogin(), () => this.showLoginButton()),
-      new MenuItem('Account', 'user', () => routingService.navigateToAccount(), () => this.showAccountButton())
+      new MenuItem('home', 'Home', 'home', () => routingService.navigateToHomeHello(), () => true),
+      new MenuItem('login', 'Login', 'sign-in', () => routingService.navigateToAccountLogin(), () => this.showLoginButton()),
+      new MenuItem('account', 'Account', 'user', () => routingService.navigateToAccount(), () => this.showAccountButton())
     ];
     facadeService.addOrUpdateConfiguration('awdware-core', config);
   }

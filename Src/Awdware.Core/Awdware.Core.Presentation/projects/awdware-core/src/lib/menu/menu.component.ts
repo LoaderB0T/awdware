@@ -27,6 +27,15 @@ export class MenuComponent implements OnInit {
     this._facadeService.updated.subscribe(cfg => {
       this._menuItems = this.getMenuItemsFromConfigs(cfg);
     });
+    this._facadeService.activeMenuItem.subscribe(key => {
+      this._menuItems.forEach(menuItem => {
+        if (menuItem.key === key) {
+          menuItem.active = true;
+        } else {
+          menuItem.active = false;
+        }
+      })
+    });
   }
 
   private getMenuItemsFromConfigs(cfg: AwdwareConfig[]): MenuItem[] {

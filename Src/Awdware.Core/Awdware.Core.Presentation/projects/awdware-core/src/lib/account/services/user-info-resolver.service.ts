@@ -12,10 +12,10 @@ import { UserDetailsService } from '../../services/user-details.service';
   providedIn: 'root'
 })
 export class UserDetailsResolverService implements Resolve<UserDetailsDto> {
-  private _accountService: AccountService;
-  private _sessionStoreService: SessionStoreService;
-  private _sessionService: SessionService;
-  private _userInfoService: UserDetailsService;
+  private readonly _accountService: AccountService;
+  private readonly _sessionStoreService: SessionStoreService;
+  private readonly _sessionService: SessionService;
+  private readonly _userInfoService: UserDetailsService;
 
   constructor(
     accountService: AccountService,

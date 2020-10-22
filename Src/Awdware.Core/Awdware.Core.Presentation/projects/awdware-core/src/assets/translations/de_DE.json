@@ -59,5 +59,13 @@
       },
       "heading": "Registrieren"
     }
+  },
+  "home": {
+    "theater": {
+      "hi": "Hi!",
+      "iam": "Ich bin",
+      "ilike": "Ich mag:",
+      "skills": {}
+    }
   }
 }
