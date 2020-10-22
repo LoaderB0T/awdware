@@ -20,12 +20,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   public loginSuccessful: boolean = false;
   public clickedButton: boolean = false;
 
-  private _subMgr = new SubscriptionManager();
-  private _accountService: AccountService;
-  private _routingService: RoutingService;
+  private readonly _subMgr = new SubscriptionManager();
+  private readonly _accountService: AccountService;
+  private readonly _routingService: RoutingService;
 
   @ViewChild('login', { static: true })
-  private _formElement: NgForm;
+  private readonly _formElement: NgForm;
 
   constructor(
     accountService: AccountService,

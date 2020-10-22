@@ -10,8 +10,8 @@ import { map } from 'rxjs/operators';
 })
 export class AuthGuard implements CanActivate {
 
-  private _sessionService: SessionService;
-  private _routingService: RoutingService;
+  private readonly _sessionService: SessionService;
+  private readonly _routingService: RoutingService;
 
   constructor(sessionService: SessionService, routingService: RoutingService) {
     this._sessionService = sessionService;

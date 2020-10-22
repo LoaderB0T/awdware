@@ -36,7 +36,7 @@ import { environment } from '../environment';
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
 })
 export class CoreModule {
-  private _sessionStoreService: SessionStoreService;
+  private readonly _sessionStoreService: SessionStoreService;
 
   constructor(
     routingService: RoutingService,

@@ -1,13 +1,11 @@
-import { Injectable, Provider } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpResponse,
-  HttpErrorResponse,
-  HTTP_INTERCEPTORS,
-  HttpEventType
+  HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -20,7 +18,7 @@ import { RoutingService } from './routing.service';
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-  constructor(private sessionStoreService: SessionStoreService, private routingService: RoutingService) { }
+  constructor(private readonly sessionStoreService: SessionStoreService, private readonly routingService: RoutingService) { }
 
   private logResponse(ev: HttpEvent<any>) {
     if (ev instanceof HttpResponse) {
@@ -31,7 +29,7 @@ export class HttpInterceptorService implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let request: HttpRequest<any>;
     if (this.sessionStoreService.hasToken) {
-      const headers = req.headers.set('Authorization', 'Bearer ' + this.sessionStoreService.getTokenString());
+      const headers = req.headers.set('Authorization', `Bearer ${this.sessionStoreService.getTokenString()}`);
       request = req.clone({ headers, withCredentials: true });
     } else {
       request = req.clone({ withCredentials: true });

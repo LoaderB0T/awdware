@@ -20,10 +20,10 @@ export class NewPasswordComponent implements OnInit, OnDestroy {
   public pwConf: string;
   public clickedButton = false;
 
-  private _accountService: AccountService;
-  private _activatedRoute: ActivatedRoute;
+  private readonly _accountService: AccountService;
+  private readonly _activatedRoute: ActivatedRoute;
 
-  @ViewChild('reset', { static: true }) private _formElement: NgForm;
+  @ViewChild('reset', { static: true }) private readonly _formElement: NgForm;
 
   constructor(accountService: AccountService, activatedRoute: ActivatedRoute) {
     this._accountService = accountService;

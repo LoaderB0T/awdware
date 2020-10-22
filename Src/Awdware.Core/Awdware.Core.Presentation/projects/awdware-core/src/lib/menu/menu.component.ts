@@ -7,7 +7,7 @@ import { AwdwareConfig, MenuItem, FacadeService } from '@awdware/awdware-shared'
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  private _facadeService: FacadeService;
+  private readonly _facadeService: FacadeService;
   private _menuItems: MenuItem[];
 
   @Input()
@@ -34,7 +34,7 @@ export class MenuComponent implements OnInit {
         } else {
           menuItem.active = false;
         }
-      })
+      });
     });
   }
 

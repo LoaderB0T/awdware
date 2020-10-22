@@ -17,11 +17,11 @@ export class LoginHelpComponent implements OnInit, OnDestroy {
   public clickedButton: boolean;
   public errorMessageKey: string;
   public emailHasBeenSend = false;
-  private _accountService: AccountService;
-  private _subMgr = new SubscriptionManager();
+  private readonly _accountService: AccountService;
+  private readonly _subMgr = new SubscriptionManager();
 
   @ViewChild('loginHelp', { static: true })
-  private _formElement: NgForm;
+  private readonly _formElement: NgForm;
 
   constructor(accountService: AccountService) {
     this._accountService = accountService;

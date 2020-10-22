@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   providedIn: 'root'
 })
 export class RoutingService {
-  private _router: Router;
+  private readonly _router: Router;
   private _returnUrl: string;
 
   constructor(router: Router, route: ActivatedRoute) {

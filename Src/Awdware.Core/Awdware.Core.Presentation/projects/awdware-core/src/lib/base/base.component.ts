@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { DialogService } from '@awdware/awdware-shared';
 import { NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -27,6 +27,7 @@ export class BaseComponent implements OnInit {
       '☜(ﾟヮﾟ☜)', '(⌐■_■)', '(•_•)', '¯\\_(ツ)_/¯', '( ͡• ͜ʖ ͡• )'
     ];
     // bitwise operator floors a (very tiny) bit faster, very unnecessary 
+    // eslint-disable-next-line no-irregular-whitespace
     title.setTitle(`awdware   ${rndmTitleEmojis[Math.random() * (rndmTitleEmojis.length) | 0]}`);
     this._dialogService.setRootViewContainerRef(viewContainerRef);
     router.events

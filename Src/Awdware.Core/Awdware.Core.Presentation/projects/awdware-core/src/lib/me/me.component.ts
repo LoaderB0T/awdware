@@ -12,10 +12,10 @@ import { AccountService } from '../account/services/account.service';
   styleUrls: ['./me.component.scss']
 })
 export class MeComponent implements OnInit {
-  private _userInfoService: UserDetailsService;
-  private _accountService: AccountService;
-  private _themeService: ThemeService;
-  private _translationService: TranslationService;
+  private readonly _userInfoService: UserDetailsService;
+  private readonly _accountService: AccountService;
+  private readonly _themeService: ThemeService;
+  private readonly _translationService: TranslationService;
 
   constructor(
     userInfoService: UserDetailsService,

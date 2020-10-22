@@ -31,11 +31,10 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.2",
     "@angular-devkit/build-ng-packagr": "~0.1000.2",
-    "@angular-eslint/eslint-plugin": "^0.5.0-beta.4",
     "@angular/cli": "~10.0.2",
     "@angular/compiler-cli": "~10.0.3",
     "@angular/language-service": "~10.0.3",
-    "@awdware/eslint-config-angular": "0.0.8",
+    "@awdware/eslint-config-angular": "0.0.9",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",

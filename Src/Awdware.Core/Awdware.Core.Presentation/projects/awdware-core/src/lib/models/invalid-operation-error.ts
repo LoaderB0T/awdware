@@ -2,6 +2,6 @@
 
   constructor(m: string)
   constructor(m: string, error?: Error) {
-    super('InvalidOperationError: ' + m);
+    super(`InvalidOperationError: ${m}`);
   }
 }
