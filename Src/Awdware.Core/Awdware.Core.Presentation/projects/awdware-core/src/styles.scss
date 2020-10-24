@@ -16,6 +16,7 @@ html {
   position: relative;
   background-color: var(--colorBgPrimary);
   color: var(--colorMainContent);
+  transition: background-color 0.2s, color 0.2s;
 }
 
 body {
@@ -97,7 +98,6 @@ input[type="submit"],
   .awd-floating-container {
     @include content-color;
     width: 90%;
-    max-width: 700px;
   }
 }
 

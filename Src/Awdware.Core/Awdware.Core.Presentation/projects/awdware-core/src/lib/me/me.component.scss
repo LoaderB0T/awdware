@@ -1,0 +1,15 @@
+.awd-floating-container {
+  max-width: 700px;
+}
+
+#me-content {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+  .this-is {
+    font-size: 20px;
+  }
+}

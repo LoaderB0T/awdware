@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         .addScene('me2:Janik', 0)
         .addScene('me3:.<br>', 0)
         .addScene(`me4:${text_ilike} `, 0)
-        .addScene('me5: ', 0);
+        .addScene('me5:', 0);
       this.writeLikes([
         'Web Development',
         "TypeScript",
