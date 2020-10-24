@@ -12,9 +12,10 @@
     width: 300px;
     height: 300px;
     overflow: visible;
+    white-space: nowrap;
     font-size: min(40px, 10vw);
-    span {
-      white-space: nowrap;
+    span:not(.br) {
+      padding-left: 3px;
     }
     #textAnimation2 {
       color: var(--colorHighlightColor1);
@@ -27,6 +28,17 @@
       cursor: pointer;
       text-decoration: underline;
       text-decoration-style: dotted;
+    }
+    #textCursor {
+      animation: blinker 1060ms step-start infinite;
+      font-weight: bold;
+      display: inline-block;
+
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
     }
   }
 }

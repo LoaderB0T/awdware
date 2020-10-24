@@ -10,7 +10,7 @@
   transition: border-bottom 75ms linear;
 
   &.disabled {
-    border-bottom: var(--colorHighlightContent) 3px solid;
+    border-bottom: var(--colorBgSecondary) 3px solid;
   }
 
   .icon-container {
@@ -99,7 +99,7 @@
       display: none;
       position: absolute;
       transform: translateX(-325px) translateY(-20px);
-      background: var(--colorHighlightContent);
+      background: var(--colorBgSecondary);
       border: var(--colorError) 2px solid;
       padding: 10px;
       width: 300px;

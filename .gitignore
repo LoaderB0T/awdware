@@ -377,3 +377,5 @@ yarn-error.log
 /WebApi/WebApi/Migrations/20190118205044_Another 'initial' Migration 
 coverage.cobertura.xml
 /WindowsCollector/WindowsCollector/config.json
+
+Src/Awdware.Core/Awdware.Core.Presentation/gah-local.json

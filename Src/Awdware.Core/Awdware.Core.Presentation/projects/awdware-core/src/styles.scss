@@ -14,7 +14,7 @@ html {
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  background-color: var(--colorMainBg);
+  background-color: var(--colorBgPrimary);
   color: var(--colorMainContent);
 }
 
@@ -34,7 +34,7 @@ input[type="submit"],
   border: none;
   border-radius: 5px;
   color: var(--colorMainContent);
-  background: var(--colorMainBg);
+  background: var(--colorBgPrimary);
   box-shadow: 0 0 0 3px var(--colorHighlightColor1) inset;
   font-size: var(--fontSizeNormal);
   transition: box-shadow 75ms linear;
@@ -85,6 +85,19 @@ input[type="submit"],
       grid-row-gap: 10px;
       grid-auto-flow: row;
     }
+  }
+}
+
+.awd-content-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  .awd-floating-container {
+    @include content-color;
+    width: 90%;
+    max-width: 700px;
   }
 }
 

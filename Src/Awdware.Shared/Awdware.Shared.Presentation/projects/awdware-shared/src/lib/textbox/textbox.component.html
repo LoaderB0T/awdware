@@ -1,20 +1,44 @@
-<div class="input-container" [class.focus]="isFocused" [class.disabled]="isDisabled" [attr.style]="cssVariablesStyle">
-  <div class="icon-container" [class.has-second-icon]="icon2 && true" *ngIf="icon && true">
+<div class="input-container"
+     [class.focus]="isFocused"
+     [class.disabled]="isDisabled"
+     [attr.style]="cssVariablesStyle">
+  <div class="icon-container"
+       [class.has-second-icon]="icon2 && true"
+       *ngIf="icon && true">
     <i class="icon fal fa-{{icon}}"></i>
-    <i *ngIf="icon2 && true" class="icon2 fal fa-{{icon2}}"></i>
+    <i *ngIf="icon2 && true"
+       class="icon2 fal fa-{{icon2}}"></i>
   </div>
-  <div class="input-label-container" [class.no-icon]="icon && false">
-    <input #inputField [type]="getInputType" [(ngModel)]="value" [name]="name" [class]="name" [id]="name"
-      [tabindex]="inputTabIndex" [pattern]="pattern" [minlength]="minLength" [maxlength]="maxLength"
-      [disabled]="isDisabled" [class.has-icon]="icon && true" (blur)="onBlur()" (focus)="onFocus()"
-      (input)="inputEvent()" [class.has-error]="validationError && true" [disabled]="isDisabled" [min]="minValue"
-      [max]="maxValue">
-    <label for="{{name}}" [class.hide]="showLabel && hidePlaceholderOnInput" [class.moved]="showLabel"
-      [class.has-icon]="icon && true">
+  <div class="input-label-container"
+       [class.no-icon]="icon && false">
+    <input #inputField
+           [type]="getInputType"
+           [(ngModel)]="value"
+           [name]="name"
+           [class]="name"
+           [id]="name"
+           [tabindex]="inputTabIndex"
+           [pattern]="pattern"
+           [minlength]="minLength"
+           [maxlength]="maxLength"
+           [disabled]="isDisabled"
+           [class.has-icon]="icon && true"
+           (blur)="onBlur()"
+           (focus)="onFocus()"
+           (input)="inputEvent()"
+           [class.has-error]="validationError && true"
+           [disabled]="isDisabled"
+           [min]="minValue"
+           [max]="maxValue">
+    <label for="{{name}}"
+           [class.hide]="showLabel && hidePlaceholderOnInput"
+           [class.moved]="showLabel"
+           [class.has-icon]="icon && true">
       {{placeholder}}
     </label>
   </div>
-  <div class="validation-error" *ngIf="validationError && true">
+  <div class="validation-error"
+       *ngIf="validationError && true">
     <i class="error-icon fal fa-exclamation-circle"></i>
     <span class="error-description">
       {{validationError | translate}}

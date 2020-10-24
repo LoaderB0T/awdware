@@ -13,13 +13,13 @@ export class LogoComponent implements OnInit {
   public key_w = false;
   public key_d = false;
 
-  private $timer_a = new Subject();
-  private $timer_w = new Subject();
-  private $timer_d = new Subject();
+  private readonly $timer_a = new Subject();
+  private readonly $timer_w = new Subject();
+  private readonly $timer_d = new Subject();
 
-  private timer_a = this.$timer_a.asObservable();
-  private timer_w = this.$timer_w.asObservable();
-  private timer_d = this.$timer_d.asObservable();
+  private readonly timer_a = this.$timer_a.asObservable();
+  private readonly timer_w = this.$timer_w.asObservable();
+  private readonly timer_d = this.$timer_d.asObservable();
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {

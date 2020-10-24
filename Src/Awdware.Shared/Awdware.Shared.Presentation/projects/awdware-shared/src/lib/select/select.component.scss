@@ -1,5 +1,5 @@
 div.select-container {
-  background-color: var(--colorMainBg);
+  background-color: var(--colorBgPrimary);
   position: relative;
   display: inline-block;
   padding: 0px;
@@ -7,7 +7,7 @@ div.select-container {
   width: 100%;
   button.drop-button {
     position: relative;
-    background-color: var(--colorMainBg);
+    background-color: var(--colorBgPrimary);
     color: var(--colorMainContent);
     padding-left: 8px;
     border: none;
@@ -27,7 +27,7 @@ div.select-container {
       display: inline-block;
       right: 0px;
       top: 0px;
-      background-color: var(--colorMainBg);
+      background-color: var(--colorBgPrimary);
       font-size: 26px;
       .select-arrow-offset {
         position: absolute;
@@ -50,14 +50,14 @@ div.select-container {
       div.select-arrow-div {
         background-color: var(--colorHighlightColor1);
         span {
-          color: var(--colorMainBg);
+          color: var(--colorBgPrimary);
         }
       }
     }
   }
   div.select-content {
     position: fixed;
-    background-color: var(--colorHighlightContent);
+    background-color: var(--colorBgSecondary);
     overflow: auto;
     z-index: 3;
     border: 1px solid var(--colorPassiveContent);
@@ -76,7 +76,7 @@ div.select-container {
       }
       &:hover {
         background-color: var(--colorHighlightColor1);
-        color: var(--colorMainBg);
+        color: var(--colorBgPrimary);
       }
     }
   }

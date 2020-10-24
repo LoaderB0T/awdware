@@ -15,7 +15,7 @@ import { ColorType } from '../models/color-type.model';
 })
 export class SliderComponent implements OnInit, ControlValueAccessor {
   @Input() public min: number;
-  @Input() public max: number = 524288;
+  @Input() public max = 524288;
   @Input() public inputTabIndex: number;
   @Input() public name: string;
   @Input() public minColor: string;
@@ -26,8 +26,8 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
 
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
-  private _sanitizer: DomSanitizer;
-  private _theme: ThemeService;
+  private readonly _sanitizer: DomSanitizer;
+  private readonly _theme: ThemeService;
   public isDisabled: boolean;
   public innerValue: number;
   public isFocused: boolean;
@@ -61,7 +61,7 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
   private refreshStyles() {
     this.cssVariables = this._sanitizer.bypassSecurityTrustStyle(
       `--slider-color: ${this.getCalculatedColor()};
-    --slider-background: ${this._theme.getColor('colorMainBg')};`);
+    --slider-background: ${this._theme.getColor('colorBgPrimary')};`);
   }
 
   private getCalculatedColor(): string {

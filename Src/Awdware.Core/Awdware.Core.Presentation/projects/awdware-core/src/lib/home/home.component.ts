@@ -1,23 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 const theaterJS = require('theaterjs');
-const theater = theaterJS({ locale: 'en' });
 
 @Component({
   selector: 'awd-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   private readonly _translateService: TranslateService;
+
+  private _theater = theaterJS({ locale: 'en' });
+
 
   constructor(translateService: TranslateService) {
     this._translateService = translateService;
   }
 
   ngOnInit() {
-    this.startTypingAnimation();
+    if (!this._theater.getCurrentActor()) {
+      this.startTypingAnimation();
+    } else {
+      this._theater.replay();
+    }
+  }
+
+  ngOnDestroy() {
+    this._theater.stop();
   }
 
   private startTypingAnimation() {
@@ -28,7 +38,7 @@ export class HomeComponent implements OnInit {
     forkJoin([obs_hi, obs_iam, obs_ilike]).subscribe(x => {
       const [text_hi, text_iam, text_ilike] = x;
 
-      theater
+      this._theater
         .addActor('me1', { accuracy: 0.2, speed: 1 }, '#textAnimation1')
         .addActor('me2', { accuracy: 1, speed: 1 }, '#textAnimation2')
         .addActor('me3', { accuracy: 1, speed: 1 }, '#textAnimation3')
@@ -42,18 +52,18 @@ export class HomeComponent implements OnInit {
         .addScene('me5: ', 0);
       this.writeLikes([
         'Web Development',
-        // "TypeScript",
-        // "Angular",
-        // "C# & .NET Core",
-        // "Tinkering with (S)CSS",
+        "TypeScript",
+        "Angular",
+        "C# & .NET Core",
+        "Tinkering with (S)CSS",
       ]);
-      theater.addScene('me6:lots actually!');
+      this._theater.addScene('me6:lots actually!');
     });
   }
 
   private writeLikes(texts: string[]) {
     texts.forEach(text => {
-      theater
+      this._theater
         .addScene(text, 50)
         .addScene(500)
         .addScene(-text.length);

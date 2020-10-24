@@ -2,13 +2,26 @@
   {{ labelText }}
   <div class="color-slider-container">
     <div class="slider-container">
-      <awd-slider [(ngModel)]="r" [min]=0 [max]=255 [minColor]="'rgb(100, 0, 0)'" [maxColor]="'rgb(255, 0, 0)'">
+      <awd-slider [(ngModel)]="r"
+                  [min]=0
+                  [max]=255
+                  [minColor]="'rgb(100, 0, 0)'"
+                  [maxColor]="'rgb(255, 0, 0)'">
       </awd-slider>
-      <awd-slider [(ngModel)]="g" [min]=0 [max]=255 [minColor]="'rgb(0, 100, 0)'" [maxColor]="'rgb(0, 255, 0)'">
+      <awd-slider [(ngModel)]="g"
+                  [min]=0
+                  [max]=255
+                  [minColor]="'rgb(0, 100, 0)'"
+                  [maxColor]="'rgb(0, 255, 0)'">
       </awd-slider>
-      <awd-slider [(ngModel)]="b" [min]=0 [max]=255 [minColor]="'rgb(0, 0, 100)'" [maxColor]="'rgb(0, 0, 255)'">
+      <awd-slider [(ngModel)]="b"
+                  [min]=0
+                  [max]=255
+                  [minColor]="'rgb(0, 0, 100)'"
+                  [maxColor]="'rgb(0, 0, 255)'">
       </awd-slider>
     </div>
-    <div class="color-preview" [style.background-color]="previewColor"></div>
+    <div class="color-preview"
+         [style.background-color]="previewColor"></div>
   </div>
 </div>

@@ -27,11 +27,12 @@ html {
 }
 
 @mixin content-color {
-  background-color: var(--colorHighlightContentTransparent);
+  background-color: var(--colorHighlightContent04);
   transition: background-color 0.1s;
   box-shadow: var(--shaddowDefault);
-  &:hover {
+  &:hover,
+  &:focus-within {
     box-shadow: var(--shaddowFocus);
-    background-color: var(--colorHighlightContent);
+    background-color: var(--colorHighlightContent10);
   }
 }

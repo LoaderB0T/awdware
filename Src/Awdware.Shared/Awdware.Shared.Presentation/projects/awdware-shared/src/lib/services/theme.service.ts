@@ -63,13 +63,15 @@ export class ThemeService {
   private get darkTheme(): Theme {
     const theme = new Theme('dark');
     theme.props = [
-      { name: 'colorMainBg', value: 'rgb(37, 41, 52)' },
+      { name: 'colorBgPrimary', value: 'rgb(18, 18, 18)' },
+      { name: 'colorBgSecondary', value: 'rgba(25, 25, 25, 1)' },
       { name: 'colorMainContent', value: 'rgb(242, 239, 234)' },
       { name: 'colorPassiveContent', value: 'rgb(140, 138, 133)' },
-      { name: 'colorHighlightContentTransparent', value: 'rgba(50, 49, 48, 0.8)' },
-      { name: 'colorHighlightContent', value: 'rgba(50, 49, 48)' },
-      { name: 'colorHighlightColor1', value: 'rgb(255, 0, 66)' },
-      { name: 'colorHighlightColor2', value: 'rgb(38, 131, 224)' },
+      { name: 'colorHighlightContent04', value: 'rgba(0, 0, 0, 0.35)' },
+      { name: 'colorHighlightContent10', value: 'rgba(0, 0, 0, 0.75)' },
+      { name: 'colorHighlightContent', value: 'rgba(0, 15, 20, 1)' },
+      { name: 'colorHighlightColor1', value: 'rgb(255 0 82)' },
+      { name: 'colorHighlightColor2', value: 'rgb(255 167 0)' },
       { name: 'colorError', value: 'rgb(238, 31, 16)' },
     ];
     return theme;
@@ -78,10 +80,10 @@ export class ThemeService {
   private get lightTheme(): Theme {
     const theme = new Theme('light');
     theme.props = [
-      { name: 'colorMainBg', value: 'rgb(249, 251, 252)' },
+      { name: 'colorBgPrimary', value: 'rgb(249, 251, 252)' },
       { name: 'colorMainContent', value: 'rgba(26, 25, 25, 1)' },
       { name: 'colorPassiveContent', value: 'rgb(92, 94, 96)' },
-      { name: 'colorHighlightContentTransparent', value: 'rgba(227, 227, 230, 0.8)' },
+      { name: 'colorHighlightContent04', value: 'rgba(227, 227, 230, 0.8)' },
       { name: 'colorHighlightContent', value: 'rgb(227, 227, 230)' },
       { name: 'colorHighlightColor1', value: 'rgb(242, 0, 255)' },
       { name: 'colorHighlightColor2', value: 'rgb(38, 131, 224)' },
