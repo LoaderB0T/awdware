@@ -16,12 +16,7 @@
     white-space: pre-wrap;
     word-break: break-all;
     font-size: min(40px, 8vw);
-    span:not(.br) {
-      padding-left: 3px;
-    }
-    #textAnimation2 {
-      color: var(--colorHighlightColor1);
-    }
+    #textAnimation2,
     #textAnimation5,
     #textAnimation6 {
       color: var(--colorHighlightColor1);

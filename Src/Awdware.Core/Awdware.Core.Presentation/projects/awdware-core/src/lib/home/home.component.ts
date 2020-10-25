@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const obs_ilike = this._translateService.get('home.theater.ilike');
 
     forkJoin([obs_hi, obs_iam, obs_ilike]).subscribe(x => {
-      const [text_hi, text_iam, text_ilike] = x;
+      const [text_hi, text_iam, text_ilike] = x as [string, string, string];
 
       this._theater
         .addActor('me1', { accuracy: 0.2, speed: 1 }, '#textAnimation1')
@@ -45,19 +45,26 @@ export class HomeComponent implements OnInit, OnDestroy {
         .addActor('me4', { accuracy: 0.5, speed: 1 }, '#textAnimation4')
         .addActor('me5', { accuracy: 0.75, speed: 1 }, '#textAnimation5')
         .addActor('me6', { accuracy: 0.5, speed: 1 }, '#textAnimation6')
+        .addActor('me7', { accuracy: 0.5, speed: 1 }, '#textAnimation7')
         .addScene(`me1:${text_hi}<br>`, `${text_iam} `, 500)
         .addScene('me2:Janik', 0)
         .addScene('me3:.<br>', 0)
+        .addScene(1111)
         .addScene(`me4:${text_ilike} `, 0)
         .addScene('me5:', 0);
       this.writeLikes([
         'Web Development',
         "TypeScript",
+        "NodeJS",
         "Angular",
         "C# & .NET Core",
-        "Tinkering with (S)CSS",
+        "(S)CSS",
       ]);
-      this._theater.addScene('me6:lots actually!');
+      this._theater.addScene('me4:');
+      this._theater.addScene(-text_ilike.length);
+      this._theater.addScene('me4:Click ');
+      this._theater.addScene('me6:here');
+      this._theater.addScene('me7: to learn more!');
     });
   }
 
@@ -71,7 +78,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public doStuff() {
-    alert('did stuff!');
+    alert('Cool, you clicked there. But this does not work yet, sooo.....');
   }
 
 }
