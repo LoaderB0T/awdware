@@ -21,7 +21,7 @@ export class LedLazyModule {
     console.log('constructor: LedLazyModule');
     const config = new AwdwareConfig();
     config.menuItems = [
-      new MenuItem('led', 'LED', 'lightbulb', () => routingService.navigateToLed(), () => true),
+      new MenuItem('led', 'LED', 'lightbulb', () => routingService.navigate('led'), () => true),
     ];
     facadeService.addOrUpdateConfiguration('awdware-led', config);
   }

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ProjectGuid>11561c01-b44c-4e6d-adb1-c02795de3126</ProjectGuid>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputPath>..\..\..\bin\$(Configuration)</OutputPath>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Awdware.Blog.Facade\Awdware.Blog.Facade.csproj" />
+  </ItemGroup>
+
+</Project>

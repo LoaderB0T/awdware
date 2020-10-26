@@ -1,0 +1,22 @@
+﻿using Awdware.Blog.Data.Facade.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
+
+namespace Awdware.Blog.Data.Implementation.Contexts
+{
+    public class BlogDbContext : DbContext
+    {
+        public BlogDbContext(DbContextOptions<BlogDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<BlogPost> BlogPosts { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            if (modelBuilder == null)
+                throw new ArgumentNullException(nameof(modelBuilder));
+        }
+    }
+}

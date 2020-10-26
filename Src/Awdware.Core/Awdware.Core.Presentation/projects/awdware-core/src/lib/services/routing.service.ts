@@ -14,6 +14,10 @@ export class RoutingService {
       .subscribe(params => this._returnUrl = params.returnUrl);
   }
 
+  public navigate(...route: (string | number)[]) {
+    this._router.navigate(route);
+  }
+
   public navigateToHomeLanding() {
     this._router.navigate(['']);
   }
@@ -50,39 +54,7 @@ export class RoutingService {
     this._router.navigate(['me']);
   }
 
-  public navigateToVote() {
-    this._router.navigate(['vote']);
-  }
-
-  public navigateToMyVotes() {
-    this._router.navigate(['vote', 'my']);
-  }
-
-  public navigateToNewVote() {
-    this._router.navigate(['vote', 'new']);
-  }
-
-  public navigateToLed() {
-    this._router.navigate(['led']);
-  }
-
-  public navigateToGames(): void {
-    this._router.navigate(['games', 'home']);
-  }
-
-  public navigateToGamesPushy() {
-    this._router.navigate(['games', 'pushy']);
-  }
-
-  public navigateToGamesPushyLobby(id: string) {
-    this._router.navigate(['games', 'pushy', 'lobby', id]);
-  }
-
-  public navigateToGamesPushyField(id: string) {
-    this._router.navigate(['games', 'pushy', 'field', id]);
-  }
-
-  navigateToError(status: number) {
+  public navigateToError(status: number) {
     this._router.navigate(['error', status]);
   }
 }

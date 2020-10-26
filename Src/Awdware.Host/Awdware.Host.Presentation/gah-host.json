@@ -14,10 +14,16 @@
         "awdware-led"
       ]
     },
+    // {
+    //   "path": "../../Awdware.Games/Awdware.Games.Presentation/gah-module.json",
+    //   "names": [
+    //     "awdware-games"
+    //   ]
+    // }
     {
-      "path": "../../Awdware.Games/Awdware.Games.Presentation/gah-module.json",
+      "path": "../../Awdware.Blog/Awdware.Blog.Presentation/gah-module.json",
       "names": [
-        "awdware-games"
+        "awdware-blog"
       ]
     }
   ],

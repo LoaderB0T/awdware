@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ProjectGuid>1dcd5281-9547-4266-989b-c990f52ee4b5</ProjectGuid>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputPath>..\..\..\bin\$(Configuration)</OutputPath>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Awdware.Blog.Facade.Utils\Awdware.Blog.Facade.Utils.csproj" />
+    <ProjectReference Include="..\Awdware.Blog.Business.Implementation\Awdware.Blog.Business.Implementation.csproj" />
+    <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Business.Implementation\Awdware.Core.Business.Implementation.csproj" />
+    <ProjectReference Include="..\Awdware.Blog.Facade\Awdware.Blog.Facade.csproj" />
+  </ItemGroup>
+
+</Project>
