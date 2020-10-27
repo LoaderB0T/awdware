@@ -1,1 +1,9 @@
 Blog Component izzda
+
+<div class="blog-post">
+
+  <div *ngFor="let post of $posts | async">
+    {{post.title}}
+    <div [innerHTML]="post.content"></div>
+  </div>
+</div>

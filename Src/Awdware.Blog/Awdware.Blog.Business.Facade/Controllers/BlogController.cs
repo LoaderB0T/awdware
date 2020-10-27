@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Awdware.Core.Business.Implementation.Services;
+using Awdware.Blog.Facade.Dtos;
+using System.Collections.Generic;
 
 namespace Awdware.Blog.Business.Facade.Controllers
 {
@@ -10,19 +12,21 @@ namespace Awdware.Blog.Business.Facade.Controllers
     public class BlogController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;
+        private readonly IBlogService _blogService;
 
-        public BlogController(IAuthenticationService authenticationService)
+        public BlogController(IAuthenticationService authenticationService, IBlogService blogService)
         {
             _authenticationService = authenticationService;
+            _blogService = blogService;
         }
 
-        [HttpDelete]
-        [Route("setting/{id}")]
-        public ActionResult<bool> DeleteLedSetting([FromHeader] string authorization, string id)
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("posts/{skipCount}")]
+        public ActionResult<IEnumerable<BlogPostDto>> GetLatestBlogPosts(int skipCount = 0)
         {
-            var userId = _authenticationService.GetUserIdFromToken(authorization);
-            //var success = _ledService.DeleteSetting(userId, Guid.Parse(id));
-            return Ok(userId != null);
+            var posts = _blogService.GetLatestBlogPosts(skipCount);
+            return Ok(posts);
         }
     }
 }

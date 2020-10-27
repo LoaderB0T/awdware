@@ -6,11 +6,11 @@ using Awdware.Blog.Data.Implementation.Contexts;
 
 namespace Awdware.Blog.Data.Implementation.Repositories
 {
-    public class LedRepository : IBlogRepository
+    public class BlogRepository : IBlogRepository
     {
         private readonly BlogDbContext _dbContext;
 
-        public LedRepository(BlogDbContext ledDbContext)
+        public BlogRepository(BlogDbContext ledDbContext)
         {
             _dbContext = ledDbContext;
         }

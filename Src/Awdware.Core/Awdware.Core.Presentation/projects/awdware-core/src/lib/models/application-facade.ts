@@ -54,8 +54,8 @@ export class UserInfoDto {
 
 export enum ConfirmEmailStatus {
   UNKNOWN = 0,
-  UNKNOWN_LINK = 0,
-  EXPIRED_LINK = 1,
+  UNKNOWN_LINK = 1,
+  EXPIRED_LINK = 2,
   SUCCESS = 3
 }
 

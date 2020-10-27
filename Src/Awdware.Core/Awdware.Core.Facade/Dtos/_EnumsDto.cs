@@ -3,8 +3,8 @@
     public enum ConfirmEmailStatus
     {
         Unknown = 0,
-        UnknownLink = 0,
-        ExpiredLink = 1,
+        UnknownLink = 1,
+        ExpiredLink = 2,
         Success = 3
     }
 

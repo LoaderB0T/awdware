@@ -17,6 +17,12 @@ namespace Awdware.Blog.Data.Implementation.Contexts
         {
             if (modelBuilder == null)
                 throw new ArgumentNullException(nameof(modelBuilder));
+
+            modelBuilder.Entity<BlogPost>()
+            .Property(e => e.KeyWords)
+            .HasConversion(
+                v => string.Join(',', v),
+                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
         }
     }
 }

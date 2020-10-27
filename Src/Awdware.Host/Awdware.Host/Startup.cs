@@ -2,6 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Awdware.Blog.Business.Facade.Controllers;
+using Awdware.Blog.Data.Implementation.Contexts;
+using Awdware.Blog.Data.Implementation.Repositories;
 using Awdware.Core.Business.Facade.Controllers;
 using Awdware.Core.Business.Implementation.Services;
 using Awdware.Core.Data.Implementation.Contexts;
@@ -49,6 +52,7 @@ namespace Awdware.Host
             builder.AddApplicationPart(typeof(UserController).Assembly);
             builder.AddApplicationPart(typeof(LedController).Assembly);
             builder.AddApplicationPart(typeof(TestController).Assembly);
+            builder.AddApplicationPart(typeof(BlogController).Assembly);
 
             var assembly = typeof(UserController).GetTypeInfo().Assembly;
             services.AddMvc()
@@ -69,10 +73,12 @@ namespace Awdware.Host
             var connectionString = Configuration.GetConnectionString("awdwareDB");
             services.AddDbContext<AwdwareCoreDbContext>(opt => opt.UseSqlServer(connectionString));
             services.AddDbContext<LedDbContext>(opt => opt.UseSqlServer(connectionString));
+            services.AddDbContext<BlogDbContext>(opt => opt.UseSqlServer(connectionString));
 
             //Add Repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILedRepository, LedRepository>();
+            services.AddScoped<IBlogRepository, BlogRepository>();
 
             //Add Services
             var accessTokenKey = Configuration.GetSection("KeyLocations").GetValue<string>("accessTokenKey");
@@ -82,6 +88,7 @@ namespace Awdware.Host
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ILedService, LedService>();
+            services.AddScoped<IBlogService, BlogService>();
 
             ConfigureJwtAuthentication(services);
 
@@ -215,6 +222,7 @@ namespace Awdware.Host
                 .CreateScope();
             MigrateDb<AwdwareCoreDbContext>(serviceScope);
             MigrateDb<LedDbContext>(serviceScope);
+            MigrateDb<BlogDbContext>(serviceScope);
         }
 
         private static void MigrateDb<T>(IServiceScope serviceScope) where T : DbContext

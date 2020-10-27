@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Awdware.Blog.Data.Implementation\Awdware.Blog.Data.Implementation.csproj" />
     <ProjectReference Include="..\Awdware.Blog.Facade\Awdware.Blog.Facade.csproj" />
   </ItemGroup>
 

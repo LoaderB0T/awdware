@@ -29,6 +29,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Awdware.Blog\Awdware.Blog.Business.Facade\Awdware.Blog.Business.Facade.csproj" />
     <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Business.Facade\Awdware.Core.Business.Facade.csproj">
     </ProjectReference>
     <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Facade\Awdware.Core.Facade.csproj">
