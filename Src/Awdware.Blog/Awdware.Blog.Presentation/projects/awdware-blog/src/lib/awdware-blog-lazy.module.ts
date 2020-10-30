@@ -9,7 +9,7 @@ export const routes: Routes = [
     path: 'blog',
     loadChildren: () => import('./awdware-blog.module').then(m => m.AwdwareBlogModule)
   }
-]
+];
 
 @NgModule({
   imports: [
