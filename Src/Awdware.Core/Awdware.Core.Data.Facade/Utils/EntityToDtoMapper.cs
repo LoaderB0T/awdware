@@ -1,6 +1,5 @@
 ﻿using Awdware.Core.Data.Facade.Entities;
 using Awdware.Core.Facade.Dtos;
-using System.Text.Json;
 
 namespace Awdware.Core.Data.Facade.Utils
 {
@@ -23,7 +22,8 @@ namespace Awdware.Core.Data.Facade.Utils
                 Username = user.Username,
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
-                Email = user.Email
+                Email = user.Email,
+                Permission = (UserPermission)user.Permission
             };
         }
 

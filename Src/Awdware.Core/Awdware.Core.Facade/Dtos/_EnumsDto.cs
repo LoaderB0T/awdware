@@ -31,4 +31,13 @@
         Error = 0,
         Success = 1
     }
+
+    public enum UserPermission
+    {
+        Unknown = 0,
+        User = 1,
+        Moderator = 2,
+        Admin = 3,
+        Operator = 4
+    }
 }

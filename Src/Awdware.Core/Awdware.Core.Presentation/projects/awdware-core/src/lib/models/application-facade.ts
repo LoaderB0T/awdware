@@ -45,6 +45,7 @@ export class UserDetailsDto {
   public firstname: string;
   public lastname: string;
   public email: string;
+  public permission: UserPermission;
 }
 
 export class UserInfoDto {
@@ -78,4 +79,12 @@ export enum RegisterResult {
 export enum PasswordResetStatus {
   ERROR = 0,
   SUCCESS = 1
+}
+
+export enum UserPermission {
+  UNKNOWN = 0,
+  USER = 1,
+  MODERATOR = 2,
+  ADMIN = 3,
+  OPERATOR = 4
 }

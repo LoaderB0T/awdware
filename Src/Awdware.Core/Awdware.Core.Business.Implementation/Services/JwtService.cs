@@ -97,13 +97,18 @@ namespace Awdware.Core.Business.Implementation.Services
                 IssuerSigningKey = new SymmetricSecurityKey(
                            Convert.FromBase64String(File.ReadAllText(keyPath)))
             };
-            SecurityToken validatedToken;
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-            var user = handler.ValidateToken(token, validationParameters, out validatedToken);
-            var claims = user.Claims.ToList();
-            if (claims.Count != 5)
+            var parsedToken = handler.ReadJwtToken(token);
+
+            try
+            {
+                var user = handler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+                return true;
+            }
+            catch (Exception)
+            {
                 return false;
-            return true;
+            }
         }
     }
 }

@@ -17,12 +17,17 @@ export class UserDetailsService {
   }
 
   clearUser() {
-    this.userInfo.userId = null;
-    this.userInfo.username = null;
+    Object.keys(this.userInfo).forEach(key => {
+      this.userInfo[key] = null;
+    });
   }
 
   setUser(userInfo: UserDetailsDto) {
     this.userInfo.userId = userInfo.userId;
     this.userInfo.username = userInfo.username;
+    this.userInfo.lastname = userInfo.lastname;
+    this.userInfo.firstname = userInfo.firstname;
+    this.userInfo.email = userInfo.email;
+    this.userInfo.permission = userInfo.permission;
   }
 }

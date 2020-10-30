@@ -7,4 +7,13 @@
         PasswordReset = 2
     }
 
+    public enum WebUserPermission
+    {
+        Unknown = 0,
+        User = 1,
+        Moderator = 2,
+        Admin = 3,
+        Operator = 4
+    }
+
 }

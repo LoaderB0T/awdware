@@ -16,8 +16,13 @@ import { ErrorComponent } from './error/error.component';
 export const routes: Routes = [
   {
     path: '',
+    resolve: { userInfo: UserDetailsResolverService },
     component: BaseComponent,
     children: [
+      {
+        path: 'gah-outlet',
+        redirectTo: '/'
+      },
       {
         path: '',
         pathMatch: 'full',
@@ -25,7 +30,6 @@ export const routes: Routes = [
       },
       {
         path: '',
-        resolve: { userInfo: UserDetailsResolverService },
         children: [
           {
             path: 'account',

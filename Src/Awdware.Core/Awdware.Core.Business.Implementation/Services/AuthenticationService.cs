@@ -84,7 +84,8 @@ namespace Awdware.Core.Business.Implementation.Services
                 Email = registerRequestDto.Email,
                 Firstname = registerRequestDto.Firstname,
                 Lastname = registerRequestDto.Lastname,
-                Username = registerRequestDto.Username
+                Username = registerRequestDto.Username,
+                Permission = WebUserPermission.User
             };
             var newPw = PasswordHasher.Hash(registerRequestDto.Password);
             newUser.PasswordHash = newPw;
