@@ -1,28 +1,31 @@
-<div id='menu-container' [class.opened]="opened">
+<div id='menu-container'
+     [class.opened]="opened">
   <div class="spacer"></div>
-  <div class="menu-item" id="menu-controls" (click)="toggleMenu()">
+  <div class="menu-item"
+       id="menu-close-button"
+       (click)="toggleMenu()">
     <div class="icon-container">
-      <div [class.icon-hidden]="!opened" class="icon-switch" id="close-icon">
-        <i class="icon fal fa-times"></i>
-      </div>
-      <div [class.icon-hidden]="opened" class="icon-switch">
-        <i class="icon fal fa-chevron-right"></i>
-      </div>
+      <i class="icon fal fa-xmark"></i>
     </div>
     <span class="text">Close</span>
   </div>
-  <div class="menu-item" *ngFor="let menuItem of enabledMenuItems" (click)="itemClicked(menuItem)">
+  <div class="menu-item"
+       *ngFor="let menuItem of enabledMenuItems"
+       (click)="itemClicked(menuItem)">
     <div class="icon-container">
-      <i class="icon fal fa-{{menuItem.icon}}" aria-hidden="true"></i>
+      <i class="icon fal fa-{{menuItem.icon}}"
+         aria-hidden="true"></i>
     </div>
     <span class="text">{{menuItem.text}}</span>
   </div>
   <div class="spacer"></div>
 </div>
 
-<div id="menu-mobile-button" [class.opened]="opened">
+<div id="menu-mobile-button"
+     [class.opened]="opened">
   <div class="header">
-    <div class="icon-container" (click)="toggleMenu()">
+    <div class="icon-container"
+         (click)="toggleMenu()">
       <i class="fal fa-bars"></i>
     </div>
     <span>awdware</span>

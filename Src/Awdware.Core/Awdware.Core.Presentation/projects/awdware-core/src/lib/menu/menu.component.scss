@@ -21,6 +21,9 @@
     &.selected {
       border-color: var(--colorHighlightColor2);
     }
+    &#menu-close-button {
+      display: none;
+    }
     .text {
       opacity: 0;
       padding: 10px;
@@ -42,15 +45,6 @@
       justify-content: center;
       color: var(--colorHighlightColor1);
       transition: color 50ms ease-in-out;
-      .icon-switch {
-        // transition: opacity 0.6s;
-        &#close-icon {
-          position: absolute;
-        }
-        &.icon-hidden {
-          opacity: 0;
-        }
-      }
       .icon {
         font-size: 48px;
       }
@@ -61,39 +55,35 @@
       }
     }
   }
-  #menu-controls {
-    padding-top: 10px;
-    display: none;
-  }
 }
 
 @media only screen and (max-width: 700px) {
   #menu-container {
     opacity: 0;
     position: fixed;
-    z-index: 10;
     transition: opacity 0.6s;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 0;
+    height: 100vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     .menu-item {
       flex-direction: row;
       padding: 20px;
+      &#menu-close-button {
+        display: flex;
+      }
       .text {
         position: relative;
         opacity: 1;
         bottom: unset;
       }
     }
-    #menu-controls {
-      display: flex;
-    }
     &.opened {
       opacity: 1;
+      z-index: 10;
       border-color: transparent;
       height: 100vh;
     }
@@ -125,6 +115,7 @@
     padding-left: 5px;
     .icon-container {
       font-size: 40px;
+      cursor: pointer;
     }
     span {
       font-size: var(--fontSizeGiant);

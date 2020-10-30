@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
+import { RoutingService } from '../services/routing.service';
 const theaterJS = require('theaterjs');
 
 @Component({
@@ -10,12 +11,14 @@ const theaterJS = require('theaterjs');
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private readonly _translateService: TranslateService;
+  private readonly _routingService: RoutingService;
 
   private _theater = theaterJS({ locale: 'en' });
 
 
-  constructor(translateService: TranslateService) {
+  constructor(translateService: TranslateService, routingService: RoutingService) {
     this._translateService = translateService;
+    this._routingService = routingService;
   }
 
   ngOnInit() {
@@ -77,8 +80,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  public doStuff() {
-    alert('Cool, you clicked there. But this does not work yet, sooo.....');
+  public learnMore() {
+    this._routingService.navigate('blog');
   }
 
 }

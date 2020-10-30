@@ -56,7 +56,7 @@ export class CoreModule {
     const config = new AwdwareConfig();
     config.menuItems = [
       new MenuItem('home', 'Home', 'home', () => routingService.navigateToHomeHello(), () => true),
-      new MenuItem('login', 'Login', 'sign-in', () => routingService.navigateToAccountLogin(), () => this.showLoginButton()),
+      new MenuItem('login', 'Login', 'arrow-right-to-bracket', () => routingService.navigateToAccountLogin(), () => this.showLoginButton()),
       new MenuItem('account', 'Account', 'user', () => routingService.navigateToAccount(), () => this.showAccountButton())
     ];
     facadeService.addOrUpdateConfiguration('awdware-core', config);
