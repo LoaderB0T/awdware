@@ -6,3 +6,9 @@
 
 # Ignoring the compiled output path
 dist
+
+# Ignoring gah generated files
+**/.gah
+
+# Ignoring local gah config
+**/gah-local.json
