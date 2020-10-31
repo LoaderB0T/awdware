@@ -3,6 +3,8 @@ export class BlogPostDetailsDto {
   public id: string;
   public title: string;
   public content: string;
+  public locale: string;
+  public translations: Array<BlogPostTranslationDto>;
   public dateTime: string;
 }
 
@@ -11,7 +13,14 @@ export class BlogPostDto {
   public id: string;
   public title: string;
   public preview: string;
+  public locale: string;
+  public translations: Array<BlogPostTranslationDto>;
   public dateTime: string;
+}
+
+export class BlogPostTranslationDto {
+  public key: string;
+  public value: string;
 }
 
 export enum BlogPostType {

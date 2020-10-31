@@ -15,10 +15,10 @@
   </header>
   <div class="blog-content">
     <div *ngIf="!isDetails">
-      <div [innerHTML]="postPreview.preview"></div>
+      <div [innerHTML]="translateText(postPreview.preview)"></div>
     </div>
     <div *ngIf="isDetails">
-      <div [innerHTML]="postDetails.content"></div>
+      <div [innerHTML]="translateText(postPreview.content)"></div>
     </div>
   </div>
 </div>

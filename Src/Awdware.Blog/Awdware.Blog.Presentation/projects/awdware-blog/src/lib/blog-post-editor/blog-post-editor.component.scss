@@ -5,11 +5,27 @@
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: start;
-    ngx-monaco-editor,
+    align-items: flex-start;
+    .editor,
     awd-blog-post {
       width: 50%;
       height: 100%;
     }
+    ngx-monaco-editor {
+      height: 100%;
+    }
+  }
+}
+
+ngx-monaco-editor::ng-deep {
+  .editor-container {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .overflowingContentWidgets {
+    display: none;
   }
 }

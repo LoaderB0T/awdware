@@ -17,15 +17,15 @@ namespace Awdware.Core.Business.Implementation.Services
             _blogRepository = blogRepository;
         }
 
-        public IEnumerable<BlogPostDto> GetLatestBlogPosts(int skipCount = 0)
+        public IEnumerable<BlogPostDto> GetLatestBlogPosts(int skipCount, string locale)
         {
-            return this._blogRepository.GetLatestBlogPosts().Select(x => x.ToDto());
+            return this._blogRepository.GetLatestBlogPosts(skipCount).Select(x => x.ToDto(locale));
         }
 
-        public BlogPostDetailsDto GetBlogPostDetails(string id)
+        public BlogPostDetailsDto GetBlogPostDetails(string id, string locale)
         {
             var guid = Guid.Parse(id);
-            return this._blogRepository.GetBlogPostDetailsById(guid).ToDetailsDto();
+            return this._blogRepository.GetBlogPostDetailsById(guid).ToDetailsDto(locale);
         }
     }
 }

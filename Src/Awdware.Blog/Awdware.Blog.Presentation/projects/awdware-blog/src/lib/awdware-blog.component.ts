@@ -27,7 +27,7 @@ export class AwdwareBlogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._blogService.getLatestPosts(0).subscribe(s => {
+    this._blogService.getLatestPosts(0, 'de').subscribe(s => {
       this._posts.next(s);
     });
   }

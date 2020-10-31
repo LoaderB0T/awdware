@@ -41,6 +41,7 @@ export class UserDetailsResolverService implements Resolve<UserDetailsDto> {
             },
             err => {
               console.log('HTTP Error', err);
+              this._userInfoService.clearUser();
               resolve(null);
             });
         } else {
@@ -53,6 +54,7 @@ export class UserDetailsResolverService implements Resolve<UserDetailsDto> {
               },
               err => {
                 console.log('HTTP Error', err);
+                this._userInfoService.clearUser();
                 resolve(null);
               }
             );

@@ -35,6 +35,17 @@ export class BlogPostComponent implements OnInit {
     return this.post as BlogPostDto;
   }
 
+  public translateText(blogText: string) {
+    return blogText.replace(/{{([a-zA-Z0-9-]+)}}/g, (fullMatch, contentKey) => {
+      const translation = this.post.translations.find(x => x.key === contentKey);
+      if (!translation?.value) {
+        console.warn(`Missing translation in blog for '${contentKey}'`);
+        return `##${contentKey}##`;
+      }
+      return translation.value;
+    });
+  }
+
   ngOnInit(): void {
   }
 

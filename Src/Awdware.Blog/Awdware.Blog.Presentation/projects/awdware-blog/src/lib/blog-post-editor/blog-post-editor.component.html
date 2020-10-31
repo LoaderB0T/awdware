@@ -1,7 +1,9 @@
 <div class="editor-main">
   <div class="splitscreen">
-    <ngx-monaco-editor [options]="editorOptions"
-                       [(ngModel)]="post.content"></ngx-monaco-editor>
+    <div class="editor">
+      <ngx-monaco-editor [options]="editorOptions"
+                         [(ngModel)]="code"></ngx-monaco-editor>
+    </div>
     <awd-blog-post [post]="post"
                    [hideEditIcon]="true"></awd-blog-post>
   </div>

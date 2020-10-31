@@ -15,7 +15,6 @@ export class BlogPostResolverService implements Resolve<BlogPostDetailsDto> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BlogPostDetailsDto> {
-    return this._blogService.getPostDetails(route.params['id']);
+    return this._blogService.getPostDetails(route.params['id'], 'de');
   }
-
 }

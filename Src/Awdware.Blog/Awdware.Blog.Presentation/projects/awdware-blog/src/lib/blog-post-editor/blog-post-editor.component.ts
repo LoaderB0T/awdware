@@ -21,4 +21,22 @@ export class BlogPostEditorComponent implements OnInit {
   public get post(): BlogPostDetailsDto {
     return this._activatedRoute.snapshot.data['post'];
   }
+
+  public get code(): string {
+    return this.post.content.replace(/{{([a-zA-Z0-9-]+)}}/g, (fullMatch, contentKey) => {
+      const translation = this.post.translations.find(x => x.key === contentKey);
+      return `{{${contentKey}{${translation.value ?? ''}}}}`;
+    });
+  }
+
+  public set code(value: string) {
+    this.post.translations = [];
+    this.post.content = value.replace(/{{([a-zA-Z0-9-]+){([\S\s]*?)}}}/g, (fullMatch, contentKey, contentValue) => {
+      this.post.translations.push({
+        key: contentKey,
+        value: contentValue
+      });
+      return `{{${contentKey}}}`;
+    });
+  }
 }

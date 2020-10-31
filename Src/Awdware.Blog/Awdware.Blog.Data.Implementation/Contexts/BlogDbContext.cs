@@ -23,6 +23,9 @@ namespace Awdware.Blog.Data.Implementation.Contexts
             .HasConversion(
                 v => string.Join(',', v),
                 v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+
+            modelBuilder.Entity<BlogPostTranslation>()
+            .HasKey(c => new { c.PostId, c.Locale, c.ContentKey });
         }
     }
 }

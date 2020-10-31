@@ -22,19 +22,19 @@ namespace Awdware.Blog.Business.Facade.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("posts/{skipCount}")]
-        public ActionResult<IEnumerable<BlogPostDto>> GetLatestBlogPosts(int skipCount = 0)
+        [Route("posts/{skipCount}/{locale}")]
+        public ActionResult<IEnumerable<BlogPostDto>> GetLatestBlogPosts(int skipCount, string locale)
         {
-            var posts = _blogService.GetLatestBlogPosts(skipCount);
+            var posts = _blogService.GetLatestBlogPosts(skipCount, locale);
             return Ok(posts);
         }
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("post/{id}")]
-        public ActionResult<BlogPostDto> GetBlogPostDetails(string id)
+        [Route("post/{id}/{locale}")]
+        public ActionResult<BlogPostDto> GetBlogPostDetails(string id, string locale)
         {
-            var post = _blogService.GetBlogPostDetails(id);
+            var post = _blogService.GetBlogPostDetails(id, locale);
             if(post == null)
             {
                 return NotFound();

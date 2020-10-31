@@ -13,11 +13,11 @@ export class BlogService {
     this._webApiService = webApiService;
   }
 
-  public getLatestPosts(skipCount: number) {
-    return this._webApiService.get<BlogPostDto[]>(`blog/posts/${skipCount}`);
+  public getLatestPosts(skipCount: number, locale: string) {
+    return this._webApiService.get<BlogPostDto[]>(`blog/posts/${skipCount}/${locale}`);
   }
 
-  public getPostDetails(postId: string): Observable<BlogPostDetailsDto> {
-    return this._webApiService.get<BlogPostDetailsDto>(`blog/post/${postId}`);
+  public getPostDetails(postId: string, locale: string): Observable<BlogPostDetailsDto> {
+    return this._webApiService.get<BlogPostDetailsDto>(`blog/post/${postId}/${locale}`);
   }
 }
