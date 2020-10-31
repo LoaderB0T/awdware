@@ -1,0 +1,28 @@
+.blog-post {
+  padding: 20px;
+  box-sizing: border-box;
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .title {
+      cursor: pointer;
+    }
+    .button-controls {
+      .control-button {
+        font-size: 24px;
+        cursor: pointer;
+        transition: color 0.2s;
+        padding: 10px;
+        &:hover {
+          color: var(--colorHighlightColor1);
+        }
+      }
+    }
+  }
+}
+:host::ng-deep .blog-content {
+  i {
+    color: red;
+  }
+}

@@ -1,0 +1,8 @@
+<div class="editor-main">
+  <div class="splitscreen">
+    <ngx-monaco-editor [options]="editorOptions"
+                       [(ngModel)]="post.content"></ngx-monaco-editor>
+    <awd-blog-post [post]="post"
+                   [hideEditIcon]="true"></awd-blog-post>
+  </div>
+</div>

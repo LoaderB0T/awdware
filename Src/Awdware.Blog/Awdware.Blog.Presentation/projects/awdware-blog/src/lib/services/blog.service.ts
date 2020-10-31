@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WebApiService } from '@awdware/awdware-shared';
-import { BlogPostDto } from '../models/application-facade';
+import { Observable } from 'rxjs';
+import { BlogPostDetailsDto, BlogPostDto } from '../models/application-facade';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +15,9 @@ export class BlogService {
 
   public getLatestPosts(skipCount: number) {
     return this._webApiService.get<BlogPostDto[]>(`blog/posts/${skipCount}`);
+  }
+
+  public getPostDetails(postId: string): Observable<BlogPostDetailsDto> {
+    return this._webApiService.get<BlogPostDetailsDto>(`blog/post/${postId}`);
   }
 }

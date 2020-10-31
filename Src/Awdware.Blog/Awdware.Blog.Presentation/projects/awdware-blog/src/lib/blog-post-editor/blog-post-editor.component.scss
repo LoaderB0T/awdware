@@ -1,0 +1,15 @@
+.editor-main {
+  width: 100%;
+  height: 100%;
+  .splitscreen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: start;
+    ngx-monaco-editor,
+    awd-blog-post {
+      width: 50%;
+      height: 100%;
+    }
+  }
+}

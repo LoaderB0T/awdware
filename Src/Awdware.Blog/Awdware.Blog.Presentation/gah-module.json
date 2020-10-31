@@ -3,7 +3,7 @@
   "modules": [
     {
       "name": "awdware-blog",
-      "packageName": "@awdware",
+      "packageName": "awdware",
       "publicApiPath": "projects/awdware-blog/src/public-api.ts",
       "baseNgModuleName": "AwdwareLazyBlogModule",
       "isEntry": false,

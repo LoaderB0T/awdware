@@ -1,17 +1,6 @@
 <div class="blog-root awd-content-container">
-
-  <div *ngFor="let post of $posts | async"
-       class="awd-floating-container blog-post">
-    <header>
-      <h1 class="title"
-          [id]="'#post-' + post.id">
-        {{post.title}}
-      </h1>
-      <div class="edit-buttons"
-           *ngIf="showEdit">
-        <i class="fal fa-pen"></i>
-      </div>
-    </header>
-    <div [innerHTML]="post.content"></div>
-  </div>
+  <awd-blog-post *ngFor="let post of $posts | async"
+                 [post]="post"
+                 class="awd-floating-container">
+  </awd-blog-post>
 </div>

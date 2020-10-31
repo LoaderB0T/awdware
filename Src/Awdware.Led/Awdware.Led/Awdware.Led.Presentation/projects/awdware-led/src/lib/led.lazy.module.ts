@@ -1,5 +1,3 @@
-// @dynamic
-
 import { NgModule } from '@angular/core';
 
 import { RoutingService } from '@awdware/awdware-core';
@@ -9,12 +7,12 @@ import { Routes, RouterModule } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'led',
-    loadChildren: () => import('./led.module').then(m => m.LedModule),
+    loadChildren: () => import('./led.module').then(m => m.LedModule)
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)]
 })
 export class LedLazyModule {
   constructor(routingService: RoutingService, facadeService: FacadeService) {

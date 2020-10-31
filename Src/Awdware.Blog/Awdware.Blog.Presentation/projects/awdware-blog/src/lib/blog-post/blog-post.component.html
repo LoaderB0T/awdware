@@ -1,0 +1,24 @@
+<div class="blog-post">
+  <header>
+    <h1 class="title"
+        (click)="navToBlog(post.id)"
+        [id]="'#post-' + post.id">
+      {{post.title}}
+    </h1>
+    <div class="button-controls"
+         *ngIf="showEdit">
+      <div (click)="editPost(post.id)"
+           class="edit-button control-button">
+        <i class="fal fa-pen"></i>
+      </div>
+    </div>
+  </header>
+  <div class="blog-content">
+    <div *ngIf="!isDetails">
+      <div [innerHTML]="postPreview.preview"></div>
+    </div>
+    <div *ngIf="isDetails">
+      <div [innerHTML]="postDetails.content"></div>
+    </div>
+  </div>
+</div>

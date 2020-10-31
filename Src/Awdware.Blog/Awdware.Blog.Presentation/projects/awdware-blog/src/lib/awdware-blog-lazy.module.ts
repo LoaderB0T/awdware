@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { RoutingService } from '@awdware/awdware-core';
 import { FacadeService, AwdwareConfig, MenuItem } from '@awdware/awdware-shared';
 
@@ -12,8 +12,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-  ]
+  imports: [RouterModule.forChild(routes)]
 })
 export class AwdwareLazyBlogModule {
   constructor(routingService: RoutingService, facadeService: FacadeService) {
