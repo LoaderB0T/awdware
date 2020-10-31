@@ -20,6 +20,9 @@ namespace Awdware.Blog.Data.Facade.Entities
         public string Content { get; set; }
 
         [Required]
+        public string Preview { get; set; }
+
+        [Required]
         public DateTime DateTime { get; set; }
 
         public string[] KeyWords { get; set; }

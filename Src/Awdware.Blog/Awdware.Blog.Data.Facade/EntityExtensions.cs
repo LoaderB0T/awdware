@@ -10,6 +10,19 @@ namespace Awdware.Blog.Data.Facade
         {
             return new BlogPostDto()
             {
+                PostType = BlogPostType.Preview,
+                Id = blogPost.Id.ToString(),
+                Title = blogPost.Title,
+                Preview = blogPost.Preview,
+                DateTime = blogPost.DateTime
+            };
+        }
+
+        public static BlogPostDetailsDto ToDetailsDto(this BlogPost blogPost)
+        {
+            return new BlogPostDetailsDto()
+            {
+                PostType = BlogPostType.Details,
                 Id = blogPost.Id.ToString(),
                 Title = blogPost.Title,
                 Content = blogPost.Content,

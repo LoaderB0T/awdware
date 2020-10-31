@@ -6,5 +6,6 @@ namespace Awdware.Core.Business.Implementation.Services
     public interface IBlogService
     {
         IEnumerable<BlogPostDto> GetLatestBlogPosts(int skipCount = 0);
+        BlogPostDetailsDto GetBlogPostDetails(string id);
     }
 }

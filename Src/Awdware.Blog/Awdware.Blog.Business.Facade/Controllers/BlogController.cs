@@ -28,5 +28,18 @@ namespace Awdware.Blog.Business.Facade.Controllers
             var posts = _blogService.GetLatestBlogPosts(skipCount);
             return Ok(posts);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("post/{id}")]
+        public ActionResult<BlogPostDto> GetBlogPostDetails(string id)
+        {
+            var post = _blogService.GetBlogPostDetails(id);
+            if(post == null)
+            {
+                return NotFound();
+            }
+            return Ok(post);
+        }
     }
 }

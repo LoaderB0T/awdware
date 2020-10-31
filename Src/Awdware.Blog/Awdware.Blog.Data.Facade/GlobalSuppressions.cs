@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:Awdware.Blog.Data.Facade.EntityExtensions.ToDto(Awdware.Blog.Data.Facade.Entities.BlogPost)~Awdware.Blog.Facade.Dtos.BlogPostDto")]
+[assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:Awdware.Blog.Data.Facade.EntityExtensions.ToDetailsDto(Awdware.Blog.Data.Facade.Entities.BlogPost)~Awdware.Blog.Facade.Dtos.BlogPostDetailsDto")]

@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Awdware.Blog.Facade.Utils\Awdware.Blog.Facade.Utils.csproj" />
     <ProjectReference Include="..\Awdware.Blog.Business.Implementation\Awdware.Blog.Business.Implementation.csproj" />
     <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Business.Implementation\Awdware.Core.Business.Implementation.csproj" />
     <ProjectReference Include="..\Awdware.Blog.Facade\Awdware.Blog.Facade.csproj" />

@@ -8,5 +8,6 @@ namespace Awdware.Blog.Data.Implementation.Repositories
     public interface IBlogRepository
     {
         IEnumerable<BlogPost> GetLatestBlogPosts(int skipCount = 0);
+        BlogPost GetBlogPostDetailsById(Guid id);
     }
 }

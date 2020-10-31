@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Awdware.Blog.Data.Facade;
 using Awdware.Blog.Data.Implementation.Repositories;
@@ -19,6 +20,12 @@ namespace Awdware.Core.Business.Implementation.Services
         public IEnumerable<BlogPostDto> GetLatestBlogPosts(int skipCount = 0)
         {
             return this._blogRepository.GetLatestBlogPosts().Select(x => x.ToDto());
+        }
+
+        public BlogPostDetailsDto GetBlogPostDetails(string id)
+        {
+            var guid = Guid.Parse(id);
+            return this._blogRepository.GetBlogPostDetailsById(guid).ToDetailsDto();
         }
     }
 }

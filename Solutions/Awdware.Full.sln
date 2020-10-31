@@ -51,8 +51,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Blog.Data.Implement
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Blog.Facade", "..\Src\Awdware.Blog\Awdware.Blog.Facade\Awdware.Blog.Facade.csproj", "{B6B99017-311D-4DFA-B754-0348CD9B1D18}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Blog.Facade.Utils", "..\Src\Awdware.Blog\Awdware.Blog.Facade.Utils\Awdware.Blog.Facade.Utils.csproj", "{68FE8657-14CB-4A09-94AB-31011524481A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Blog.UnitTests", "..\Src\Awdware.Blog\Awdware.Blog.UnitTests\Awdware.Blog.UnitTests.csproj", "{A93838BA-5151-4F4F-AD84-9D4EE7398AAF}"
 EndProject
 Global
@@ -157,10 +155,6 @@ Global
 		{B6B99017-311D-4DFA-B754-0348CD9B1D18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6B99017-311D-4DFA-B754-0348CD9B1D18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6B99017-311D-4DFA-B754-0348CD9B1D18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68FE8657-14CB-4A09-94AB-31011524481A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68FE8657-14CB-4A09-94AB-31011524481A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68FE8657-14CB-4A09-94AB-31011524481A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68FE8657-14CB-4A09-94AB-31011524481A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A93838BA-5151-4F4F-AD84-9D4EE7398AAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A93838BA-5151-4F4F-AD84-9D4EE7398AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A93838BA-5151-4F4F-AD84-9D4EE7398AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
