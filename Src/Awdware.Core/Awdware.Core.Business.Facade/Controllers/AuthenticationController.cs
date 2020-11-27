@@ -132,7 +132,7 @@ namespace Awdware.Core.Business.Facade.Controllers
             {
                 return Ok(null);
             }
-            var refreshUserId = _authenticationService.GetUserIdFromToken(authorization);
+            var refreshUserId = _authenticationService.GetUserIdFromToken(savedRefreshToken);
 
             if (!requestUserId.Equals(refreshUserId, StringComparison.InvariantCultureIgnoreCase))
             {

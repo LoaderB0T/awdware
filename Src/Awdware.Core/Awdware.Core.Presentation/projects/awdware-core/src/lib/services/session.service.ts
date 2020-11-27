@@ -42,11 +42,7 @@ export class SessionService {
       return of(false);
     }
 
-    if (this.sessionNeedsRefresh()) {
-      return this.renewSession();
-    } else {
-      return of(true);
-    }
+    return this.renewSession();
   }
 
   public sessionNeedsRefresh(): boolean {
@@ -75,7 +71,7 @@ export class SessionService {
         }),
         map(
           (x) => {
-            return x && true;
+            return !!x;
           }
         )
       );

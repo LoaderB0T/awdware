@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 import { AccountService } from './account.service';
 import { SessionStoreService } from '../../services/session-store.service';
 import { SessionService } from '../../services/session.service';
 import { UserDetailsDto } from '../../models/application-facade';
 import { UserDetailsService } from '../../services/user-details.service';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class UserDetailsResolverService implements Resolve<UserDetailsDto> {
   private readonly _sessionStoreService: SessionStoreService;
   private readonly _sessionService: SessionService;
   private readonly _userInfoService: UserDetailsService;
+
 
   constructor(
     accountService: AccountService,
@@ -30,40 +32,13 @@ export class UserDetailsResolverService implements Resolve<UserDetailsDto> {
   }
 
   resolve() {
-    return new Promise<UserDetailsDto>((resolve, reject) => {
-      if (this._sessionStoreService.hasToken) {
-        if (this._sessionService.sessionNeedsRefresh()) {
-          this._sessionService.renewSession().subscribe(
-            () => {
-              this._accountService.loadUserDetails().subscribe(x => {
-                resolve(x);
-              });
-            },
-            err => {
-              console.log('HTTP Error', err);
-              this._userInfoService.clearUser();
-              resolve(null);
-            });
-        } else {
-          if (this._userInfoService.userInfo?.userId) {
-            resolve(this._userInfoService.userInfo);
-          } else {
-            this._accountService.loadUserDetails().subscribe(
-              x => {
-                resolve(x);
-              },
-              err => {
-                console.log('HTTP Error', err);
-                this._userInfoService.clearUser();
-                resolve(null);
-              }
-            );
-          }
+    return this._sessionService.hasValidToken().pipe(
+      mergeMap(tokenValid => {
+        if (!tokenValid) {
+          return of(null);
         }
-      } else {
-        this._userInfoService.clearUser();
-        resolve(null);
-      }
-    });
+        return this._accountService.loadUserDetails()
+      })
+    )
   }
 }

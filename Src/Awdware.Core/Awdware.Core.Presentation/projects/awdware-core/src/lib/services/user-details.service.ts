@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
+import { ToolbarInvalidatedEvent } from '../events/toolbar-invalidated.event';
 import { UserDetailsDto } from '../models/application-facade';
 import { UserDetails } from '../models/user-details';
+import { EventService } from './event.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserDetailsService {
   public userInfo: UserDetails;
+  private readonly _eventService: EventService;
 
-  constructor() {
+  constructor(eventService: EventService) {
+    this._eventService = eventService;
     this.userInfo = new UserDetails();
   }
 
@@ -20,6 +24,7 @@ export class UserDetailsService {
     Object.keys(this.userInfo).forEach(key => {
       this.userInfo[key] = null;
     });
+    this._eventService.publishEvent<ToolbarInvalidatedEvent>(ToolbarInvalidatedEvent);
   }
 
   setUser(userInfo: UserDetailsDto) {
@@ -29,5 +34,6 @@ export class UserDetailsService {
     this.userInfo.firstname = userInfo.firstname;
     this.userInfo.email = userInfo.email;
     this.userInfo.permission = userInfo.permission;
+    this._eventService.publishEvent<ToolbarInvalidatedEvent>(ToolbarInvalidatedEvent);
   }
 }

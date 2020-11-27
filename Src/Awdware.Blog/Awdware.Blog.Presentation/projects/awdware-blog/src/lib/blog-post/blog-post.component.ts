@@ -17,10 +17,10 @@ export class BlogPostComponent implements OnInit {
   }
 
   @Input() post: BlogPostDto | BlogPostDetailsDto;
-  @Input() hideEditIcon: boolean;
+  @Input() showEditButton: boolean;
 
   public get showEdit(): boolean {
-    return !this.hideEditIcon && this._userService.userInfo.permission === UserPermission.OPERATOR;
+    return this.showEditButton && this._userService.userInfo.permission === UserPermission.OPERATOR;
   }
 
   public get isDetails(): boolean {

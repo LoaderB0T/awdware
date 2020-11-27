@@ -7,9 +7,23 @@
     display: flex;
     align-items: flex-start;
     .editor,
-    awd-blog-post {
+    .right-pane {
       width: 50%;
       height: 100%;
+    }
+    .right-pane {
+      display: flex;
+      flex-direction: column;
+      .top {
+        width: 100%;
+        height: 60px;
+        padding: 10px;
+        box-sizing: border-box;
+        .control-button {
+          font-size: 32px;
+          cursor: pointer;
+        }
+      }
     }
     ngx-monaco-editor {
       height: 100%;

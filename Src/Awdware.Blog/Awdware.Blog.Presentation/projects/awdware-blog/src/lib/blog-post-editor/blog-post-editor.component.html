@@ -1,10 +1,18 @@
 <div class="editor-main">
-  <div class="splitscreen">
+  <div class="splitscreen"
+       *ngIf="post">
     <div class="editor">
       <ngx-monaco-editor [options]="editorOptions"
                          [(ngModel)]="code"></ngx-monaco-editor>
     </div>
-    <awd-blog-post [post]="post"
-                   [hideEditIcon]="true"></awd-blog-post>
+    <div class="right-pane">
+      <div class="top">
+        <div (click)="switchLocale()"
+             class="control-button">
+          <i class="fal fa-globe"></i>
+        </div>
+      </div>
+      <awd-blog-post [post]="post"></awd-blog-post>
+    </div>
   </div>
 </div>

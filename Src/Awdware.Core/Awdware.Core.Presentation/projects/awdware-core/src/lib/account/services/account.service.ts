@@ -15,8 +15,6 @@ import {
   ResetPasswordDto
 } from '../../models/application-facade';
 import { RegisterRequestDto, RegisterResponseDto } from '../../models/application-facade';
-import { EventService } from '../../services/event.service';
-import { ToolbarInvalidatedEvent } from '../../events/toolbar-invalidated.event';
 import { SessionService } from '../../services/session.service';
 import { RoutingService } from '../../services/routing.service';
 import { UserDetailsService } from '../../services/user-details.service';
@@ -28,21 +26,18 @@ export class AccountService {
   private readonly _routingService: RoutingService;
   private readonly _webApiService: WebApiService;
   private readonly _sessionStoreService: SessionStoreService;
-  private readonly _eventService: EventService;
   private readonly _sessionService: SessionService;
   private readonly _userInfoService: UserDetailsService;
 
   constructor(
     webApiService: WebApiService,
     sessionStoreService: SessionStoreService,
-    eventService: EventService,
     sessionService: SessionService,
     routingService: RoutingService,
     userInfoService: UserDetailsService
   ) {
     this._webApiService = webApiService;
     this._sessionStoreService = sessionStoreService;
-    this._eventService = eventService;
     this._sessionService = sessionService;
     this._routingService = routingService;
     this._userInfoService = userInfoService;
@@ -58,7 +53,6 @@ export class AccountService {
               this._sessionService.startCheckSession();
               console.log(data);
               this._userInfoService.setUser(data.userInfo);
-              this._eventService.publishEvent<ToolbarInvalidatedEvent>(ToolbarInvalidatedEvent);
               return LoginResult.SUCCESS;
             } else {
               return data.loginSuccess;
@@ -75,7 +69,6 @@ export class AccountService {
             this._sessionStoreService.putToken(data.token);
             this._sessionService.startCheckSession();
             this._userInfoService.setUser(data.userInfo);
-            this._eventService.publishEvent<ToolbarInvalidatedEvent>(ToolbarInvalidatedEvent);
             return RegisterResult.SUCCESS;
           } else {
             return data.registerSuccess;
@@ -96,8 +89,13 @@ export class AccountService {
     return this._webApiService.get<UserDetailsDto>('user/getMyUserDetails')
       .pipe(
         tap(x => {
-          this._userInfoService.setUser(x);
-          this._eventService.publishEvent<ToolbarInvalidatedEvent>(ToolbarInvalidatedEvent);
+          if (x) {
+            this._userInfoService.setUser(x);
+          } else {
+            this._userInfoService.clearUser();
+            this._sessionStoreService.removeToken();
+            this._sessionService.stopCheckSession();
+          }
         })
       );
   }
@@ -106,7 +104,6 @@ export class AccountService {
     this._sessionStoreService.removeToken();
     this._sessionService.stopCheckSession();
     this._userInfoService.clearUser();
-    this._eventService.publishEvent<ToolbarInvalidatedEvent>(ToolbarInvalidatedEvent);
     this._routingService.navigateToHomeHello();
   }
 

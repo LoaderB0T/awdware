@@ -1,14 +1,15 @@
-<div class="blog-post">
+<div class="blog-post"
+     *ngIf="post">
   <header>
     <h1 class="title"
         (click)="navToBlog(post.id)"
         [id]="'#post-' + post.id">
       {{post.title}}
     </h1>
-    <div class="button-controls"
-         *ngIf="showEdit">
+    <div class="button-controls">
       <div (click)="editPost(post.id)"
-           class="edit-button control-button">
+           *ngIf="showEdit"
+           class="control-button">
         <i class="fal fa-pen"></i>
       </div>
     </div>
@@ -18,7 +19,7 @@
       <div [innerHTML]="translateText(postPreview.preview)"></div>
     </div>
     <div *ngIf="isDetails">
-      <div [innerHTML]="translateText(postPreview.content)"></div>
+      <div [innerHTML]="translateText(postDetails.content)"></div>
     </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 <div class="blog-root awd-content-container">
   <awd-blog-post *ngFor="let post of $posts | async"
                  [post]="post"
+                 [showEditButton]="true"
                  class="awd-floating-container">
   </awd-blog-post>
 </div>

@@ -4,15 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlogPostEditorComponent } from './blog-post-editor.component';
 import { FormsModule } from '@angular/forms';
 import { BlogPostModule } from '../blog-post/blog-post.module';
-import { BlogPostResolverService } from '../services/blog-post-resolver.service';
 import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
 
 const routes: Routes = [
   {
     path: '',
-    resolve: {
-      post: BlogPostResolverService
-    },
     component: BlogPostEditorComponent
   },
 ];
