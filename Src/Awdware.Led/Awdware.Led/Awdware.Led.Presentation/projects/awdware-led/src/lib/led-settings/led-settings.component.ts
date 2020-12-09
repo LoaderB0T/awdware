@@ -15,7 +15,7 @@ export class LedSettingsComponent extends BaseDialog implements OnInit {
   @Input() public settingsList: LedSettingsDto[];
 
   public selectedOptionName: string;
-  private _ledService: LedService;
+  private readonly _ledService: LedService;
 
   constructor(ledService: LedService) {
     super();

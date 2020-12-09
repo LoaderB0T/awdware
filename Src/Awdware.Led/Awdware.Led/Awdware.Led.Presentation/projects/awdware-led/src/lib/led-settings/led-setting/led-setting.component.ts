@@ -17,7 +17,7 @@ export class LedSettingComponent implements OnInit {
   @Output() deleteSetting = new EventEmitter<string>();
 
   InputType: typeof InputType = InputType;
-  private _ledService: LedService;
+  private readonly _ledService: LedService;
   public configSaved: boolean = true;
   public _downloadService: DownloadService;
 
@@ -31,7 +31,7 @@ export class LedSettingComponent implements OnInit {
   }
 
   public saveCurrentSettings() {
-    this._ledService.updateSetting(this.settings).subscribe(x => {
+    this._ledService.updateSetting(this.settings).subscribe(() => {
       this.configSaved = true;
     });
   }

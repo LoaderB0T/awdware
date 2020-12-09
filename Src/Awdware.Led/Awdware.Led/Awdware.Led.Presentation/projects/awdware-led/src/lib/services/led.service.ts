@@ -11,7 +11,7 @@ import { LedConfigurationDto, LedEffectKind, LedSettingsDto } from '../models/ap
   providedIn: 'root'
 })
 export class LedService {
-  private _apiService: WebApiService;
+  private readonly _apiService: WebApiService;
   public ledEffects: LedEffect[] = new Array<LedEffect>();
 
   constructor(apiService: WebApiService) {
@@ -60,7 +60,7 @@ export class LedService {
   }
 
   public getAllSettings() {
-    return this._apiService.get<LedSettingsDto[]>(`led/settings`);
+    return this._apiService.get<LedSettingsDto[]>('led/settings');
   }
 
   public updateSetting(ledSetting: LedSettingsDto) {

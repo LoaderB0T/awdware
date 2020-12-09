@@ -13,7 +13,7 @@ import { LedEffectKind } from '../models/application-facade';
 })
 export class AddEffectComponent extends BaseDialog implements OnInit {
   LedEffectKind: typeof LedEffectKind = LedEffectKind;
-  private _ledService: LedService;
+  private readonly _ledService: LedService;
   public selectedAddEffect: LedEffectKind;
   public addEffectName: string;
 

@@ -10,7 +10,7 @@ import { LedService } from '../services/led.service';
 export class LedEffectComponent implements OnInit {
   @Input() effect: LedEffect;
 
-  private _ledService: LedService;
+  private readonly _ledService: LedService;
 
   constructor(ledService: LedService) {
     this._ledService = ledService;
@@ -19,7 +19,7 @@ export class LedEffectComponent implements OnInit {
   ngOnInit() {
   }
 
-  public madeChanges(evt: any) {
+  public madeChanges() {
     this.effect.hasPendingChanges = true;
   }
 

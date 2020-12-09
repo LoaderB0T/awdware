@@ -14,9 +14,9 @@ import { LedSettingsDto } from './models/application-facade';
   styleUrls: ['./led.component.scss']
 })
 export class LedComponent implements OnInit, OnDestroy {
-  private _ledService: LedService;
-  private _dialogService: DialogService;
-  private _subMgr = new SubscriptionManager();
+  private readonly _ledService: LedService;
+  private readonly _dialogService: DialogService;
+  private readonly _subMgr = new SubscriptionManager();
 
   public ledSettings: LedSettingsDto[];
 
