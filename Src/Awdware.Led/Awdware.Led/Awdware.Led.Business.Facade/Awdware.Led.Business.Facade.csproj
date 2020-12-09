@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <ProjectGuid>b61b2254-7401-46a8-8c2b-c5d6c958a49f</ProjectGuid>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
