@@ -12,14 +12,26 @@ If you really want to contribute feel free to [contact me](mailto:rndmb0t@gmail.
 
 ## Build and run
 
-### Client
+### Client (Src/Awdware.Host/Awdware.Host.Presentation)
+
+**Prerequisites
+ - NodeJs
+ - yarn
+ - [gah](https://github.com/awdware/gah)
+
 ```powershell
+# Prepare
+yarn global add @awdware/gah
+gah install
+
 # Build
-yarn run build
+gah run ng build
+
 # Build productive
-yarn run build--prod
+gah run ng build --prod
+
 # Serve the application
-yarn run start
+gah run ng serve
 ```
 
 ### WebApi
