@@ -126,17 +126,6 @@ steps:
     PathtoPublish: publish/AwdwareApi
     ArtifactName: awdwareApi
 
-- task: PowerShell@2
-  inputs:
-    script: |
-      .\AzureDevOpsTools.exe hasFolderChanged -s "**/Awdware.Led/Awdware.Led.Facade/**"
-      if($LASTEXITCODE -eq 1) { echo "##vso[task.setvariable variable=PATH_HAS_CHANGES]TRUE" }
-    workingDirectory: 'Src/tools'
-    failOnStderr: true
-    targetType: inline
-    ignoreLASTEXITCODE: true
-  displayName: Check whether nuget package has to be updated
-
 - task: NuGetCommand@2
   displayName: "Build nuget package"
   inputs:
@@ -144,7 +133,7 @@ steps:
     packagesToPack: '**/Awdware.Led/Awdware.Led.Facade.csproj'
     versioningScheme: byBuildNumber
     buildProperties: version=$(major).$(minor).$(patch);
-  condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
+  condition: and(succeeded(), eq(variables['UPDATE_LED_CLIENT'], 'true'))
 
 - task: NuGetCommand@2
   displayName: "Publish nuget package"
@@ -153,7 +142,7 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'loaderb0t nuget'
-  condition: and(succeeded(), eq(variables['PATH_HAS_CHANGES'], 'TRUE'))
+  condition: and(succeeded(), eq(variables['UPDATE_LED_CLIENT'], 'true'))
 
 - task: SonarCloudAnalyze@1
   displayName: "Run Code Analysis - API"
