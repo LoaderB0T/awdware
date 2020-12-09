@@ -15,15 +15,16 @@ pool:
   demands: java
 
 steps:
-- task: DotNetCoreInstaller@1
-  displayName: "\U00002699 Use .NET Core sdk"
+- task: UseDotNet@1
+  displayName: "\U00002699 Use .NET 5 SDK"
   inputs:
-    version: 3.1.301
+    packageType: 'sdk'
+    version: '5.0.x'
 
 - task: NuGetToolInstaller@1
-  displayName: "\U00002699 Use NuGet 5.6.0"
+  displayName: "\U00002699 Use NuGet 5.8.0"
   inputs:
-    versionSpec: 5.6.0
+    versionSpec: 5.8.0
     checkLatest: true
 
 - task: SonarCloudPrepare@1
