@@ -14,8 +14,6 @@ import { SliderComponent } from './slider/slider.component';
 import { ColorSliderComponent } from './color-slider/color-slider.component';
 import { SelectComponent } from './select/select.component';
 import { LogoComponent } from './logo/logo.component';
-import { NgAssetsModule } from 'ng-assets';
-import { assets } from '../assets';
 
 @NgModule({
   declarations: [
@@ -39,7 +37,6 @@ import { assets } from '../assets';
     }),
     FormsModule,
     ClickOutsideModule,
-    NgAssetsModule.forRoot(assets)
   ],
   exports: [
     TranslateModule,
