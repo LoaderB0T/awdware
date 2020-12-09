@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { BaseDialog, SelectOption } from '@awdware/awdware-shared';
+import { BaseDialog, SelectOption } from '@awdware/shared';
 
 import { LedService } from '../services/led.service';
 import { LedSettingsDto } from '../models/application-facade';

@@ -1,5 +1,5 @@
 {
-  "name": "@awdware/awdware-core",
+  "name": "@awdware/core",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

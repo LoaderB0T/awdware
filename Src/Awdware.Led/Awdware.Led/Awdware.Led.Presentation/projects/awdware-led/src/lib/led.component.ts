@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { DialogService, SubscriptionManager } from '@awdware/awdware-shared';
+import { DialogService, SubscriptionManager } from '@awdware/shared';
 
 import { LedService } from './services/led.service';
 import { LedSettingsComponent } from './led-settings/led-settings.component';

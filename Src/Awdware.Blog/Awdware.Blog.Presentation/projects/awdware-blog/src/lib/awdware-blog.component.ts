@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { UserDetailsService, UserPermission } from '@awdware/awdware-core';
+import { UserDetailsService, UserPermission } from '@awdware/core';
 import { BlogPostDto } from './models/application-facade';
 import { BlogService } from './services/blog.service';
 

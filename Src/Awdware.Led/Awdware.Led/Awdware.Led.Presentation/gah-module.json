@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/awdware/gah/master/shared/assets/gah-module-schema.json",
   "modules": [
     {
-      "name": "awdware-led",
+      "name": "led",
       "packageName": "awdware",
       "publicApiPath": "projects/awdware-led/src/public-api.ts",
       "baseNgModuleName": "LedLazyModule",
@@ -10,7 +10,7 @@
         {
           "path": "../../../Awdware.Core/Awdware.Core.Presentation/gah-module.json",
           "names": [
-            "awdware-core"
+            "core"
           ]
         }
       ]

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import { InputType, ValidationDefinition, ValidationErrorType } from '@awdware/awdware-shared';
+import { InputType, ValidationDefinition, ValidationErrorType } from '@awdware/shared';
 
 import { AccountService } from '../services/account.service';
 import { ResetPasswordDto } from '../../models/application-facade';

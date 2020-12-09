@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import {
   AwdwareCoreSharedModule, FacadeService, WebApiService,
   ThemeService, TranslationService, AwdwareConfig, MenuItem
-} from '@awdware/awdware-shared';
+} from '@awdware/shared';
 
 import { MenuComponent } from './menu/menu.component';
 import { MeComponent } from './me/me.component';

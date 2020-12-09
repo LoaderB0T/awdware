@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "..\\Src\\Awdware.Host\\Awdware.Host.Presentation"
+		},
+		{
+			"path": "..\\Src\\Awdware.Core\\Awdware.Core.Presentation"
+		},
+		{
+			"path": "..\\Src\\Awdware.Shared\\Awdware.Shared.Presentation"
+		},
+		{
+			"path": "..\\Src\\Awdware.Blog\\Awdware.Blog.Presentation"
+		},
+		{
+			"path": "..\\Src\\Awdware.Led\\Awdware.Led\\Awdware.Led.Presentation"
+		}
+	],
+	"settings": {}
+}

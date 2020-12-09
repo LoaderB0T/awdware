@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WebApiService } from '@awdware/awdware-shared';
+import { WebApiService } from '@awdware/shared';
 import { Observable } from 'rxjs';
 import { BlogPostDetailsDto, BlogPostDto } from '../models/application-facade';
 

@@ -5,19 +5,19 @@
     {
       "path": "../../Awdware.Core/Awdware.Core.Presentation/gah-module.json",
       "names": [
-        "awdware-core"
+        "core"
       ]
     },
     {
       "path": "../../Awdware.Led/Awdware.Led/Awdware.Led.Presentation/gah-module.json",
       "names": [
-        "awdware-led"
+        "led"
       ]
     },
     {
       "path": "../../Awdware.Blog/Awdware.Blog.Presentation/gah-module.json",
       "names": [
-        "awdware-blog"
+        "blog"
       ]
     }
   ],

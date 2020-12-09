@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AccountService } from '../services/account.service';
-import { SubscriptionManager, InputType } from '@awdware/awdware-shared';
+import { SubscriptionManager, InputType } from '@awdware/shared';
 import { LoginHelpRequestDto } from '../../models/application-facade';
 
 @Component({

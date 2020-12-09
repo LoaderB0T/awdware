@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RoutingService, UserDetailsService, UserPermission } from '@awdware/awdware-core';
+import { RoutingService, UserDetailsService, UserPermission } from '@awdware/core';
 import { BlogPostDetailsDto, BlogPostDto, BlogPostType } from '../models/application-facade';
 
 @Component({

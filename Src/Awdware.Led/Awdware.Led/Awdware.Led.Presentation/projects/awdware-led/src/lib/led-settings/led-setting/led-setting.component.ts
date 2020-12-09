@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { InputType, DownloadService } from '@awdware/awdware-shared';
+import { InputType, DownloadService } from '@awdware/shared';
 
 import { LedService } from '../../services/led.service';
 import { LedSettingsDto } from '../../models/application-facade';

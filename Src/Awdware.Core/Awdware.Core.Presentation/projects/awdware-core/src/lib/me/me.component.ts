@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ThemeService, TranslationService } from '@awdware/awdware-shared';
+import { ThemeService, TranslationService } from '@awdware/shared';
 
 import { UserDetailsService } from '../services/user-details.service';
 import { UserDetails } from '../models/user-details';

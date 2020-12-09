@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { InvalidOperationError, ThemeService } from '@awdware/awdware-shared';
+import { InvalidOperationError, ThemeService } from '@awdware/shared';
 
 import { LedEffectProperty } from '../../models/led-effect-property.model';
 import { LedEffectNumberProperty } from '../../models/led-effect-number-property.model';
