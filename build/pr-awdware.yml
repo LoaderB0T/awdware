@@ -7,16 +7,16 @@ pool:
   name: Hosted VS2017
 
 steps:
+
 - task: CreatePullRequest@1
   inputs:
-    repoType: Azure DevOps
-    sourceBranch: 'develop'
-    targetBranch: 'master'
-    title: 'dev -> master'
-    #reviewers: 'test@test.com;MyTeam'
+    repoType: 'GitHub'
+    githubEndpoint: 'awdwareConnection'
+    githubRepository: '$(Build.Repository.Name)'
+    sourceBranch: '$(Build.SourceBranch)'
+    targetBranch: 'main'
+    title: 'dev -> main'
     autoComplete: true
     mergeStrategy: 'rebase'
-  env:
-    System_AccessToken: $(System.AccessToken)
   condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'develop'))
   displayName: 'Trigger pull request'
