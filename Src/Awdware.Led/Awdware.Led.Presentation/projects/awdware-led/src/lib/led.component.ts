@@ -45,7 +45,7 @@ export class LedComponent implements OnInit, OnDestroy {
 
   public showAddDialog() {
     const addEffectDialog = this._dialogService.showComponentDialog<AddEffectComponent>(AddEffectComponent);
-    const sub = addEffectDialog.effectAdded.subscribe(e => this.effectAdded(e));
+    const sub = addEffectDialog.effectAdded.subscribe((e: LedEffect) => this.effectAdded(e));
     this._subMgr.add(sub);
   }
 

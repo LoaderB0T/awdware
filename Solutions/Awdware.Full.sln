@@ -31,15 +31,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Core.Infrastructure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Core.Test.UnitTest", "..\Src\Awdware.Core\Awdware.Core.Test.UnitTest\Awdware.Core.Test.UnitTest.csproj", "{F8ECAE46-F4D8-4AEA-8478-5965E44B792B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Business.Facade", "..\Src\Awdware.Led\Awdware.Led\Awdware.Led.Business.Facade\Awdware.Led.Business.Facade.csproj", "{B61B2254-7401-46A8-8C2B-C5D6C958A49F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Business.Facade", "..\Src\Awdware.Led\Awdware.Led.Business.Facade\Awdware.Led.Business.Facade.csproj", "{B61B2254-7401-46A8-8C2B-C5D6C958A49F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Business.Implementation", "..\Src\Awdware.Led\Awdware.Led\Awdware.Led.Business.Implementation\Awdware.Led.Business.Implementation.csproj", "{851D0400-DB91-4CE2-9211-C272038A265D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Business.Implementation", "..\Src\Awdware.Led\Awdware.Led.Business.Implementation\Awdware.Led.Business.Implementation.csproj", "{851D0400-DB91-4CE2-9211-C272038A265D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Data.Facade", "..\Src\Awdware.Led\Awdware.Led\Awdware.Led.Data.Facade\Awdware.Led.Data.Facade.csproj", "{6AE07CA0-9A4E-409C-A626-3F6499EC9640}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Data.Facade", "..\Src\Awdware.Led\Awdware.Led.Data.Facade\Awdware.Led.Data.Facade.csproj", "{6AE07CA0-9A4E-409C-A626-3F6499EC9640}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Data.Implementation", "..\Src\Awdware.Led\Awdware.Led\Awdware.Led.Data.Implementation\Awdware.Led.Data.Implementation.csproj", "{DACD3FAD-F0AE-4748-848F-6BC069D19F51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Data.Implementation", "..\Src\Awdware.Led\Awdware.Led.Data.Implementation\Awdware.Led.Data.Implementation.csproj", "{DACD3FAD-F0AE-4748-848F-6BC069D19F51}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Facade", "..\Src\Awdware.Led\Awdware.Led\Awdware.Led.Facade\Awdware.Led.Facade.csproj", "{AD8F282D-016F-4FF3-9E34-92A9B39E6F15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Facade", "..\Src\Awdware.Led\Awdware.Led.Facade\Awdware.Led.Facade.csproj", "{AD8F282D-016F-4FF3-9E34-92A9B39E6F15}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Blog.Business.Facade", "..\Src\Awdware.Blog\Awdware.Blog.Business.Facade\Awdware.Blog.Business.Facade.csproj", "{1DCD5281-9547-4266-989B-C990F52EE4B5}"
 EndProject
@@ -53,7 +53,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Blog.Facade", "..\S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Blog.UnitTests", "..\Src\Awdware.Blog\Awdware.Blog.UnitTests\Awdware.Blog.UnitTests.csproj", "{A93838BA-5151-4F4F-AD84-9D4EE7398AAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Client", "..\Src\Awdware.Led\Awdware.Led\Awdware.Led.Client\Awdware.Led.Client.csproj", "{6A221B4C-EC66-41D7-93B5-62BCBE7338A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Client", "..\Src\Awdware.Led\Awdware.Led.Client\Awdware.Led.Client.csproj", "{6A221B4C-EC66-41D7-93B5-62BCBE7338A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

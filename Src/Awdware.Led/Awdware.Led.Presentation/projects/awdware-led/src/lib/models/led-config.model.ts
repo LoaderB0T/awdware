@@ -103,6 +103,7 @@ export class LedEffect {
       this.props.push(new LedEffectNumberProperty(4, 'Speed', 30, 0, 255));
       this.props.push(new LedEffectBoolProperty(5, 'Switch Direction', false));
       this.props.push(new LedEffectBoolProperty(6, 'Two Sides', false));
+      this.props.push(new LedEffectBoolProperty(7, 'Music Reactive', false));
       break;
     }
     case LedEffectKind.WEB: {

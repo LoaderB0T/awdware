@@ -19,7 +19,8 @@ namespace Awdware.Led.Data.Implementation.Repositories
 
         public IEnumerable<LedEffect> GetLedEffects(string userId)
         {
-            return _dbContext.LedConfigs.Where(x => x.UserId == userId);
+            var res = _dbContext.LedConfigs.Where(x => x.UserId == userId).ToList();
+            return res;
         }
 
         public void UpdateLedConfig(Guid id, LedEffectDto ledEffect, string newName)

@@ -32,10 +32,11 @@ namespace Awdware.Led.Business.Facade.Controllers
 
         [HttpGet]
         [Route("effects")]
-        public ActionResult<LedConfigurationDto> GetMyLedEffects([FromHeader] string authorization)
+        public ActionResult<IEnumerable<LedConfigurationDto>> GetMyLedEffects([FromHeader] string authorization)
         {
             var userId = _authenticationService.GetUserIdFromToken(authorization);
-            return Ok(_ledService.GetEffects(userId).Select(x => x.ToDto()));
+            var res = _ledService.GetEffects(userId).Select(x => x.ToDto()).ToList();
+            return Ok(res);
         }
 
         [HttpPut]
