@@ -53,6 +53,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Blog.Facade", "..\S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Blog.UnitTests", "..\Src\Awdware.Blog\Awdware.Blog.UnitTests\Awdware.Blog.UnitTests.csproj", "{A93838BA-5151-4F4F-AD84-9D4EE7398AAF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Awdware.Led.Client", "..\Src\Awdware.Led\Awdware.Led\Awdware.Led.Client\Awdware.Led.Client.csproj", "{6A221B4C-EC66-41D7-93B5-62BCBE7338A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +161,10 @@ Global
 		{A93838BA-5151-4F4F-AD84-9D4EE7398AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A93838BA-5151-4F4F-AD84-9D4EE7398AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A93838BA-5151-4F4F-AD84-9D4EE7398AAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A221B4C-EC66-41D7-93B5-62BCBE7338A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A221B4C-EC66-41D7-93B5-62BCBE7338A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A221B4C-EC66-41D7-93B5-62BCBE7338A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A221B4C-EC66-41D7-93B5-62BCBE7338A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

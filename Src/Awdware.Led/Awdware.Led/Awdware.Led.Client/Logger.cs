@@ -16,7 +16,7 @@ namespace LedController
                     .AddConsole()
                     .AddEventLog();
             });
-            var logger = _loggerFactory.CreateLogger("awdware-api");
+            var logger = _loggerFactory.CreateLogger("awdware-led-client");
             return logger;
         }
 
