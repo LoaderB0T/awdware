@@ -33,16 +33,25 @@ namespace LedController
                     GetColorProperty(props, 2),
                     GetIntProperty(props, 3),
                     GetBoolProperty(props, 4),
-                    GetBoolProperty(props, 4)
+                    GetBoolProperty(props, 5)
                 ),
-                LedEffectKind.Music => new MusicEffect(ledCount, dto.Name,
+                LedEffectKind.Mix => new MixEffect(ledCount, dto.Name,
                     GetColorProperty(props, 1),
                     GetColorProperty(props, 2),
-                    GetIntProperty(props, 3)
+                    GetIntProperty(props, 3),
+                    GetBoolProperty(props, 4)
                 ),
                 LedEffectKind.Web => new WebEffect(ledCount, dto.Name,
                     GetStringProperty(props, 1),
                     GetUintProperty(props, 2)
+                ),
+                LedEffectKind.Music => new MusicEffect(ledCount, dto.Name,
+                    GetColorProperty(props, 1),
+                    GetColorProperty(props, 2),
+                    GetIntProperty(props, 3),
+                    GetBoolProperty(props, 4),
+                    GetBoolProperty(props, 5),
+                    GetBoolProperty(props, 6)
                 ),
                 _ => null,
             };

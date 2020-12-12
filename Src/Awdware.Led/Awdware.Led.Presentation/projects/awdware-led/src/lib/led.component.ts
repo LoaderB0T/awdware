@@ -49,7 +49,7 @@ export class LedComponent implements OnInit, OnDestroy {
     this._subMgr.add(sub);
   }
 
-  effectAdded(e: LedEffect): void {
+  public effectAdded(e: LedEffect): void {
     this.ledConfigs.push(e);
   }
 

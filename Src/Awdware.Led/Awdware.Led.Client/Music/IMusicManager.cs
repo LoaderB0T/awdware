@@ -18,6 +18,6 @@ namespace LedController.Music
         }
 
         public int[] GetSpectrum(uint rowCount, uint maxValue);
-        public double GetCurrentVolume();
+        public float GetCurrentVolume();
     }
 }

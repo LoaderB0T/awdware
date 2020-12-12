@@ -27,19 +27,19 @@ export class LedEffect {
     if (dto.ledEffect.properties) {
       newLedConfig.props = dto.ledEffect.properties.map(propDto => {
         switch (propDto.effectType) {
-        case LedEffectPropertyKind.BOOL:
-          return new LedEffectBoolProperty(propDto.id, propDto.name, propDto.value && true);
-        case LedEffectPropertyKind.COLOR:
-          return new LedEffectColorProperty(propDto.id, propDto.name, propDto.value);
-        case LedEffectPropertyKind.NUMBER:
-          return new LedEffectNumberProperty(
-            propDto.id, propDto.name, Number.parseInt(propDto.value, 10),
-            propDto.minValue, propDto.maxValue
-          );
-        case LedEffectPropertyKind.STRING:
-          return new LedEffectStringProperty(propDto.id, propDto.name, propDto.value);
-        default:
-          return null;
+          case LedEffectPropertyKind.BOOL:
+            return new LedEffectBoolProperty(propDto.id, propDto.name, propDto.value && true);
+          case LedEffectPropertyKind.COLOR:
+            return new LedEffectColorProperty(propDto.id, propDto.name, propDto.value);
+          case LedEffectPropertyKind.NUMBER:
+            return new LedEffectNumberProperty(
+              propDto.id, propDto.name, Number.parseInt(propDto.value, 10),
+              propDto.minValue, propDto.maxValue
+            );
+          case LedEffectPropertyKind.STRING:
+            return new LedEffectStringProperty(propDto.id, propDto.name, propDto.value);
+          default:
+            return null;
         }
       });
     }
@@ -77,40 +77,48 @@ export class LedEffect {
 
   private getDefaultParams() {
     switch (this.effectKind) {
-    case LedEffectKind.STATIC: {
-      this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
-      break;
-    }
-    case LedEffectKind.PIXEL: {
-      this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
-      this.props.push(new LedEffectColorProperty(2, 'Background Color', '#000000'));
-      this.props.push(new LedEffectNumberProperty(3, 'Speed', 30, 0, 255));
-      this.props.push(new LedEffectNumberProperty(4, 'Count', 200, 1, 1000));
-      this.props.push(new LedEffectBoolProperty(5, 'Even Colors', true));
-      break;
-    }
-    case LedEffectKind.MIX: {
-      this.props.push(new LedEffectColorProperty(1, 'Color A', '#FFFFFF'));
-      this.props.push(new LedEffectColorProperty(2, 'Color B', '#000000'));
-      this.props.push(new LedEffectNumberProperty(3, 'Speed', 30, 0, 255));
-      this.props.push(new LedEffectBoolProperty(4, 'Animated', false));
-      this.props.push(new LedEffectBoolProperty(5, 'Random Colors', false));
-      break;
-    }
-    case LedEffectKind.STRIPE: {
-      this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
-      this.props.push(new LedEffectColorProperty(2, 'Background Color', '#000000'));
-      this.props.push(new LedEffectNumberProperty(4, 'Speed', 30, 0, 255));
-      this.props.push(new LedEffectBoolProperty(5, 'Switch Direction', false));
-      this.props.push(new LedEffectBoolProperty(6, 'Two Sides', false));
-      this.props.push(new LedEffectBoolProperty(7, 'Music Reactive', false));
-      break;
-    }
-    case LedEffectKind.WEB: {
-      this.props.push(new LedEffectStringProperty(1, 'URL', ''));
-      this.props.push(new LedEffectNumberProperty(2, 'Interval', 30, 5, 300));
-      break;
-    }
+      case LedEffectKind.STATIC: {
+        this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
+        break;
+      }
+      case LedEffectKind.PIXEL: {
+        this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
+        this.props.push(new LedEffectColorProperty(2, 'Background Color', '#000000'));
+        this.props.push(new LedEffectNumberProperty(3, 'Speed', 30, 0, 255));
+        this.props.push(new LedEffectNumberProperty(4, 'Count', 200, 1, 1000));
+        this.props.push(new LedEffectBoolProperty(5, 'Even Colors', true));
+        break;
+      }
+      case LedEffectKind.MIX: {
+        this.props.push(new LedEffectColorProperty(1, 'Color A', '#FFFFFF'));
+        this.props.push(new LedEffectColorProperty(2, 'Color B', '#000000'));
+        this.props.push(new LedEffectNumberProperty(3, 'Speed', 30, 0, 255));
+        this.props.push(new LedEffectBoolProperty(4, 'Animated', false));
+        break;
+      }
+      case LedEffectKind.STRIPE: {
+        this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
+        this.props.push(new LedEffectColorProperty(2, 'Background Color', '#000000'));
+        this.props.push(new LedEffectNumberProperty(3, 'Speed', 30, 0, 255));
+        this.props.push(new LedEffectBoolProperty(4, 'Switch Direction', false));
+        this.props.push(new LedEffectBoolProperty(5, 'Two Sides', false));
+        this.props.push(new LedEffectBoolProperty(6, 'Music Reactive', false));
+        break;
+      }
+      case LedEffectKind.WEB: {
+        this.props.push(new LedEffectStringProperty(1, 'URL', ''));
+        this.props.push(new LedEffectNumberProperty(2, 'Interval', 30, 5, 300));
+        break;
+      }
+      case LedEffectKind.MUSIC: {
+        this.props.push(new LedEffectColorProperty(1, 'Color', '#FFFFFF'));
+        this.props.push(new LedEffectColorProperty(2, 'Background Color', '#000000'));
+        this.props.push(new LedEffectNumberProperty(3, 'Speed', 30, 0, 255));
+        this.props.push(new LedEffectBoolProperty(4, 'Spectrum', false));
+        this.props.push(new LedEffectBoolProperty(5, 'Two Sides', false));
+        this.props.push(new LedEffectBoolProperty(6, 'Switch Direction', false));
+        break;
+      }
     }
   }
 }

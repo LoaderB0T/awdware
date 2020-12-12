@@ -12,10 +12,11 @@ namespace LedController.Models.Effects
         private readonly int _speed;
         private readonly bool _switchDirection;
         private readonly bool _twoSides;
+        private readonly bool _music;
 
         public StripeEffect(uint ledCount, string name, RgbColor color, RgbColor bgcolor, int speed, bool switchDirection, bool twoSides) : base(ledCount, name)
         {
-            _color = color;
+             _color = color;
             _bgcolor = bgcolor;
             _speed = speed;
             _switchDirection = switchDirection;
@@ -60,6 +61,7 @@ namespace LedController.Models.Effects
                     }
 
                 }
+
                 return Image.ToByteArray();
             }
             return null;

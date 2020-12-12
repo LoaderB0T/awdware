@@ -36,6 +36,13 @@
       <i class="icon icon2 fal fa-lightbulb-on"></i>
       <span>Web</span>
     </div>
+    <div class="add-item"
+         [class.selected]="selectedAddEffect === LedEffectKind.MUSIC"
+         (click)="selectAddEffect(LedEffectKind.MUSIC)">
+      <i class="icon icon1 fal fa-lightbulb"></i>
+      <i class="icon icon2 fal fa-lightbulb-on"></i>
+      <span>Music</span>
+    </div>
   </div>
   <div class="add-effect-lower">
     <awd-textbox class="textbox"

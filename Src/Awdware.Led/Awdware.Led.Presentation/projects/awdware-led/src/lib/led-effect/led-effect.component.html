@@ -3,11 +3,11 @@
   <div class="effect-actions">
     <div class="action-item"
          (click)="deleteEffect()">
-      <i class="icon fal fa-times"></i>
+      <i class="icon fal fa-xmark"></i>
     </div>
     <div class="action-item"
          (click)="selectEffect()">
-      <i class="icon fal fa-check-circle"></i>
+      <i class="icon fal fa-circle-check"></i>
     </div>
     <div class="action-item"
          *ngIf="effect.hasPendingChanges"
@@ -17,7 +17,7 @@
     <div class="action-item"
          *ngIf="effect.hasPendingChanges"
          (click)="{}">
-      <i class="icon fal fa-undo"></i>
+      <i class="icon fal fa-arrow-left-rotate"></i>
     </div>
   </div>
   <span class="header">

@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Awdware.Led.Business.Implementation\Awdware.Led.Business.Implementation.csproj" />
-    <ProjectReference Include="..\..\..\Awdware.Core\Awdware.Core.Business.Implementation\Awdware.Core.Business.Implementation.csproj" />
+    <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Business.Implementation\Awdware.Core.Business.Implementation.csproj" />
   </ItemGroup>
 
 </Project>

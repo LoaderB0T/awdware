@@ -14,7 +14,7 @@
   <Choose>
     <When Condition=" '$(Configuration)'=='Debug' ">
       <PropertyGroup>
-        <OutputType>WinExe</OutputType>
+        <OutputType>Exe</OutputType>
       </PropertyGroup>
     </When>
     <When Condition=" '$(Configuration)'!='Debug' ">
@@ -25,18 +25,17 @@
   </Choose>
 
   <ItemGroup>
-    <PackageReference Include="ManagedBass" Version="3.0.0" />
-    <PackageReference Include="ManagedBass.Wasapi" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.EventLog" Version="5.0.0" />
+    <PackageReference Include="NAudio" Version="1.10.0" />
     <PackageReference Include="System.IO.Ports" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Awdware.Led\Awdware.Led.Facade\Awdware.Led.Facade.csproj" />
-    <ProjectReference Include="..\..\..\Awdware.Core\Awdware.Core.Facade\Awdware.Core.Facade.csproj" />
+    <ProjectReference Include="..\Awdware.Led.Facade\Awdware.Led.Facade.csproj" />
+    <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Facade\Awdware.Core.Facade.csproj" />
   </ItemGroup>
 
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
