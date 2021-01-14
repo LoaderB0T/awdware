@@ -17,7 +17,7 @@ If you really want to contribute feel free to [contact me](mailto:rndmb0t@gmail.
 **Prerequisites
  - NodeJs
  - yarn
- - [gah](https://github.com/awdware/gah)
+ - [gah](https://github.com/gahjs/core)
 
 ```powershell
 # Prepare
