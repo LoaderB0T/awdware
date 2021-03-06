@@ -168,7 +168,7 @@ steps:
   - task: DotNetCoreCLI@2
     displayName: "\U0001F6E0 build led controller"
     inputs:
-      projects: Src/Awdware.Led/LedController/LedController/LedController.csproj
+      projects: Src/Awdware.Led/Awdware.Led.Client/Awdware.Led.Client.csproj
       configuration: Release
 
   - task: DotNetCoreCLI@2
@@ -176,7 +176,7 @@ steps:
     inputs:
       command: publish
       publishWebProjects: false
-      projects: Src/Awdware.Led/LedController/LedController/LedController.csproj
+      projects: Src/Awdware.Led/Awdware.Led.Client/Awdware.Led.Client.csproj
       arguments: "-o publish/LedController /p:PublishSingleFile=true -r win-x64"
       zipAfterPublish: false
       modifyOutputPath: false
