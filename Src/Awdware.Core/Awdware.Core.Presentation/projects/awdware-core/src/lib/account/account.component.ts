@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { RoutingService } from '../services/routing.service';
-import { ToolbarProviderService } from '../services/toolbar-provider.service';
-import { TabViewContent } from '@awdware/shared';
+import { FacadeService, TabViewContent } from '@awdware/shared';
 
 @Component({
   selector: 'awd-account',
@@ -11,13 +10,13 @@ import { TabViewContent } from '@awdware/shared';
 })
 export class AccountComponent implements OnInit {
   private readonly _routingService: RoutingService;
-  private readonly _toolbarProviderService: ToolbarProviderService;
+  private readonly _facadeService: FacadeService;
 
   public accountTabContent: TabViewContent;
 
-  constructor(routingService: RoutingService, toolbarProviderService: ToolbarProviderService) {
+  constructor(routingService: RoutingService, facadeService: FacadeService) {
     this._routingService = routingService;
-    this._toolbarProviderService = toolbarProviderService;
+    this._facadeService = facadeService;
 
     this.accountTabContent = new TabViewContent();
     this.accountTabContent.tabs = [
@@ -28,6 +27,6 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._toolbarProviderService.activeItem = 'account.login.heading';
+    this._facadeService.setActiveMenuItem('account');
   }
 }

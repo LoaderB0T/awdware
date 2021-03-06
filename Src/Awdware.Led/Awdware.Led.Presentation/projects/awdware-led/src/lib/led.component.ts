@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { DialogService, SubscriptionManager } from '@awdware/shared';
+import { DialogService, SubscriptionManager, FacadeService } from '@awdware/shared';
 
 import { LedService } from './services/led.service';
 import { LedSettingsComponent } from './led-settings/led-settings.component';
@@ -16,13 +16,15 @@ import { LedSettingsDto } from './models/application-facade';
 export class LedComponent implements OnInit, OnDestroy {
   private readonly _ledService: LedService;
   private readonly _dialogService: DialogService;
+  private readonly _facadeService: FacadeService;
   private readonly _subMgr = new SubscriptionManager();
 
   public ledSettings: LedSettingsDto[];
 
-  constructor(ledService: LedService, dialogService: DialogService) {
+  constructor(ledService: LedService, dialogService: DialogService, facadeService: FacadeService) {
     this._ledService = ledService;
     this._dialogService = dialogService;
+    this._facadeService = facadeService;
   }
 
   ngOnInit() {
@@ -30,6 +32,7 @@ export class LedComponent implements OnInit, OnDestroy {
     this._ledService.getAllSettings().subscribe(allSettings => {
       this.ledSettings = allSettings;
     });
+    this._facadeService.setActiveMenuItem('led');
   }
 
   ngOnDestroy() {
