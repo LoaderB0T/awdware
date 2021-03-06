@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { LenID } from '../../.gah/dependencies/shared/public-api';
 import { BlogPostDetailsDto } from '../models/application-facade';
 import { BlogService } from '../services/blog.service';
 
@@ -15,7 +16,7 @@ export class BlogPostEditorComponent implements OnInit {
   editorOptions = { theme: 'vs-dark', language: 'html' };
   private readonly _postCache: { locale: string; post: BlogPostDetailsDto }[];
   private readonly _blogService: BlogService;
-  private _currentLocale: string = 'de';
+  private _currentLocale: LenID = 'de_DE';
   public post: BlogPostDetailsDto;
 
   constructor(activatedRoute: ActivatedRoute, blogService: BlogService) {
@@ -51,7 +52,7 @@ export class BlogPostEditorComponent implements OnInit {
   }
 
   switchLocale() {
-    this._currentLocale = this._currentLocale === 'en' ? 'de' : 'en';
+    this._currentLocale = this._currentLocale === 'en_US' ? 'de_DE' : 'en_US';
     this.loadPost().subscribe();
   }
 

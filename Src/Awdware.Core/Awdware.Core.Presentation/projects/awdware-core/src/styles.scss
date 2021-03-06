@@ -1,4 +1,4 @@
-@import './references.scss';
+@import "./references.scss";
 
 * {
   font-family: var(--fontMain);
@@ -29,7 +29,7 @@ body {
   outline-style: none;
 }
 
-input[type='submit'],
+input[type="submit"],
 .button {
   padding: 10px 25px;
   border: none;
@@ -109,4 +109,20 @@ input[type='submit'],
   left: 0;
   background: rgba(0, 0, 0, 0.7);
   z-index: 9;
+}
+
+.awd-column {
+  display: flex;
+  flex-direction: column;
+  &.center {
+    align-items: center;
+  }
+}
+
+.awd-row {
+  display: flex;
+  flex-direction: row;
+  &.center {
+    align-items: center;
+  }
 }

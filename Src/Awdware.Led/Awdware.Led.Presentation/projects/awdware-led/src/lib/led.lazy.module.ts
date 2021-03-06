@@ -23,6 +23,7 @@ export class LedLazyModule {
         'led',
         'LED',
         'lightbulb',
+        85,
         () => routingService.navigate('led'),
         () => true
       )

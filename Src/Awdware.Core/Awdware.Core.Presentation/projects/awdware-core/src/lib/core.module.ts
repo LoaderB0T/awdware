@@ -23,10 +23,11 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ErrorModule } from './error/error.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from '../environment';
+import { SettingsModule } from './settings/settings.module';
 
 @NgModule({
   declarations: [MenuComponent, MeComponent, BaseComponent],
-  imports: [CommonModule, CoreRoutingModule, AwdwareCoreSharedModule, AccountModule, HomeModule, ErrorModule],
+  imports: [CommonModule, CoreRoutingModule, AwdwareCoreSharedModule, AccountModule, HomeModule, ErrorModule, SettingsModule],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }]
 })
 export class CoreModule {
@@ -53,6 +54,7 @@ export class CoreModule {
         'home',
         'Home',
         'home',
+        0,
         () => routingService.navigateToHomeHello(),
         () => true
       ),
@@ -60,6 +62,7 @@ export class CoreModule {
         'login',
         'Login',
         'arrow-right-to-bracket',
+        100,
         () => routingService.navigateToAccountLogin(),
         () => this.showLoginButton()
       ),
@@ -67,8 +70,17 @@ export class CoreModule {
         'account',
         'Account',
         'user',
+        100,
         () => routingService.navigateToAccount(),
         () => this.showAccountButton()
+      ),
+      new MenuItem(
+        'settings',
+        'Settings',
+        'gear',
+        200,
+        () => routingService.navigateToSettings(),
+        () => true
       )
     ];
     facadeService.addOrUpdateConfiguration('awdware-core', config);

@@ -26,6 +26,10 @@ export class TranslationService {
     }
   }
 
+  public get lenID(): LenID {
+    return this.getLanguageId();
+  }
+
   private isSupportedLanguage(len: any): boolean {
     return internalLenId.hasOwnProperty(len);
   }

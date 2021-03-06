@@ -22,6 +22,7 @@ export class AwdwareLazyBlogModule {
         'blog',
         'Blog',
         'code',
+        80,
         () => routingService.navigate('blog'),
         () => true
       )

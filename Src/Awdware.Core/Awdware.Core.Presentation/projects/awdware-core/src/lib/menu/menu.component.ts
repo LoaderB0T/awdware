@@ -44,7 +44,7 @@ export class MenuComponent implements OnInit {
   }
 
   public get enabledMenuItems(): MenuItem[] {
-    return this._menuItems.filter(x => x.enabled());
+    return this._menuItems.filter(x => x.enabled()).sort((a, b) => a.order - b.order);
   }
 
   public toggleMenu() {

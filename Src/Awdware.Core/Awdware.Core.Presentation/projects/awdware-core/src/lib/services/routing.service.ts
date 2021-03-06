@@ -53,6 +53,10 @@ export class RoutingService {
     this._router.navigate(['me']);
   }
 
+  public navigateToSettings() {
+    this._router.navigate(['settings']);
+  }
+
   public navigateToError(status: number) {
     this._router.navigate(['error', status]);
   }

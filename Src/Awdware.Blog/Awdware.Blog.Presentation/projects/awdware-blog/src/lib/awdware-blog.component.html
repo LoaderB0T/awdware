@@ -1,4 +1,12 @@
 <div class="blog-root awd-content-container">
-  <awd-blog-post *ngFor="let post of $posts | async" [post]="post" [showEditButton]="true" class="awd-floating-container">
-  </awd-blog-post>
+  <ng-container *ngIf="blogsEnabled">
+    <awd-blog-post *ngFor="let post of $posts | async" [post]="post" [showEditButton]="true"
+      class="awd-floating-container">
+    </awd-blog-post>
+  </ng-container>
+
+  <div id="disabled-blog" class="awd-floating-container awd-column" *ngIf="!blogsEnabled">
+    <span id="blog-wip">WIP</span>
+    <span>This whole website - including this page - is still work in progress!</span>
+  </div>
 </div>

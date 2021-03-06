@@ -38,17 +38,4 @@ export class MeComponent implements OnInit {
   public logout() {
     this._accountService.logout();
   }
-
-  public darkTheme() {
-    this._themeService.changeTheme('dark');
-  }
-  public lightTheme() {
-    this._themeService.changeTheme('light');
-  }
-  public german() {
-    this._translationService.setLanguage('de_DE');
-  }
-  public english() {
-    this._translationService.setLanguage('en_US');
-  }
 }

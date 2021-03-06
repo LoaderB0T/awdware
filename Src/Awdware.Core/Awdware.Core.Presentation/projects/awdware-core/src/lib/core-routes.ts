@@ -12,6 +12,7 @@ import { MeComponent } from './me/me.component';
 import { AuthGuard } from './services/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
+import { SettingsComponent } from './settings/settings.component';
 
 export const routes: Routes = [
   {
@@ -70,6 +71,10 @@ export const routes: Routes = [
           {
             path: 'hello',
             component: HomeComponent
+          },
+          {
+            path: 'settings',
+            component: SettingsComponent
           }
         ]
       },
