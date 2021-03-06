@@ -15,188 +15,185 @@ pool:
   demands: java
 
 steps:
-- task: UseDotNet@1
-  displayName: "\U00002699 Use .NET 5 SDK"
-  inputs:
-    packageType: 'sdk'
-    version: '5.0.x'
+  - task: UseDotNet@1
+    displayName: "\U00002699 Use .NET 5 SDK"
+    inputs:
+      packageType: "sdk"
+      version: "5.0.x"
 
-- task: NuGetToolInstaller@1
-  displayName: "\U00002699 Use NuGet 5.8.0"
-  inputs:
-    versionSpec: 5.8.0
-    checkLatest: true
+  - task: NuGetToolInstaller@1
+    displayName: "\U00002699 Use NuGet 5.8.0"
+    inputs:
+      versionSpec: 5.8.0
+      checkLatest: true
 
-- task: SonarCloudPrepare@1
-  continueOnError: true
-  displayName: "\U0001F50E Prepare analysis on SonarCloud - API"
-  inputs:
-    SonarCloud: 'sonarcloud'
-    organization: 'awdware'
-    scannerMode: 'MSBuild'
-    projectKey: 'awdware:webapi'
-    extraProperties: |
-      sonar.exclusions=**/bin/**,**/obj/**,**/Template/**
-      sonar.test.exclusions=**/bin/**,**/obj/**
-    # sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
+  - task: SonarCloudPrepare@1
+    continueOnError: true
+    displayName: "\U0001F50E Prepare analysis on SonarCloud - API"
+    inputs:
+      SonarCloud: "sonarcloud"
+      organization: "awdware"
+      scannerMode: "MSBuild"
+      projectKey: "awdware:webapi"
+      extraProperties: |
+        sonar.exclusions=**/bin/**,**/obj/**,**/Template/**
+        sonar.test.exclusions=**/bin/**,**/obj/**
+      # sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
-- task: DotNetCoreCLI@2
-  displayName: "\U0001F6E0 build core"
-  inputs:
-    projects: Src/Awdware.Core/Awdware.Core.sln
-    configuration: Release
+  - task: DotNetCoreCLI@2
+    displayName: "\U0001F6E0 build core"
+    inputs:
+      projects: Src/Awdware.Core/Awdware.Core.sln
+      configuration: Release
 
-- task: DotNetCoreCLI@2
-  displayName: "\U0001F6E0 build led"
-  inputs:
-    projects: Src/Awdware.Led/Awdware.Led/Awdware.Led.sln
-    configuration: Release
+  - task: DotNetCoreCLI@2
+    displayName: "\U0001F6E0 build led"
+    inputs:
+      projects: Src/Awdware.Led/Awdware.Led.sln
+      configuration: Release
 
-- task: DotNetCoreCLI@2
-  displayName: "\U0001F6E0 build games"
-  inputs:
-    projects: Src/Awdware.Games/Awdware.Games.sln
-    configuration: Release
+  - task: DotNetCoreCLI@2
+    displayName: "\U0001F6E0 build games"
+    inputs:
+      projects: Src/Awdware.Games/Awdware.Games.sln
+      configuration: Release
 
-- task: DotNetCoreCLI@2
-  displayName: "\U0001F6E0 build host"
-  inputs:
-    projects: Src/Awdware.Host/Awdware.Host.sln
-    configuration: Release
+  - task: DotNetCoreCLI@2
+    displayName: "\U0001F6E0 build host"
+    inputs:
+      projects: Src/Awdware.Host/Awdware.Host.sln
+      configuration: Release
 
+  - task: DotNetCoreCLI@2
+    displayName: "\U0001F446 build package to publish awdware api"
+    inputs:
+      command: publish
+      publishWebProjects: false
+      projects: Src/Awdware.Host/Awdware.Host/Awdware.Host.csproj
+      arguments: "-o publish/AwdwareApi --no-build --no-restore"
+      zipAfterPublish: false
+      modifyOutputPath: false
+      configuration: Release
 
-- task: DotNetCoreCLI@2
-  displayName: "\U0001F446 build package to publish awdware api"
-  inputs:
-    command: publish
-    publishWebProjects: false
-    projects: Src/Awdware.Host/Awdware.Host/Awdware.Host.csproj
-    arguments: '-o publish/AwdwareApi --no-build --no-restore'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    configuration: Release
+  - task: DotNetCoreCLI@2
+    displayName: "dotnet test"
+    inputs:
+      command: custom
+      custom: vstest
+      arguments: bin/Debug/**/Awdware*Test.dll
+    continueOnError: true
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet test'
-  inputs:
-    command: custom
-    custom: vstest
-    arguments: bin/Debug/**/Awdware*Test.dll
-  continueOnError: true
+  # - task: DotNetCoreCLI@2
+  #   displayName: 'dotnet test with code coverage'
+  #   inputs:
+  #     command: custom
+  #     custom: vstest
+  #     arguments: ../../bin/Debug/**/*Tests.dll /Enablecodecoverage /Settings:Awdware.Core.Test.UnitTests/CodeCoverage.runsettings
+  #     # arguments: '/Enablecodecoverage /Settings:CodeCoverage.runsettings /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+  #   continueOnError: true
 
+  # - task: reportgenerator@4
+  #   displayName: 'Convert coverage.cobertura.xml to htmlInline'
+  #   inputs:
+  #     reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
+  #     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
+  #     tag: '$(Build.BuildNumber)'
+  #     reporttypes: 'htmlInline'
+  #   continueOnError: true
 
-# - task: DotNetCoreCLI@2
-#   displayName: 'dotnet test with code coverage'
-#   inputs:
-#     command: custom
-#     custom: vstest
-#     arguments: ../../bin/Debug/**/*Tests.dll /Enablecodecoverage /Settings:Awdware.Core.Test.UnitTests/CodeCoverage.runsettings
-#     # arguments: '/Enablecodecoverage /Settings:CodeCoverage.runsettings /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
-#   continueOnError: true
+  # - task: reportgenerator@4
+  #   displayName: 'Convert coverage.cobertura.xml to sonarQube'
+  #   inputs:
+  #     reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
+  #     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports\sonar'
+  #     tag: '$(Build.BuildNumber)'
+  #     reporttypes: 'sonarQube'
+  #   continueOnError: true
 
-# - task: reportgenerator@4
-#   displayName: 'Convert coverage.cobertura.xml to htmlInline'
-#   inputs:
-#     reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
-#     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
-#     tag: '$(Build.BuildNumber)'
-#     reporttypes: 'htmlInline'
-#   continueOnError: true
+  # - task: PublishCodeCoverageResults@1
+  #   displayName: 'Publish code coverage from $(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
+  #   inputs:
+  #     codeCoverageTool: Cobertura
+  #     summaryFileLocation: '$(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
+  #     reportDirectory: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
+  #   continueOnError: true
 
-# - task: reportgenerator@4
-#   displayName: 'Convert coverage.cobertura.xml to sonarQube'
-#   inputs:
-#     reports: '$(Build.SourcesDirectory)\TestResults\Coverage\coverage.cobertura.xml'
-#     targetdir: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports\sonar'
-#     tag: '$(Build.BuildNumber)'
-#     reporttypes: 'sonarQube'
-#   continueOnError: true
+  - task: PublishBuildArtifacts@1
+    displayName: "\U0001F446 Publish Awdware Api"
+    inputs:
+      PathtoPublish: publish/AwdwareApi
+      ArtifactName: awdwareApi
 
-# - task: PublishCodeCoverageResults@1
-#   displayName: 'Publish code coverage from $(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
-#   inputs:
-#     codeCoverageTool: Cobertura
-#     summaryFileLocation: '$(Build.SourcesDirectory)\TestResults\Coverage\**\coverage.cobertura.xml'
-#     reportDirectory: '$(Build.SourcesDirectory)\TestResults\Coverage\Reports'
-#   continueOnError: true
-  
-- task: PublishBuildArtifacts@1
-  displayName: "\U0001F446 Publish Awdware Api"
-  inputs:
-    PathtoPublish: publish/AwdwareApi
-    ArtifactName: awdwareApi
+  - task: NuGetCommand@2
+    displayName: "Build nuget package"
+    inputs:
+      command: "pack"
+      packagesToPack: "**/Awdware.Led/Awdware.Led.Facade.csproj"
+      versioningScheme: byBuildNumber
+      buildProperties: version=$(major).$(minor).$(patch);
+    condition: and(succeeded(), eq(variables['UPDATE_LED_CLIENT'], 'true'))
 
-- task: NuGetCommand@2
-  displayName: "Build nuget package"
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/Awdware.Led/Awdware.Led.Facade.csproj'
-    versioningScheme: byBuildNumber
-    buildProperties: version=$(major).$(minor).$(patch);
-  condition: and(succeeded(), eq(variables['UPDATE_LED_CLIENT'], 'true'))
+  - task: NuGetCommand@2
+    displayName: "Publish nuget package"
+    inputs:
+      command: "push"
+      packagesToPush: "$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg"
+      nuGetFeedType: "external"
+      publishFeedCredentials: "loaderb0t nuget"
+    condition: and(succeeded(), eq(variables['UPDATE_LED_CLIENT'], 'true'))
 
-- task: NuGetCommand@2
-  displayName: "Publish nuget package"
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'loaderb0t nuget'
-  condition: and(succeeded(), eq(variables['UPDATE_LED_CLIENT'], 'true'))
+  - task: SonarCloudAnalyze@1
+    displayName: "Run Code Analysis - API"
+    continueOnError: true
 
-- task: SonarCloudAnalyze@1
-  displayName: "Run Code Analysis - API"
-  continueOnError: true
+  - task: SonarCloudPublish@1
+    displayName: "Publish Quality Gate Result - API"
+    continueOnError: true
+    inputs:
+      pollingTimeoutSec: "300"
 
-- task: SonarCloudPublish@1
-  displayName: "Publish Quality Gate Result - API"
-  continueOnError: true
-  inputs:
-    pollingTimeoutSec: '300'
+  - task: SonarCloudPrepare@1
+    continueOnError: true
+    displayName: '\U0001F50E Prepare analysis on SonarCloud - LED'
+    inputs:
+      SonarCloud: "sonarcloud"
+      organization: "awdware"
+      scannerMode: "MSBuild"
+      projectKey: "awdware:ledcontroller"
+      extraProperties: |
+        sonar.exclusions=**/bin/**,**/obj/**,**/WebApi/**
+        sonar.test.exclusions=**/bin/**,**/obj/**
+      #  sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
 
-- task: SonarCloudPrepare@1
-  continueOnError: true
-  displayName: '\U0001F50E Prepare analysis on SonarCloud - LED'
-  inputs:
-    SonarCloud: 'sonarcloud'
-    organization: 'awdware'
-    scannerMode: 'MSBuild'
-    projectKey: 'awdware:ledcontroller'
-    extraProperties: |
-     sonar.exclusions=**/bin/**,**/obj/**,**/WebApi/**
-     sonar.test.exclusions=**/bin/**,**/obj/**
-    #  sonar.coverageReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/Reports/sonar/SonarQube.xml
+  - task: DotNetCoreCLI@2
+    displayName: "\U0001F6E0 build led controller"
+    inputs:
+      projects: Src/Awdware.Led/LedController/LedController/LedController.csproj
+      configuration: Release
 
+  - task: DotNetCoreCLI@2
+    displayName: "\U0001F446 build package to publish led controller"
+    inputs:
+      command: publish
+      publishWebProjects: false
+      projects: Src/Awdware.Led/LedController/LedController/LedController.csproj
+      arguments: "-o publish/LedController /p:PublishSingleFile=true -r win-x64"
+      zipAfterPublish: false
+      modifyOutputPath: false
+      configuration: Release
 
-- task: DotNetCoreCLI@2
-  displayName: "\U0001F6E0 build led controller"
-  inputs:
-    projects: Src/Awdware.Led/LedController/LedController/LedController.csproj
-    configuration: Release
+  - task: PublishBuildArtifacts@1
+    displayName: "\U0001F446 Publish led Controller"
+    inputs:
+      PathtoPublish: publish/LedController
+      ArtifactName: ledController
 
-- task: DotNetCoreCLI@2
-  displayName: "\U0001F446 build package to publish led controller"
-  inputs:
-    command: publish
-    publishWebProjects: false
-    projects: Src/Awdware.Led/LedController/LedController/LedController.csproj
-    arguments: '-o publish/LedController /p:PublishSingleFile=true -r win-x64'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    configuration: Release
+  - task: SonarCloudAnalyze@1
+    displayName: "Run Code Analysis - LED"
+    continueOnError: true
 
-- task: PublishBuildArtifacts@1
-  displayName: "\U0001F446 Publish led Controller"
-  inputs:
-    PathtoPublish: publish/LedController
-    ArtifactName: ledController
-
-- task: SonarCloudAnalyze@1
-  displayName: 'Run Code Analysis - LED'
-  continueOnError: true
-
-- task: SonarCloudPublish@1
-  displayName: 'Publish Quality Gate Result - LED'
-  continueOnError: true
-  inputs:
-    pollingTimeoutSec: '300'
+  - task: SonarCloudPublish@1
+    displayName: "Publish Quality Gate Result - LED"
+    continueOnError: true
+    inputs:
+      pollingTimeoutSec: "300"
