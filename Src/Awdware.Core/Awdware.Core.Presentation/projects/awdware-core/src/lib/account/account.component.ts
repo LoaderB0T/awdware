@@ -27,6 +27,6 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._facadeService.setActiveMenuItem('account');
+    this._facadeService.setActiveMenuItem('login');
   }
 }
