@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>.net5.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <ProjectGuid>{6a221b4c-ec66-41d7-93b5-62bcbe7338a9}</ProjectGuid>
     <StartupObject>LedController.Program</StartupObject>
     <Company>awdware</Company>
