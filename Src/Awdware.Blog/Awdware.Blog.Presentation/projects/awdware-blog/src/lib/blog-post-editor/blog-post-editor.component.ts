@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { LenID } from '../../.gah/dependencies/shared/public-api';
+import { LenID } from '@awdware/shared';
 import { BlogPostDetailsDto } from '../models/application-facade';
 import { BlogService } from '../services/blog.service';
 
