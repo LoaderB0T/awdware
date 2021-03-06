@@ -26,11 +26,7 @@ export const blogRoutes: Routes = [
 
 @NgModule({
   declarations: [AwdwareBlogComponent, BlogPostShellComponent],
-  imports: [
-    CommonModule,
-    BlogPostModule,
-    RouterModule.forChild(blogRoutes)
-  ],
+  imports: [CommonModule, BlogPostModule, RouterModule.forChild(blogRoutes)],
   exports: []
 })
 export class AwdwareBlogModule {

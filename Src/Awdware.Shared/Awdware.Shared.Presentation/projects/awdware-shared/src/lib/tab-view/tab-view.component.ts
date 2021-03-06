@@ -24,16 +24,13 @@ export class TabViewComponent implements OnInit {
     this._activatedRoute.url.subscribe(x => {
       this.content.selectedTabId = this._activatedRoute.snapshot.firstChild.url[0].path;
     });
-
   }
 
   public get cssVariablesStyle() {
-    return this._sanitizer.bypassSecurityTrustStyle(
-      `--tabCount: ${this.content.tabs.length};`);
+    return this._sanitizer.bypassSecurityTrustStyle(`--tabCount: ${this.content.tabs.length};`);
   }
 
   public selectTab(tab: TabViewTab) {
     tab.clicked();
   }
-
 }

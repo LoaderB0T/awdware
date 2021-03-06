@@ -7,7 +7,6 @@ import { RegisterRequestDto, RegisterResult } from '../../models/application-fac
 import { AccountService } from '../services/account.service';
 import { RoutingService } from '../../services/routing.service';
 
-
 @Component({
   selector: 'awd-register',
   templateUrl: './register.component.html',
@@ -34,9 +33,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.registerModel = new RegisterRequestDto();
   }
 
-  public ngOnInit() {
-
-  }
+  public ngOnInit() {}
 
   public onSubmit() {
     this.register();
@@ -81,44 +78,51 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
   }
 
-
   public get validationDefinitionEmail(): ValidationDefinition[] {
-    return [{
-      type: ValidationErrorType.PATTERN_MISMATCH,
-      translationKey: 'account.register.form.email.validation.invalidmail'
-    }];
+    return [
+      {
+        type: ValidationErrorType.PATTERN_MISMATCH,
+        translationKey: 'account.register.form.email.validation.invalidmail'
+      }
+    ];
   }
 
   public get validationDefinitionUsername(): ValidationDefinition[] {
-    return [{
-      type: ValidationErrorType.TOO_SHORT,
-      translationKey: 'account.register.form.username.validation.tooshort'
-    },
-    {
-      type: ValidationErrorType.TOO_LONG,
-      translationKey: 'account.register.form.username.validation.toolong'
-    },
-    {
-      type: ValidationErrorType.PATTERN_MISMATCH,
-      translationKey: 'account.register.form.username.validation.pattern'
-    }];
+    return [
+      {
+        type: ValidationErrorType.TOO_SHORT,
+        translationKey: 'account.register.form.username.validation.tooshort'
+      },
+      {
+        type: ValidationErrorType.TOO_LONG,
+        translationKey: 'account.register.form.username.validation.toolong'
+      },
+      {
+        type: ValidationErrorType.PATTERN_MISMATCH,
+        translationKey: 'account.register.form.username.validation.pattern'
+      }
+    ];
   }
 
   public get validationDefinitionPassword(): ValidationDefinition[] {
-    return [{
-      type: ValidationErrorType.TOO_SHORT,
-      translationKey: 'account.register.form.password.validation.tooshort'
-    },
-    {
-      type: ValidationErrorType.PATTERN_MISMATCH,
-      translationKey: 'account.register.form.password.validation.pattern'
-    }];
+    return [
+      {
+        type: ValidationErrorType.TOO_SHORT,
+        translationKey: 'account.register.form.password.validation.tooshort'
+      },
+      {
+        type: ValidationErrorType.PATTERN_MISMATCH,
+        translationKey: 'account.register.form.password.validation.pattern'
+      }
+    ];
   }
 
   public get validationDefinitionPassword2(): ValidationDefinition[] {
-    return [{
-      type: ValidationErrorType.EQUALITY_MISMATCH,
-      translationKey: 'account.register.form.password2.validation.equality'
-    }];
+    return [
+      {
+        type: ValidationErrorType.EQUALITY_MISMATCH,
+        translationKey: 'account.register.form.password2.validation.equality'
+      }
+    ];
   }
 }

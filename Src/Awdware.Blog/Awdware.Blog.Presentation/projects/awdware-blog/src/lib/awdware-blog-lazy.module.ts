@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { RoutingService } from '@awdware/core';
 import { FacadeService, AwdwareConfig, MenuItem } from '@awdware/shared';
 
-
 export const routes: Routes = [
   {
     path: 'blog',
@@ -19,9 +18,14 @@ export class AwdwareLazyBlogModule {
     console.log('constructor: AwdwareBlogLazyModule');
     const config = new AwdwareConfig();
     config.menuItems = [
-      new MenuItem('blog', 'Blog', 'code', () => routingService.navigate('blog'), () => true),
+      new MenuItem(
+        'blog',
+        'Blog',
+        'code',
+        () => routingService.navigate('blog'),
+        () => true
+      )
     ];
     facadeService.addOrUpdateConfiguration('awdware-blog', config);
   }
-
 }

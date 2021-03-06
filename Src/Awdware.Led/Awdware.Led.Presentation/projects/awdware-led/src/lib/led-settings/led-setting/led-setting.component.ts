@@ -11,7 +11,6 @@ import { LedSettingsDto } from '../../models/application-facade';
   styleUrls: ['./led-setting.component.scss']
 })
 export class LedSettingComponent implements OnInit {
-
   @Input() settings: LedSettingsDto;
   @Output() closeDialog = new EventEmitter();
   @Output() deleteSetting = new EventEmitter<string>();
@@ -21,14 +20,12 @@ export class LedSettingComponent implements OnInit {
   public configSaved: boolean = true;
   public _downloadService: DownloadService;
 
-
   constructor(ledService: LedService, downloadService: DownloadService) {
     this._ledService = ledService;
     this._downloadService = downloadService;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public saveCurrentSettings() {
     this._ledService.updateSetting(this.settings).subscribe(() => {

@@ -1,24 +1,24 @@
-input[type="range"] {
+input[type='range'] {
   -webkit-appearance: none;
   width: 100%;
   margin: 3.5px 0;
   background: transparent;
 }
 
-input[type="range"]::-webkit-slider-runnable-track {
+input[type='range']::-webkit-slider-runnable-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
   background: var(--slider-background);
 }
-input[type="range"]::-moz-range-track {
+input[type='range']::-moz-range-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
   background: var(--slider-background);
 }
 
-input[type="range"]::-webkit-slider-thumb {
+input[type='range']::-webkit-slider-thumb {
   background: var(--slider-color);
   height: 11px;
   width: 32px;
@@ -27,7 +27,7 @@ input[type="range"]::-webkit-slider-thumb {
   margin-top: -3.5px;
 }
 
-input[type="range"]::-moz-range-thumb {
+input[type='range']::-moz-range-thumb {
   background: var(--slider-color);
   height: 11px;
   width: 32px;

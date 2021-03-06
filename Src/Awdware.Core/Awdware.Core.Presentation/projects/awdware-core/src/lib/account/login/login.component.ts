@@ -27,18 +27,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   @ViewChild('login', { static: true })
   private readonly _formElement: NgForm;
 
-  constructor(
-    accountService: AccountService,
-    routingService: RoutingService
-  ) {
+  constructor(accountService: AccountService, routingService: RoutingService) {
     this._accountService = accountService;
     this._routingService = routingService;
     this.loginModel = new LoginRequestDto();
   }
 
-  public ngOnInit(): void {
-
-  }
+  public ngOnInit(): void {}
 
   public onSubmit(): void {
     this.login();
@@ -82,5 +77,4 @@ export class LoginComponent implements OnInit, OnDestroy {
       return !this._formElement.valid;
     }
   }
-
 }

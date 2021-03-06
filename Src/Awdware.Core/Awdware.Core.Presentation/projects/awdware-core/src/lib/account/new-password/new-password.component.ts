@@ -7,7 +7,6 @@ import { InputType, ValidationDefinition, ValidationErrorType } from '@awdware/s
 import { AccountService } from '../services/account.service';
 import { ResetPasswordDto } from '../../models/application-facade';
 
-
 @Component({
   selector: 'awd-new-password',
   templateUrl: './new-password.component.html',
@@ -30,37 +29,36 @@ export class NewPasswordComponent implements OnInit, OnDestroy {
     this._activatedRoute = activatedRoute;
   }
 
-  ngOnInit() {
+  ngOnInit() {}
 
-  }
-
-  ngOnDestroy() {
-
-  }
+  ngOnDestroy() {}
 
   public onSubmit() {
     const a = this._activatedRoute.snapshot.paramMap.get('token');
     this.resetPw.token = a;
-    return this._accountService.resetPassword(this.resetPw).subscribe(x => {
-    });
+    return this._accountService.resetPassword(this.resetPw).subscribe(x => {});
   }
 
   public get validationDefinitionPassword(): ValidationDefinition[] {
-    return [{
-      type: ValidationErrorType.TOO_SHORT,
-      translationKey: 'account.register.form.password.validation.pattern'
-    },
-    {
-      type: ValidationErrorType.PATTERN_MISMATCH,
-      translationKey: 'account.register.form.password.validation.pattern'
-    }];
+    return [
+      {
+        type: ValidationErrorType.TOO_SHORT,
+        translationKey: 'account.register.form.password.validation.pattern'
+      },
+      {
+        type: ValidationErrorType.PATTERN_MISMATCH,
+        translationKey: 'account.register.form.password.validation.pattern'
+      }
+    ];
   }
 
   public get validationDefinitionPassword2(): ValidationDefinition[] {
-    return [{
-      type: ValidationErrorType.EQUALITY_MISMATCH,
-      translationKey: 'account.register.form.password2.validation.equality'
-    }];
+    return [
+      {
+        type: ValidationErrorType.EQUALITY_MISMATCH,
+        translationKey: 'account.register.form.password2.validation.equality'
+      }
+    ];
   }
 
   public get resetDisabled(): boolean {
@@ -72,5 +70,4 @@ export class NewPasswordComponent implements OnInit, OnDestroy {
       return !this._formElement.valid;
     }
   }
-
 }

@@ -12,9 +12,7 @@
       "dependencies": [
         {
           "path": "../../Awdware.Shared/Awdware.Shared.Presentation/gah-module.json",
-          "names": [
-            "shared"
-          ]
+          "names": ["shared"]
         }
       ],
       "config": {

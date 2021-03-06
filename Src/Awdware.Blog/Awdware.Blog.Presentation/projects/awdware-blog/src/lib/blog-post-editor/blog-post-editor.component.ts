@@ -13,7 +13,7 @@ import { BlogService } from '../services/blog.service';
 export class BlogPostEditorComponent implements OnInit {
   private readonly _activatedRoute: ActivatedRoute;
   editorOptions = { theme: 'vs-dark', language: 'html' };
-  private readonly _postCache: { locale: string, post: BlogPostDetailsDto }[];
+  private readonly _postCache: { locale: string; post: BlogPostDetailsDto }[];
   private readonly _blogService: BlogService;
   private _currentLocale: string = 'de';
   public post: BlogPostDetailsDto;
@@ -21,7 +21,7 @@ export class BlogPostEditorComponent implements OnInit {
   constructor(activatedRoute: ActivatedRoute, blogService: BlogService) {
     this._activatedRoute = activatedRoute;
     this._blogService = blogService;
-    this._postCache = new Array<{ locale: string, post: BlogPostDetailsDto }>();
+    this._postCache = new Array<{ locale: string; post: BlogPostDetailsDto }>();
   }
 
   ngOnInit(): void {

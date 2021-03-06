@@ -1,5 +1,5 @@
 export class ColorType {
-  private static colorRegex = new RegExp('rgba?\\((\\d{1,3}), (\\d{1,3}), (\\d{1,3})(, \\d?\.?\\d)?\\)');
+  private static colorRegex = new RegExp('rgba?\\((\\d{1,3}), (\\d{1,3}), (\\d{1,3})(, \\d?.?\\d)?\\)');
   public r: number;
   public g: number;
   public b: number;
@@ -11,11 +11,7 @@ export class ColorType {
   }
 
   public static transition(c1: ColorType, c2: ColorType, prog: number) {
-    return new ColorType(
-      c1.r - (c1.r - c2.r) * prog,
-      c1.g - (c1.g - c2.g) * prog,
-      c1.b - (c1.b - c2.b) * prog
-    );
+    return new ColorType(c1.r - (c1.r - c2.r) * prog, c1.g - (c1.g - c2.g) * prog, c1.b - (c1.b - c2.b) * prog);
   }
 
   public static fromCssPropertyString(cssProp: string) {
@@ -45,5 +41,4 @@ export class ColorType {
   public toCssProperyString() {
     return `rgb(${this.r}, ${this.g}, ${this.b})`;
   }
-
 }

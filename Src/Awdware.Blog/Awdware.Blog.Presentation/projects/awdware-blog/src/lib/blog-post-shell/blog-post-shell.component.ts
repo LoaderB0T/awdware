@@ -15,8 +15,7 @@ export class BlogPostShellComponent implements OnInit {
     this._activatedRoute = activatedRoute;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public get post(): BlogPostDetailsDto {
     return this._activatedRoute.snapshot.data['post'];

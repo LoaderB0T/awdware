@@ -8,7 +8,7 @@ export const routes: Routes = [
   {
     path: 'led',
     loadChildren: () => import('./led.module').then(m => m.LedModule)
-  },
+  }
 ];
 
 @NgModule({
@@ -19,7 +19,13 @@ export class LedLazyModule {
     console.log('constructor: LedLazyModule');
     const config = new AwdwareConfig();
     config.menuItems = [
-      new MenuItem('led', 'LED', 'lightbulb', () => routingService.navigate('led'), () => true),
+      new MenuItem(
+        'led',
+        'LED',
+        'lightbulb',
+        () => routingService.navigate('led'),
+        () => true
+      )
     ];
     facadeService.addOrUpdateConfiguration('awdware-led', config);
   }

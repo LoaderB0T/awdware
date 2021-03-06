@@ -31,6 +31,4 @@ export class AwdwareBlogComponent implements OnInit {
       this._posts.next(s);
     });
   }
-
-
 }

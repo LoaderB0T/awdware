@@ -21,15 +21,15 @@ export class MeComponent implements OnInit {
     userInfoService: UserDetailsService,
     accountService: AccountService,
     themeService: ThemeService,
-    translationService: TranslationService) {
+    translationService: TranslationService
+  ) {
     this._userInfoService = userInfoService;
     this._accountService = accountService;
     this._themeService = themeService;
     this._translationService = translationService;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public get userInfo(): UserDetails {
     return this._userInfoService.userInfo;
@@ -51,5 +51,4 @@ export class MeComponent implements OnInit {
   public english() {
     this._translationService.setLanguage('en_US');
   }
-
 }

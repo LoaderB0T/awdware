@@ -17,8 +17,7 @@ export class MenuComponent implements OnInit {
 
   constructor(facadeService: FacadeService) {
     this._facadeService = facadeService;
-    this._menuItems = [
-    ];
+    this._menuItems = [];
   }
 
   ngOnInit() {
@@ -48,8 +47,6 @@ export class MenuComponent implements OnInit {
     return this._menuItems.filter(x => x.enabled());
   }
 
-
-
   public toggleMenu() {
     this.opened = !this.opened;
   }
@@ -60,5 +57,4 @@ export class MenuComponent implements OnInit {
     }
     item.action();
   }
-
 }

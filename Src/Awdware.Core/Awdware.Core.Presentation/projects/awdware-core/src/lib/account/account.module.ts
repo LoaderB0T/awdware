@@ -11,7 +11,6 @@ import { RegisterComponent } from './register/register.component';
 import { VerifyMailComponent } from './verify-mail/verify-mail.component';
 import { AwdwareCoreSharedModule } from '@awdware/shared';
 
-
 @NgModule({
   declarations: [
     AccountComponent,
@@ -21,11 +20,6 @@ import { AwdwareCoreSharedModule } from '@awdware/shared';
     RegisterComponent,
     VerifyMailComponent
   ],
-  imports: [
-    CommonModule,
-    AccountRoutingModule,
-    AwdwareCoreSharedModule,
-    FormsModule
-  ]
+  imports: [CommonModule, AccountRoutingModule, AwdwareCoreSharedModule, FormsModule]
 })
-export class AccountModule { }
+export class AccountModule {}

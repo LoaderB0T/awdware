@@ -14,7 +14,7 @@ export class WebApiService {
   }
 
   public init(apiUrl: string) {
-    this.baseUrl = `${apiUrl  }/api/`;
+    this.baseUrl = `${apiUrl}/api/`;
   }
 
   private checkInit() {
@@ -29,16 +29,12 @@ export class WebApiService {
     this.checkInit();
     const apiUrl = this.baseUrl + method;
     if (parseResponse) {
-      return this.httpClient.get<ResultT>(apiUrl)
-        .pipe(
-          catchError(this.handleError<ResultT>())
-        );
+      return this.httpClient.get<ResultT>(apiUrl).pipe(catchError(this.handleError<ResultT>()));
     } else {
-      return this.httpClient.get(apiUrl, { responseType: 'text' })
-        .pipe(
-          catchError(this.handleError()),
-          map(x => x as string)
-        );
+      return this.httpClient.get(apiUrl, { responseType: 'text' }).pipe(
+        catchError(this.handleError()),
+        map(x => x as string)
+      );
     }
   }
 
@@ -48,16 +44,12 @@ export class WebApiService {
     this.checkInit();
     const apiUrl = this.baseUrl + method;
     if (parseResponse) {
-      return this.httpClient.post<ResultT>(apiUrl, body)
-        .pipe(
-          catchError(this.handleError<ResultT>())
-        );
+      return this.httpClient.post<ResultT>(apiUrl, body).pipe(catchError(this.handleError<ResultT>()));
     } else {
-      return this.httpClient.post(apiUrl, body, { responseType: 'text' })
-        .pipe(
-          catchError(this.handleError()),
-          map(x => x as string)
-        );
+      return this.httpClient.post(apiUrl, body, { responseType: 'text' }).pipe(
+        catchError(this.handleError()),
+        map(x => x as string)
+      );
     }
   }
 
@@ -67,16 +59,12 @@ export class WebApiService {
     this.checkInit();
     const apiUrl = this.baseUrl + method;
     if (parseResponse) {
-      return this.httpClient.put<ResultT>(apiUrl, body)
-        .pipe(
-          catchError(this.handleError<ResultT>())
-        );
+      return this.httpClient.put<ResultT>(apiUrl, body).pipe(catchError(this.handleError<ResultT>()));
     } else {
-      return this.httpClient.put(apiUrl, body, { responseType: 'text' })
-        .pipe(
-          catchError(this.handleError()),
-          map(x => x as string)
-        );
+      return this.httpClient.put(apiUrl, body, { responseType: 'text' }).pipe(
+        catchError(this.handleError()),
+        map(x => x as string)
+      );
     }
   }
 
@@ -86,16 +74,12 @@ export class WebApiService {
     this.checkInit();
     const apiUrl = this.baseUrl + method;
     if (parseResponse) {
-      return this.httpClient.delete<ResultT>(apiUrl)
-        .pipe(
-          catchError(this.handleError<ResultT>())
-        );
+      return this.httpClient.delete<ResultT>(apiUrl).pipe(catchError(this.handleError<ResultT>()));
     } else {
-      return this.httpClient.delete(apiUrl, { responseType: 'text' })
-        .pipe(
-          catchError(this.handleError()),
-          map(x => x as string)
-        );
+      return this.httpClient.delete(apiUrl, { responseType: 'text' }).pipe(
+        catchError(this.handleError()),
+        map(x => x as string)
+      );
     }
   }
 

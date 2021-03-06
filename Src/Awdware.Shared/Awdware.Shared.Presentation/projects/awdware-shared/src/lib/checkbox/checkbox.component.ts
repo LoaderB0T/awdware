@@ -12,9 +12,7 @@ export enum CheckedState {
   selector: 'awd-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
-  providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: CheckboxComponent, multi: true },
-  ],
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: CheckboxComponent, multi: true }]
 })
 export class CheckboxComponent implements OnInit, ControlValueAccessor, OnDestroy {
   @Input() public labelText: string;

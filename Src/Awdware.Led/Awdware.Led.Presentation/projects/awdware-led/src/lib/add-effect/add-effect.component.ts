@@ -24,8 +24,7 @@ export class AddEffectComponent extends BaseDialog implements OnInit {
 
   @Output() effectAdded = new EventEmitter<LedEffect>();
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public confirmAddEffect() {
     if (!this.canConfirmAddEffect) {

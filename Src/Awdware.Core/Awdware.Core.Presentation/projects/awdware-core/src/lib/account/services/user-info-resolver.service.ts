@@ -18,7 +18,6 @@ export class UserDetailsResolverService implements Resolve<UserDetailsDto> {
   private readonly _sessionService: SessionService;
   private readonly _userInfoService: UserDetailsService;
 
-
   constructor(
     accountService: AccountService,
     sessionStoreService: SessionStoreService,
@@ -37,8 +36,8 @@ export class UserDetailsResolverService implements Resolve<UserDetailsDto> {
         if (!tokenValid) {
           return of(null);
         }
-        return this._accountService.loadUserDetails()
+        return this._accountService.loadUserDetails();
       })
-    )
+    );
   }
 }

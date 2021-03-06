@@ -19,10 +19,9 @@ export class LedEffectPropertyComponent implements OnInit {
   @Output() valueChanged = new EventEmitter<any>();
   effectType = LedEffectPropertyKind;
 
-  constructor(public theme: ThemeService) { }
+  constructor(public theme: ThemeService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public madeChanges(evt: any) {
     this.valueChanged.next(evt);

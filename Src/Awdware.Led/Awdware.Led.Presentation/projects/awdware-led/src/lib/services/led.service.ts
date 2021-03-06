@@ -19,17 +19,14 @@ export class LedService {
   }
 
   public getEffetcs(): Observable<void> {
-    return this._apiService.get<Array<LedConfigurationDto>>('led/effects')
-      .pipe(
-        tap(dtos => {
-          dtos.sort((a, b) => a.ordinal - b.ordinal);
-          const models = dtos.map(
-            dto => LedEffect.fromDto(dto)
-          );
-          this.ledEffects = models;
-        }),
-        map(() => null)
-      );
+    return this._apiService.get<Array<LedConfigurationDto>>('led/effects').pipe(
+      tap(dtos => {
+        dtos.sort((a, b) => a.ordinal - b.ordinal);
+        const models = dtos.map(dto => LedEffect.fromDto(dto));
+        this.ledEffects = models;
+      }),
+      map(() => null)
+    );
   }
 
   public deleteEffect(id: string) {

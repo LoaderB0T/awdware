@@ -9,9 +9,7 @@
       "dependencies": [
         {
           "path": "../../../Awdware.Core/Awdware.Core.Presentation/gah-module.json",
-          "names": [
-            "core"
-          ]
+          "names": ["core"]
         }
       ]
     }

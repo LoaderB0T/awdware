@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpInterceptor,
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpResponse,
-  HttpErrorResponse
-} from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -17,8 +10,7 @@ import { RoutingService } from './routing.service';
   providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
-
-  constructor(private readonly sessionStoreService: SessionStoreService, private readonly routingService: RoutingService) { }
+  constructor(private readonly sessionStoreService: SessionStoreService, private readonly routingService: RoutingService) {}
 
   private logResponse(ev: HttpEvent<any>) {
     if (ev instanceof HttpResponse) {
@@ -34,13 +26,15 @@ export class HttpInterceptorService implements HttpInterceptor {
     } else {
       request = req.clone({ withCredentials: true });
     }
-    return next.handle(request).pipe(tap(
-      (ev: HttpEvent<any>) => {
-        this.logResponse(ev);
-      },
-      (err: HttpErrorResponse) => {
-        this.handleResponse(err);
-      })
+    return next.handle(request).pipe(
+      tap(
+        (ev: HttpEvent<any>) => {
+          this.logResponse(ev);
+        },
+        (err: HttpErrorResponse) => {
+          this.handleResponse(err);
+        }
+      )
     );
   }
 

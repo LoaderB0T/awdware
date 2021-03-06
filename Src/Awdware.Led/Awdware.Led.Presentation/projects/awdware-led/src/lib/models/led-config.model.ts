@@ -3,7 +3,13 @@ import { LedEffectNumberProperty } from './led-effect-number-property.model';
 import { LedEffectBoolProperty } from './led-effect-bool-property.model';
 import { LedEffectColorProperty } from './led-effect-color-property.model';
 import { LedEffectStringProperty } from './led-effect-string-property.model';
-import { LedConfigurationDto, LedEffectKind, LedEffectPropertyKind, LedEffectDto, LedEffectPropertyDto } from './application-facade';
+import {
+  LedConfigurationDto,
+  LedEffectKind,
+  LedEffectPropertyKind,
+  LedEffectDto,
+  LedEffectPropertyDto
+} from './application-facade';
 
 export class LedEffect {
   public name: string;
@@ -33,8 +39,11 @@ export class LedEffect {
             return new LedEffectColorProperty(propDto.id, propDto.name, propDto.value);
           case LedEffectPropertyKind.NUMBER:
             return new LedEffectNumberProperty(
-              propDto.id, propDto.name, Number.parseInt(propDto.value, 10),
-              propDto.minValue, propDto.maxValue
+              propDto.id,
+              propDto.name,
+              Number.parseInt(propDto.value, 10),
+              propDto.minValue,
+              propDto.maxValue
             );
           case LedEffectPropertyKind.STRING:
             return new LedEffectStringProperty(propDto.id, propDto.name, propDto.value);
@@ -64,7 +73,7 @@ export class LedEffect {
       propDto.id = prop.id;
       propDto.name = prop.name;
       propDto.effectType = prop.effectType;
-      if (typeof (prop.value) !== 'string') {
+      if (typeof prop.value !== 'string') {
         propDto.value = prop.value.toString();
       } else {
         propDto.value = prop.value;

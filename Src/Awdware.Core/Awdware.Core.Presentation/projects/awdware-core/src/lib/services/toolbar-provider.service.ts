@@ -8,11 +8,10 @@ import { ToolbarInvalidatedEvent } from '../events/toolbar-invalidated.event';
   providedIn: 'root'
 })
 export class ToolbarProviderService {
-
   private readonly possibleToolbarItems: PossibleToolbarItem[] = new Array<PossibleToolbarItem>();
   public activeItem: string;
 
-  constructor(private readonly eventService: EventService) { }
+  constructor(private readonly eventService: EventService) {}
 
   public addItems(items: PossibleToolbarItem[]) {
     items.forEach(x => this.addItem(x));

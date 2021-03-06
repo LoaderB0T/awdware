@@ -12,8 +12,6 @@ import { LedSettingsComponent } from './led-settings/led-settings.component';
 import { LedSettingComponent } from './led-settings/led-setting/led-setting.component';
 import { AddEffectComponent } from './add-effect/add-effect.component';
 
-
-
 @NgModule({
   declarations: [
     LedComponent,
@@ -23,16 +21,8 @@ import { AddEffectComponent } from './add-effect/add-effect.component';
     LedSettingComponent,
     AddEffectComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    AwdwareCoreSharedModule,
-    LedRoutingModule
-  ],
-  entryComponents: [
-    LedSettingsComponent,
-    AddEffectComponent
-  ]
+  imports: [CommonModule, FormsModule, AwdwareCoreSharedModule, LedRoutingModule],
+  entryComponents: [LedSettingsComponent, AddEffectComponent]
 })
 export class LedModule {
   constructor() {

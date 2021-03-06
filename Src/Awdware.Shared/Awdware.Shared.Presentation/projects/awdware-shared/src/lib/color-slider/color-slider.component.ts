@@ -7,9 +7,7 @@ import { ColorType } from '../models/color-type.model';
   selector: 'awd-color-slider',
   templateUrl: './color-slider.component.html',
   styleUrls: ['./color-slider.component.scss'],
-  providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: ColorSliderComponent, multi: true },
-  ]
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: ColorSliderComponent, multi: true }]
 })
 export class ColorSliderComponent implements OnInit, ControlValueAccessor {
   @Input() public inputTabIndex: number;
@@ -50,8 +48,7 @@ export class ColorSliderComponent implements OnInit, ControlValueAccessor {
     return this.rgbColor.toCssProperyString();
   }
 
-  constructor() {
-  }
+  constructor() {}
 
   writeValue(value: any) {
     if (value !== this.innerValue) {
@@ -84,7 +81,6 @@ export class ColorSliderComponent implements OnInit, ControlValueAccessor {
     this.isFocused = true;
   }
 
-
   registerOnChange(fn: any) {
     this.onChangeCallback = fn;
   }
@@ -97,7 +93,5 @@ export class ColorSliderComponent implements OnInit, ControlValueAccessor {
     this.isDisabled = isDisabled;
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

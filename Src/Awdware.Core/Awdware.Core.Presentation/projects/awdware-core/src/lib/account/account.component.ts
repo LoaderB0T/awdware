@@ -15,10 +15,7 @@ export class AccountComponent implements OnInit {
 
   public accountTabContent: TabViewContent;
 
-  constructor(
-    routingService: RoutingService,
-    toolbarProviderService: ToolbarProviderService
-  ) {
+  constructor(routingService: RoutingService, toolbarProviderService: ToolbarProviderService) {
     this._routingService = routingService;
     this._toolbarProviderService = toolbarProviderService;
 
@@ -26,7 +23,7 @@ export class AccountComponent implements OnInit {
     this.accountTabContent.tabs = [
       { id: 'login', text: 'account.login.heading', clicked: () => this._routingService.navigateToAccountLogin() },
       { id: 'register', text: 'account.register.heading', clicked: () => this._routingService.navigateToAccountRegister() },
-      { id: 'help', text: 'account.help.heading', clicked: () => this._routingService.navigateToAccountHelp() },
+      { id: 'help', text: 'account.help.heading', clicked: () => this._routingService.navigateToAccountHelp() }
     ];
   }
 

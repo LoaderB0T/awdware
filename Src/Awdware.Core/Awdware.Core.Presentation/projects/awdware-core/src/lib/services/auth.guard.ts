@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
   private readonly _sessionService: SessionService;
   private readonly _routingService: RoutingService;
 
@@ -18,10 +17,7 @@ export class AuthGuard implements CanActivate {
     this._routingService = routingService;
   }
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return this._sessionService.hasValidToken().pipe(
       map(res => {
         if (res) {

@@ -11,7 +11,6 @@ import { LedSettingsDto } from '../models/application-facade';
   styleUrls: ['./led-settings.component.scss']
 })
 export class LedSettingsComponent extends BaseDialog implements OnInit {
-
   @Input() public settingsList: LedSettingsDto[];
 
   public selectedOptionName: string;

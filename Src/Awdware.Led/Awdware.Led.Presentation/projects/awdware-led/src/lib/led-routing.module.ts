@@ -8,11 +8,11 @@ export const routes: Routes = [
     path: '',
     component: LedComponent,
     canActivate: [AuthGuard]
-  },
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LedRoutingModule { }
+export class LedRoutingModule {}

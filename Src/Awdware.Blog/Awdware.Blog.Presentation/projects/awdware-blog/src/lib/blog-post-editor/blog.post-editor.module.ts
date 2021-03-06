@@ -10,22 +10,16 @@ const routes: Routes = [
   {
     path: '',
     component: BlogPostEditorComponent
-  },
+  }
 ];
 
 const monacoConfig: NgxMonacoEditorConfig = {
-  defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
+  defaultOptions: { scrollBeyondLastLine: false } // pass default options to be used
 };
 
 @NgModule({
   declarations: [BlogPostEditorComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    FormsModule,
-    MonacoEditorModule.forRoot(monacoConfig),
-    BlogPostModule
-  ],
+  imports: [CommonModule, RouterModule.forChild(routes), FormsModule, MonacoEditorModule.forRoot(monacoConfig), BlogPostModule],
   exports: []
 })
-export class AwdwareBlogEditorModule { }
+export class AwdwareBlogEditorModule {}

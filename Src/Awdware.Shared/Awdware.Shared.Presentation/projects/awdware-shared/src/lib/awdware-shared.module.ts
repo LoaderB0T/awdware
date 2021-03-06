@@ -36,7 +36,7 @@ import { LogoComponent } from './logo/logo.component';
       }
     }),
     FormsModule,
-    ClickOutsideModule,
+    ClickOutsideModule
   ],
   exports: [
     TranslateModule,

@@ -6,13 +6,13 @@ import { AwdwareConfig } from '../models/awdware-config';
 export class FacadeService {
   private $updated = new Subject<AwdwareConfig[]>();
   private $activeMenuItem = new Subject<string>();
-  public configurations: { key: string, config: AwdwareConfig }[];
+  public configurations: { key: string; config: AwdwareConfig }[];
   public updated = this.$updated.asObservable();
   public activeMenuItem = this.$activeMenuItem.asObservable();
 
   public addOrUpdateConfiguration(name: string, config: AwdwareConfig) {
     if (!this.configurations) {
-      this.configurations = new Array<{ key: string, config: AwdwareConfig }>();
+      this.configurations = new Array<{ key: string; config: AwdwareConfig }>();
     }
     const cfgIndex = this.configurations.findIndex(x => x.key === name);
     if (cfgIndex > -1) {

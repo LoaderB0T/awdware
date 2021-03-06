@@ -25,8 +25,5 @@ export class VerifyMailComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-
-  }
-
+  ngOnDestroy() {}
 }

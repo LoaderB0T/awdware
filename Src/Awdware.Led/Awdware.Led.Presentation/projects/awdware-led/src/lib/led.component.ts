@@ -20,10 +20,7 @@ export class LedComponent implements OnInit, OnDestroy {
 
   public ledSettings: LedSettingsDto[];
 
-  constructor(
-    ledService: LedService,
-    dialogService: DialogService
-  ) {
+  constructor(ledService: LedService, dialogService: DialogService) {
     this._ledService = ledService;
     this._dialogService = dialogService;
   }

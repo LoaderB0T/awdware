@@ -16,8 +16,7 @@ export class LedEffectComponent implements OnInit {
     this._ledService = ledService;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public madeChanges() {
     this.effect.hasPendingChanges = true;
