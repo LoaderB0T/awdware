@@ -9,7 +9,6 @@ import { ToolbarInvalidatedEvent } from '../events/toolbar-invalidated.event';
 })
 export class ToolbarProviderService {
   private readonly possibleToolbarItems: PossibleToolbarItem[] = new Array<PossibleToolbarItem>();
-  public activeItem: string;
 
   constructor(private readonly eventService: EventService) {}
 
