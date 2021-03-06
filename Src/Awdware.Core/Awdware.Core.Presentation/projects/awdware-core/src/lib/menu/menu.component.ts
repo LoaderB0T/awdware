@@ -15,6 +15,34 @@ export class MenuComponent implements OnInit {
 
   public opened: boolean = false;
 
+  public social = [
+    {
+      icon: 'github',
+      link: 'https://github.com/LoaderB0T',
+      text: 'GitHub'
+    },
+    {
+      icon: 'twitter',
+      link: 'https://twitter.com/TheLoaderB0T',
+      text: 'Twitter'
+    },
+    {
+      icon: 'steam',
+      link: 'https://steamcommunity.com/id/loaderb0t',
+      text: 'Steam'
+    },
+    {
+      icon: 'linkedin-in',
+      link: 'https://www.linkedin.com/in/janikschumacher/',
+      text: 'LinkedIn'
+    },
+    {
+      icon: 'xing',
+      link: 'https://www.xing.com/profile/Janik_Schumacher',
+      text: 'Xing'
+    }
+  ];
+
   constructor(facadeService: FacadeService) {
     this._facadeService = facadeService;
     this._menuItems = [];
