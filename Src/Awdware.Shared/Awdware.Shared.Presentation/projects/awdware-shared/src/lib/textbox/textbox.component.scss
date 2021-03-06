@@ -80,9 +80,9 @@
       font-size: var(--font-size);
       width: 100%;
 
-      &[type="password"] {
+      &[type='password'] {
         letter-spacing: 2px;
-        font-family: "Aleo", serif;
+        font-family: 'Aleo', serif;
       }
 
       &.has-error {

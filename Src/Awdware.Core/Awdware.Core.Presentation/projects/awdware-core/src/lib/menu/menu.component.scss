@@ -55,6 +55,27 @@
       }
     }
   }
+
+  #menu-social {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    div {
+      padding-right: 20px;
+      gap: 20px;
+      font-size: 48px;
+      .social-link {
+        transition: color 0.2s;
+        color: var(--colorBgTertiary);
+        &:hover {
+          color: var(--colorHighlightColor1);
+        }
+        &:active {
+          color: var(--colorHighlightColor2);
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 700px) {

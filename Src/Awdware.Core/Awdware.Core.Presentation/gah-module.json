@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/awdware/gah/master/shared/assets/gah-module-schema.json",
+  "$schema": "https://raw.githubusercontent.com/gahjs/core/master/shared/assets/gah-module-schema.json",
   "modules": [
     {
       "name": "core",
@@ -12,11 +12,47 @@
       "dependencies": [
         {
           "path": "../../Awdware.Shared/Awdware.Shared.Presentation/gah-module.json",
-          "names": [
-            "shared"
-          ]
+          "names": ["shared"]
         }
-      ]
+      ],
+      "config": {
+        "plugins": [
+          {
+            "name": "@awdware/gah-translation-merger",
+            "version": "2.0.1",
+            "settings": {
+              "searchGlobPattern": "src/assets/**/translations/*.json",
+              "destinationPath": "src/assets/i18n",
+              "matchPattern": ""
+            }
+          },
+          {
+            "name": "@awdware/gah-angular-json-plugin",
+            "version": "0.2.0",
+            "settings": {
+              "ngJson": {
+                "projects": {
+                  "gah-host": {
+                    "architect": {
+                      "build": {
+                        "options": {
+                          "assets": [
+                            {
+                              "glob": "**/*",
+                              "input": "node_modules/monaco-editor/dev",
+                              "output": "./assets/monaco/"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
     }
   ]
 }

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <ProjectGuid>851d0400-db91-4ce2-9211-c272038a265d</ProjectGuid>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputPath>..\..\..\..\bin\$(Configuration)</OutputPath>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Awdware.Led.Data.Implementation\Awdware.Led.Data.Implementation.csproj" />
+  </ItemGroup>
+
+</Project>

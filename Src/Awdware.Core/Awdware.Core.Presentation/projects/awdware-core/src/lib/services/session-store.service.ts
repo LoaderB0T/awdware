@@ -5,10 +5,9 @@ import { JwtPayload } from '../models/jwt-payload';
   providedIn: 'root'
 })
 export class SessionStoreService {
-
   private _tokenString: string;
 
-  constructor() { }
+  constructor() {}
 
   public putToken(token: string) {
     this._tokenString = token;

@@ -10,8 +10,7 @@ export class RoutingService {
 
   constructor(router: Router, route: ActivatedRoute) {
     this._router = router;
-    route.queryParams
-      .subscribe(params => this._returnUrl = params.returnUrl);
+    route.queryParams.subscribe(params => (this._returnUrl = params.returnUrl));
   }
 
   public navigate(...route: (string | number)[]) {
@@ -52,6 +51,10 @@ export class RoutingService {
 
   public navigateToAccount() {
     this._router.navigate(['me']);
+  }
+
+  public navigateToSettings() {
+    this._router.navigate(['settings']);
   }
 
   public navigateToError(status: number) {

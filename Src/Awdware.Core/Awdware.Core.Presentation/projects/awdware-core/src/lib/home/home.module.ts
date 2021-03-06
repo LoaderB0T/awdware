@@ -4,13 +4,8 @@ import { HomeComponent } from './home.component';
 
 import { AwdwareCoreSharedModule } from '@awdware/shared';
 
-
-
 @NgModule({
   declarations: [HomeComponent],
-  imports: [
-    CommonModule,
-    AwdwareCoreSharedModule
-  ]
+  imports: [CommonModule, AwdwareCoreSharedModule]
 })
-export class HomeModule { }
+export class HomeModule {}

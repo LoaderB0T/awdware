@@ -5,12 +5,12 @@ import { BaseEvent } from '../models/base-event';
 import { InvalidOperationError } from '../models/invalid-operation-error';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class EventService {
   private readonly events = {};
 
-  constructor() { }
+  constructor() {}
 
   public publishEvent<TEvent extends BaseEvent>(type: new () => TEvent, callback?: (value: TEvent) => void): void {
     const eventToPublish = new type();

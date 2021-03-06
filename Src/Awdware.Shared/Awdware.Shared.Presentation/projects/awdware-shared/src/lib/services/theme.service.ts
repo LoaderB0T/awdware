@@ -3,18 +3,15 @@ import { Theme } from '../models/theme.model';
 import { InvalidOperationError } from '../models/invalid-operation-error';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ThemeService {
   public selectedTheme: Theme;
   private _globalStyleSheet: CSSStyleSheet;
 
-  private readonly themes: Theme[] = [
-    this.darkTheme,
-    this.lightTheme
-  ];
+  private readonly themes: Theme[] = [this.darkTheme, this.lightTheme];
 
-  constructor() { }
+  constructor() {}
 
   public init() {
     if (this._globalStyleSheet) {
@@ -45,7 +42,7 @@ export class ThemeService {
 
   private setTheme(theme: Theme) {
     if (!this._globalStyleSheet) {
-      throw new InvalidOperationError('Theme service has not been initialized. Call \'init\' method before setting the theme');
+      throw new InvalidOperationError("Theme service has not been initialized. Call 'init' method before setting the theme");
     }
 
     if (this._globalStyleSheet.rules.length > 0) {
@@ -73,7 +70,7 @@ export class ThemeService {
       { name: 'colorHighlightContent', value: 'rgba(0, 15, 20, 1)' },
       { name: 'colorHighlightColor1', value: 'rgb(255 0 82)' },
       { name: 'colorHighlightColor2', value: 'rgb(255 167 0)' },
-      { name: 'colorError', value: 'rgb(238, 31, 16)' },
+      { name: 'colorError', value: 'rgb(238, 31, 16)' }
     ];
     return theme;
   }
@@ -91,7 +88,7 @@ export class ThemeService {
       { name: 'colorHighlightContent', value: 'rgba(0, 15, 20, 1)' },
       { name: 'colorHighlightColor1', value: 'rgb(255 0 82)' },
       { name: 'colorHighlightColor2', value: 'rgb(255 167 0)' },
-      { name: 'colorError', value: 'rgb(238, 31, 16)' },
+      { name: 'colorError', value: 'rgb(238, 31, 16)' }
     ];
     return theme;
   }

@@ -46,8 +46,7 @@ export class BlogPostComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   navToBlog(postId: string) {
     this._routingService.navigate('blog', 'post', postId);
@@ -56,5 +55,4 @@ export class BlogPostComponent implements OnInit {
   editPost(postId: string) {
     this._routingService.navigate('blog', 'post', postId, 'edit');
   }
-
 }

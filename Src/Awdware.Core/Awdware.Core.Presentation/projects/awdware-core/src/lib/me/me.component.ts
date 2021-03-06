@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ThemeService, TranslationService } from '@awdware/shared';
+import { FacadeService, ThemeService, TranslationService } from '@awdware/shared';
 
 import { UserDetailsService } from '../services/user-details.service';
 import { UserDetails } from '../models/user-details';
@@ -14,21 +14,16 @@ import { AccountService } from '../account/services/account.service';
 export class MeComponent implements OnInit {
   private readonly _userInfoService: UserDetailsService;
   private readonly _accountService: AccountService;
-  private readonly _themeService: ThemeService;
-  private readonly _translationService: TranslationService;
+  private readonly _facadeService: FacadeService;
 
-  constructor(
-    userInfoService: UserDetailsService,
-    accountService: AccountService,
-    themeService: ThemeService,
-    translationService: TranslationService) {
+  constructor(userInfoService: UserDetailsService, accountService: AccountService, facadeService: FacadeService) {
     this._userInfoService = userInfoService;
     this._accountService = accountService;
-    this._themeService = themeService;
-    this._translationService = translationService;
+    this._facadeService = facadeService;
   }
 
   ngOnInit() {
+    this._facadeService.setActiveMenuItem('account');
   }
 
   public get userInfo(): UserDetails {
@@ -38,18 +33,4 @@ export class MeComponent implements OnInit {
   public logout() {
     this._accountService.logout();
   }
-
-  public darkTheme() {
-    this._themeService.changeTheme('dark');
-  }
-  public lightTheme() {
-    this._themeService.changeTheme('light');
-  }
-  public german() {
-    this._translationService.setLanguage('de_DE');
-  }
-  public english() {
-    this._translationService.setLanguage('en_US');
-  }
-
 }

@@ -26,15 +26,14 @@ export class SignalrService {
   }
 
   public sendData<T>(hub: HubConnection, methodName: string, ...args: any[]): Observable<T> {
-    return this.ensureConnection(hub).pipe(
-      concatMap(() => from(hub.invoke<T>(methodName, ...args)))
-    );
+    return this.ensureConnection(hub).pipe(concatMap(() => from(hub.invoke<T>(methodName, ...args))));
   }
 
   public getHubConnection(apiUrl: string, hubUrl: string): HubConnection {
     const hubConnection = new HubConnectionBuilder()
       .configureLogging(LogLevel.Debug)
-      .withUrl(apiUrl + hubUrl).build();
+      .withUrl(apiUrl + hubUrl)
+      .build();
 
     return hubConnection;
   }
@@ -43,9 +42,11 @@ export class SignalrService {
     if (hub.state === HubConnectionState.Connected) {
       return of(null);
     }
-    return from(hub.start()).pipe(catchError(err => {
-      console.error(err);
-      return of(null);
-    }));
+    return from(hub.start()).pipe(
+      catchError(err => {
+        console.error(err);
+        return of(null);
+      })
+    );
   }
 }

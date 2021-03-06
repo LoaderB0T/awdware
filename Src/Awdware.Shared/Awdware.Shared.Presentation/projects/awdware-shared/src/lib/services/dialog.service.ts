@@ -8,7 +8,7 @@ import { BaseDialog } from '../models/base-dialog.model';
 export class DialogService {
   private _factoryResolver: ComponentFactoryResolver;
   private _rootViewContainer: ViewContainerRef;
-  private _subMgrs = new Array<{ id: string, mgr: SubscriptionManager }>();
+  private _subMgrs = new Array<{ id: string; mgr: SubscriptionManager }>();
 
   public dialogVisible: boolean;
 
@@ -33,14 +33,11 @@ export class DialogService {
     const newId = this.getRandomId();
 
     this._subMgrs.push({ id: newId, mgr: new SubscriptionManager() });
-    const factory = this._factoryResolver
-      .resolveComponentFactory<T>(componentType);
-    const component = factory
-      .create(this._rootViewContainer.parentInjector);
+    const factory = this._factoryResolver.resolveComponentFactory<T>(componentType);
+    const component = factory.create(this._rootViewContainer.parentInjector);
 
     if (component.instance.closeDialog) {
       const hideSub = component.instance.closeDialog.subscribe((id: string) => {
-
         const indexToRemove = this._rootViewContainer.indexOf(component.hostView);
 
         this._rootViewContainer.remove(indexToRemove);
@@ -52,7 +49,7 @@ export class DialogService {
       this._subMgrs.find(subMgr => subMgr.id === newId)?.mgr?.add(hideSub);
     } else {
       // should rather not happen I hope
-      console.warn('This Component does not implement the BaseDialog Class:')
+      console.warn('This Component does not implement the BaseDialog Class:');
       console.warn(component.instance);
     }
 

@@ -9,9 +9,7 @@ import { ColorType } from '../models/color-type.model';
   selector: 'awd-slider',
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
-  providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: SliderComponent, multi: true },
-  ]
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: SliderComponent, multi: true }]
 })
 export class SliderComponent implements OnInit, ControlValueAccessor {
   @Input() public min: number;
@@ -61,13 +59,13 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
   private refreshStyles() {
     this.cssVariables = this._sanitizer.bypassSecurityTrustStyle(
       `--slider-color: ${this.getCalculatedColor()};
-    --slider-background: ${this._theme.getColor('colorBgPrimary')};`);
+    --slider-background: ${this._theme.getColor('colorBgPrimary')};`
+    );
   }
 
   private getCalculatedColor(): string {
     if (this.minColor) {
       if (this.maxColor) {
-
         const color1 = ColorType.fromCssPropertyString(this.minColor);
         const color2 = ColorType.fromCssPropertyString(this.maxColor);
 
@@ -82,8 +80,6 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
     } else {
       return this._theme.getColor('colorHighlightColor1');
     }
-
-
   }
 
   onBlur() {
@@ -94,7 +90,6 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
   onFocus() {
     this.isFocused = true;
   }
-
 
   registerOnChange(fn: any) {
     this.onChangeCallback = fn;
@@ -108,7 +103,5 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
     this.isDisabled = isDisabled;
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

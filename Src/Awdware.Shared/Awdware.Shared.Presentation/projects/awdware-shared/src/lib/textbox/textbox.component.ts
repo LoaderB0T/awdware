@@ -1,6 +1,13 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { InputType } from '../models/input-type';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
+import {
+  NG_VALUE_ACCESSOR,
+  ControlValueAccessor,
+  NG_VALIDATORS,
+  Validator,
+  AbstractControl,
+  ValidationErrors
+} from '@angular/forms';
 import { noop } from 'rxjs';
 import { ValidationDefinition } from '../models/validation-definition';
 import { ValidationErrorType } from '../models/validation-error-type';
@@ -13,7 +20,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: TextboxComponent, multi: true },
     { provide: NG_VALIDATORS, useExisting: TextboxComponent, multi: true }
-  ],
+  ]
 })
 export class TextboxComponent implements OnInit, ControlValueAccessor, Validator {
   @Input() private validationDefinitions: ValidationDefinition[] = new Array<ValidationDefinition>();
@@ -54,8 +61,7 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
     this._sanitizer = sanitizer;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public inputEvent() {
     this.valueChanged.emit(null);
@@ -63,11 +69,16 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
 
   public get getInputType(): string {
     switch (this.inputType) {
-      case InputType.TEXT: return 'text';
-      case InputType.PASSWORD: return 'password';
-      case InputType.NUMERIC: return 'number';
-      case InputType.EMAIL: return 'email';
-      default: return 'text';
+      case InputType.TEXT:
+        return 'text';
+      case InputType.PASSWORD:
+        return 'password';
+      case InputType.NUMERIC:
+        return 'number';
+      case InputType.EMAIL:
+        return 'email';
+      default:
+        return 'text';
     }
   }
 
@@ -107,7 +118,6 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
     }
 
     if (isInvalid) {
-
       if (this.inputElement.nativeElement.validity.tooShort) {
         const valDef = this.validationDefinitions.find(x => x.type === ValidationErrorType.TOO_SHORT);
         reason = valDef && valDef.translationKey;
@@ -129,7 +139,7 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
         error: {
           valid: false,
           reason
-        },
+        }
       };
     } else {
       return null;
@@ -137,8 +147,7 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   }
 
   public get cssVariablesStyle() {
-    return this._sanitizer.bypassSecurityTrustStyle(
-      `--font-size: ${this.fontSize}px;`);
+    return this._sanitizer.bypassSecurityTrustStyle(`--font-size: ${this.fontSize}px;`);
   }
 
   get value(): any {

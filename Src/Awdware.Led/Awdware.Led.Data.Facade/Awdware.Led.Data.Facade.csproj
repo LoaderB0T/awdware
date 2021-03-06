@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <ProjectGuid>6ae07ca0-9a4e-409c-a626-3f6499ec9640</ProjectGuid>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputPath>..\..\..\..\bin\$(Configuration)</OutputPath>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Awdware.Led.Facade\Awdware.Led.Facade.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/awdware/gah/master/shared/assets/gah-host-schema.json",
+  "$schema": "https://raw.githubusercontent.com/gahjs/core/master/shared/assets/gah-host-schema.json",
   "aot": true,
   "modules": [
     {
@@ -9,7 +9,7 @@
       ]
     },
     {
-      "path": "../../Awdware.Led/Awdware.Led/Awdware.Led.Presentation/gah-module.json",
+      "path": "../../Awdware.Led/Awdware.Led.Presentation/gah-module.json",
       "names": [
         "led"
       ]

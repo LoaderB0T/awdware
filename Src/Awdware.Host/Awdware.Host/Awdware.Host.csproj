@@ -16,10 +16,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -34,7 +30,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Awdware.Core\Awdware.Core.Facade\Awdware.Core.Facade.csproj">
     </ProjectReference>
-    <ProjectReference Include="..\..\Awdware.Led\Awdware.Led\Awdware.Led.Business.Facade\Awdware.Led.Business.Facade.csproj">
+    <ProjectReference Include="..\..\Awdware.Led\Awdware.Led.Business.Facade\Awdware.Led.Business.Facade.csproj">
     </ProjectReference>
     <ProjectReference Include="..\..\Awdware.Games\Awdware.Games.Business.Facade\Awdware.Games.Business.Facade.csproj">
     </ProjectReference>

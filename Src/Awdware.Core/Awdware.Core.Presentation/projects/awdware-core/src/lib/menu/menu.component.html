@@ -1,31 +1,35 @@
-<div id='menu-container'
-     [class.opened]="opened">
+<div id="menu-container" [class.opened]="opened">
   <div class="spacer"></div>
-  <div class="menu-item"
-       id="menu-close-button"
-       (click)="toggleMenu()">
+  <div class="menu-item" id="menu-close-button" (click)="toggleMenu()">
     <div class="icon-container">
       <i class="icon fal fa-xmark"></i>
     </div>
     <span class="text">Close</span>
   </div>
-  <div class="menu-item"
-       *ngFor="let menuItem of enabledMenuItems"
-       (click)="itemClicked(menuItem)">
+  <div class="menu-item" *ngFor="let menuItem of enabledMenuItems" (click)="itemClicked(menuItem)"
+    [class.selected]="menuItem.active">
     <div class="icon-container">
-      <i class="icon fal fa-{{menuItem.icon}}"
-         aria-hidden="true"></i>
+      <i class="icon fal fa-{{ menuItem.icon }}" aria-hidden="true"></i>
     </div>
-    <span class="text">{{menuItem.text}}</span>
+    <span class="text">{{ menuItem.text }}</span>
   </div>
-  <div class="spacer"></div>
+  <div class="spacer">
+    <div id="menu-social">
+      <div class="awd-row center">
+        <a *ngFor="let s of social" [href]="s.link" [title]="s.text" target="_blank" class="social-link">
+          <i class="fab fa-{{s.icon}}"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+
 </div>
 
-<div id="menu-mobile-button"
-     [class.opened]="opened">
+<div id="menu-mobile-button" [class.opened]="opened">
   <div class="header">
-    <div class="icon-container"
-         (click)="toggleMenu()">
+    <div class="icon-container" (click)="toggleMenu()">
       <i class="fal fa-bars"></i>
     </div>
     <span>awdware</span>

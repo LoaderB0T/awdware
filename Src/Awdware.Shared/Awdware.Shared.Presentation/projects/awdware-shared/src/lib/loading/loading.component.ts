@@ -11,10 +11,9 @@ export class LoadingComponent implements OnInit {
 
   public fakeArray = new Array(5);
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public get height(): number {
     return 40 * this.scale;
@@ -31,5 +30,4 @@ export class LoadingComponent implements OnInit {
   public get margin(): number {
     return 1 * this.scale;
   }
-
 }

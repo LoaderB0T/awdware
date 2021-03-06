@@ -6,4 +6,4 @@ import { routes } from './core-routes';
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CoreRoutingModule { }
+export class CoreRoutingModule {}

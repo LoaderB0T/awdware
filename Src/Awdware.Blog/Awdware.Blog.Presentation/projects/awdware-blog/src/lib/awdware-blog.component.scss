@@ -1,0 +1,10 @@
+@import '../references.scss';
+
+#disabled-blog {
+  max-width: 75%;
+  padding: 20px;
+  #blog-wip {
+    font-size: 54px;
+    color: var(--colorHighlightColor1);
+  }
+}

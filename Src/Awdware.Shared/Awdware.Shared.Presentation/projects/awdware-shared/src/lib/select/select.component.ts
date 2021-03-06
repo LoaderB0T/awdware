@@ -1,5 +1,14 @@
-
-import { Component, Input, Output, EventEmitter, OnInit, ElementRef, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  ChangeDetectorRef,
+  OnDestroy
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Subject, noop } from 'rxjs';
 import { SelectOption } from '../models/select-option.model';
@@ -9,9 +18,7 @@ import { InvalidOperationError } from '../models/invalid-operation-error';
   selector: 'awd-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
-  providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: SelectComponent, multi: true }
-  ],
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: SelectComponent, multi: true }]
 })
 export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy {
   public isVisible: boolean = false;
@@ -42,8 +49,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
   @Output() selectionChanged = new EventEmitter<string>();
   @Output() toggled = new EventEmitter<boolean>();
 
-  constructor(private readonly ref: ChangeDetectorRef) {
-  }
+  constructor(private readonly ref: ChangeDetectorRef) {}
 
   setDisabledState?(isDisabled: boolean): void {
     this._isDisabled = isDisabled;
@@ -174,6 +180,5 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
     this.ref.detectChanges();
   }
 
-  ngOnDestroy(): void {
-  }
+  ngOnDestroy(): void {}
 }

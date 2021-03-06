@@ -1,20 +1,10 @@
-<div id="me-main"
-     class="awd-content-container">
+<div id="me-main" class="awd-content-container">
   <div class="awd-floating-container">
-    <div id="me-content">
+    <div id="me-content" class="awd-column">
       <span class="this-is">
-        This is <strong>{{userInfo.username}}</strong>
+        This is <strong>{{ userInfo.username }}</strong>
       </span>
-      <button class="button"
-              (click)="logout()">Logout</button>
-      <button class="button"
-              (click)="darkTheme()">Dark Theme</button>
-      <button class="button"
-              (click)="lightTheme()">Light Theme</button>
-      <button class="button"
-              (click)="german()">German</button>
-      <button class="button"
-              (click)="english()">English</button>
+      <button class="button" (click)="logout()">Logout</button>
     </div>
   </div>
 </div>

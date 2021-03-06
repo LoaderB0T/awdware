@@ -29,9 +29,7 @@ export class LoginHelpComponent implements OnInit, OnDestroy {
     this.loginHelpModel = new LoginHelpRequestDto();
   }
 
-  public ngOnInit(): void {
-
-  }
+  public ngOnInit(): void {}
 
   get loginHelpDisabled(): boolean {
     if (this.clickedButton) {

@@ -110,3 +110,19 @@ input[type="submit"],
   background: rgba(0, 0, 0, 0.7);
   z-index: 9;
 }
+
+.awd-column {
+  display: flex;
+  flex-direction: column;
+  &.center {
+    align-items: center;
+  }
+}
+
+.awd-row {
+  display: flex;
+  flex-direction: row;
+  &.center {
+    align-items: center;
+  }
+}

@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
+import { FacadeService } from '@awdware/shared';
+
 import { RoutingService } from '../services/routing.service';
 const theaterJS = require('theaterjs');
 
@@ -12,13 +14,14 @@ const theaterJS = require('theaterjs');
 export class HomeComponent implements OnInit, OnDestroy {
   private readonly _translateService: TranslateService;
   private readonly _routingService: RoutingService;
+  private readonly _facadeService: FacadeService;
 
-  private _theater = theaterJS({ locale: 'en' });
+  private readonly _theater = theaterJS({ locale: 'en' });
 
-
-  constructor(translateService: TranslateService, routingService: RoutingService) {
+  constructor(translateService: TranslateService, routingService: RoutingService, facadeService: FacadeService) {
     this._translateService = translateService;
     this._routingService = routingService;
+    this._facadeService = facadeService;
   }
 
   ngOnInit() {
@@ -27,6 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     } else {
       this._theater.replay();
     }
+    this._facadeService.setActiveMenuItem('home');
   }
 
   ngOnDestroy() {
@@ -55,14 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         .addScene(1111)
         .addScene(`me4:${text_ilike} `, 0)
         .addScene('me5:', 0);
-      this.writeLikes([
-        'Web Development',
-        "TypeScript",
-        "NodeJS",
-        "Angular",
-        "C# & .NET Core",
-        "(S)CSS",
-      ]);
+      this.writeLikes(['Web Development', 'TypeScript', 'Angular', 'C# & .NET', 'Automation (CI/CD)']);
       this._theater.addScene('me4:');
       this._theater.addScene(-text_ilike.length);
       this._theater.addScene('me4:Click ');
@@ -73,15 +70,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private writeLikes(texts: string[]) {
     texts.forEach(text => {
-      this._theater
-        .addScene(text, 50)
-        .addScene(500)
-        .addScene(-text.length);
+      this._theater.addScene(text, 50).addScene(500).addScene(-text.length);
     });
   }
 
   public learnMore() {
     this._routingService.navigate('blog');
   }
-
 }

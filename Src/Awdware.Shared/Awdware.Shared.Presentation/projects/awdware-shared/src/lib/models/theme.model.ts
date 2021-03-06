@@ -8,9 +8,11 @@ export class Theme {
   }
 
   toRules(): string {
-    return this.props.map(prop => {
-      return `--${prop.name}: ${prop.value}`;
-    }).join(';');
+    return this.props
+      .map(prop => {
+        return `--${prop.name}: ${prop.value}`;
+      })
+      .join(';');
   }
 }
 

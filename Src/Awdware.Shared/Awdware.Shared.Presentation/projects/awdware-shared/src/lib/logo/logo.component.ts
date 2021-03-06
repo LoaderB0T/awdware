@@ -8,7 +8,6 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./logo.component.scss']
 })
 export class LogoComponent implements OnInit {
-
   public key_a = false;
   public key_w = false;
   public key_d = false;
@@ -23,7 +22,6 @@ export class LogoComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-
     const focusedElem = document.activeElement;
     if (focusedElem) {
       if ((focusedElem as HTMLInputElement).type === 'password') {
@@ -50,12 +48,11 @@ export class LogoComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    this.timer_a.pipe(debounceTime(500)).subscribe(() => this.key_a = false);
-    this.timer_w.pipe(debounceTime(500)).subscribe(() => this.key_w = false);
-    this.timer_d.pipe(debounceTime(500)).subscribe(() => this.key_d = false);
+    this.timer_a.pipe(debounceTime(500)).subscribe(() => (this.key_a = false));
+    this.timer_w.pipe(debounceTime(500)).subscribe(() => (this.key_w = false));
+    this.timer_d.pipe(debounceTime(500)).subscribe(() => (this.key_d = false));
   }
-
 }

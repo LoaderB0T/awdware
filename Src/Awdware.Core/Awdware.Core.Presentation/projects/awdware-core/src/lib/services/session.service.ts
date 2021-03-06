@@ -14,9 +14,7 @@ export class SessionService {
   private readonly checkSessionInterval = interval(1000 * 60);
   private checkSessionSubscription: Subscription;
 
-
-  constructor(private readonly sessionStoreService: SessionStoreService, private readonly webApiService: WebApiService) {
-  }
+  constructor(private readonly sessionStoreService: SessionStoreService, private readonly webApiService: WebApiService) {}
 
   public startCheckSession() {
     this.checkSession();
@@ -60,20 +58,17 @@ export class SessionService {
   }
 
   public renewSession(): Observable<boolean> {
-    return this.webApiService.get<TokenDto>('authentication/refreshToken')
-      .pipe(
-        tap(x => {
-          if (!x) {
-            this.sessionStoreService.removeToken();
-          } else {
-            this.sessionStoreService.putToken(x.token);
-          }
-        }),
-        map(
-          (x) => {
-            return !!x;
-          }
-        )
-      );
+    return this.webApiService.get<TokenDto>('authentication/refreshToken').pipe(
+      tap(x => {
+        if (!x) {
+          this.sessionStoreService.removeToken();
+        } else {
+          this.sessionStoreService.putToken(x.token);
+        }
+      }),
+      map(x => {
+        return !!x;
+      })
+    );
   }
 }

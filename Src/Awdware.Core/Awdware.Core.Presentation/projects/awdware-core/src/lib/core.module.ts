@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import {
-  AwdwareCoreSharedModule, FacadeService, WebApiService,
-  ThemeService, TranslationService, AwdwareConfig, MenuItem
+  AwdwareCoreSharedModule,
+  FacadeService,
+  WebApiService,
+  ThemeService,
+  TranslationService,
+  AwdwareConfig,
+  MenuItem
 } from '@awdware/shared';
 
 import { MenuComponent } from './menu/menu.component';
@@ -18,22 +23,12 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ErrorModule } from './error/error.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from '../environment';
+import { SettingsModule } from './settings/settings.module';
 
 @NgModule({
-  declarations: [
-    MenuComponent,
-    MeComponent,
-    BaseComponent
-  ],
-  imports: [
-    CommonModule,
-    CoreRoutingModule,
-    AwdwareCoreSharedModule,
-    AccountModule,
-    HomeModule,
-    ErrorModule
-  ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
+  declarations: [MenuComponent, MeComponent, BaseComponent],
+  imports: [CommonModule, CoreRoutingModule, AwdwareCoreSharedModule, AccountModule, HomeModule, ErrorModule, SettingsModule],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }]
 })
 export class CoreModule {
   private readonly _sessionStoreService: SessionStoreService;
@@ -44,7 +39,7 @@ export class CoreModule {
     sessionStoreService: SessionStoreService,
     apiService: WebApiService,
     themeService: ThemeService,
-    translationService: TranslationService,
+    translationService: TranslationService
   ) {
     console.log('constructor: CoreModule');
 
@@ -55,9 +50,38 @@ export class CoreModule {
     this._sessionStoreService = sessionStoreService;
     const config = new AwdwareConfig();
     config.menuItems = [
-      new MenuItem('home', 'Home', 'home', () => routingService.navigateToHomeHello(), () => true),
-      new MenuItem('login', 'Login', 'arrow-right-to-bracket', () => routingService.navigateToAccountLogin(), () => this.showLoginButton()),
-      new MenuItem('account', 'Account', 'user', () => routingService.navigateToAccount(), () => this.showAccountButton())
+      new MenuItem(
+        'home',
+        'Home',
+        'home',
+        0,
+        () => routingService.navigateToHomeHello(),
+        () => true
+      ),
+      new MenuItem(
+        'login',
+        'Login',
+        'arrow-right-to-bracket',
+        100,
+        () => routingService.navigateToAccountLogin(),
+        () => this.showLoginButton()
+      ),
+      new MenuItem(
+        'account',
+        'Account',
+        'user',
+        100,
+        () => routingService.navigateToAccount(),
+        () => this.showAccountButton()
+      ),
+      new MenuItem(
+        'settings',
+        'Settings',
+        'gear',
+        200,
+        () => routingService.navigateToSettings(),
+        () => true
+      )
     ];
     facadeService.addOrUpdateConfiguration('awdware-core', config);
   }

@@ -12,37 +12,51 @@ import { Title } from '@angular/platform-browser';
 export class BaseComponent implements OnInit {
   private readonly _dialogService: DialogService;
 
-  constructor(
-    viewContainerRef: ViewContainerRef,
-    router: Router,
-    dialogService: DialogService,
-    title: Title
-  ) {
+  constructor(viewContainerRef: ViewContainerRef, router: Router, dialogService: DialogService, title: Title) {
     this._dialogService = dialogService;
 
     // Another one of those very useless but stil lvery fun details :)
     const rndmTitleEmojis = [
-      '*^____^*', 'O(∩_∩)O', '(～￣▽￣)～', '（*＾-＾*）', '(*^_^*)', '(❁´◡`❁)', '(´▽`ʃ♡ƪ)', '♪(^∇^*)', '(oﾟvﾟ)ノ', '(☆▽☆)', '(o゜▽゜)o',
-      '☆ヾ(•ω•`)o', '\\(￣︶￣*\\)', ')(￣o￣) . z Z', '\\(@^0^@)/', 'ヾ(^▽^*)))', '✪ ω ✪', '♪(´▽｀)', 'ヽ(✿ﾟ▽ﾟ)ノ', '（。＾▽＾）', '(☞ﾟヮﾟ)☞',
-      '☜(ﾟヮﾟ☜)', '(⌐■_■)', '(•_•)', '¯\\_(ツ)_/¯', '( ͡• ͜ʖ ͡• )'
+      '*^____^*',
+      'O(∩_∩)O',
+      '(～￣▽￣)～',
+      '（*＾-＾*）',
+      '(*^_^*)',
+      '(❁´◡`❁)',
+      '(´▽`ʃ♡ƪ)',
+      '♪(^∇^*)',
+      '(oﾟvﾟ)ノ',
+      '(☆▽☆)',
+      '(o゜▽゜)o',
+      '☆ヾ(•ω•`)o',
+      '\\(￣︶￣*\\)',
+      ')(￣o￣) . z Z',
+      '\\(@^0^@)/',
+      'ヾ(^▽^*)))',
+      '✪ ω ✪',
+      '♪(´▽｀)',
+      'ヽ(✿ﾟ▽ﾟ)ノ',
+      '（。＾▽＾）',
+      '(☞ﾟヮﾟ)☞',
+      '☜(ﾟヮﾟ☜)',
+      '(⌐■_■)',
+      '(•_•)',
+      '¯\\_(ツ)_/¯',
+      '( ͡• ͜ʖ ͡• )'
     ];
-    // bitwise operator floors a (very tiny) bit faster, very unnecessary 
+    // bitwise operator floors a (very tiny) bit faster, very unnecessary
     // eslint-disable-next-line no-irregular-whitespace
-    title.setTitle(`awdware   ${rndmTitleEmojis[Math.random() * (rndmTitleEmojis.length) | 0]}`);
+    title.setTitle(`awdware   ${rndmTitleEmojis[(Math.random() * rndmTitleEmojis.length) | 0]}`);
     this._dialogService.setRootViewContainerRef(viewContainerRef);
     router.events
       .pipe(
-        filter(
-          (event: NavigationStart) => {
-            return (event instanceof NavigationStart);
-          }
-        )
+        filter((event: NavigationStart) => {
+          return event instanceof NavigationStart;
+        })
       )
-      .subscribe(
-        () => {
-          this._dialogService.hideAllDialogs();
-        }
-      );
+      .subscribe(() => {
+        this._dialogService.hideAllDialogs();
+      });
   }
 
   ngOnInit(): void {
