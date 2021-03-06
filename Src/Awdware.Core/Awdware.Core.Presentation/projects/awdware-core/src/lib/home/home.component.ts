@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private _theater = theaterJS({ locale: 'en' });
 
-
   constructor(translateService: TranslateService, routingService: RoutingService) {
     this._translateService = translateService;
     this._routingService = routingService;
@@ -55,14 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         .addScene(1111)
         .addScene(`me4:${text_ilike} `, 0)
         .addScene('me5:', 0);
-      this.writeLikes([
-        'Web Development',
-        "TypeScript",
-        "NodeJS",
-        "Angular",
-        "C# & .NET Core",
-        "(S)CSS",
-      ]);
+      this.writeLikes(['Web Development', 'TypeScript', 'NodeJS', 'Angular', 'C# & .NET Core', '(S)CSS']);
       this._theater.addScene('me4:');
       this._theater.addScene(-text_ilike.length);
       this._theater.addScene('me4:Click ');
@@ -73,15 +65,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private writeLikes(texts: string[]) {
     texts.forEach(text => {
-      this._theater
-        .addScene(text, 50)
-        .addScene(500)
-        .addScene(-text.length);
+      this._theater.addScene(text, 50).addScene(500).addScene(-text.length);
     });
   }
 
   public learnMore() {
     this._routingService.navigate('blog');
   }
-
 }
