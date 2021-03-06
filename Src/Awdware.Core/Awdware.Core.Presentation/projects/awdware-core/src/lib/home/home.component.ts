@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         .addScene(1111)
         .addScene(`me4:${text_ilike} `, 0)
         .addScene('me5:', 0);
-      this.writeLikes(['Web Development', 'TypeScript', 'NodeJS', 'Angular', 'C# & .NET Core', '(S)CSS']);
+      this.writeLikes(['Web Development', 'TypeScript', 'Angular', 'C# & .NET', 'Automation (CI/CD)']);
       this._theater.addScene('me4:');
       this._theater.addScene(-text_ilike.length);
       this._theater.addScene('me4:Click ');
