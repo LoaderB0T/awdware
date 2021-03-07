@@ -14,13 +14,11 @@
   .menu-item {
     cursor: pointer;
     display: flex;
+    width: 80px;
     align-items: center;
+    justify-content: center;
     flex-direction: column-reverse;
-    padding-bottom: 12.5px;
     border-top: 4px solid var(--colorHighlightColor1);
-    &.selected {
-      border-color: var(--colorHighlightColor2);
-    }
     &#menu-close-button {
       display: none;
     }
@@ -28,6 +26,7 @@
       opacity: 0;
       padding: 10px;
       bottom: 80px;
+      pointer-events: none;
       background-color: var(--colorBgPrimary);
       transition: opacity 0.3s;
       font-size: 32px;
@@ -54,6 +53,15 @@
         color: var(--colorHighlightColor2);
       }
     }
+  }
+
+  .selected-menu-item {
+    width: 80px;
+    border-top: 4px solid var(--colorHighlightColor2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: left 300ms cubic-bezier(0.97, -0.08, 0.555, 1.16);
   }
 
   #menu-social {
