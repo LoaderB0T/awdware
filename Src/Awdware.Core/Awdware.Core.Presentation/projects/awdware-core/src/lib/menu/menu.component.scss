@@ -14,9 +14,10 @@
   .menu-item {
     cursor: pointer;
     display: flex;
+    width: 80px;
     align-items: center;
+    justify-content: center;
     flex-direction: column-reverse;
-    padding-bottom: 12.5px;
     border-top: 4px solid var(--colorHighlightColor1);
     &.selected {
       border-color: var(--colorHighlightColor2);
@@ -28,6 +29,7 @@
       opacity: 0;
       padding: 10px;
       bottom: 80px;
+      pointer-events: none;
       background-color: var(--colorBgPrimary);
       transition: opacity 0.3s;
       font-size: 32px;
