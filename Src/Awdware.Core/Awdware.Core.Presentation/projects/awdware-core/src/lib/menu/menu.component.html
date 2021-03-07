@@ -10,15 +10,17 @@
     <span class="text">Close</span>
   </div>
   <div class="menu-item"
+       id="menu-item-{{menuItem.key}}"
        *ngFor="let menuItem of enabledMenuItems"
-       (click)="itemClicked(menuItem)"
-       [class.selected]="menuItem.active">
+       (click)="itemClicked(menuItem)">
     <div class="icon-container">
       <i class="icon fal fa-{{ menuItem.icon }}"
          aria-hidden="true"></i>
     </div>
     <span class="text">{{ menuItem.text }}</span>
   </div>
+  <div class="selected-menu-item"
+       [style.left.px]="selectedMenuItemLeftPos"></div>
   <div class="spacer">
     <div id="menu-social">
       <div class="awd-row center">

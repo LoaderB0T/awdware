@@ -19,9 +19,6 @@
     justify-content: center;
     flex-direction: column-reverse;
     border-top: 4px solid var(--colorHighlightColor1);
-    &.selected {
-      border-color: var(--colorHighlightColor2);
-    }
     &#menu-close-button {
       display: none;
     }
@@ -56,6 +53,15 @@
         color: var(--colorHighlightColor2);
       }
     }
+  }
+
+  .selected-menu-item {
+    width: 80px;
+    border-top: 4px solid var(--colorHighlightColor2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: left 300ms cubic-bezier(0.97, -0.08, 0.555, 1.16);
   }
 
   #menu-social {

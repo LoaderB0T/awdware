@@ -52,6 +52,12 @@ export class MenuComponent {
     return this._menuService.enabledMenuItems;
   }
 
+  public get selectedMenuItemLeftPos(): number {
+    const key = this.enabledMenuItems.find(x => x.active).key;
+    const element = document.getElementById(`menu-item-${key}`);
+    return element?.getBoundingClientRect().left ?? 0;
+  }
+
   public toggleMenu() {
     this.opened = !this.opened;
   }
