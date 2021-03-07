@@ -49,7 +49,7 @@ export class RoutingService {
     this._router.navigate(['account', 'help']);
   }
 
-  public navigateToAccount() {
+  public navigateToAccountMe() {
     this._router.navigate(['me']);
   }
 
