@@ -8,8 +8,6 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class MenuService {
   private readonly _facadeService: FacadeService;
   private _menuItems: MenuItem[];
-  private readonly _enabledItems = new BehaviorSubject<MenuItem[]>(null);
-  public readonly enabledItems$ = this._enabledItems.asObservable();
 
   constructor(facadeService: FacadeService) {
     this._facadeService = facadeService;
@@ -17,10 +15,8 @@ export class MenuService {
 
     const syncCfg = this._facadeService.getAllConfigs();
     this._menuItems = this.getMenuItemsFromConfigs(syncCfg);
-    this._enabledItems.next(this.enabledMenuItems);
     this._facadeService.updated.subscribe(cfg => {
       this._menuItems = this.getMenuItemsFromConfigs(cfg);
-      this._enabledItems.next(this.enabledMenuItems);
     });
     this._facadeService.activeMenuItem.subscribe(key => {
       this._menuItems.forEach(menuItem => {
@@ -39,7 +35,7 @@ export class MenuService {
     return returnValue.sort((a, b) => a.order - b.order);
   }
 
-  private get enabledMenuItems(): MenuItem[] {
+  public get enabledMenuItems(): MenuItem[] {
     return this._menuItems.filter(x => x.enabled());
   }
 

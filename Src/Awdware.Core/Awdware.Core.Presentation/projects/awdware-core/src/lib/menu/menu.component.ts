@@ -48,8 +48,8 @@ export class MenuComponent {
     }
   ];
 
-  public get enabledMenuItems(): Observable<MenuItem[]> {
-    return this._menuService.enabledItems$;
+  public get enabledMenuItems(): MenuItem[] {
+    return this._menuService.enabledMenuItems;
   }
 
   public toggleMenu() {
