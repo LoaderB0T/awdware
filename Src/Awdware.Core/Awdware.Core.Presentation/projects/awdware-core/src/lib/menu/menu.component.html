@@ -10,7 +10,7 @@
     <span class="text">Close</span>
   </div>
   <div class="menu-item"
-       *ngFor="let menuItem of enabledMenuItems | async"
+       *ngFor="let menuItem of enabledMenuItems"
        (click)="itemClicked(menuItem)"
        [class.selected]="menuItem.active">
     <div class="icon-container">

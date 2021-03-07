@@ -35,7 +35,7 @@ export const routes: Routes = [
           {
             path: 'account',
             component: AccountComponent,
-            data: { activePage: 'account' },
+            data: { activePage: 'login' },
             children: [
               {
                 path: 'login',
