@@ -6,7 +6,8 @@ import { FacadeService, AwdwareConfig, MenuItem } from '@awdware/shared';
 export const routes: Routes = [
   {
     path: 'blog',
-    loadChildren: () => import('./awdware-blog.module').then(m => m.AwdwareBlogModule)
+    loadChildren: () => import('./awdware-blog.module').then(m => m.AwdwareBlogModule),
+    data: { activePage: 'blog' }
   }
 ];
 

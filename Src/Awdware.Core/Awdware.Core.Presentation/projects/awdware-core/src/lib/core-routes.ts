@@ -35,6 +35,7 @@ export const routes: Routes = [
           {
             path: 'account',
             component: AccountComponent,
+            data: { activePage: 'account' },
             children: [
               {
                 path: 'login',
@@ -66,15 +67,18 @@ export const routes: Routes = [
           {
             path: 'me',
             component: MeComponent,
-            canActivate: [AuthGuard]
+            canActivate: [AuthGuard],
+            data: { activePage: 'me' }
           },
           {
             path: 'hello',
-            component: HomeComponent
+            component: HomeComponent,
+            data: { activePage: 'home' }
           },
           {
             path: 'settings',
-            component: SettingsComponent
+            component: SettingsComponent,
+            data: { activePage: 'settings' }
           }
         ]
       },

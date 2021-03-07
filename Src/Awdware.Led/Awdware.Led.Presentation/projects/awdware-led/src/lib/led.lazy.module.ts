@@ -7,7 +7,8 @@ import { Routes, RouterModule } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'led',
-    loadChildren: () => import('./led.module').then(m => m.LedModule)
+    loadChildren: () => import('./led.module').then(m => m.LedModule),
+    data: { activePage: 'led' }
   }
 ];
 

@@ -1,14 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AwdwareConfig, MenuItem, FacadeService } from '@awdware/shared';
+import { Component, Input } from '@angular/core';
+import { MenuItem } from '@awdware/shared';
+import { Observable } from 'rxjs';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'awd-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
-  private readonly _facadeService: FacadeService;
-  private _menuItems: MenuItem[];
+export class MenuComponent {
+  private readonly _menuService: MenuService;
+
+  constructor(menuService: MenuService) {
+    this._menuService = menuService;
+  }
 
   @Input()
   public hideToTop: boolean;
@@ -43,36 +48,8 @@ export class MenuComponent implements OnInit {
     }
   ];
 
-  constructor(facadeService: FacadeService) {
-    this._facadeService = facadeService;
-    this._menuItems = [];
-  }
-
-  ngOnInit() {
-    const syncCfg = this._facadeService.getAllConfigs();
-    this._menuItems = this.getMenuItemsFromConfigs(syncCfg);
-    this._facadeService.updated.subscribe(cfg => {
-      this._menuItems = this.getMenuItemsFromConfigs(cfg);
-    });
-    this._facadeService.activeMenuItem.subscribe(key => {
-      this._menuItems.forEach(menuItem => {
-        if (menuItem.key === key) {
-          menuItem.active = true;
-        } else {
-          menuItem.active = false;
-        }
-      });
-    });
-  }
-
-  private getMenuItemsFromConfigs(cfg: AwdwareConfig[]): MenuItem[] {
-    const returnValue = new Array<MenuItem>();
-    cfg?.forEach(x => returnValue.push(...x.menuItems));
-    return returnValue;
-  }
-
-  public get enabledMenuItems(): MenuItem[] {
-    return this._menuItems.filter(x => x.enabled()).sort((a, b) => a.order - b.order);
+  public get enabledMenuItems(): Observable<MenuItem[]> {
+    return this._menuService.enabledItems$;
   }
 
   public toggleMenu() {

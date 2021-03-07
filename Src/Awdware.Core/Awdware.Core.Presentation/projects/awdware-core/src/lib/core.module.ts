@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
   AwdwareCoreSharedModule,
@@ -27,7 +28,16 @@ import { SettingsModule } from './settings/settings.module';
 
 @NgModule({
   declarations: [MenuComponent, MeComponent, BaseComponent],
-  imports: [CommonModule, CoreRoutingModule, AwdwareCoreSharedModule, AccountModule, HomeModule, ErrorModule, SettingsModule],
+  imports: [
+    CommonModule,
+    CoreRoutingModule,
+    BrowserAnimationsModule,
+    AwdwareCoreSharedModule,
+    AccountModule,
+    HomeModule,
+    ErrorModule,
+    SettingsModule
+  ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }]
 })
 export class CoreModule {
@@ -67,11 +77,11 @@ export class CoreModule {
         () => this.showLoginButton()
       ),
       new MenuItem(
-        'account',
-        'Account',
+        'me',
+        'Me',
         'user',
         100,
-        () => routingService.navigateToAccount(),
+        () => routingService.navigateToAccountMe(),
         () => this.showAccountButton()
       ),
       new MenuItem(

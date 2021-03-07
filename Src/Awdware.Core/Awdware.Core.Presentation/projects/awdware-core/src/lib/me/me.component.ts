@@ -23,7 +23,7 @@ export class MeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._facadeService.setActiveMenuItem('account');
+    this._facadeService.setActiveMenuItem('me');
   }
 
   public get userInfo(): UserDetails {
