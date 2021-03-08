@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly _translateService: TranslateService;
   private readonly _routingService: RoutingService;
   private readonly _facadeService: FacadeService;
+  private _timeOut: NodeJS.Timeout;
 
   private readonly _theater = theaterJS({ locale: 'en' });
 
@@ -26,7 +27,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (!this._theater.getCurrentActor()) {
-      this.startTypingAnimation();
+      this._timeOut = setTimeout(() => {
+        this.startTypingAnimation();
+      }, 800);
     } else {
       this._theater.replay();
     }
@@ -35,6 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._theater.stop();
+    clearTimeout(this._timeOut);
   }
 
   private startTypingAnimation() {
@@ -46,6 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       const [text_hi, text_iam, text_ilike] = x as [string, string, string];
 
       this._theater
+        .addActor('me0', { accuracy: 0.2, speed: 1 }, '#textAnimation0')
         .addActor('me1', { accuracy: 0.2, speed: 1 }, '#textAnimation1')
         .addActor('me2', { accuracy: 1, speed: 1 }, '#textAnimation2')
         .addActor('me3', { accuracy: 1, speed: 1 }, '#textAnimation3')
@@ -53,7 +58,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         .addActor('me5', { accuracy: 0.75, speed: 1 }, '#textAnimation5')
         .addActor('me6', { accuracy: 0.5, speed: 1 }, '#textAnimation6')
         .addActor('me7', { accuracy: 0.5, speed: 1 }, '#textAnimation7')
-        .addScene(`me1:${text_hi}<br>`, `${text_iam} `, 500)
+        .addScene(`me0:${text_hi}`, 750)
+        .addScene(`me1:<br>${text_iam} `)
         .addScene('me2:Janik', 0)
         .addScene('me3:.<br>', 0)
         .addScene(1111)

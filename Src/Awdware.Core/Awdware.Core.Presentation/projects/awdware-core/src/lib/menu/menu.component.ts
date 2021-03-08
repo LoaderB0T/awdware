@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { MenuItem } from '@awdware/shared';
-import { Observable } from 'rxjs';
 import { MenuService } from '../services/menu.service';
 
 @Component({
@@ -24,27 +23,32 @@ export class MenuComponent {
     {
       icon: 'github',
       link: 'https://github.com/LoaderB0T',
-      text: 'GitHub'
+      text: 'GitHub',
+      color: '#fafafa'
     },
     {
       icon: 'twitter',
       link: 'https://twitter.com/TheLoaderB0T',
-      text: 'Twitter'
+      text: 'Twitter',
+      color: '#1DA1F2'
     },
     {
       icon: 'steam',
       link: 'https://steamcommunity.com/id/loaderb0t',
-      text: 'Steam'
+      text: 'Steam',
+      color: '#171a21'
     },
     {
       icon: 'linkedin-in',
       link: 'https://www.linkedin.com/in/janikschumacher/',
-      text: 'LinkedIn'
+      text: 'LinkedIn',
+      color: '#2867B2'
     },
     {
       icon: 'xing',
       link: 'https://www.xing.com/profile/Janik_Schumacher',
-      text: 'Xing'
+      text: 'Xing',
+      color: '#cfdc00'
     }
   ];
 
@@ -53,7 +57,7 @@ export class MenuComponent {
   }
 
   public get selectedMenuItemLeftPos(): number {
-    const key = this.enabledMenuItems.find(x => x.active).key;
+    const key = this.enabledMenuItems.find(x => x.active)?.key;
     const element = document.getElementById(`menu-item-${key}`);
     return element?.getBoundingClientRect().left ?? 0;
   }

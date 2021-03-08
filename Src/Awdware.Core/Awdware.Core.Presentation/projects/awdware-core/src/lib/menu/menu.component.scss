@@ -74,9 +74,9 @@
       font-size: 48px;
       .social-link {
         transition: color 0.2s;
-        color: var(--colorBgTertiary);
+        color: var(--colorPassiveContent);
         &:hover {
-          color: var(--colorHighlightColor1);
+          color: var(--colorBrandHover);
         }
         &:active {
           color: var(--colorHighlightColor2);
