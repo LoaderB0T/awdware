@@ -27,6 +27,7 @@
         <a *ngFor="let s of social"
            [href]="s.link"
            [title]="s.text"
+           style="--colorBrandHover: {{s.color}}"
            target="_blank"
            class="social-link">
           <i class="fab fa-{{s.icon}}"></i>
