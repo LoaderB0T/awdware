@@ -81,12 +81,12 @@ export class BaseComponent implements OnInit {
 
   public prepareRoute(outlet: RouterOutlet) {
     const activePage = outlet?.activatedRouteData?.activePage;
-    let dir = 1;
+    let dir = -1;
     if (activePage !== this._prevActiveRoute) {
       const prevIndex = this._menuService.menuItems?.find(x => x.key === this._prevActiveRoute)?.order ?? 0;
       const activeIndex = this._menuService.menuItems?.find(x => x.key === activePage)?.order ?? 0;
       if (prevIndex < activeIndex) {
-        dir = -1;
+        dir = 1;
       }
       this._prevActiveRoute = activePage;
     }
