@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterContentInit, Component, Input } from '@angular/core';
 import { MenuItem } from '@awdware/shared';
 import { MenuService } from '../services/menu.service';
 
@@ -7,8 +7,9 @@ import { MenuService } from '../services/menu.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent {
+export class MenuComponent implements AfterContentInit {
   private readonly _menuService: MenuService;
+  public showSelectedMenuItem: boolean;
 
   constructor(menuService: MenuService) {
     this._menuService = menuService;
@@ -60,6 +61,10 @@ export class MenuComponent {
     const key = this.enabledMenuItems.find(x => x.active)?.key;
     const element = document.getElementById(`menu-item-${key}`);
     return element?.getBoundingClientRect().left ?? 0;
+  }
+
+  ngAfterContentInit(): void {
+    this.showSelectedMenuItem = true;
   }
 
   public toggleMenu() {
