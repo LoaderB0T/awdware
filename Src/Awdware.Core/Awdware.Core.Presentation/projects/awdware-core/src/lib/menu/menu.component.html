@@ -1,37 +1,42 @@
 <div id="menu-container"
      [class.opened]="opened">
-  <div class="spacer"></div>
-  <div class="menu-item"
-       id="menu-close-button"
-       (click)="toggleMenu()">
-    <div class="icon-container">
-      <i class="icon fal fa-xmark"></i>
+  <div id="menu-list-box">
+
+    <div class="spacer"></div>
+    <div class="menu-item"
+         id="menu-close-button"
+         (click)="toggleMenu()">
+      <div class="icon-container">
+        <i class="icon fal fa-xmark"></i>
+      </div>
+      <span class="text">Close</span>
     </div>
-    <span class="text">Close</span>
-  </div>
-  <div class="menu-item"
-       id="menu-item-{{menuItem.key}}"
-       *ngFor="let menuItem of enabledMenuItems"
-       (click)="itemClicked(menuItem)">
-    <div class="icon-container">
-      <i class="icon fal fa-{{ menuItem.icon }}"
-         aria-hidden="true"></i>
+    <div class="menu-item"
+         id="menu-item-{{menuItem.key}}"
+         *ngFor="let menuItem of enabledMenuItems"
+         (click)="itemClicked(menuItem)"
+         [class.active]="menuItem.active">
+      <div class="icon-container">
+        <i class="icon fal fa-{{ menuItem.icon }}"
+           aria-hidden="true"></i>
+      </div>
+      <span class="text">{{ menuItem.text }}</span>
     </div>
-    <span class="text">{{ menuItem.text }}</span>
-  </div>
-  <div class="selected-menu-item"
-       [style.left.px]="selectedMenuItemLeftPos"></div>
-  <div class="spacer">
-    <div id="menu-social">
-      <div class="awd-row center">
-        <a *ngFor="let s of social"
-           [href]="s.link"
-           [title]="s.text"
-           style="--colorBrandHover: {{s.color}}"
-           target="_blank"
-           class="social-link">
-          <i class="fab fa-{{s.icon}}"></i>
-        </a>
+    <div *ngIf="showSelectedMenuItem"
+         class="selected-menu-item"
+         [style.left.px]="selectedMenuItemLeftPos"></div>
+    <div class="spacer">
+      <div id="menu-social">
+        <div class="awd-row center">
+          <a *ngFor="let s of social"
+             [href]="s.link"
+             [title]="s.text"
+             style="--colorBrandHover: {{s.color}}"
+             target="_blank"
+             class="social-link">
+            <i class="fab fa-{{s.icon}}"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
