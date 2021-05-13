@@ -13,7 +13,7 @@ export class UserDetailsService {
 
   constructor(eventService: EventService) {
     this._eventService = eventService;
-    this.userInfo = new UserDetails();
+    this.userInfo = {} as UserDetails;
   }
 
   public isLoggedIn(): boolean {

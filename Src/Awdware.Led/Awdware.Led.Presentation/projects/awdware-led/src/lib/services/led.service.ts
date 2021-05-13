@@ -18,7 +18,7 @@ export class LedService {
     this._apiService = apiService;
   }
 
-  public getEffetcs(): Observable<void> {
+  public getEffetcs(): Observable<null> {
     return this._apiService.get<Array<LedConfigurationDto>>('led/effects').pipe(
       tap(dtos => {
         dtos.sort((a, b) => a.ordinal - b.ordinal);
@@ -35,8 +35,8 @@ export class LedService {
     return this._apiService.delete<boolean>(`led/effect/${id}`);
   }
 
-  public updateEffect(newConfig: LedEffect): Observable<void> {
-    return this._apiService.put<void>('led/effect', newConfig.toDto());
+  public updateEffect(newConfig: LedEffect): Observable<null> {
+    return this._apiService.put<null>('led/effect', newConfig.toDto());
   }
 
   public addEffect(newConfig: LedEffect): Observable<string> {
@@ -49,7 +49,7 @@ export class LedService {
   }
 
   public selectEffect(id: string) {
-    return this._apiService.get<void>(`led/selecteffect/${id}`);
+    return this._apiService.get<null>(`led/selecteffect/${id}`);
   }
 
   public getConfigFile(id: string) {

@@ -6,10 +6,10 @@ import { InvalidOperationError } from '../models/invalid-operation-error';
   providedIn: 'root'
 })
 export class ThemeService {
-  public selectedTheme: Theme;
-  private _globalStyleSheet: CSSStyleSheet;
+  private _globalStyleSheet?: CSSStyleSheet;
 
   private readonly themes: Theme[] = [this.darkTheme, this.lightTheme];
+  public selectedTheme: Theme = this.themes[0];
 
   constructor() {}
 
@@ -53,8 +53,8 @@ export class ThemeService {
     localStorage.setItem('theme', theme.name);
   }
 
-  public getColor(key: string) {
-    return this.selectedTheme.props.find(x => x.name === key).value;
+  public getColor(key: string): string {
+    return this.selectedTheme.props.find(x => x.name === key)?.value ?? 'rgb(0,0,0)';
   }
 
   private get darkTheme(): Theme {
@@ -68,8 +68,8 @@ export class ThemeService {
       { name: 'colorHighlightContent04', value: 'rgba(0, 0, 0, 0.35)' },
       { name: 'colorHighlightContent10', value: 'rgba(0, 0, 0, 0.75)' },
       { name: 'colorHighlightContent', value: 'rgba(0, 15, 20, 1)' },
-      { name: 'colorHighlightColor1', value: 'rgb(255 0 82)' },
-      { name: 'colorHighlightColor2', value: 'rgb(255 167 0)' },
+      { name: 'colorHighlightColor1', value: 'rgb(255, 0, 82)' },
+      { name: 'colorHighlightColor2', value: 'rgb(255, 167, 0)' },
       { name: 'colorError', value: 'rgb(238, 31, 16)' }
     ];
     return theme;

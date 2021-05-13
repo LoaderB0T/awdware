@@ -30,18 +30,18 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
   public contentLeft: number = 100;
   public opened = this._opened.asObservable();
 
-  private _value: string;
-  private _isFocused: boolean;
-  private _isDisabled: boolean;
+  private _value: string = '';
+  private _isFocused: boolean = false;
+  private _isDisabled: boolean = false;
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
 
-  @ViewChild('selectButton') selectButton: ElementRef<HTMLButtonElement>;
-  @ViewChild('selectContent') selectContent: ElementRef<HTMLDivElement>;
+  @ViewChild('selectButton') selectButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('selectContent') selectContent?: ElementRef<HTMLDivElement>;
 
-  @Input() public options: SelectOption[];
-  @Input() public isReadOnly: boolean;
-  @Input() public label: string;
+  @Input() public options: SelectOption[] = [];
+  @Input() public isReadOnly: boolean = false;
+  @Input() public label: string = '';
   @Input() public set triggerChangeDetection(value: number) {
     this.ref.detectChanges();
   }
@@ -49,7 +49,9 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
   @Output() selectionChanged = new EventEmitter<string>();
   @Output() toggled = new EventEmitter<boolean>();
 
-  constructor(private readonly ref: ChangeDetectorRef) {}
+  constructor(private readonly ref: ChangeDetectorRef) {
+    this.id = Math.random().toString(36).slice(2);
+  }
 
   setDisabledState?(isDisabled: boolean): void {
     this._isDisabled = isDisabled;
@@ -78,13 +80,12 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
   }
 
   private measureLength(text: string): number {
-    const ruler = document.getElementById('ruler');
+    const ruler = document.getElementById('ruler')!;
     ruler.innerHTML = text;
     return ruler.offsetWidth;
   }
 
   ngOnInit(): void {
-    this.id = Math.random().toString(36).slice(2);
     this.ref.detach();
     this.ref.detectChanges();
     // setInterval(() => {
@@ -110,10 +111,10 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
 
       this.ref.detectChanges();
 
-      const btnY = this.selectButton.nativeElement.getClientRects()[0].top;
-      const btnX = this.selectButton.nativeElement.getClientRects()[0].left;
-      const btnHeight = this.selectButton.nativeElement.getClientRects()[0].height;
-      const contentHeight = this.selectContent.nativeElement.clientHeight;
+      const btnY = this.selectButton!.nativeElement.getClientRects()[0].top;
+      const btnX = this.selectButton!.nativeElement.getClientRects()[0].left;
+      const btnHeight = this.selectButton!.nativeElement.getClientRects()[0].height;
+      const contentHeight = this.selectContent!.nativeElement.clientHeight;
 
       this.contentTop = btnY - contentHeight;
       if (contentHeight + btnY + btnHeight > window.innerHeight) {
@@ -132,7 +133,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
   }
 
   private calculateWidth() {
-    this.contentWidth = this.selectButton.nativeElement.clientWidth;
+    this.contentWidth = this.selectButton!.nativeElement.clientWidth;
     if (this.options) {
       this.options.forEach(option => {
         // 36 = magic number that is the span width (inc. padding / border, etc.)
@@ -143,7 +144,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
       });
     }
     // max 10px to the right window border
-    const maxWidth = window.innerWidth - this.selectButton.nativeElement.getClientRects()[0].left - 10;
+    const maxWidth = window.innerWidth - this.selectButton!.nativeElement.getClientRects()[0].left - 10;
     if (this.contentWidth > maxWidth) {
       this.contentWidth = maxWidth;
     }
@@ -158,7 +159,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
       return '';
     }
     const optionItem = this.options.find(x => x.key === this._value);
-    return optionItem.text;
+    return optionItem!.text;
   }
 
   public onClickedOutside() {

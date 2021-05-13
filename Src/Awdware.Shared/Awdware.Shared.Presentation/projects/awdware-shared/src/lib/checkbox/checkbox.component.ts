@@ -15,26 +15,26 @@ export enum CheckedState {
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: CheckboxComponent, multi: true }]
 })
 export class CheckboxComponent implements OnInit, ControlValueAccessor, OnDestroy {
-  @Input() public labelText: string;
-  @Input() public identifier: string;
+  @Input() public labelText: string = '';
+  @Input() public identifier: string = '';
   @Input() public iconName: string = 'check';
-  @Input() public color: string;
-  @Input() public inputTabIndex: number;
+  @Input() public color: string = '';
+  @Input() public inputTabIndex: number = 99999;
   @Input() set isReadonly(value: boolean) {
     this.readonly = value;
     if (this.ref) {
       this.ref.detectChanges();
     }
   }
-  @Input() public forcedChecked: boolean;
+  @Input() public forcedChecked: boolean = false;
   @Input() public allowUndefinedState: boolean = false;
   @Output() private readonly stateChanged = new EventEmitter<boolean>();
-  public isDisabled: boolean;
-  private checked: CheckedState;
-  public readonly: boolean;
+  public isDisabled: boolean = false;
+  private checked: CheckedState = CheckedState.UNCHECKED;
+  public readonly: boolean = false;
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
-  private ref: ChangeDetectorRef;
+  private ref: ChangeDetectorRef | null;
 
   constructor(ref: ChangeDetectorRef) {
     this.ref = ref;
@@ -48,7 +48,7 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor, OnDestro
     if (this.checked === undefined) {
       this.checked = CheckedState.UNCHECKED;
     }
-    this.ref.detectChanges();
+    this.ref?.detectChanges();
   }
 
   public get getLabelText(): string {
@@ -67,9 +67,7 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor, OnDestro
     }
     this.onChangeCallback(value);
     this.stateChanged.next(this.isChecked);
-    if (this.ref) {
-      this.ref.detectChanges();
-    }
+    this.ref?.detectChanges();
   }
 
   public clicked(event: Event) {

@@ -1,5 +1,5 @@
 import { MenuItem } from './menu-item';
 
-export class AwdwareConfig {
-  public menuItems: MenuItem[];
+export interface AwdwareConfig {
+  menuItems: MenuItem[];
 }

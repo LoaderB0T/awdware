@@ -4,9 +4,9 @@ import { AwdwareConfig } from '../models/awdware-config';
 
 @Injectable({ providedIn: 'root' })
 export class FacadeService {
-  private $updated = new Subject<AwdwareConfig[]>();
-  private $activeMenuItem = new Subject<string>();
-  public configurations: { key: string; config: AwdwareConfig }[];
+  private readonly $updated = new Subject<AwdwareConfig[]>();
+  private readonly $activeMenuItem = new Subject<string>();
+  public configurations: { key: string; config: AwdwareConfig }[] = [];
   public updated = this.$updated.asObservable();
   public activeMenuItem = this.$activeMenuItem.asObservable();
 

@@ -1,5 +1,5 @@
-export class SelectOption {
-  public text: string;
-  public icon: string;
-  public key: string;
+export interface SelectOption {
+  text: string;
+  icon: string;
+  key: string;
 }

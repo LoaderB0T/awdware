@@ -1,10 +1,10 @@
 import { UserPermission } from './application-facade';
 
-export class UserDetails {
-  public userId: string;
-  public username: string;
-  public firstname: string;
-  public lastname: string;
-  public email: string;
-  public permission: UserPermission;
+export interface UserDetails {
+  userId: string;
+  username: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  permission: UserPermission;
 }

@@ -31,39 +31,42 @@ export class LedEffect {
     newLedConfig.id = dto.id;
     newLedConfig.props = new Array<LedEffectProperty>();
     if (dto.ledEffect.properties) {
-      newLedConfig.props = dto.ledEffect.properties.map(propDto => {
-        switch (propDto.effectType) {
-          case LedEffectPropertyKind.BOOL:
-            return new LedEffectBoolProperty(propDto.id, propDto.name, propDto.value && true);
-          case LedEffectPropertyKind.COLOR:
-            return new LedEffectColorProperty(propDto.id, propDto.name, propDto.value);
-          case LedEffectPropertyKind.NUMBER:
-            return new LedEffectNumberProperty(
-              propDto.id,
-              propDto.name,
-              Number.parseInt(propDto.value, 10),
-              propDto.minValue,
-              propDto.maxValue
-            );
-          case LedEffectPropertyKind.STRING:
-            return new LedEffectStringProperty(propDto.id, propDto.name, propDto.value);
-          default:
-            return null;
-        }
-      });
+      newLedConfig.props = dto.ledEffect.properties
+        .map(propDto => {
+          switch (propDto.effectType) {
+            case LedEffectPropertyKind.BOOL:
+              return new LedEffectBoolProperty(propDto.id, propDto.name, !!propDto.value);
+            case LedEffectPropertyKind.COLOR:
+              return new LedEffectColorProperty(propDto.id, propDto.name, propDto.value);
+            case LedEffectPropertyKind.NUMBER:
+              return new LedEffectNumberProperty(
+                propDto.id,
+                propDto.name,
+                Number.parseInt(propDto.value, 10),
+                propDto.minValue,
+                propDto.maxValue
+              );
+            case LedEffectPropertyKind.STRING:
+              return new LedEffectStringProperty(propDto.id, propDto.name, propDto.value);
+            default:
+              return undefined;
+          }
+        })
+        .filter(x => !!x)
+        .map(x => x as LedEffectProperty);
     }
     return newLedConfig;
   }
 
   public toDto(): LedConfigurationDto {
-    const ledCOnfigDto = new LedConfigurationDto();
+    const ledCOnfigDto = {} as LedConfigurationDto;
     ledCOnfigDto.id = this.id;
     ledCOnfigDto.name = this.name;
 
-    ledCOnfigDto.ledEffect = new LedEffectDto();
+    ledCOnfigDto.ledEffect = {} as LedEffectDto;
     ledCOnfigDto.ledEffect.effectKind = this.effectKind;
     ledCOnfigDto.ledEffect.properties = this.props.map(prop => {
-      const propDto = new LedEffectPropertyDto();
+      const propDto = {} as LedEffectPropertyDto;
 
       if (prop.effectType === LedEffectPropertyKind.NUMBER) {
         propDto.maxValue = (prop as LedEffectNumberProperty).maxVal;

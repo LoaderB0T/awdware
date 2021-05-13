@@ -10,10 +10,10 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./tab-view.component.scss']
 })
 export class TabViewComponent implements OnInit {
-  private _activatedRoute: ActivatedRoute;
+  private readonly _activatedRoute: ActivatedRoute;
   @Input()
-  public content: TabViewContent;
-  private _sanitizer: DomSanitizer;
+  public content?: TabViewContent;
+  private readonly _sanitizer: DomSanitizer;
 
   constructor(activatedRoute: ActivatedRoute, sanitizer: DomSanitizer) {
     this._activatedRoute = activatedRoute;
@@ -21,13 +21,16 @@ export class TabViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._activatedRoute.url.subscribe(x => {
-      this.content.selectedTabId = this._activatedRoute.snapshot.firstChild.url[0].path;
+    this._activatedRoute.url.subscribe(() => {
+      if (!this.content) {
+        return;
+      }
+      this.content.selectedTabId = this._activatedRoute.snapshot.firstChild?.url[0]?.path ?? this.content.selectedTabId;
     });
   }
 
   public get cssVariablesStyle() {
-    return this._sanitizer.bypassSecurityTrustStyle(`--tabCount: ${this.content.tabs.length};`);
+    return this._sanitizer.bypassSecurityTrustStyle(`--tabCount: ${this.content?.tabs.length ?? 1};`);
   }
 
   public selectTab(tab: TabViewTab) {

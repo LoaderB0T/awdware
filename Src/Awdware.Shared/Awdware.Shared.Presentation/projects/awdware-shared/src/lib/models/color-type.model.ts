@@ -16,7 +16,7 @@ export class ColorType {
 
   public static fromCssPropertyString(cssProp: string) {
     const match = cssProp.match(this.colorRegex);
-    return new ColorType(Number.parseInt(match[1], 10), Number.parseInt(match[2], 10), Number.parseInt(match[3], 10));
+    return new ColorType(Number.parseInt(match![1]!, 10), Number.parseInt(match![2]!, 10), Number.parseInt(match![3]!, 10));
   }
 
   public static fromHex(hex: string) {

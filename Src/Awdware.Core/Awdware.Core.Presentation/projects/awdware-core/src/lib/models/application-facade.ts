@@ -1,56 +1,56 @@
-export class LoginHelpRequestDto {
-  public email: string;
-  public forgotUsername: boolean;
-  public forgotPassword: boolean;
+export interface LoginHelpRequestDto {
+  email: string;
+  forgotUsername: boolean;
+  forgotPassword: boolean;
 }
 
-export class LoginRequestDto {
-  public username: string;
-  public password: string;
+export interface LoginRequestDto {
+  username: string;
+  password: string;
 }
 
-export class LoginResponseDto {
-  public loginSuccess: LoginResult;
-  public userInfo: UserDetailsDto;
-  public token: string;
+export interface LoginResponseDto {
+  loginSuccess: LoginResult;
+  userInfo: UserDetailsDto;
+  token: string;
 }
 
-export class RegisterRequestDto {
-  public username: string;
-  public password: string;
-  public password2: string;
-  public email: string;
-  public firstname: string;
-  public lastname: string;
+export interface RegisterRequestDto {
+  username: string;
+  password: string;
+  password2: string;
+  email: string;
+  firstname: string;
+  lastname: string;
 }
 
-export class RegisterResponseDto {
-  public registerSuccess: RegisterResult;
-  public userInfo: UserDetailsDto;
-  public token: string;
+export interface RegisterResponseDto {
+  registerSuccess: RegisterResult;
+  userInfo: UserDetailsDto;
+  token: string;
 }
 
-export class ResetPasswordDto {
-  public token: string;
-  public newPassword: string;
+export interface ResetPasswordDto {
+  token: string;
+  newPassword: string;
 }
 
-export class TokenDto {
-  public token: string;
+export interface TokenDto {
+  token: string;
 }
 
-export class UserDetailsDto {
-  public userId: string;
-  public username: string;
-  public firstname: string;
-  public lastname: string;
-  public email: string;
-  public permission: UserPermission;
+export interface UserDetailsDto {
+  userId: string;
+  username: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  permission: UserPermission;
 }
 
-export class UserInfoDto {
-  public id: string;
-  public username: string;
+export interface UserInfoDto {
+  id: string;
+  username: string;
 }
 
 export enum ConfirmEmailStatus {
