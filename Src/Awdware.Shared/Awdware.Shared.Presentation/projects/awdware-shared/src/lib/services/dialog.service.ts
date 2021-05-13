@@ -6,18 +6,18 @@ import { BaseDialog } from '../models/base-dialog.model';
   providedIn: 'root'
 })
 export class DialogService {
-  private _factoryResolver: ComponentFactoryResolver;
-  private _rootViewContainer: ViewContainerRef;
+  private readonly _factoryResolver: ComponentFactoryResolver;
+  private _rootViewContainer?: ViewContainerRef;
   private _subMgrs = new Array<{ id: string; mgr: SubscriptionManager }>();
 
-  public dialogVisible: boolean;
+  public dialogVisible: boolean = false;
 
   constructor(factoryResolver: ComponentFactoryResolver) {
     this._factoryResolver = factoryResolver;
   }
 
   public hideAllDialogs() {
-    this._rootViewContainer.clear();
+    this._rootViewContainer?.clear();
     this._subMgrs.forEach(subMgr => {
       subMgr.mgr.unsubscribeAll();
     });
@@ -29,20 +29,25 @@ export class DialogService {
     this._rootViewContainer = viewContainerRef;
   }
 
-  public showComponentDialog<T extends BaseDialog>(componentType: new (...args) => T): T {
+  public showComponentDialog<T extends BaseDialog>(componentType: new (...args: any[]) => T): T {
+    if (!this._rootViewContainer) {
+      throw new Error('setRootViewContainerRef has not been called yet');
+    }
+    const rootViewContainer = this._rootViewContainer as ViewContainerRef;
+
     const newId = this.getRandomId();
 
     this._subMgrs.push({ id: newId, mgr: new SubscriptionManager() });
     const factory = this._factoryResolver.resolveComponentFactory<T>(componentType);
-    const component = factory.create(this._rootViewContainer.parentInjector);
+    const component = factory.create(rootViewContainer.parentInjector);
 
     if (component.instance.closeDialog) {
       const hideSub = component.instance.closeDialog.subscribe((id: string) => {
-        const indexToRemove = this._rootViewContainer.indexOf(component.hostView);
+        const indexToRemove = rootViewContainer.indexOf(component.hostView);
 
-        this._rootViewContainer.remove(indexToRemove);
+        rootViewContainer.remove(indexToRemove);
         this._subMgrs.find(subMgr => subMgr.id === id)?.mgr?.unsubscribeAll();
-        if (this._rootViewContainer.length === 0) {
+        if (rootViewContainer.length === 0) {
           this.dialogVisible = false;
         }
       });
@@ -53,7 +58,7 @@ export class DialogService {
       console.warn(component.instance);
     }
 
-    this._rootViewContainer.insert(component.hostView);
+    rootViewContainer.insert(component.hostView);
     this.dialogVisible = true;
     return component.instance;
   }

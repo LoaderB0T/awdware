@@ -18,7 +18,7 @@ export const routes: Routes = [
 export class LedLazyModule {
   constructor(routingService: RoutingService, facadeService: FacadeService) {
     console.log('constructor: LedLazyModule');
-    const config = new AwdwareConfig();
+    const config = {} as AwdwareConfig;
     config.menuItems = [
       new MenuItem(
         'led',

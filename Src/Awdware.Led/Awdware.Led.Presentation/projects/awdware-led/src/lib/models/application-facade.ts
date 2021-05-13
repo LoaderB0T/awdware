@@ -1,24 +1,24 @@
-export class LedConfigFileDto {
-  public serverHost: string;
-  public serverPort: number;
-  public serverUseHttps: boolean;
-  public userId: string;
-  public configName: string;
-  public comPortName: string;
-  public id: string;
+export interface LedConfigFileDto {
+  serverHost: string;
+  serverPort: number;
+  serverUseHttps: boolean;
+  userId: string;
+  configName: string;
+  comPortName: string;
+  id: string;
 }
 
-export class LedConfigurationDto {
-  public id: string;
-  public name: string;
-  public ordinal: number;
-  public userId: string;
-  public ledEffect: LedEffectDto;
+export interface LedConfigurationDto {
+  id: string;
+  name: string;
+  ordinal: number;
+  userId: string;
+  ledEffect: LedEffectDto;
 }
 
-export class LedEffectDto {
-  public effectKind: LedEffectKind;
-  public properties: Array<LedEffectPropertyDto>;
+export interface LedEffectDto {
+  effectKind: LedEffectKind;
+  properties: Array<LedEffectPropertyDto>;
 }
 
 export enum LedEffectKind {
@@ -39,29 +39,29 @@ export enum LedEffectPropertyKind {
   STRING = 4
 }
 
-export class LedEffectPropertyDto {
-  public id: number;
-  public name: string;
-  public effectType: LedEffectPropertyKind;
-  public value: string;
-  public minValue?: number;
-  public maxValue?: number;
+export interface LedEffectPropertyDto {
+  id: number;
+  name: string;
+  effectType: LedEffectPropertyKind;
+  value: string;
+  minValue?: number;
+  maxValue?: number;
 }
 
-export class LedImageDto {
-  public leds: RgbColorDto;
-  public transitionTime: number;
+export interface LedImageDto {
+  leds: RgbColorDto;
+  transitionTime: number;
 }
 
-export class LedSettingsDto {
-  public userId: string;
-  public settingName: string;
-  public comPortName: string;
-  public id: string;
+export interface LedSettingsDto {
+  userId: string;
+  settingName: string;
+  comPortName: string;
+  id: string;
 }
 
-export class RgbColorDto {
-  public r: number;
-  public g: number;
-  public b: number;
+export interface RgbColorDto {
+  r: number;
+  g: number;
+  b: number;
 }

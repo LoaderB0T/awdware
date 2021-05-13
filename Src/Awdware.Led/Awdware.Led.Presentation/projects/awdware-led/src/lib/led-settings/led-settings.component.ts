@@ -29,18 +29,18 @@ export class LedSettingsComponent extends BaseDialog implements OnInit {
 
   public get selectOptions(): SelectOption[] {
     return this.settingsList.map(x => {
-      const newOption = new SelectOption();
+      const newOption = {} as SelectOption;
       newOption.key = x.id;
       newOption.text = x.settingName;
       return newOption;
     });
   }
 
-  public get currentSettings(): LedSettingsDto {
+  public get currentSettings(): LedSettingsDto | undefined {
     if (this.selectedOptionName) {
       return this.settingsList.find(x => x.id === this.selectedOptionName);
     } else {
-      return null;
+      return undefined;
     }
   }
 
@@ -51,7 +51,7 @@ export class LedSettingsComponent extends BaseDialog implements OnInit {
     if (this.settingsList.length > 0) {
       this.selectedOptionName = this.settingsList[0].id;
     } else {
-      this.selectedOptionName = null;
+      this.selectedOptionName = '';
     }
   }
 

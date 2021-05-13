@@ -23,18 +23,18 @@ import { DomSanitizer } from '@angular/platform-browser';
   ]
 })
 export class TextboxComponent implements OnInit, ControlValueAccessor, Validator {
-  @Input() private validationDefinitions: ValidationDefinition[] = new Array<ValidationDefinition>();
+  @Input() public validationDefinitions: ValidationDefinition[] = new Array<ValidationDefinition>();
   @Input() public fontSize: number = 16;
-  @Input() public name: string;
-  @Input() public placeholder: string;
-  @Input() public pattern: string;
-  @Input() public minLength: number;
+  @Input() public name: string = '';
+  @Input() public placeholder: string = '';
+  @Input() public pattern: string = '';
+  @Input() public minLength: number = 0;
   @Input() public maxLength: number = 524288;
-  @Input() public inputTabIndex: number;
+  @Input() public inputTabIndex: number = 99999;
   @Input() public inputType: InputType = InputType.TEXT;
-  @Input() public icon: string;
-  @Input() public icon2: string;
-  @Input() public hidePlaceholderOnInput: boolean;
+  @Input() public icon: string = '';
+  @Input() public icon2: string = '';
+  @Input() public hidePlaceholderOnInput: boolean = false;
   @Input() public minValue: number = -1;
   @Input() public maxValue: number = -1;
 
@@ -45,17 +45,18 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
     this.shouldMatchValue = value;
     this.onChangeCallback(this.value);
   }
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly
   @ViewChild('inputField', { static: true })
-  private inputElement: ElementRef<HTMLInputElement>;
+  private inputElement?: ElementRef<HTMLInputElement>;
 
   public isDisabled: boolean = false;
   public isFocused: boolean = false;
   private innerValue: any = '';
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
-  private shouldMatchValue: string;
-  private _control: AbstractControl;
-  private _sanitizer: DomSanitizer;
+  private shouldMatchValue?: string;
+  private _control?: AbstractControl;
+  private readonly _sanitizer: DomSanitizer;
 
   constructor(sanitizer: DomSanitizer) {
     this._sanitizer = sanitizer;
@@ -87,6 +88,9 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   }
 
   public get validationError(): string {
+    if (!this._control) {
+      return '';
+    }
     const myValidity = this.validate(this._control);
 
     if (!myValidity) {
@@ -100,10 +104,10 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
     this.isDisabled = isDisabled;
   }
 
-  public validate(control: AbstractControl): ValidationErrors {
+  public validate(control: AbstractControl): ValidationErrors | null {
     let isInvalid = false;
     this._control = control;
-    let reason: string;
+    let reason: string | undefined;
 
     if (this.shouldMatchValue) {
       if (this.value !== this.shouldMatchValue) {
@@ -113,20 +117,20 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
       }
     }
 
-    if (!this.inputElement.nativeElement.validity.valid) {
+    if (!this.inputElement?.nativeElement.validity.valid) {
       isInvalid = true;
     }
 
     if (isInvalid) {
-      if (this.inputElement.nativeElement.validity.tooShort) {
+      if (this.inputElement?.nativeElement.validity.tooShort) {
         const valDef = this.validationDefinitions.find(x => x.type === ValidationErrorType.TOO_SHORT);
         reason = valDef && valDef.translationKey;
       }
-      if (this.inputElement.nativeElement.validity.tooLong) {
+      if (this.inputElement?.nativeElement.validity.tooLong) {
         const valDef = this.validationDefinitions.find(x => x.type === ValidationErrorType.TOO_LONG);
         reason = valDef && valDef.translationKey;
       }
-      if (this.inputElement.nativeElement.validity.patternMismatch) {
+      if (this.inputElement?.nativeElement.validity.patternMismatch) {
         const valDef = this.validationDefinitions.find(x => x.type === ValidationErrorType.PATTERN_MISMATCH);
         reason = valDef && valDef.translationKey;
       }

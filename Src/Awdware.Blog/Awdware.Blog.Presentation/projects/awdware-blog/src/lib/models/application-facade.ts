@@ -1,26 +1,26 @@
-export class BlogPostDetailsDto {
-  public postType: BlogPostType;
-  public id: string;
-  public title: string;
-  public content: string;
-  public locale: string;
-  public translations: Array<BlogPostTranslationDto>;
-  public dateTime: string;
+export interface BlogPostDetailsDto {
+  postType: BlogPostType;
+  id: string;
+  title: string;
+  content: string;
+  locale: string;
+  translations: Array<BlogPostTranslationDto>;
+  dateTime: string;
 }
 
-export class BlogPostDto {
-  public postType: BlogPostType;
-  public id: string;
-  public title: string;
-  public preview: string;
-  public locale: string;
-  public translations: Array<BlogPostTranslationDto>;
-  public dateTime: string;
+export interface BlogPostDto {
+  postType: BlogPostType;
+  id: string;
+  title: string;
+  preview: string;
+  locale: string;
+  translations: Array<BlogPostTranslationDto>;
+  dateTime: string;
 }
 
-export class BlogPostTranslationDto {
-  public key: string;
-  public value: string;
+export interface BlogPostTranslationDto {
+  key: string;
+  value: string;
 }
 
 export enum BlogPostType {

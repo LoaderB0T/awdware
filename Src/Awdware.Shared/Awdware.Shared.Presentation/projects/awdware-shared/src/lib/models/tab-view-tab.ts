@@ -1,5 +1,5 @@
-export class TabViewTab {
-  public id: string;
-  public text: string;
-  public clicked: () => void;
+export interface TabViewTab {
+  id: string;
+  text: string;
+  clicked: () => void;
 }

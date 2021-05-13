@@ -27,8 +27,8 @@
             }
           },
           {
-            "name": "@awdware/gah-angular-json-plugin",
-            "version": "0.2.0",
+            "name": "@gah/json-config-plugin",
+            "version": "0.4.1",
             "settings": {
               "ngJson": {
                 "projects": {
@@ -47,6 +47,12 @@
                       }
                     }
                   }
+                }
+              },
+              "tsConfigJson": {
+                "compilerOptions": {
+                  "strict": false,
+                  "noImplicitReturns": false
                 }
               }
             }

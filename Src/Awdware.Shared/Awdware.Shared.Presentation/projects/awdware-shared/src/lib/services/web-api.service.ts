@@ -7,7 +7,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class WebApiService {
-  private baseUrl: string;
+  private baseUrl: string = '';
 
   constructor(private readonly httpClient: HttpClient) {
     console.log('web api service constructor called');
@@ -86,7 +86,7 @@ export class WebApiService {
   private handleError<T>(result?: T) {
     return (error: HttpErrorResponse): Observable<T> => {
       console.error(error);
-      return of(result);
+      return of(result as T);
     };
   }
 }

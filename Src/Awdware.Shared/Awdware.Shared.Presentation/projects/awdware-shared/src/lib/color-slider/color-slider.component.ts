@@ -10,17 +10,17 @@ import { ColorType } from '../models/color-type.model';
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: ColorSliderComponent, multi: true }]
 })
 export class ColorSliderComponent implements OnInit, ControlValueAccessor {
-  @Input() public inputTabIndex: number;
-  @Input() public name: string;
-  @Input() public labelText: string;
+  @Input() public inputTabIndex: number = 99999;
+  @Input() public name: string = '';
+  @Input() public labelText: string = '';
   @Output() public valueChanged = new EventEmitter<string>();
 
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
   private rgbColor: ColorType = new ColorType(0, 0, 0);
-  private innerValue: string;
-  public isDisabled: boolean;
-  public isFocused: boolean;
+  private innerValue: string = '';
+  public isDisabled: boolean = false;
+  public isFocused: boolean = false;
 
   public get r(): number {
     return this.rgbColor.r;

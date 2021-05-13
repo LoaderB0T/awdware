@@ -17,7 +17,7 @@ export const routes: Routes = [
 export class AwdwareLazyBlogModule {
   constructor(routingService: RoutingService, facadeService: FacadeService) {
     console.log('constructor: AwdwareBlogLazyModule');
-    const config = new AwdwareConfig();
+    const config = {} as AwdwareConfig;
     config.menuItems = [
       new MenuItem(
         'blog',

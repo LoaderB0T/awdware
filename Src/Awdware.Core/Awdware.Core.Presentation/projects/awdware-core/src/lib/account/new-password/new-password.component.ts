@@ -15,7 +15,7 @@ import { ResetPasswordDto } from '../../models/application-facade';
 export class NewPasswordComponent implements OnInit, OnDestroy {
   public inputType: typeof InputType = InputType;
 
-  public resetPw = new ResetPasswordDto();
+  public resetPw = {} as ResetPasswordDto;
   public pwConf: string;
   public clickedButton = false;
 

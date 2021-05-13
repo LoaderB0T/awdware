@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AccountService } from '../services/account.service';
@@ -12,7 +12,7 @@ import { SubscriptionManager, InputType } from '@awdware/shared';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnDestroy {
   inputType = InputType;
 
   public errorMessageKey: string;
@@ -30,10 +30,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(accountService: AccountService, routingService: RoutingService) {
     this._accountService = accountService;
     this._routingService = routingService;
-    this.loginModel = new LoginRequestDto();
+    this.loginModel = {} as LoginRequestDto;
   }
-
-  public ngOnInit(): void {}
 
   public onSubmit(): void {
     this.login();

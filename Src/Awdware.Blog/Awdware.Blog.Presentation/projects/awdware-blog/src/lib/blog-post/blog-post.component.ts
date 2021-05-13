@@ -16,28 +16,28 @@ export class BlogPostComponent implements OnInit {
     this._routingService = routingService;
   }
 
-  @Input() post: BlogPostDto | BlogPostDetailsDto;
-  @Input() showEditButton: boolean;
+  @Input() post?: BlogPostDto | BlogPostDetailsDto;
+  @Input() showEditButton: boolean = false;
 
   public get showEdit(): boolean {
     return this.showEditButton && this._userService.userInfo.permission === UserPermission.OPERATOR;
   }
 
   public get isDetails(): boolean {
-    return this.post.postType === BlogPostType.DETAILS;
+    return this.post?.postType === BlogPostType.DETAILS;
   }
 
-  public get postDetails(): BlogPostDetailsDto {
+  public get postDetails(): BlogPostDetailsDto | undefined {
     return this.post as BlogPostDetailsDto;
   }
 
-  public get postPreview(): BlogPostDto {
+  public get postPreview(): BlogPostDto | undefined {
     return this.post as BlogPostDto;
   }
 
   public translateText(blogText: string) {
     return blogText.replace(/{{([a-zA-Z0-9-]+)}}/g, (fullMatch, contentKey) => {
-      const translation = this.post.translations.find(x => x.key === contentKey);
+      const translation = this.post?.translations.find(x => x.key === contentKey);
       if (!translation?.value) {
         console.warn(`Missing translation in blog for '${contentKey}'`);
         return `##${contentKey}##`;

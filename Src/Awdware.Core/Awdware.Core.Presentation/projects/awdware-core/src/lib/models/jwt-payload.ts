@@ -1,7 +1,7 @@
-export class JwtPayload {
-  public userId: string;
-  public nbf: number;
-  public exp: number;
-  public iss: string;
-  public aud: string;
+export interface JwtPayload {
+  userId: string;
+  nbf: number;
+  exp: number;
+  iss: string;
+  aud: string;
 }

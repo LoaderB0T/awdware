@@ -14,8 +14,8 @@ export class LoginHelpComponent implements OnInit, OnDestroy {
   public inputType: typeof InputType = InputType;
 
   public loginHelpModel: LoginHelpRequestDto;
-  public clickedButton: boolean;
-  public errorMessageKey: string;
+  public clickedButton: boolean = false;
+  public errorMessageKey?: string;
   public emailHasBeenSend = false;
   private readonly _accountService: AccountService;
   private readonly _subMgr = new SubscriptionManager();
@@ -26,7 +26,7 @@ export class LoginHelpComponent implements OnInit, OnDestroy {
   constructor(accountService: AccountService) {
     this._accountService = accountService;
     this.errorMessageKey = '';
-    this.loginHelpModel = new LoginHelpRequestDto();
+    this.loginHelpModel = {} as LoginHelpRequestDto;
   }
 
   public ngOnInit(): void {}

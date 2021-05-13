@@ -19,7 +19,7 @@ export class LedComponent implements OnInit, OnDestroy {
   private readonly _facadeService: FacadeService;
   private readonly _subMgr = new SubscriptionManager();
 
-  public ledSettings: LedSettingsDto[];
+  public ledSettings: LedSettingsDto[] = [];
 
   constructor(ledService: LedService, dialogService: DialogService, facadeService: FacadeService) {
     this._ledService = ledService;

@@ -16,7 +16,7 @@ export class Theme {
   }
 }
 
-export class ThemeProperty {
-  public name: string;
-  public value: string;
+export interface ThemeProperty {
+  name: string;
+  value: string;
 }

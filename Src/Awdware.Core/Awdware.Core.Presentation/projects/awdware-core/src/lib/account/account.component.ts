@@ -18,7 +18,7 @@ export class AccountComponent implements OnInit {
     this._routingService = routingService;
     this._facadeService = facadeService;
 
-    this.accountTabContent = new TabViewContent();
+    this.accountTabContent = {} as TabViewContent;
     this.accountTabContent.tabs = [
       { id: 'login', text: 'account.login.heading', clicked: () => this._routingService.navigateToAccountLogin() },
       { id: 'register', text: 'account.register.heading', clicked: () => this._routingService.navigateToAccountRegister() },

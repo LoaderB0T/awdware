@@ -12,7 +12,7 @@ import { RoutingService } from '../../services/routing.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnDestroy {
   public inputType: typeof InputType = InputType;
 
   public errorMessageKey: string;
@@ -30,10 +30,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this._accountService = accountService;
     this._routingService = routingService;
     this.errorMessageKey = '';
-    this.registerModel = new RegisterRequestDto();
+    this.registerModel = {} as RegisterRequestDto;
   }
-
-  public ngOnInit() {}
 
   public onSubmit() {
     this.register();

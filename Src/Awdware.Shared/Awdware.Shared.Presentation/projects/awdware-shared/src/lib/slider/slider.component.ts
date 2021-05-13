@@ -12,13 +12,13 @@ import { ColorType } from '../models/color-type.model';
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: SliderComponent, multi: true }]
 })
 export class SliderComponent implements OnInit, ControlValueAccessor {
-  @Input() public min: number;
+  @Input() public min: number = 0;
   @Input() public max = 524288;
-  @Input() public inputTabIndex: number;
-  @Input() public name: string;
-  @Input() public minColor: string;
-  @Input() public maxColor: string;
-  @Input() public labelText: string;
+  @Input() public inputTabIndex: number = 99999;
+  @Input() public name: string = '';
+  @Input() public minColor?: string;
+  @Input() public maxColor?: string;
+  @Input() public labelText: string = '';
 
   @Output() public valueChanged = new EventEmitter<number>();
 
@@ -26,10 +26,10 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
   private onChangeCallback: (_: any) => void = noop;
   private readonly _sanitizer: DomSanitizer;
   private readonly _theme: ThemeService;
-  public isDisabled: boolean;
-  public innerValue: number;
-  public isFocused: boolean;
-  public cssVariables: SafeStyle;
+  public isDisabled: boolean = false;
+  public innerValue: number = 0;
+  public isFocused: boolean = false;
+  public cssVariables?: SafeStyle;
 
   constructor(sanitizer: DomSanitizer, themeService: ThemeService) {
     this._sanitizer = sanitizer;

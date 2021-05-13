@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, LogLevel, HubConnectionState } from '@aspnet/signalr';
 import { Observable, of, from } from 'rxjs';
-import { catchError, concatMap } from 'rxjs/operators';
+import { catchError, concatMap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignalrService {
-  public mSecondsTillLastData: number;
-  private _listeners = new Map<string, Observable<any>>();
+  public mSecondsTillLastData: number = 0;
+  private readonly _listeners = new Map<string, Observable<any>>();
 
   public onDataRecieved<T>(hub: HubConnection, methodName: string): Observable<T> {
     if (this._listeners.has(methodName)) {
@@ -38,7 +38,7 @@ export class SignalrService {
     return hubConnection;
   }
 
-  public ensureConnection(hub: HubConnection): Observable<void> {
+  public ensureConnection(hub: HubConnection): Observable<null> {
     if (hub.state === HubConnectionState.Connected) {
       return of(null);
     }
@@ -46,7 +46,8 @@ export class SignalrService {
       catchError(err => {
         console.error(err);
         return of(null);
-      })
+      }),
+      map(() => null)
     );
   }
 }
