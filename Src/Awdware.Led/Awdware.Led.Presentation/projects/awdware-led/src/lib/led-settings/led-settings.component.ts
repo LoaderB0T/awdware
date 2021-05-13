@@ -29,7 +29,7 @@ export class LedSettingsComponent extends BaseDialog implements OnInit {
 
   public get selectOptions(): SelectOption[] {
     return this.settingsList.map(x => {
-      const newOption = new SelectOption();
+      const newOption = {} as SelectOption;
       newOption.key = x.id;
       newOption.text = x.settingName;
       return newOption;

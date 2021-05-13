@@ -58,7 +58,7 @@ export class CoreModule {
     themeService.init();
 
     this._sessionStoreService = sessionStoreService;
-    const config = new AwdwareConfig();
+    const config = {} as AwdwareConfig;
     config.menuItems = [
       new MenuItem(
         'home',
