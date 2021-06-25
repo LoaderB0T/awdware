@@ -13,6 +13,10 @@
     {
       "path": "../../Awdware.Blog/Awdware.Blog.Presentation/gah-module.json",
       "names": ["blog"]
+    },
+    {
+      "path": "../../Awdware.Shared/Awdware.Shared.Presentation/gah-module.json",
+      "names": ["shared"]
     }
   ],
   "htmlHeadContent": [
