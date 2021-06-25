@@ -37,7 +37,6 @@ export * from './lib/events/toolbar-invalidated.event';
 
 export * from './lib/models/application-facade';
 export * from './lib/models/base-event';
-export * from './lib/models/invalid-operation-error';
 export * from './lib/models/jwt-payload';
 export * from './lib/models/possible-toolbar-item';
 export * from './lib/models/toolbar-item';
