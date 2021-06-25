@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { noop } from 'rxjs';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
@@ -11,7 +11,7 @@ import { ColorType } from '../models/color-type.model';
   styleUrls: ['./slider.component.scss'],
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: SliderComponent, multi: true }]
 })
-export class SliderComponent implements OnInit, ControlValueAccessor {
+export class SliderComponent implements ControlValueAccessor {
   @Input() public min: number = 0;
   @Input() public max = 524288;
   @Input() public inputTabIndex: number = 99999;
@@ -102,6 +102,4 @@ export class SliderComponent implements OnInit, ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
-
-  ngOnInit() {}
 }

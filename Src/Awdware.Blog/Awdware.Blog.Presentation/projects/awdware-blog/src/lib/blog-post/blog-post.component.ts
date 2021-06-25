@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RoutingService, UserDetailsService, UserPermission } from '@awdware/core';
 import { BlogPostDetailsDto, BlogPostDto, BlogPostType } from '../models/application-facade';
 
@@ -7,7 +7,7 @@ import { BlogPostDetailsDto, BlogPostDto, BlogPostType } from '../models/applica
   templateUrl: './blog-post.component.html',
   styleUrls: ['./blog-post.component.scss']
 })
-export class BlogPostComponent implements OnInit {
+export class BlogPostComponent {
   private readonly _userService: UserDetailsService;
   private readonly _routingService: RoutingService;
 
@@ -45,8 +45,6 @@ export class BlogPostComponent implements OnInit {
       return translation.value;
     });
   }
-
-  ngOnInit(): void {}
 
   navToBlog(postId: string) {
     this._routingService.navigate('blog', 'post', postId);

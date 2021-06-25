@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FacadeService, ThemeService, TranslationService } from '@awdware/shared';
+import { FacadeService } from '@awdware/shared';
 
 import { UserDetailsService } from '../services/user-details.service';
 import { UserDetails } from '../models/user-details';

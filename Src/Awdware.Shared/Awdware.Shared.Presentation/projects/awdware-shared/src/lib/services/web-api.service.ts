@@ -23,6 +23,7 @@ export class WebApiService {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public get<ResultT extends string>(method: string, parseResponse: boolean): Observable<string>;
   public get<ResultT>(method: string): Observable<ResultT>;
   public get<ResultT>(method: string, parseResponse = true): Observable<ResultT | string> {
@@ -38,6 +39,7 @@ export class WebApiService {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public post<ResultT extends string>(method: string, body: any, parseResponse: boolean): Observable<string>;
   public post<ResultT>(method: string, body: any): Observable<ResultT>;
   public post<ResultT>(method: string, body: any, parseResponse = true): Observable<ResultT | string> {
@@ -53,6 +55,7 @@ export class WebApiService {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public put<ResultT extends string>(method: string, body: any, parseResponse: boolean): Observable<string>;
   public put<ResultT>(method: string, body: any): Observable<ResultT>;
   public put<ResultT>(method: string, body: any, parseResponse = true): Observable<ResultT | string> {
@@ -68,6 +71,7 @@ export class WebApiService {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public delete<ResultT extends string>(method: string, parseResponse: boolean): Observable<string>;
   public delete<ResultT>(method: string): Observable<ResultT>;
   public delete<ResultT>(method: string, parseResponse = true): Observable<ResultT | string> {

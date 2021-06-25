@@ -1,5 +1,5 @@
 export class ColorType {
-  private static colorRegex = new RegExp('rgba?\\((\\d{1,3}), (\\d{1,3}), (\\d{1,3})(, \\d?.?\\d)?\\)');
+  private static readonly colorRegex = new RegExp('rgba?\\((\\d{1,3}), (\\d{1,3}), (\\d{1,3})(, \\d?.?\\d)?\\)');
   public r: number;
   public g: number;
   public b: number;
@@ -35,7 +35,7 @@ export class ColorType {
 
   public toHex(): string {
     // tslint:disable-next-line:no-bitwise
-    return '#' + ((1 << 24) + (this.r << 16) + (this.g << 8) + this.b).toString(16).slice(1);
+    return `#${((1 << 24) + (this.r << 16) + (this.g << 8) + this.b).toString(16).slice(1)}`;
   }
 
   public toCssProperyString() {

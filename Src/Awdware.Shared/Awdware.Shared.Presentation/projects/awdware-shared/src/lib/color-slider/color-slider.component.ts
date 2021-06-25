@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { noop } from 'rxjs';
 import { ColorType } from '../models/color-type.model';
@@ -9,7 +9,7 @@ import { ColorType } from '../models/color-type.model';
   styleUrls: ['./color-slider.component.scss'],
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: ColorSliderComponent, multi: true }]
 })
-export class ColorSliderComponent implements OnInit, ControlValueAccessor {
+export class ColorSliderComponent implements ControlValueAccessor {
   @Input() public inputTabIndex: number = 99999;
   @Input() public name: string = '';
   @Input() public labelText: string = '';
@@ -92,6 +92,4 @@ export class ColorSliderComponent implements OnInit, ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
-
-  ngOnInit() {}
 }

@@ -8,7 +8,7 @@ export class DownloadService {
 
   public downloadStringAsFile(filename: string, filecontent: string) {
     const element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(filecontent));
+    element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(filecontent)}`);
     element.setAttribute('download', filename);
 
     element.style.display = 'none';

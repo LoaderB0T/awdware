@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { Observable, of, Subject } from 'rxjs';
+import { of } from 'rxjs';
 
 import { AccountService } from './account.service';
 import { SessionStoreService } from '../../services/session-store.service';

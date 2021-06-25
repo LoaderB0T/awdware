@@ -1,19 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'awd-loading',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss']
 })
-export class LoadingComponent implements OnInit {
+export class LoadingComponent {
   @Input() public scale: number = 1;
   @Input() public color: string = '#FFFFFF';
 
   public fakeArray = new Array(5);
 
   constructor() {}
-
-  ngOnInit() {}
 
   public get height(): number {
     return 40 * this.scale;

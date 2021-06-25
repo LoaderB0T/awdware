@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FacadeService, ThemeService, TranslationService } from '@awdware/shared';
 
 @Component({
@@ -6,7 +6,7 @@ import { FacadeService, ThemeService, TranslationService } from '@awdware/shared
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit, OnDestroy {
+export class SettingsComponent implements OnInit {
   private readonly _themeService: ThemeService;
   private readonly _translationService: TranslationService;
   private readonly _facadeService: FacadeService;
@@ -20,8 +20,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._facadeService.setActiveMenuItem('settings');
   }
-
-  ngOnDestroy() {}
 
   public darkTheme() {
     this._themeService.changeTheme('dark');

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AccountService } from '../services/account.service';
@@ -10,7 +10,7 @@ import { LoginHelpRequestDto } from '../../models/application-facade';
   templateUrl: './login-help.component.html',
   styleUrls: ['./login-help.component.scss']
 })
-export class LoginHelpComponent implements OnInit, OnDestroy {
+export class LoginHelpComponent implements OnDestroy {
   public inputType: typeof InputType = InputType;
 
   public loginHelpModel: LoginHelpRequestDto;
@@ -28,8 +28,6 @@ export class LoginHelpComponent implements OnInit, OnDestroy {
     this.errorMessageKey = '';
     this.loginHelpModel = {} as LoginHelpRequestDto;
   }
-
-  public ngOnInit(): void {}
 
   get loginHelpDisabled(): boolean {
     if (this.clickedButton) {
