@@ -22,15 +22,17 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "ng-click-outside": "^8.0.0",
-    "rxjs": "~7.1.0",
+    "rxjs": "~6.6.7",
     "theaterjs": "^3.2.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.1.0",
+    "@angular-eslint/builder": "^12.2.0",
     "@angular-eslint/eslint-plugin": "^12.2.0",
     "@angular-eslint/eslint-plugin-template": "^12.2.0",
+    "@angular-eslint/schematics": "^12.2.0",
     "@angular-eslint/template-parser": "^12.2.0",
     "@angular/cli": "~12.1.0",
     "@angular/compiler-cli": "~12.1.0",

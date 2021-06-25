@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AwdwareConfig, FacadeService, MenuItem } from '@awdware/shared';
-import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

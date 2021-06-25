@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -12,7 +12,7 @@ import { ResetPasswordDto } from '../../models/application-facade';
   templateUrl: './new-password.component.html',
   styleUrls: ['./new-password.component.scss']
 })
-export class NewPasswordComponent implements OnInit, OnDestroy {
+export class NewPasswordComponent {
   public inputType: typeof InputType = InputType;
 
   public resetPw = {} as ResetPasswordDto;
@@ -29,14 +29,10 @@ export class NewPasswordComponent implements OnInit, OnDestroy {
     this._activatedRoute = activatedRoute;
   }
 
-  ngOnInit() {}
-
-  ngOnDestroy() {}
-
   public onSubmit() {
     const a = this._activatedRoute.snapshot.paramMap.get('token');
     this.resetPw.token = a;
-    return this._accountService.resetPassword(this.resetPw).subscribe(x => {});
+    return this._accountService.resetPassword(this.resetPw).subscribe(() => {});
   }
 
   public get validationDefinitionPassword(): ValidationDefinition[] {
