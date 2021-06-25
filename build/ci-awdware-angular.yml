@@ -35,8 +35,8 @@ steps:
 
   - task: PowerShell@2
     inputs:
-      targetType: "inline"
-      script: gah install --debug
+      targetType: 'inline'
+      script: gah install --debug --restrictedLogging
       workingDirectory: "Src/Awdware.Host/Awdware.Host.Presentation"
     displayName: "Gah install"
 
