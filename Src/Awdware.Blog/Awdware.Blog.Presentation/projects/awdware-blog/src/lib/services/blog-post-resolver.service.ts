@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BlogPostDetailsDto } from '../models/application-facade';
 import { BlogService } from './blog.service';
@@ -14,7 +14,7 @@ export class BlogPostResolverService implements Resolve<BlogPostDetailsDto> {
     this._blogService = blogService;
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BlogPostDetailsDto> {
+  resolve(route: ActivatedRouteSnapshot): Observable<BlogPostDetailsDto> {
     return this._blogService.getPostDetails(route.params['id']);
   }
 }

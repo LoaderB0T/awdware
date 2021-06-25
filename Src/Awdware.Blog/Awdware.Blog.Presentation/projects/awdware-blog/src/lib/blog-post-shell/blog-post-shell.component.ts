@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPostDetailsDto } from '../models/application-facade';
 
@@ -8,14 +8,12 @@ import { BlogPostDetailsDto } from '../models/application-facade';
   styleUrls: ['./blog-post-shell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BlogPostShellComponent implements OnInit {
+export class BlogPostShellComponent {
   private readonly _activatedRoute: ActivatedRoute;
 
   constructor(activatedRoute: ActivatedRoute) {
     this._activatedRoute = activatedRoute;
   }
-
-  ngOnInit(): void {}
 
   public get post(): BlogPostDetailsDto {
     return this._activatedRoute.snapshot.data['post'];

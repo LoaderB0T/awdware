@@ -30,10 +30,9 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": ["projects/awdware-blog/tsconfig.lib.json", "projects/awdware-blog/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": ["projects/awdware-blog/**/*.ts", "projects/awdware-blog/**/*.html"]
           }
         }
       }
