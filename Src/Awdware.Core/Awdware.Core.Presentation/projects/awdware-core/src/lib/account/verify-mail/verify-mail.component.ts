@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AccountService } from '../services/account.service';
@@ -8,7 +8,7 @@ import { AccountService } from '../services/account.service';
   templateUrl: './verify-mail.component.html',
   styleUrls: ['./verify-mail.component.scss']
 })
-export class VerifyMailComponent implements OnInit, OnDestroy {
+export class VerifyMailComponent implements OnInit {
   public verifyComplete = false;
   private readonly _activatedRoute: ActivatedRoute;
   private readonly _accountService: AccountService;
@@ -24,6 +24,4 @@ export class VerifyMailComponent implements OnInit, OnDestroy {
       this.verifyComplete = true;
     });
   }
-
-  ngOnDestroy() {}
 }
