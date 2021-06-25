@@ -4,7 +4,7 @@ pool:
 steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: "12.x"
+      versionSpec: "14.x"
     displayName: "Install Node.js"
 
   - task: YarnInstaller@3
@@ -26,11 +26,10 @@ steps:
         sonar.sourceEncoding=UTF-8
         sonar.exclusions=**/node_modules/**,**/*.spec.ts,**/.gah/**
         sonar.test.inclusions=**/*.spec.ts
-        sonar.ts.tslintconfigpath=Src/Awdware.Host/Awdware.Host.Presentation/.gah/tslint.json
 
   - task: PowerShell@2
     inputs:
-      targetType: 'inline'
+      targetType: "inline"
       script: sudo yarn global add @gah/cli
     displayName: "Installing gah globally"
 
@@ -38,14 +37,14 @@ steps:
     inputs:
       targetType: 'inline'
       script: gah install --debug --restrictedLogging
-      workingDirectory: 'Src/Awdware.Host/Awdware.Host.Presentation'
+      workingDirectory: "Src/Awdware.Host/Awdware.Host.Presentation"
     displayName: "Gah install"
 
   - task: PowerShell@2
     inputs:
-      targetType: 'inline'
-      script: 'gah run -e prod ng build --prod'
-      workingDirectory: 'Src/Awdware.Host/Awdware.Host.Presentation'
+      targetType: "inline"
+      script: "gah run -e prod ng build --prod"
+      workingDirectory: "Src/Awdware.Host/Awdware.Host.Presentation"
     displayName: "Build host and dependencies"
 
   - task: PublishBuildArtifacts@1
