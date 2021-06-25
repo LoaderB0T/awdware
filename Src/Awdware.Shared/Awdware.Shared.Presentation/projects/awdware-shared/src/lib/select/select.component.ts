@@ -1,14 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  ChangeDetectorRef,
-  OnDestroy
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, ChangeDetectorRef, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Subject, noop } from 'rxjs';
 import { SelectOption } from '../models/select-option.model';
@@ -20,7 +10,7 @@ import { InvalidOperationError } from '../models/invalid-operation-error';
   styleUrls: ['./select.component.scss'],
   providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: SelectComponent, multi: true }]
 })
-export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy {
+export class SelectComponent implements ControlValueAccessor, OnInit {
   public isVisible: boolean = false;
   public id: string;
 
@@ -180,6 +170,4 @@ export class SelectComponent implements OnInit, ControlValueAccessor, OnDestroy 
     this.toggled.next(this.isVisible);
     this.ref.detectChanges();
   }
-
-  ngOnDestroy(): void {}
 }

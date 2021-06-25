@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { InputType } from '../models/input-type';
 import {
   NG_VALUE_ACCESSOR,
@@ -22,7 +22,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     { provide: NG_VALIDATORS, useExisting: TextboxComponent, multi: true }
   ]
 })
-export class TextboxComponent implements OnInit, ControlValueAccessor, Validator {
+export class TextboxComponent implements ControlValueAccessor, Validator {
   @Input() public validationDefinitions: ValidationDefinition[] = new Array<ValidationDefinition>();
   @Input() public fontSize: number = 16;
   @Input() public name: string = '';
@@ -61,8 +61,6 @@ export class TextboxComponent implements OnInit, ControlValueAccessor, Validator
   constructor(sanitizer: DomSanitizer) {
     this._sanitizer = sanitizer;
   }
-
-  ngOnInit() {}
 
   public inputEvent() {
     this.valueChanged.emit(null);
