@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { InvalidOperationError, ThemeService } from '@awdware/shared';
 
@@ -14,14 +14,12 @@ import { LedEffectPropertyKind } from '../../models/application-facade';
   templateUrl: './led-effect-property.component.html',
   styleUrls: ['./led-effect-property.component.scss']
 })
-export class LedEffectPropertyComponent implements OnInit {
+export class LedEffectPropertyComponent {
   @Input() effectProperty: LedEffectProperty;
   @Output() valueChanged = new EventEmitter<any>();
   effectType = LedEffectPropertyKind;
 
   constructor(public theme: ThemeService) {}
-
-  ngOnInit() {}
 
   public madeChanges(evt: any) {
     this.valueChanged.next(evt);

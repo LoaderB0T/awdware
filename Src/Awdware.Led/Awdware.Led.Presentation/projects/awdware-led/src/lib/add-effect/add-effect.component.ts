@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 import { BaseDialog } from '@awdware/shared';
 
@@ -11,7 +11,7 @@ import { LedEffectKind } from '../models/application-facade';
   templateUrl: './add-effect.component.html',
   styleUrls: ['./add-effect.component.scss']
 })
-export class AddEffectComponent extends BaseDialog implements OnInit {
+export class AddEffectComponent extends BaseDialog {
   LedEffectKind: typeof LedEffectKind = LedEffectKind;
   private readonly _ledService: LedService;
   public selectedAddEffect: LedEffectKind;
@@ -23,8 +23,6 @@ export class AddEffectComponent extends BaseDialog implements OnInit {
   }
 
   @Output() effectAdded = new EventEmitter<LedEffect>();
-
-  ngOnInit() {}
 
   public confirmAddEffect() {
     if (!this.canConfirmAddEffect) {

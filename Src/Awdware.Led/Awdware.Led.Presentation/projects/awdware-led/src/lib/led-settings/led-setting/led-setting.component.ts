@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { InputType, DownloadService } from '@awdware/shared';
 
@@ -10,7 +10,7 @@ import { LedSettingsDto } from '../../models/application-facade';
   templateUrl: './led-setting.component.html',
   styleUrls: ['./led-setting.component.scss']
 })
-export class LedSettingComponent implements OnInit {
+export class LedSettingComponent {
   @Input() settings: LedSettingsDto;
   @Output() closeDialog = new EventEmitter();
   @Output() deleteSetting = new EventEmitter<string>();
@@ -24,8 +24,6 @@ export class LedSettingComponent implements OnInit {
     this._ledService = ledService;
     this._downloadService = downloadService;
   }
-
-  ngOnInit() {}
 
   public saveCurrentSettings() {
     this._ledService.updateSetting(this.settings).subscribe(() => {
