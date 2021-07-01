@@ -12,20 +12,13 @@
       "dependencies": [
         {
           "path": "../../Awdware.Shared/Awdware.Shared.Presentation/gah-module.json",
-          "names": ["shared"]
+          "names": [
+            "shared"
+          ]
         }
       ],
       "config": {
         "plugins": [
-          {
-            "name": "@awdware/gah-translation-merger",
-            "version": "2.0.1",
-            "settings": {
-              "searchGlobPattern": "src/assets/**/translations/*.json",
-              "destinationPath": "src/assets/i18n",
-              "matchPattern": ""
-            }
-          },
           {
             "name": "@gah/json-config-plugin",
             "version": "0.4.1",
@@ -55,6 +48,16 @@
                   "noImplicitReturns": false
                 }
               }
+            }
+          },
+          {
+            "name": "@awdware/gah-translation-merger",
+            "version": "3.1.6",
+            "settings": {
+              "searchGlobPattern": "src/assets/**/translations/*.json",
+              "destinationPath": "src/assets/i18n",
+              "localeRegexPattern": "",
+              "prefixRegexPattern": ""
             }
           }
         ]
