@@ -9,7 +9,7 @@ updates:
     directory: "Src/Awdware.Core/Awdware.Core.Presentation" # Location of package manifests
     schedule:
       interval: "monthly"
-   - package-ecosystem: "npm" # See documentation for possible values
+  - package-ecosystem: "npm" # See documentation for possible values
     directory: "Src/Awdware.Shared/Awdware.Shared.Presentation" # Location of package manifests
     schedule:
       interval: "monthly"
