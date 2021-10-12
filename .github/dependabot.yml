@@ -6,6 +6,18 @@
 version: 2
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+    directory: "Src/Awdware.Core/Awdware.Core.Presentation" # Location of package manifests
+    schedule:
+      interval: "monthly"
+   - package-ecosystem: "npm" # See documentation for possible values
+    directory: "Src/Awdware.Shared/Awdware.Shared.Presentation" # Location of package manifests
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "Src/Awdware.Blog/Awdware.Blog.Presentation" # Location of package manifests
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "Src/Awdware.Led/Awdware.Led.Presentation" # Location of package manifests
     schedule:
       interval: "monthly"
