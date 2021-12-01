@@ -34,7 +34,7 @@
     "@angular-eslint/template-parser": "^12.2.0",
     "@angular/cli": "~12.1.0",
     "@angular/compiler-cli": "~12.1.0",
-    "@angular/language-service": "~12.1.0",
+    "@angular/language-service": "~13.0.2",
     "@awdware/eslint-config-angular": "^1.0.1",
     "@awdware/eslint-config-base": "^1.0.0",
     "@awdware/prettier-config": "^0.0.2",
