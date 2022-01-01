@@ -36,7 +36,7 @@
     "@awdware/eslint-config-angular": "^1.0.1",
     "@awdware/eslint-config-base": "^1.0.0",
     "@awdware/prettier-config": "^0.0.2",
-    "@types/node": "^14.17.4",
+    "@types/node": "^17.0.6",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "eslint": "^7.29.0",
