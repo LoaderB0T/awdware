@@ -12,9 +12,7 @@
       "dependencies": [
         {
           "path": "../../Awdware.Shared/Awdware.Shared.Presentation/gah-module.json",
-          "names": [
-            "shared"
-          ]
+          "names": ["shared"]
         }
       ],
       "config": {
@@ -57,7 +55,9 @@
               "searchGlobPattern": "src/assets/**/translations/*.json",
               "destinationPath": "src/assets/i18n",
               "localeRegexPattern": "",
-              "prefixRegexPattern": ""
+              "prefixRegexPattern": "",
+              "translationMismatchReport": "warn",
+              "translationMismatchReportFile": "translation-mismatch-report.json"
             }
           }
         ]
