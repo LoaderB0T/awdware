@@ -5429,10 +5429,10 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ng-click-outside@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/ng-click-outside/-/ng-click-outside-9.0.0.tgz#4ed1f3663c1e5cc485d46d89377daf38ad58e2ae"
-  integrity sha512-WaM1Ph42xAf3WA92fitAGvVvi8NUMsc8D/saVh1673cOtcKKVYbX8lIfs2EzvS0OSULthA9CbZc3VpFM8UGBBA==
+ng-click-outside@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/ng-click-outside/-/ng-click-outside-9.0.1.tgz#1bbcd6882b2073cbabd95c55eb07b2ea9211a4a8"
+  integrity sha512-gqRZ2SexX3CntzO/HJuIh7aqxzc6xAhNfyM9VUrjYrorORADEbWTRA/1f7x/ChGGlXN0VtpKyZpWvYScndmsog==
 
 ng-packagr@^12.2.5:
   version "12.2.5"
