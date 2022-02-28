@@ -1,0 +1,14 @@
+<div id="app-main"
+     [class.blur]="dialogVisible">
+  <div class="bg">
+    <awd-logo></awd-logo>
+  </div>
+  <div id="main-content"
+       [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+  <awd-menu></awd-menu>
+</div>
+
+<div [class.shown]="dialogVisible"
+     class="dialog-bg dialog-bg-blurred"></div>

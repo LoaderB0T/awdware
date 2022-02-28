@@ -1,7 +1,10 @@
 {
   "version": 2,
   "projects": {
+    "core": "apps/core",
+    "core-e2e": "apps/core-e2e",
     "host": "apps/host",
-    "host-e2e": "apps/host-e2e"
+    "host-e2e": "apps/host-e2e",
+    "shared": "libs/shared"
   }
 }

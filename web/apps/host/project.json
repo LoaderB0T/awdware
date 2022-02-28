@@ -14,7 +14,11 @@
         "polyfills": "apps/host/src/polyfills.ts",
         "tsConfig": "apps/host/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/host/src/favicon.ico", "apps/host/src/assets"],
+        "assets": [
+          "apps/host/src/favicon.ico",
+          "apps/host/src/assets",
+          "apps/host/src/modules"
+        ],
         "styles": ["apps/host/src/styles.scss"],
         "scripts": [],
         "customWebpackConfig": {
@@ -95,7 +99,7 @@
     "serve-mfe": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": ["nx serve host"]
+        "commands": ["nx serve core", "nx serve account", "nx serve host"]
       }
     }
   },
