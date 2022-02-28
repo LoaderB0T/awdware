@@ -1,0 +1,22 @@
+<div *ngIf="effect && effect.props" class="effect-details-container">
+  <div class="effect-actions">
+    <div class="action-item" (click)="deleteEffect()">
+      <i class="icon fal fa-xmark"></i>
+    </div>
+    <div class="action-item" (click)="selectEffect()">
+      <i class="icon fal fa-circle-check"></i>
+    </div>
+    <div class="action-item" *ngIf="effect.hasPendingChanges" (click)="saveEffect()">
+      <i class="icon fal fa-save"></i>
+    </div>
+    <div class="action-item" *ngIf="effect.hasPendingChanges" (click)="({})">
+      <i class="icon fal fa-arrow-left-rotate"></i>
+    </div>
+  </div>
+  <span class="header">
+    {{ effect.name }}
+  </span>
+  <div *ngFor="let prop of effect.props">
+    <awd-led-effect-property (valueChanged)="madeChanges()" [effectProperty]="prop"></awd-led-effect-property>
+  </div>
+</div>

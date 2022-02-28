@@ -2,7 +2,7 @@
   "projectType": "application",
   "root": "apps/core",
   "sourceRoot": "apps/core/src",
-  "prefix": "web",
+  "prefix": "awd",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:webpack-browser",

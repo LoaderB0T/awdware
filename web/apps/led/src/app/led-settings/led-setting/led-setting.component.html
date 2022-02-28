@@ -1,0 +1,9 @@
+<div>
+  <awd-textbox class="dialog-row" (input)="editedSettings()" [(ngModel)]="settings.comPortName"></awd-textbox>
+  <button class="button dialog-row" [disabled]="!configSaved" (click)="getConfigFile()">Download Config File</button>
+  <div class="dialog-row">
+    <button class="button" [disabled]="configSaved" (click)="saveCurrentSettings()">Save</button>
+    <button class="button" (click)="delete()">Delete</button>
+    <button class="button" (click)="close()">Close</button>
+  </div>
+</div>

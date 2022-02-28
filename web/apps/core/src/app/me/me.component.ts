@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDetailsService, AccountService, UserDetails } from '@awdware/session';
 
 import { FacadeService } from '@awdware/shared';
-
-import { UserDetailsService } from '../services/user-details.service';
-import { UserDetails } from '../models/user-details';
-import { AccountService } from '../account/services/account.service';
 
 @Component({
   selector: 'awd-me',

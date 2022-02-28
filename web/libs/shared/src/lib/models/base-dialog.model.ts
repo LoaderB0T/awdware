@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 
 export abstract class BaseDialog {
   public dialogId: string;
-  protected $closeDialog = new Subject();
+  protected $closeDialog = new Subject<void>();
   public closeDialog = this.$closeDialog.asObservable().pipe(map(() => this.dialogId));
 
   constructor() {

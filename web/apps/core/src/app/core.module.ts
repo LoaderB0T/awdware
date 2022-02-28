@@ -8,7 +8,8 @@ import {
   ThemeService,
   TranslationService,
   AwdwareConfig,
-  MenuItem
+  MenuItem,
+  RoutingService
 } from '@awdware/shared';
 
 import { MenuComponent } from './menu/menu.component';
@@ -18,13 +19,11 @@ import { AccountModule } from './account/account.module';
 import { HomeModule } from './home/home.module';
 import { BaseComponent } from './base/base.component';
 import { CommonModule } from '@angular/common';
-import { SessionStoreService } from './services/session-store.service';
-import { RoutingService } from './services/routing.service';
-import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ErrorModule } from './error/error.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from '../environment';
 import { SettingsModule } from './settings/settings.module';
+import { HttpInterceptorService, SessionStoreService } from '@awdware/session';
 
 @NgModule({
   declarations: [MenuComponent, MeComponent, BaseComponent],

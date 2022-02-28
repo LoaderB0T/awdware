@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/core-lib",
+  "sourceRoot": "libs/core-lib/src",
+  "prefix": "awdware",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/core-lib"],
+      "options": {
+        "jestConfig": "libs/core-lib/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/core-lib/src/**/*.ts", "libs/core-lib/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

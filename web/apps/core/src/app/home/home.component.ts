@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
-import { FacadeService } from '@awdware/shared';
+import { FacadeService, RoutingService } from '@awdware/shared';
 
-import { RoutingService } from '../services/routing.service';
 const theaterJS = require('theaterjs');
 
 @Component({

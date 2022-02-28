@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/session",
+  "sourceRoot": "libs/session/src",
+  "prefix": "web",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/session"],
+      "options": {
+        "jestConfig": "libs/session/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/session/src/**/*.ts", "libs/session/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

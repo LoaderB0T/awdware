@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RoutingService } from '../services/routing.service';
-import { FacadeService, TabViewContent } from '@awdware/shared';
+import { FacadeService, RoutingService, TabViewContent } from '@awdware/shared';
 
 @Component({
   selector: 'awd-account',

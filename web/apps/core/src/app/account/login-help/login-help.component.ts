@@ -1,9 +1,9 @@
 import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { AccountService } from '../services/account.service';
+import { AccountService } from '@awdware/session';
 import { SubscriptionManager, InputType } from '@awdware/shared';
-import { LoginHelpRequestDto } from '../../models/application-facade';
+import { LoginHelpRequestDto } from 'libs/session/src/lib/models/session-facade';
 
 @Component({
   selector: 'awd-login-help',

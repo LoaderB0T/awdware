@@ -1,0 +1,98 @@
+{
+  "projectType": "application",
+  "root": "apps/led",
+  "sourceRoot": "apps/led/src",
+  "prefix": "web",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/led",
+        "index": "apps/led/src/index.html",
+        "main": "apps/led/src/main.ts",
+        "polyfills": "apps/led/src/polyfills.ts",
+        "tsConfig": "apps/led/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/led/src/favicon.ico", "apps/led/src/assets"],
+        "styles": ["apps/led/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/led/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/led/src/environments/environment.ts",
+              "with": "apps/led/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/led/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "led:build:production"
+        },
+        "development": {
+          "browserTarget": "led:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4203,
+        "publicHost": "http://localhost:4203"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "led:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/led/src/**/*.ts", "apps/led/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/led"],
+      "options": {
+        "jestConfig": "apps/led/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

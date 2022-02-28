@@ -1,0 +1,14 @@
+<div id="led-main">
+  <div class="led-effects-container">
+    <div *ngFor="let effect of ledConfigs" class="led-effect-container" id="led-effect-{{ effect.id }}">
+      <awd-led-effect [effect]="effect"></awd-led-effect>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-button add-button" (click)="showAddDialog()">
+  <i class="icon fal fa-plus"></i>
+</div>
+<div class="bottom-button settings-button" (click)="showSettingsDialog()">
+  <i class="icon fal fa-gear"></i>
+</div>

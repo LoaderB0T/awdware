@@ -15,6 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@awdware/core-lib": ["libs/core-lib/src/index.ts"],
+      "@awdware/session": ["libs/session/src/index.ts"],
       "@awdware/shared": ["libs/shared/src/index.ts"]
     }
   },

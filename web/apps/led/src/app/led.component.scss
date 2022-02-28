@@ -1,0 +1,60 @@
+@mixin content-color {
+  background-color: var(--colorHighlightContent04);
+  transition: background-color 0.1s;
+  box-shadow: var(--shaddowDefault);
+  &:hover,
+  &:focus-within {
+    box-shadow: var(--shaddowFocus);
+    background-color: var(--colorHighlightContent10);
+  }
+}
+
+#led-main {
+  .led-effects-container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 100px;
+    .led-effect-container {
+      @include content-color;
+      position: relative;
+      width: 25vw;
+      min-width: 380px;
+      @media only screen and (max-width: 600px) {
+        min-width: unset;
+        width: 90%;
+      }
+
+      padding: 20px;
+      padding-bottom: 0;
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.bottom-button {
+  height: 80px;
+  width: 80px;
+  position: fixed;
+  bottom: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: $shaddowDefault;
+  background-color: var(--colorHighlightContent);
+  &.add-button {
+    right: 20px;
+    font-size: 80px;
+  }
+  &.settings-button {
+    right: 120px;
+    font-size: 60px;
+  }
+  &:hover {
+    box-shadow: $shaddowFocus;
+  }
+}

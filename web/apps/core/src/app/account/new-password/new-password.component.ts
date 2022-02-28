@@ -4,8 +4,8 @@ import { NgForm } from '@angular/forms';
 
 import { InputType, ValidationDefinition, ValidationErrorType } from '@awdware/shared';
 
-import { AccountService } from '../services/account.service';
-import { ResetPasswordDto } from '../../models/application-facade';
+import { AccountService } from '@awdware/session';
+import { ResetPasswordDto } from 'libs/session/src/lib/models/session-facade';
 
 @Component({
   selector: 'awd-new-password',

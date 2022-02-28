@@ -2,7 +2,7 @@
   "projectType": "application",
   "root": "apps/host",
   "sourceRoot": "apps/host/src",
-  "prefix": "web",
+  "prefix": "awd",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:webpack-browser",
@@ -14,11 +14,7 @@
         "polyfills": "apps/host/src/polyfills.ts",
         "tsConfig": "apps/host/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/host/src/favicon.ico",
-          "apps/host/src/assets",
-          "apps/host/src/modules"
-        ],
+        "assets": ["apps/host/src/favicon.ico", "apps/host/src/assets", "apps/host/src/modules"],
         "styles": ["apps/host/src/styles.scss"],
         "scripts": [],
         "customWebpackConfig": {
@@ -99,7 +95,7 @@
     "serve-mfe": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": ["nx serve core", "nx serve account", "nx serve host"]
+        "commands": ["nx serve led", "nx serve core", "nx serve account", "nx serve host"]
       }
     }
   },

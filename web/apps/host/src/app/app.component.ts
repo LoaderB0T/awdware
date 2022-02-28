@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ThemeService } from '@awdware/shared';
 
 @Component({
   selector: 'web-root',
@@ -8,9 +7,4 @@ import { ThemeService } from '@awdware/shared';
 })
 export class AppComponent {
   title = 'host';
-
-  constructor(themeService: ThemeService) {
-    themeService.init();
-    themeService.changeTheme('dark');
-  }
 }

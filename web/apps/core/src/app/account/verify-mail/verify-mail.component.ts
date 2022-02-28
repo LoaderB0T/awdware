@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AccountService } from '../services/account.service';
+import { AccountService } from '@awdware/session';
 
 @Component({
   selector: 'awd-verify-mail',

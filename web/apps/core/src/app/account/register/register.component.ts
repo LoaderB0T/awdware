@@ -1,11 +1,10 @@
 import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { InputType, SubscriptionManager, ValidationDefinition, ValidationErrorType } from '@awdware/shared';
-import { RegisterRequestDto, RegisterResult } from '../../models/application-facade';
+import { InputType, RoutingService, SubscriptionManager, ValidationDefinition, ValidationErrorType } from '@awdware/shared';
 
-import { AccountService } from '../services/account.service';
-import { RoutingService } from '../../services/routing.service';
+import { AccountService } from '@awdware/session';
+import { RegisterRequestDto, RegisterResult } from 'libs/session/src/lib/models/session-facade';
 
 @Component({
   selector: 'awd-register',

@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { BaseComponent } from './base/base.component';
-import { UserDetailsResolverService } from './account/services/user-info-resolver.service';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
@@ -9,10 +8,10 @@ import { LoginHelpComponent } from './account/login-help/login-help.component';
 import { VerifyMailComponent } from './account/verify-mail/verify-mail.component';
 import { NewPasswordComponent } from './account/new-password/new-password.component';
 import { MeComponent } from './me/me.component';
-import { AuthGuard } from './services/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { SettingsComponent } from './settings/settings.component';
+import { AuthGuard, UserDetailsResolverService } from '@awdware/session';
 
 export const routes: Routes = [
   {

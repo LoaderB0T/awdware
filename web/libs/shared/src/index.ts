@@ -12,6 +12,7 @@ export * from './lib/textbox/textbox.component';
 
 export * from './lib/models/awdware-config';
 export * from './lib/models/base-dialog.model';
+export * from './lib/models/base-event';
 export * from './lib/models/color-type.model';
 export * from './lib/models/input-type';
 export * from './lib/models/invalid-operation-error';
@@ -26,7 +27,9 @@ export * from './lib/models/validation-error-type';
 
 export * from './lib/services/dialog.service';
 export * from './lib/services/download.service';
+export * from './lib/services/event.service';
 export * from './lib/services/facade.service';
+export * from './lib/services/routing.service';
 export * from './lib/services/signalr.service';
 export * from './lib/services/theme.service';
 export * from './lib/services/translation.service';
