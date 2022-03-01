@@ -2,7 +2,7 @@
   "projectType": "library",
   "root": "libs/shared",
   "sourceRoot": "libs/shared/src",
-  "prefix": "web",
+  "prefix": "awd",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
