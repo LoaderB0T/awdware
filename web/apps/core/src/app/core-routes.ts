@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard, UserDetailsResolverService } from '@awdware/session';
 
 import { BaseComponent } from './base/base.component';
 import { AccountComponent } from './account/account.component';
@@ -11,7 +12,6 @@ import { MeComponent } from './me/me.component';
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { SettingsComponent } from './settings/settings.component';
-import { AuthGuard, UserDetailsResolverService } from '@awdware/session';
 
 export const routes: Routes = [
   {

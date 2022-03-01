@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, SecurityContext } from '@angular/core';
 import { InputType } from '../models/input-type';
 import {
   NG_VALUE_ACCESSOR,
@@ -27,7 +27,7 @@ export class TextboxComponent implements ControlValueAccessor, Validator {
   @Input() public fontSize: number = 16;
   @Input() public name: string = '';
   @Input() public placeholder: string = '';
-  @Input() public pattern: string = '';
+  @Input() public pattern: string = '.*';
   @Input() public minLength: number = 0;
   @Input() public maxLength: number = 524288;
   @Input() public inputTabIndex: number = 99999;
@@ -98,7 +98,7 @@ export class TextboxComponent implements ControlValueAccessor, Validator {
     return myValidity && myValidity['error'] && myValidity['error'].reason;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  public setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
 
@@ -149,7 +149,7 @@ export class TextboxComponent implements ControlValueAccessor, Validator {
   }
 
   public get cssVariablesStyle() {
-    return this._sanitizer.bypassSecurityTrustStyle(`--font-size: ${this.fontSize}px;`);
+    return this._sanitizer.sanitize(SecurityContext.STYLE, `--font-size: ${this.fontSize}px;`);
   }
 
   get value(): any {

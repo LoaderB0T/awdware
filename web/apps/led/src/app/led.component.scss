@@ -1,10 +1,10 @@
 @mixin content-color {
   background-color: var(--colorHighlightContent04);
   transition: background-color 0.1s;
-  box-shadow: var(--shaddowDefault);
+  box-shadow: var(--shadowDefault);
   &:hover,
   &:focus-within {
-    box-shadow: var(--shaddowFocus);
+    box-shadow: var(--shadowFocus);
     background-color: var(--colorHighlightContent10);
   }
 }
@@ -44,7 +44,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: $shaddowDefault;
+  box-shadow: var(--shadowDefault);
   background-color: var(--colorHighlightContent);
   &.add-button {
     right: 20px;
@@ -55,6 +55,6 @@
     font-size: 60px;
   }
   &:hover {
-    box-shadow: $shaddowFocus;
+    box-shadow: var(--shadowFocus);
   }
 }

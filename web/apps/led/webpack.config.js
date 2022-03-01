@@ -16,13 +16,7 @@ const tsConfigPath = process.env.NX_TSCONFIG_PATH ?? path.join(__dirname, '../..
 
 const workspaceRootPath = path.join(__dirname, '../../');
 const sharedMappings = new mf.SharedMappings();
-sharedMappings.register(
-  tsConfigPath,
-  [
-    /* mapped paths to share */
-  ],
-  workspaceRootPath
-);
+sharedMappings.register(tsConfigPath, ['@awdware/shared', '@awdware/session', '@awdware/core-lib'], workspaceRootPath);
 
 module.exports = {
   output: {
@@ -48,11 +42,48 @@ module.exports = {
         './Module': 'apps/led/src/app/remote-entry/entry.module.ts'
       },
       shared: share({
-        '@angular/core': { singleton: true, strictVersion: true, requiredVersion: 'auto', includeSecondaries: true },
-        '@angular/common': { singleton: true, strictVersion: true, requiredVersion: 'auto', includeSecondaries: true },
-        '@angular/common/http': { singleton: true, strictVersion: true, requiredVersion: 'auto', includeSecondaries: true },
-        '@angular/router': { singleton: true, strictVersion: true, requiredVersion: 'auto', includeSecondaries: true },
-        rxjs: { singleton: true, strictVersion: true, requiredVersion: 'auto', includeSecondaries: true },
+        '@angular/forms': {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: 'auto',
+          includeSecondaries: true
+        },
+        '@angular/core': {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: 'auto',
+          includeSecondaries: true
+        },
+        '@angular/common': {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: 'auto',
+          includeSecondaries: true
+        },
+        '@angular/common/http': {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: 'auto',
+          includeSecondaries: true
+        },
+        '@angular/router': {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: 'auto',
+          includeSecondaries: true
+        },
+        rxjs: {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: 'auto',
+          includeSecondaries: true
+        },
+        '@ngx-translate/core': {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: 'auto',
+          includeSecondaries: true
+        },
         ...sharedMappings.getDescriptors()
       }),
       library: {

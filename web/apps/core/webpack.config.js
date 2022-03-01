@@ -12,80 +12,84 @@ const share = mf.share;
  * This NX_TSCONFIG_PATH environment variable is set by the @nrwl/angular:webpack-browser and it contains
  * the location of the generated temporary tsconfig file.
  */
-const tsConfigPath =
-  process.env.NX_TSCONFIG_PATH ??
-  path.join(__dirname, '../../tsconfig.base.json');
+const tsConfigPath = process.env.NX_TSCONFIG_PATH ?? path.join(__dirname, '../../tsconfig.base.json');
 
 const workspaceRootPath = path.join(__dirname, '../../');
 const sharedMappings = new mf.SharedMappings();
-sharedMappings.register(
-  tsConfigPath,
-  [
-    /* mapped paths to share */
-  ],
-  workspaceRootPath
-);
+sharedMappings.register(tsConfigPath, ['@awdware/shared', '@awdware/session', '@awdware/core-lib'], workspaceRootPath);
 
 module.exports = {
   output: {
     uniqueName: 'core',
-    publicPath: 'auto',
+    publicPath: 'auto'
   },
   optimization: {
-    runtimeChunk: false,
+    runtimeChunk: false
   },
   experiments: {
-    outputModule: true,
+    outputModule: true
   },
   resolve: {
     alias: {
-      ...sharedMappings.getAliases(),
-    },
+      ...sharedMappings.getAliases()
+    }
   },
   plugins: [
     new ModuleFederationPlugin({
       name: 'core',
       filename: 'remoteEntry.js',
       exposes: {
-        './Module': 'apps/core/src/app/remote-entry/entry.module.ts',
+        './Module': 'apps/core/src/app/remote-entry/entry.module.ts'
       },
       shared: share({
+        '@angular/forms': {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: 'auto',
+          includeSecondaries: true
+        },
         '@angular/core': {
           singleton: true,
           strictVersion: true,
           requiredVersion: 'auto',
-          includeSecondaries: true,
+          includeSecondaries: true
         },
         '@angular/common': {
           singleton: true,
           strictVersion: true,
           requiredVersion: 'auto',
-          includeSecondaries: true,
+          includeSecondaries: true
         },
         '@angular/common/http': {
           singleton: true,
           strictVersion: true,
           requiredVersion: 'auto',
-          includeSecondaries: true,
+          includeSecondaries: true
         },
         '@angular/router': {
           singleton: true,
           strictVersion: true,
           requiredVersion: 'auto',
-          includeSecondaries: true,
+          includeSecondaries: true
         },
         rxjs: {
           singleton: true,
           strictVersion: true,
           requiredVersion: 'auto',
-          includeSecondaries: true,
+          includeSecondaries: true
         },
-        ...sharedMappings.getDescriptors(),
+        '@ngx-translate/core': {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: 'auto',
+          includeSecondaries: true
+        },
+        ...sharedMappings.getDescriptors()
       }),
       library: {
-        type: 'module',
-      },
+        type: 'module'
+      }
     }),
-    sharedMappings.getPlugin(),
-  ],
+    sharedMappings.getPlugin()
+  ]
 };

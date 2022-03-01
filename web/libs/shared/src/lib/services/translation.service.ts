@@ -8,6 +8,7 @@ export class TranslationService {
   constructor(private readonly translateService: TranslateService) {}
 
   public init() {
+    console.log('TranslationService.init');
     this.translateService.setDefaultLang('en_US');
     this.setLanguage(this.getLanguageId());
   }

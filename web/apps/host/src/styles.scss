@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-$shaddowDefault: 0px 0px 12px 0px rgba(0, 0, 0, 0.9);
-$shaddowFocus: 0px 0px 22px 0px rgba(0, 0, 0, 0.9);
+$shadowDefault: 0px 0px 12px 0px rgba(0, 0, 0, 0.9);
+$shadowFocus: 0px 0px 22px 0px rgba(0, 0, 0, 0.9);
 
 $fontSizeSmall: 14px;
 $fontSizeNormal: 16px;
@@ -13,8 +13,8 @@ $fontWeightBold: 700;
 $fontMain: 'Montserrat', sans-serif;
 
 html {
-  #{--shaddowDefault}: $shaddowDefault;
-  #{--shaddowFocus}: $shaddowFocus;
+  #{--shadowDefault}: $shadowDefault;
+  #{--shadowFocus}: $shadowFocus;
 
   #{--fontSizeSmall}: $fontSizeSmall;
   #{--fontSizeNormal}: $fontSizeNormal;
@@ -30,10 +30,10 @@ html {
 @mixin content-color {
   background-color: var(--colorHighlightContent04);
   transition: background-color 0.1s;
-  box-shadow: var(--shaddowDefault);
+  box-shadow: var(--shadowDefault);
   &:hover,
   &:focus-within {
-    box-shadow: var(--shaddowFocus);
+    box-shadow: var(--shadowFocus);
     background-color: var(--colorHighlightContent10);
   }
 }

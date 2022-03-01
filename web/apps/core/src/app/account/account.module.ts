@@ -20,6 +20,6 @@ import { SharedModule } from '@awdware/shared';
     RegisterComponent,
     VerifyMailComponent
   ],
-  imports: [CommonModule, AccountRoutingModule, SharedModule, FormsModule]
+  imports: [CommonModule, SharedModule, AccountRoutingModule, FormsModule]
 })
 export class AccountModule {}

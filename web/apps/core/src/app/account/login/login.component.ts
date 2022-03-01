@@ -29,7 +29,7 @@ export class LoginComponent implements OnDestroy {
   constructor(accountService: AccountService, routingService: RoutingService) {
     this._accountService = accountService;
     this._routingService = routingService;
-    this.loginModel = {} as LoginRequestDto;
+    this.loginModel = { username: '', password: '' };
   }
 
   public onSubmit(): void {
