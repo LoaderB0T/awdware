@@ -1,5 +1,5 @@
 import { loadModulesForApp } from '@awdware/bootstrap';
 
-loadModulesForApp('led').then(() => {
+loadModulesForApp().then(() => {
   import('./bootstrap').catch(err => console.error(err));
 });

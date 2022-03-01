@@ -1,8 +1,8 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { environment } from './environment';
+import { Environment, environment } from './environment';
 
-export type ModuleDefinition = [{ name: string; ngModuleName: string; url: string }];
-export const loadedModules: { [key: string]: any[] } = {};
+export type ModuleDefinition = { name: string; ngModuleName: string; url: string }[];
+export const loadedModules: any[] = [];
 
 const fetchModules = fetch('/modules/modules.json')
   .then(x => x.json())
@@ -17,27 +17,33 @@ const fetchEnvironment = fetch('/environments/environment.json')
     return {};
   });
 
-export const loadModulesForApp = async (name: string) => {
+export const loadModulesForApp = async () => {
   const [m, e] = await Promise.all([fetchModules, fetchEnvironment]);
   const modules = m as ModuleDefinition;
-  const env = e as { [key: string]: any };
+  const env = e as Environment;
 
-  (window as any).__gah__env = env;
-  Object.keys(env).forEach(key => {
-    environment[key] = env[key];
-  });
+  if (env) {
+    if (!env.production) {
+      (window as any).__gah__env = env;
+    }
+    Object.keys(env).forEach(key => {
+      environment[key] = env[key];
+    });
+  }
+
+  if (modules.length === 0) {
+    return;
+  }
 
   await Promise.all(
-    modules.map(module => {
+    modules.map(moduleToLoad => {
       return loadRemoteModule({
         exposedModule: './Module',
-        remoteEntry: module.url + 'remoteEntry.js',
+        remoteEntry: moduleToLoad.url + 'remoteEntry.js',
         type: 'module'
-      }).then(m => {
-        loadedModules[name] ??= [];
-        loadedModules[name].push(m[module.ngModuleName]);
+      }).then(loadedModule => {
+        loadedModules.push(loadedModule[moduleToLoad.ngModuleName]);
       });
     })
   );
-  return loadedModules[name];
 };

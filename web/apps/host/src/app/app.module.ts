@@ -4,11 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@awdware/shared';
-import { modules } from '../modules';
+import { loadedModules } from '@awdware/bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, RouterModule.forRoot([]), SharedModule, modules],
+  imports: [BrowserModule, RouterModule.forRoot([]), SharedModule, loadedModules],
   providers: [],
   bootstrap: [AppComponent]
 })
