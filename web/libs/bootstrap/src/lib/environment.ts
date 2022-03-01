@@ -1,11 +1,11 @@
-export const defaultEnvironment = {
-  production: false,
-  apiUrl: ''
+export type Environment = {
+  production: boolean;
+  [key: string]: any;
 };
 
-export const environment: typeof defaultEnvironment = (window as any).__gah__env;
+export const environment: Environment = { production: false };
 
-export const envValidator = () => {
+export const envValidator = (defaultEnvironment: Environment) => {
   if (!environment) {
     console.error('Environment is not defined');
   }

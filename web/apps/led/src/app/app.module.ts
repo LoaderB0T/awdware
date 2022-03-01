@@ -9,10 +9,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import { LedLazyModule } from './led.lazy.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' })],
+  imports: [BrowserModule, HttpClientModule, RouterModule.forRoot([]), LedLazyModule],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -22,7 +22,6 @@ import { ErrorModule } from './error/error.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SettingsModule } from './settings/settings.module';
 import { HttpInterceptorService, SessionStoreService } from '@awdware/session';
-import { environment, envValidator } from './environment';
 
 @NgModule({
   declarations: [MenuComponent, MeComponent, BaseComponent],
@@ -31,7 +30,7 @@ import { environment, envValidator } from './environment';
     CommonModule,
     CoreRoutingModule,
     BrowserAnimationsModule,
-    SharedModule.forRoot({ apiUrl: environment.apiUrl }),
+    SharedModule,
     AccountModule,
     HomeModule,
     ErrorModule,
@@ -50,7 +49,6 @@ export class CoreModule {
     translationService: TranslationService
   ) {
     console.log('constructor: CoreModule');
-    envValidator();
 
     translationService.init();
     themeService.init();

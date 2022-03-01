@@ -1,4 +1,5 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
+import { environment } from './environment';
 
 export type ModuleDefinition = [{ name: string; ngModuleName: string; url: string }];
 export const loadedModules: { [key: string]: any[] } = {};
@@ -19,9 +20,12 @@ const fetchEnvironment = fetch('/environments/environment.json')
 export const loadModulesForApp = async (name: string) => {
   const [m, e] = await Promise.all([fetchModules, fetchEnvironment]);
   const modules = m as ModuleDefinition;
-  const environment = e as { [key: string]: any };
+  const env = e as { [key: string]: any };
 
-  (window as any).__gah__env = environment;
+  (window as any).__gah__env = env;
+  Object.keys(env).forEach(key => {
+    environment[key] = env[key];
+  });
 
   await Promise.all(
     modules.map(module => {

@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -13,10 +13,6 @@ import { SliderComponent } from './slider/slider.component';
 import { ColorSliderComponent } from './color-slider/color-slider.component';
 import { SelectComponent } from './select/select.component';
 import { LogoComponent } from './logo/logo.component';
-
-export class SharedConfig {
-  apiUrl!: string;
-}
 
 @NgModule({
   declarations: [
@@ -55,13 +51,6 @@ export class SharedConfig {
 export class SharedModule {
   constructor() {
     console.log('constructor: SharedModule');
-  }
-
-  public static forRoot(cfg: SharedConfig): ModuleWithProviders<SharedModule> {
-    return {
-      ngModule: SharedModule,
-      providers: [{ provide: SharedConfig, useValue: cfg }]
-    };
   }
 }
 

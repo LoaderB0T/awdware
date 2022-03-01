@@ -14,7 +14,7 @@
         "polyfills": "apps/led/src/polyfills.ts",
         "tsConfig": "apps/led/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/led/src/favicon.ico", "apps/led/src/assets"],
+        "assets": ["apps/led/src/favicon.ico", "apps/led/src/assets", "apps/led/src/environments/environment.json"],
         "styles": ["apps/led/src/styles.scss"],
         "scripts": [],
         "customWebpackConfig": {

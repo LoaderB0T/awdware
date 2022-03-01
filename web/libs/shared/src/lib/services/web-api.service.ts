@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { SharedConfig } from '../shared.module';
+import { environment } from '@awdware/bootstrap';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,9 @@ import { SharedConfig } from '../shared.module';
 export class WebApiService {
   private baseUrl: string = '';
 
-  constructor(private readonly httpClient: HttpClient, @Inject(SharedConfig) sharedConfig: SharedConfig) {
+  constructor(private readonly httpClient: HttpClient) {
     console.log('web api service constructor called');
-    this.init(sharedConfig.apiUrl);
+    this.init(environment['apiUrl']);
   }
 
   private init(apiUrl: string) {
