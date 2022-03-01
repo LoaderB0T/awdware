@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   SharedModule,
   FacadeService,
-  WebApiService,
   ThemeService,
   TranslationService,
   AwdwareConfig,
@@ -21,9 +20,9 @@ import { BaseComponent } from './base/base.component';
 import { CommonModule } from '@angular/common';
 import { ErrorModule } from './error/error.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { environment } from '../environment';
 import { SettingsModule } from './settings/settings.module';
 import { HttpInterceptorService, SessionStoreService } from '@awdware/session';
+import { environment, envValidator } from './environment';
 
 @NgModule({
   declarations: [MenuComponent, MeComponent, BaseComponent],
@@ -32,7 +31,7 @@ import { HttpInterceptorService, SessionStoreService } from '@awdware/session';
     CommonModule,
     CoreRoutingModule,
     BrowserAnimationsModule,
-    SharedModule,
+    SharedModule.forRoot({ apiUrl: environment.apiUrl }),
     AccountModule,
     HomeModule,
     ErrorModule,
@@ -47,13 +46,12 @@ export class CoreModule {
     routingService: RoutingService,
     facadeService: FacadeService,
     sessionStoreService: SessionStoreService,
-    apiService: WebApiService,
     themeService: ThemeService,
     translationService: TranslationService
   ) {
     console.log('constructor: CoreModule');
+    envValidator();
 
-    apiService.init(environment.apiUrl);
     translationService.init();
     themeService.init();
 

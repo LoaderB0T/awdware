@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +14,10 @@ import { ColorSliderComponent } from './color-slider/color-slider.component';
 import { SelectComponent } from './select/select.component';
 import { LogoComponent } from './logo/logo.component';
 
+export class SharedConfig {
+  apiUrl!: string;
+}
+
 @NgModule({
   declarations: [
     LoadingComponent,
@@ -23,7 +27,7 @@ import { LogoComponent } from './logo/logo.component';
     SliderComponent,
     ColorSliderComponent,
     SelectComponent,
-    LogoComponent,
+    LogoComponent
   ],
   imports: [
     CommonModule,
@@ -31,10 +35,10 @@ import { LogoComponent } from './logo/logo.component';
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
+        deps: [HttpClient]
+      }
     }),
-    FormsModule,
+    FormsModule
   ],
   exports: [
     TranslateModule,
@@ -45,12 +49,19 @@ import { LogoComponent } from './logo/logo.component';
     SliderComponent,
     ColorSliderComponent,
     SelectComponent,
-    LogoComponent,
-  ],
+    LogoComponent
+  ]
 })
 export class SharedModule {
   constructor() {
     console.log('constructor: SharedModule');
+  }
+
+  public static forRoot(cfg: SharedConfig): ModuleWithProviders<SharedModule> {
+    return {
+      ngModule: SharedModule,
+      providers: [{ provide: SharedConfig, useValue: cfg }]
+    };
   }
 }
 
