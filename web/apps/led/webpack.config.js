@@ -1,6 +1,7 @@
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const mf = require('@angular-architects/module-federation/webpack');
 const path = require('path');
+const { sharedPackages, sharedLibs } = require('../../configs/awdware');
 const share = mf.share;
 
 /**
@@ -16,7 +17,7 @@ const tsConfigPath = process.env.NX_TSCONFIG_PATH ?? path.join(__dirname, '../..
 
 const workspaceRootPath = path.join(__dirname, '../../');
 const sharedMappings = new mf.SharedMappings();
-sharedMappings.register(tsConfigPath, ['@awdware/shared', '@awdware/session', '@awdware/core-lib'], workspaceRootPath);
+sharedMappings.register(tsConfigPath, sharedLibs, workspaceRootPath);
 
 module.exports = {
   output: {
@@ -42,48 +43,7 @@ module.exports = {
         './Module': 'apps/led/src/app/remote-entry/entry.module.ts'
       },
       shared: share({
-        '@angular/forms': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: 'auto',
-          includeSecondaries: true
-        },
-        '@angular/core': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: 'auto',
-          includeSecondaries: true
-        },
-        '@angular/common': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: 'auto',
-          includeSecondaries: true
-        },
-        '@angular/common/http': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: 'auto',
-          includeSecondaries: true
-        },
-        '@angular/router': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: 'auto',
-          includeSecondaries: true
-        },
-        rxjs: {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: 'auto',
-          includeSecondaries: true
-        },
-        '@ngx-translate/core': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: 'auto',
-          includeSecondaries: true
-        },
+        ...sharedPackages,
         ...sharedMappings.getDescriptors()
       }),
       library: {
