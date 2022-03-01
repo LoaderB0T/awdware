@@ -1,5 +1,4 @@
 export * from './lib/shared.module';
-export * from '../../../apps/host/src/module-loader';
 
 export * from './lib/checkbox/checkbox.component';
 export * from './lib/slider/slider.component';
