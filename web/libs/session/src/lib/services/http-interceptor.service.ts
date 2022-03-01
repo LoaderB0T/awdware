@@ -44,7 +44,7 @@ export class HttpInterceptorService implements HttpInterceptor {
       // this.routingService.navigateToAccountLogin();
       // TODO: Implement redirect, except ypu already are on login pare or are currently beeing redirected
     } else if (error.status === 404 || error.status >= 500 || !error.status) {
-      this.routingService.navigateToError(error.status ?? 0);
+      // this.routingService.navigateToError(error.status ?? 0);
     } else {
       // Todo: Visualize Error?
     }

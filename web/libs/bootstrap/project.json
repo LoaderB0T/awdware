@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/bootstrap",
+  "sourceRoot": "libs/bootstrap/src",
+  "prefix": "awdware",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/bootstrap"],
+      "options": {
+        "jestConfig": "libs/bootstrap/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/bootstrap/src/**/*.ts", "libs/bootstrap/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

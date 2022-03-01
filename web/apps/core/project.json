@@ -14,7 +14,7 @@
         "polyfills": "apps/core/src/polyfills.ts",
         "tsConfig": "apps/core/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/core/src/favicon.ico", "apps/core/src/assets"],
+        "assets": ["apps/core/src/favicon.ico", "apps/core/src/assets", "apps/core/src/environments/environment.json"],
         "styles": ["apps/core/src/styles.scss"],
         "scripts": [],
         "customWebpackConfig": {

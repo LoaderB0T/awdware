@@ -3,12 +3,21 @@ import { loadRemoteModule } from '@angular-architects/module-federation';
 export type ModuleDefinition = [{ name: string; ngModuleName: string; url: string }];
 export const loadedModules: { [key: string]: any[] } = {};
 
-const fetchModules = fetch('/modules/modules.json');
-const fetchEnvironment = fetch('/environments/environment.json');
+const fetchModules = fetch('/modules/modules.json')
+  .then(x => x.json())
+  .catch(() => {
+    console.debug('Failed to load modules.json');
+    return [];
+  });
+const fetchEnvironment = fetch('/environments/environment.json')
+  .then(x => x.json())
+  .catch(() => {
+    console.debug('Failed to load environment.json');
+    return {};
+  });
 
 export const loadModulesForApp = async (name: string) => {
-  const [mR, eR] = await Promise.all([fetchModules, fetchEnvironment]);
-  const [m, e] = await Promise.all([mR.json(), eR.json()]);
+  const [m, e] = await Promise.all([fetchModules, fetchEnvironment]);
   const modules = m as ModuleDefinition;
   const environment = e as { [key: string]: any };
 

@@ -1,4 +1,4 @@
-import { loadModulesForApp } from './module-loader';
+import { loadModulesForApp } from '@awdware/bootstrap';
 import { modules } from './modules';
 
 loadModulesForApp('host').then(m => {
