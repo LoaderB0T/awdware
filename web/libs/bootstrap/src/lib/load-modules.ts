@@ -1,49 +1,48 @@
-import { loadRemoteModule } from '@angular-architects/module-federation';
-import { Environment, environment } from './environment';
+import { environment, Environment, initializeEnvironment } from './environment';
+import { loadModule } from './load-module';
+import { loadedModules } from './loaded-modules';
 
-export type ModuleDefinition = { name: string; ngModuleName: string; url: string }[];
-export const loadedModules: any[] = [];
+export type ModuleDefinition = { name: string; ngModuleName: string; url: string };
 
-const fetchModules = fetch('/modules/modules.json')
-  .then(x => x.json())
-  .catch(() => {
-    console.debug('Failed to load modules.json');
-    return [];
-  });
-const fetchEnvironment = fetch('/environments/environment.json')
-  .then(x => x.json())
-  .catch(() => {
-    console.debug('Failed to load environment.json');
-    return {};
-  });
+export type AppInitBehavior = 'loadModules' | 'loadEnvironment' | 'loadModulesAndEnvironment';
 
-export const loadModulesForApp = async () => {
-  const [m, e] = await Promise.all([fetchModules, fetchEnvironment]);
-  const modules = m as ModuleDefinition;
-  const env = e as Environment;
+export const initializeApp = async (
+  behavior: AppInitBehavior = 'loadModulesAndEnvironment',
+  modulePath?: string,
+  environmentPath?: string
+) => {
+  const doLoadModules = behavior === 'loadModulesAndEnvironment' || behavior === 'loadModules';
+  const doLoadEnvironment = behavior === 'loadModulesAndEnvironment' || behavior === 'loadEnvironment';
 
-  if (env) {
-    if (!env.production) {
-      (window as any).__gah__env = env;
+  const fetchModules = doLoadModules
+    ? fetch(modulePath ?? '/modules/modules.json')
+        .then(x => x.json())
+        .catch(() => {
+          throw new Error('Failed to load modules.json');
+        })
+    : Promise.resolve([]);
+
+  const fetchEnvironment = doLoadEnvironment
+    ? fetch(environmentPath ?? '/environments/environment.json')
+        .then(x => x.json())
+        .catch(() => {
+          throw new Error('Failed to load environment.json');
+        })
+    : Promise.resolve({});
+
+  const [modules, env] = (await Promise.all([fetchModules, fetchEnvironment])) as [ModuleDefinition[], Environment];
+  if (doLoadEnvironment) {
+    initializeEnvironment(env);
+  }
+
+  if (doLoadModules) {
+    await Promise.all(modules.map(moduleToLoad => loadModule(moduleToLoad)));
+    if (!environment.production) {
+      console.debug(
+        'Loaded modules:',
+        modules.map(x => x.name),
+        loadedModules
+      );
     }
-    Object.keys(env).forEach(key => {
-      environment[key] = env[key];
-    });
   }
-
-  if (modules.length === 0) {
-    return;
-  }
-
-  await Promise.all(
-    modules.map(moduleToLoad => {
-      return loadRemoteModule({
-        exposedModule: './Module',
-        remoteEntry: moduleToLoad.url + 'remoteEntry.js',
-        type: 'module'
-      }).then(loadedModule => {
-        loadedModules.push(loadedModule[moduleToLoad.ngModuleName]);
-      });
-    })
-  );
 };
