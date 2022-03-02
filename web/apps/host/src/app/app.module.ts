@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@awdware/shared';
-import { loadedModules } from '@awdware/bootstrap';
+import { loadedModules } from 'ng-dynamic-mf';
 
 @NgModule({
   declarations: [AppComponent],

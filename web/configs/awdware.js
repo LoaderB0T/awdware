@@ -1,5 +1,5 @@
 module.exports = {
-  sharedLibs: ['@awdware/shared', '@awdware/session', '@awdware/core-lib', `@awdware/bootstrap`],
+  sharedLibs: ['@awdware/shared', '@awdware/session', '@awdware/core-lib'],
   sharedPackages: {
     '@angular/forms': {
       singleton: true,
@@ -38,6 +38,12 @@ module.exports = {
       includeSecondaries: true
     },
     '@ngx-translate/core': {
+      singleton: true,
+      strictVersion: true,
+      requiredVersion: 'auto',
+      includeSecondaries: true
+    },
+    'ng-dynamic-mf': {
       singleton: true,
       strictVersion: true,
       requiredVersion: 'auto',

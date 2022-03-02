@@ -10,7 +10,7 @@ import { NewPasswordComponent } from './new-password/new-password.component';
 import { RegisterComponent } from './register/register.component';
 import { VerifyMailComponent } from './verify-mail/verify-mail.component';
 import { SharedModule } from '@awdware/shared';
-import { ResourceMapModule } from '@awdware/bootstrap';
+import { ResourceMapModule } from 'ng-dynamic-mf';
 
 @NgModule({
   declarations: [

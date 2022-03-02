@@ -24,6 +24,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@nrwl/angular": "13.8.3",
+    "ng-dynamic-mf": "^0.0.2",
     "rxjs": "~7.4.0",
     "theaterjs": "^3.2.0",
     "tslib": "^2.0.0",

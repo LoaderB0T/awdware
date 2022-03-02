@@ -1,7 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "bootstrap": "libs/bootstrap",
     "core": "apps/core",
     "core-e2e": "apps/core-e2e",
     "core-lib": "libs/core-lib",
