@@ -5,11 +5,10 @@ import { resourceMapper } from './base-path';
   name: 'resourceMap'
 })
 export class ResourceMapPipe implements PipeTransform {
-  transform(value: string, ...args: string[]): string {
-    if (args.length !== 1) {
-      throw new Error('ResourcePipe: Only 1 argument is allowed: the name of the module');
+  transform(value: string, moduleName: string): string {
+    if (!moduleName) {
+      throw new Error('The module name is required');
     }
-    const moduleName = args[0];
     return resourceMapper(moduleName, value);
   }
 }
