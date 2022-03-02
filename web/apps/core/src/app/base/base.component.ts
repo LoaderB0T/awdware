@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { DialogService } from '@awdware/shared';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { MenuService } from '../services/menu.service';
   styleUrls: ['./base.component.scss'],
   animations: [slideInAnimation]
 })
-export class BaseComponent implements OnInit {
+export class BaseComponent {
   private readonly _dialogService: DialogService;
   private readonly _menuService: MenuService;
   private _prevActiveRoute: string = '';
@@ -70,13 +70,6 @@ export class BaseComponent implements OnInit {
       .subscribe(() => {
         this._dialogService.hideAllDialogs();
       });
-  }
-
-  ngOnInit(): void {
-    if ((window.document as any).documentMode) {
-      // Do IE stuff
-      document.body.innerHTML = 'THIS WEBSITE IS NOT SUPPORTED IN INTERNET EXPLORER';
-    }
   }
 
   public prepareRoute(outlet: RouterOutlet) {
