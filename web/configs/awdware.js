@@ -1,5 +1,5 @@
 module.exports = {
-  sharedLibs: ['@awdware/shared', '@awdware/session', '@awdware/core-lib'],
+  sharedLibs: ['@awdware/shared', '@awdware/session', '@awdware/core-lib', `@awdware/bootstrap`],
   sharedPackages: {
     '@angular/forms': {
       singleton: true,
