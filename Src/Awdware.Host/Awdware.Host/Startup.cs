@@ -205,7 +205,7 @@ namespace Awdware.Host
             {
                 corsBuilder.AllowAnyHeader();
                 corsBuilder.AllowAnyMethod();
-                corsBuilder.WithOrigins("https://two.awdware.de");
+                corsBuilder.WithOrigins("https://two.awdware.de", "http://three.awdware.de");
                 corsBuilder.AllowCredentials();
             }
 
