@@ -20,7 +20,7 @@ export const routes: Routes = [
     component: BaseComponent,
     children: [
       {
-        path: 'gah-outlet',
+        path: '#module-entry-point#',
         redirectTo: '/'
       },
       {
