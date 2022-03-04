@@ -23,6 +23,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SettingsModule } from './settings/settings.module';
 import { HttpInterceptorService, SessionStoreService } from '@awdware/session';
 import { DynamicTranslationService } from 'ng-dynamic-mf';
+import { TranslateService } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [MenuComponent, MeComponent, BaseComponent],
@@ -47,11 +48,13 @@ export class CoreModule {
     facadeService: FacadeService,
     sessionStoreService: SessionStoreService,
     themeService: ThemeService,
+    translateService: TranslateService,
     translationService: TranslationService,
     dynamicTranslationService: DynamicTranslationService
   ) {
     console.log('constructor: CoreModule');
 
+    dynamicTranslationService.setTranslateService(translateService);
     dynamicTranslationService.registerTranslations(['en_US', 'de_DE'], l => `assets/locales/${l}.json`);
 
     translationService.init();

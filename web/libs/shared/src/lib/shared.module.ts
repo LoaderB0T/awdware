@@ -1,9 +1,7 @@
-import { Inject, ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { LoadingComponent } from './loading/loading.component';
 import { TextboxComponent } from './textbox/textbox.component';
@@ -42,8 +40,4 @@ export class SharedModule {
   constructor() {
     console.log('constructor: SharedModule');
   }
-}
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

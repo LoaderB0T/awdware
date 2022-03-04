@@ -13,4 +13,6 @@ import { loadedModules } from 'ng-dynamic-mf';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {}
+}
