@@ -25,17 +25,7 @@ import { LogoComponent } from './logo/logo.component';
     SelectComponent,
     LogoComponent
   ],
-  imports: [
-    CommonModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    FormsModule
-  ],
+  imports: [CommonModule, FormsModule, TranslateModule],
   exports: [
     TranslateModule,
     LoadingComponent,

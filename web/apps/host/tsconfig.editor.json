@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "../../libs/shared/src/lib/test/loaded-translations.service.ts"],
   "compilerOptions": {
     "types": ["jest", "node"]
   }

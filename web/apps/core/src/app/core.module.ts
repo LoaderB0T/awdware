@@ -22,6 +22,7 @@ import { ErrorModule } from './error/error.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SettingsModule } from './settings/settings.module';
 import { HttpInterceptorService, SessionStoreService } from '@awdware/session';
+import { DynamicTranslationService } from 'ng-dynamic-mf';
 
 @NgModule({
   declarations: [MenuComponent, MeComponent, BaseComponent],
@@ -46,9 +47,12 @@ export class CoreModule {
     facadeService: FacadeService,
     sessionStoreService: SessionStoreService,
     themeService: ThemeService,
-    translationService: TranslationService
+    translationService: TranslationService,
+    dynamicTranslationService: DynamicTranslationService
   ) {
     console.log('constructor: CoreModule');
+
+    dynamicTranslationService.registerTranslations(['en_US', 'de_DE'], l => `assets/locales/${l}.json`);
 
     translationService.init();
     themeService.init();
