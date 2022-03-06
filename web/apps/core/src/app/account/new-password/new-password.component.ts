@@ -35,7 +35,7 @@ export class NewPasswordComponent {
       throw new Error('No token found');
     }
     this.resetPw.token = a;
-    return this._accountService.resetPassword(this.resetPw).subscribe(() => {});
+    return this._accountService.resetPassword(this.resetPw);
   }
 
   public get validationDefinitionPassword(): ValidationDefinition[] {

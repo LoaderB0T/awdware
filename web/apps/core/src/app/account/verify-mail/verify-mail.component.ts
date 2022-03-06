@@ -23,7 +23,7 @@ export class VerifyMailComponent implements OnInit {
     if (!a) {
       throw new Error('No token found');
     }
-    this._accountService.verifyMail(a).subscribe(() => {
+    this._accountService.verifyMail(a).then(() => {
       this.verifyComplete = true;
     });
   }

@@ -1,8 +1,8 @@
-import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AccountService } from '@awdware/session';
-import { SubscriptionManager, InputType } from '@awdware/shared';
+import { InputType } from '@awdware/shared';
 import { LoginHelpRequestDto } from 'libs/session/src/lib/models/session-facade';
 
 @Component({
@@ -10,7 +10,7 @@ import { LoginHelpRequestDto } from 'libs/session/src/lib/models/session-facade'
   templateUrl: './login-help.component.html',
   styleUrls: ['./login-help.component.scss']
 })
-export class LoginHelpComponent implements OnDestroy {
+export class LoginHelpComponent {
   public inputType: typeof InputType = InputType;
 
   public loginHelpModel: LoginHelpRequestDto;
@@ -18,7 +18,6 @@ export class LoginHelpComponent implements OnDestroy {
   public errorMessageKey?: string;
   public emailHasBeenSend = false;
   private readonly _accountService: AccountService;
-  private readonly _subMgr = new SubscriptionManager();
 
   @ViewChild('loginHelp', { static: true })
   private readonly _formElement?: NgForm;
@@ -38,10 +37,6 @@ export class LoginHelpComponent implements OnDestroy {
       return !this._formElement.valid;
     }
     return false;
-  }
-
-  public ngOnDestroy() {
-    this._subMgr.unsubscribeAll();
   }
 
   public get loginDisabled(): boolean {
@@ -67,9 +62,8 @@ export class LoginHelpComponent implements OnDestroy {
       this.loginHelpModel.forgotPassword = false;
       this.loginHelpModel.forgotUsername = true;
     }
-    const resetSub = this._accountService.loginHelp(this.loginHelpModel).subscribe(() => {
+    this._accountService.loginHelp(this.loginHelpModel).then(() => {
       this.emailHasBeenSend = true;
     });
-    this._subMgr.add(resetSub);
   }
 }

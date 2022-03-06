@@ -28,8 +28,8 @@ export class LedComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this._ledService.getEffetcs().subscribe();
-    this._ledService.getAllSettings().subscribe(allSettings => {
+    this._ledService.getEffetcs();
+    this._ledService.getAllSettings().then(allSettings => {
       this.ledSettings = allSettings;
     });
     this._facadeService.setActiveMenuItem('led');
@@ -59,7 +59,7 @@ export class LedComponent implements OnInit, OnDestroy {
   }
 
   public deleteEffect(id: string) {
-    this._ledService.deleteEffect(id).subscribe();
+    this._ledService.deleteEffect(id);
     const index = this.ledConfigs.findIndex(x => x.id === id);
     this.ledConfigs.splice(index, 1);
   }

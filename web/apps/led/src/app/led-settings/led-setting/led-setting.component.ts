@@ -26,13 +26,13 @@ export class LedSettingComponent {
   }
 
   public saveCurrentSettings() {
-    this._ledService.updateSetting(this.settings).subscribe(() => {
+    this._ledService.updateSetting(this.settings).then(() => {
       this.configSaved = true;
     });
   }
 
   public getConfigFile() {
-    this._ledService.getConfigFile(this.settings.id).subscribe(config => {
+    this._ledService.getConfigFile(this.settings.id).then(config => {
       this._downloadService.downloadStringAsFile('config.led', config);
     });
   }

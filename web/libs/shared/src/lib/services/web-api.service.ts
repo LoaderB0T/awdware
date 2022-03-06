@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { firstValueFrom, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'ng-dynamic-mf';
 
@@ -25,62 +25,70 @@ export class WebApiService {
     }
   }
 
-  public get<ResultT extends string>(method: string, parseResponse: boolean): Observable<string>;
-  public get<ResultT>(method: string): Observable<ResultT>;
-  public get<ResultT>(method: string, parseResponse = true): Observable<ResultT | string> {
+  public get<ResultT extends string>(method: string, parseResponse: boolean): Promise<string>;
+  public get<ResultT>(method: string): Promise<ResultT>;
+  public get<ResultT>(method: string, parseResponse = true): Promise<ResultT | string> {
     this.checkInit();
     const apiUrl = this.baseUrl + method;
     if (parseResponse) {
-      return this.httpClient.get<ResultT>(apiUrl).pipe(catchError(this.handleError<ResultT>()));
+      return firstValueFrom(this.httpClient.get<ResultT>(apiUrl).pipe(catchError(this.handleError<ResultT>())));
     } else {
-      return this.httpClient.get(apiUrl, { responseType: 'text' }).pipe(
-        catchError(this.handleError()),
-        map(x => x as string)
+      return firstValueFrom(
+        this.httpClient.get(apiUrl, { responseType: 'text' }).pipe(
+          catchError(this.handleError()),
+          map(x => x as string)
+        )
       );
     }
   }
 
-  public post<ResultT extends string>(method: string, body: any, parseResponse: boolean): Observable<string>;
-  public post<ResultT>(method: string, body: any): Observable<ResultT>;
-  public post<ResultT>(method: string, body: any, parseResponse = true): Observable<ResultT | string> {
+  public post<ResultT extends string>(method: string, body: any, parseResponse: boolean): Promise<string>;
+  public post<ResultT>(method: string, body: any): Promise<ResultT>;
+  public post<ResultT>(method: string, body: any, parseResponse = true): Promise<ResultT | string> {
     this.checkInit();
     const apiUrl = this.baseUrl + method;
     if (parseResponse) {
-      return this.httpClient.post<ResultT>(apiUrl, body).pipe(catchError(this.handleError<ResultT>()));
+      return firstValueFrom(this.httpClient.post<ResultT>(apiUrl, body).pipe(catchError(this.handleError<ResultT>())));
     } else {
-      return this.httpClient.post(apiUrl, body, { responseType: 'text' }).pipe(
-        catchError(this.handleError()),
-        map(x => x as string)
+      return firstValueFrom(
+        this.httpClient.post(apiUrl, body, { responseType: 'text' }).pipe(
+          catchError(this.handleError()),
+          map(x => x as string)
+        )
       );
     }
   }
 
-  public put<ResultT extends string>(method: string, body: any, parseResponse: boolean): Observable<string>;
-  public put<ResultT>(method: string, body: any): Observable<ResultT>;
-  public put<ResultT>(method: string, body: any, parseResponse = true): Observable<ResultT | string> {
+  public put<ResultT extends string>(method: string, body: any, parseResponse: boolean): Promise<string>;
+  public put<ResultT>(method: string, body: any): Promise<ResultT>;
+  public put<ResultT>(method: string, body: any, parseResponse = true): Promise<ResultT | string> {
     this.checkInit();
     const apiUrl = this.baseUrl + method;
     if (parseResponse) {
-      return this.httpClient.put<ResultT>(apiUrl, body).pipe(catchError(this.handleError<ResultT>()));
+      return firstValueFrom(this.httpClient.put<ResultT>(apiUrl, body).pipe(catchError(this.handleError<ResultT>())));
     } else {
-      return this.httpClient.put(apiUrl, body, { responseType: 'text' }).pipe(
-        catchError(this.handleError()),
-        map(x => x as string)
+      return firstValueFrom(
+        this.httpClient.put(apiUrl, body, { responseType: 'text' }).pipe(
+          catchError(this.handleError()),
+          map(x => x as string)
+        )
       );
     }
   }
 
-  public delete<ResultT extends string>(method: string, parseResponse: boolean): Observable<string>;
-  public delete<ResultT>(method: string): Observable<ResultT>;
-  public delete<ResultT>(method: string, parseResponse = true): Observable<ResultT | string> {
+  public delete<ResultT extends string>(method: string, parseResponse: boolean): Promise<string>;
+  public delete<ResultT>(method: string): Promise<ResultT>;
+  public delete<ResultT>(method: string, parseResponse = true): Promise<ResultT | string> {
     this.checkInit();
     const apiUrl = this.baseUrl + method;
     if (parseResponse) {
-      return this.httpClient.delete<ResultT>(apiUrl).pipe(catchError(this.handleError<ResultT>()));
+      return firstValueFrom(this.httpClient.delete<ResultT>(apiUrl).pipe(catchError(this.handleError<ResultT>())));
     } else {
-      return this.httpClient.delete(apiUrl, { responseType: 'text' }).pipe(
-        catchError(this.handleError()),
-        map(x => x as string)
+      return firstValueFrom(
+        this.httpClient.delete(apiUrl, { responseType: 'text' }).pipe(
+          catchError(this.handleError()),
+          map(x => x as string)
+        )
       );
     }
   }

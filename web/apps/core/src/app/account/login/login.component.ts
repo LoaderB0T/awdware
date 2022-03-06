@@ -1,9 +1,9 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AccountService } from '@awdware/session';
 
-import { SubscriptionManager, InputType, RoutingService } from '@awdware/shared';
+import { InputType, RoutingService } from '@awdware/shared';
 import { LoginRequestDto, LoginResult } from 'libs/session/src/lib/models/session-facade';
 
 @Component({
@@ -11,7 +11,7 @@ import { LoginRequestDto, LoginResult } from 'libs/session/src/lib/models/sessio
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent {
   inputType = InputType;
 
   public errorMessageKey?: string;
@@ -19,7 +19,6 @@ export class LoginComponent implements OnDestroy {
   public loginSuccessful: boolean = false;
   public clickedButton: boolean = false;
 
-  private readonly _subMgr = new SubscriptionManager();
   private readonly _accountService: AccountService;
   private readonly _routingService: RoutingService;
 
@@ -36,14 +35,10 @@ export class LoginComponent implements OnDestroy {
     this.login();
   }
 
-  public ngOnDestroy(): void {
-    this._subMgr.unsubscribeAll();
-  }
-
   private login() {
     this.errorMessageKey = '';
     this.clickedButton = true;
-    const loginSub = this._accountService.login(this.loginModel).subscribe(x => {
+    this._accountService.login(this.loginModel).then(x => {
       if (x === LoginResult.SUCCESS) {
         this.successfullLogin();
       } else {
@@ -57,7 +52,6 @@ export class LoginComponent implements OnDestroy {
         }
       }
     });
-    this._subMgr.add(loginSub);
   }
 
   private successfullLogin() {

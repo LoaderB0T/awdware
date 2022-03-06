@@ -42,57 +42,52 @@ export class AccountService {
     this._userInfoService = userInfoService;
   }
 
-  public login(loginRequestDto: LoginRequestDto): Observable<LoginResult> {
-    return this._webApiService.post<LoginResponseDto>('authentication/login', loginRequestDto).pipe(
-      map(data => {
-        if (data.loginSuccess === LoginResult.SUCCESS) {
-          this._sessionStoreService.putToken(data.token);
-          this._sessionService.startCheckSession();
-          console.log(data);
-          this._userInfoService.setUser(data.userInfo);
-          return LoginResult.SUCCESS;
-        } else {
-          return data.loginSuccess;
-        }
-      })
-    );
+  public login(loginRequestDto: LoginRequestDto): Promise<LoginResult> {
+    return this._webApiService.post<LoginResponseDto>('authentication/login', loginRequestDto).then(data => {
+      if (data.loginSuccess === LoginResult.SUCCESS) {
+        this._sessionStoreService.putToken(data.token);
+        this._sessionService.startCheckSession();
+        console.log(data);
+        this._userInfoService.setUser(data.userInfo);
+        return LoginResult.SUCCESS;
+      } else {
+        return data.loginSuccess;
+      }
+    });
   }
 
-  public register(registerRequestDto: RegisterRequestDto): Observable<RegisterResult> {
-    return this._webApiService.post<RegisterResponseDto>('authentication/register', registerRequestDto).pipe(
-      map(data => {
-        if (data.registerSuccess === RegisterResult.SUCCESS) {
-          this._sessionStoreService.putToken(data.token);
-          this._sessionService.startCheckSession();
-          this._userInfoService.setUser(data.userInfo);
-          return RegisterResult.SUCCESS;
-        } else {
-          return data.registerSuccess;
-        }
-      })
-    );
+  public register(registerRequestDto: RegisterRequestDto): Promise<RegisterResult> {
+    return this._webApiService.post<RegisterResponseDto>('authentication/register', registerRequestDto).then(data => {
+      if (data.registerSuccess === RegisterResult.SUCCESS) {
+        this._sessionStoreService.putToken(data.token);
+        this._sessionService.startCheckSession();
+        this._userInfoService.setUser(data.userInfo);
+        return RegisterResult.SUCCESS;
+      } else {
+        return data.registerSuccess;
+      }
+    });
   }
 
-  public resetPassword(resetPasswordDto: ResetPasswordDto): Observable<void> {
+  public resetPassword(resetPasswordDto: ResetPasswordDto): Promise<void> {
     return this._webApiService.post<void>('authentication/resetpassword', resetPasswordDto);
   }
 
-  public loginHelp(loginHelpRequestDto: LoginHelpRequestDto): Observable<void> {
+  public loginHelp(loginHelpRequestDto: LoginHelpRequestDto): Promise<void> {
     return this._webApiService.post<void>('authentication/loginhelp', loginHelpRequestDto);
   }
 
-  public loadUserDetails(): Observable<UserDetailsDto> {
-    return this._webApiService.get<UserDetailsDto>('user/getMyUserDetails').pipe(
-      tap(x => {
-        if (x) {
-          this._userInfoService.setUser(x);
-        } else {
-          this._userInfoService.clearUser();
-          this._sessionStoreService.removeToken();
-          this._sessionService.stopCheckSession();
-        }
-      })
-    );
+  public async loadUserDetails(): Promise<UserDetailsDto | null> {
+    const x = await this._webApiService.get<UserDetailsDto>('user/getMyUserDetails');
+    if (x) {
+      this._userInfoService.setUser(x);
+      return x;
+    } else {
+      this._userInfoService.clearUser();
+      this._sessionStoreService.removeToken();
+      this._sessionService.stopCheckSession();
+      return null;
+    }
   }
 
   public logout() {
@@ -102,7 +97,7 @@ export class AccountService {
     this._routingService.navigateToHomeHello();
   }
 
-  public verifyMail(token: string): Observable<void> {
+  public verifyMail(token: string): Promise<void> {
     return this._webApiService.get(`authentication/emailconfirmation/${token}`);
   }
 }

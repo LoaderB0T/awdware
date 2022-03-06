@@ -10,7 +10,6 @@ import { NewPasswordComponent } from './new-password/new-password.component';
 import { RegisterComponent } from './register/register.component';
 import { VerifyMailComponent } from './verify-mail/verify-mail.component';
 import { SharedModule } from '@awdware/shared';
-import { ResourceMapModule } from 'ng-dynamic-mf';
 
 @NgModule({
   declarations: [
@@ -21,6 +20,6 @@ import { ResourceMapModule } from 'ng-dynamic-mf';
     RegisterComponent,
     VerifyMailComponent
   ],
-  imports: [CommonModule, SharedModule, AccountRoutingModule, FormsModule, ResourceMapModule]
+  imports: [CommonModule, SharedModule, AccountRoutingModule, FormsModule]
 })
 export class AccountModule {}

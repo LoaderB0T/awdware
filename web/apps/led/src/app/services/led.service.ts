@@ -18,15 +18,13 @@ export class LedService {
     this._apiService = apiService;
   }
 
-  public getEffetcs(): Observable<null> {
-    return this._apiService.get<Array<LedConfigurationDto>>('led/effects').pipe(
-      tap(dtos => {
-        dtos.sort((a, b) => a.ordinal - b.ordinal);
-        const models = dtos.map(dto => LedEffect.fromDto(dto));
-        this.ledEffects = models;
-      }),
-      map(() => null)
-    );
+  public getEffetcs(): Promise<null> {
+    return this._apiService.get<Array<LedConfigurationDto>>('led/effects').then(dtos => {
+      dtos.sort((a, b) => a.ordinal - b.ordinal);
+      const models = dtos.map(dto => LedEffect.fromDto(dto));
+      this.ledEffects = models;
+      return null;
+    });
   }
 
   public deleteEffect(id: string) {
@@ -35,11 +33,11 @@ export class LedService {
     return this._apiService.delete<boolean>(`led/effect/${id}`);
   }
 
-  public updateEffect(newConfig: LedEffect): Observable<null> {
+  public updateEffect(newConfig: LedEffect): Promise<null> {
     return this._apiService.put<null>('led/effect', newConfig.toDto());
   }
 
-  public addEffect(newConfig: LedEffect): Observable<string> {
+  public addEffect(newConfig: LedEffect): Promise<string> {
     return this._apiService.post<string>('led/effect', newConfig.toDto(), false);
   }
 

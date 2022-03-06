@@ -1,7 +1,7 @@
-import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { InputType, RoutingService, SubscriptionManager, ValidationDefinition, ValidationErrorType } from '@awdware/shared';
+import { InputType, RoutingService, ValidationDefinition, ValidationErrorType } from '@awdware/shared';
 
 import { AccountService } from '@awdware/session';
 import { RegisterRequestDto, RegisterResult } from 'libs/session/src/lib/models/session-facade';
@@ -11,7 +11,7 @@ import { RegisterRequestDto, RegisterResult } from 'libs/session/src/lib/models/
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnDestroy {
+export class RegisterComponent {
   public inputType: typeof InputType = InputType;
 
   public errorMessageKey: string;
@@ -19,7 +19,6 @@ export class RegisterComponent implements OnDestroy {
   public registerSuccessful: boolean = false;
   public clickedButton: boolean = false;
 
-  private readonly _subMgr = new SubscriptionManager();
   private readonly _accountService: AccountService;
   private readonly _routingService: RoutingService;
   @ViewChild('register', { static: true })
@@ -36,14 +35,10 @@ export class RegisterComponent implements OnDestroy {
     this.register();
   }
 
-  public ngOnDestroy() {
-    this._subMgr.unsubscribeAll();
-  }
-
   private register() {
     this.clickedButton = true;
     this.errorMessageKey = '';
-    const registerSub = this._accountService.register(this.registerModel).subscribe(x => {
+    this._accountService.register(this.registerModel).then(x => {
       if (x === RegisterResult.SUCCESS) {
         this.successfulRegister();
       } else {
@@ -57,7 +52,6 @@ export class RegisterComponent implements OnDestroy {
         }
       }
     });
-    this._subMgr.add(registerSub);
   }
 
   private successfulRegister() {

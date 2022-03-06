@@ -30,7 +30,7 @@ export class AddEffectComponent extends BaseDialog {
     }
     const newEffect = this._ledService.getNewEffect(this.selectedAddEffect!, this.addEffectName!);
     this.effectAdded.emit(newEffect);
-    this._ledService.addEffect(newEffect).subscribe(effectId => {
+    this._ledService.addEffect(newEffect).then(effectId => {
       newEffect.id = effectId;
     });
     this.$closeDialog.next();

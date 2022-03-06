@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { interval, Observable, Subscription, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { interval, Subscription, map, tap, firstValueFrom } from 'rxjs';
 
 import { WebApiService } from '@awdware/shared';
 
@@ -29,15 +28,15 @@ export class SessionService {
     }
   }
 
-  private checkSession(): void {
+  private async checkSession(): Promise<void> {
     if (this.sessionNeedsRefresh()) {
-      this.renewSession().subscribe();
+      await this.renewSession();
     }
   }
 
-  public hasValidToken(): Observable<boolean> {
+  public async hasValidToken(): Promise<boolean> {
     if (!this.sessionStoreService.hasToken) {
-      return of(false);
+      return false;
     }
 
     return this.renewSession();
@@ -57,18 +56,13 @@ export class SessionService {
     return diff < 1000 * 60 * 2; // Expires in less than 2 minutes
   }
 
-  public renewSession(): Observable<boolean> {
-    return this.webApiService.get<TokenDto>('authentication/refreshToken').pipe(
-      tap(x => {
-        if (!x) {
-          this.sessionStoreService.removeToken();
-        } else {
-          this.sessionStoreService.putToken(x.token);
-        }
-      }),
-      map(x => {
-        return !!x;
-      })
-    );
+  public async renewSession(): Promise<boolean> {
+    const x = await this.webApiService.get<TokenDto>('authentication/refreshToken');
+    if (!x) {
+      this.sessionStoreService.removeToken();
+    } else {
+      this.sessionStoreService.putToken(x.token);
+    }
+    return !!x;
   }
 }

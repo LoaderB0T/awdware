@@ -21,15 +21,15 @@ export class LedEffectComponent {
   }
 
   public deleteEffect() {
-    this._ledService.deleteEffect(this.effect.id).subscribe();
+    this._ledService.deleteEffect(this.effect.id);
   }
 
   public selectEffect() {
-    this._ledService.selectEffect(this.effect.id).subscribe();
+    this._ledService.selectEffect(this.effect.id);
   }
 
   public saveEffect() {
-    this._ledService.updateEffect(this.effect).subscribe();
+    this._ledService.updateEffect(this.effect);
     this.effect.hasPendingChanges = false;
   }
 }

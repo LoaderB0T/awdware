@@ -13,7 +13,7 @@ import { UserDetailsDto } from '../models/session-facade';
 @Injectable({
   providedIn: 'root'
 })
-export class UserDetailsResolverService implements Resolve<UserDetailsDto | undefined> {
+export class UserDetailsResolverService implements Resolve<UserDetailsDto | null> {
   private readonly _accountService: AccountService;
   private readonly _sessionStoreService: SessionStoreService;
   private readonly _sessionService: SessionService;
@@ -31,11 +31,11 @@ export class UserDetailsResolverService implements Resolve<UserDetailsDto | unde
     this._userInfoService = userInfoService;
   }
 
-  async resolve(): Promise<UserDetailsDto | undefined> {
+  async resolve(): Promise<UserDetailsDto | null> {
     const isValidToken = await this._sessionService.hasValidToken();
     if (!isValidToken) {
-      return undefined;
+      return null;
     }
-    return firstValueFrom(this._accountService.loadUserDetails());
+    return this._accountService.loadUserDetails();
   }
 }

@@ -45,7 +45,7 @@ export class LedSettingsComponent extends BaseDialog implements OnInit {
   }
 
   public deleteSetting(id: string) {
-    this._ledService.deleteSetting(id).subscribe();
+    this._ledService.deleteSetting(id).then();
     const deleteIndex = this.settingsList.findIndex(x => x.id === id);
     this.settingsList.splice(deleteIndex, 1);
     if (this.settingsList.length > 0) {
@@ -56,7 +56,7 @@ export class LedSettingsComponent extends BaseDialog implements OnInit {
   }
 
   public newSetting() {
-    this._ledService.addSettings().subscribe(x => {
+    this._ledService.addSettings().then(x => {
       if (!this.settingsList) {
         this.settingsList = new Array<LedSettingsDto>();
       }
