@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-
-import { InvalidOperationError } from '@awdware/shared';
-
 import { BaseEvent } from '../models/base-event';
+import { InvalidOperationError } from '../models/invalid-operation-error';
 
 @Injectable({
   providedIn: 'root'
