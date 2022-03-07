@@ -4,7 +4,7 @@ pool:
 steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: "14.x"
+      versionSpec: "16.x"
     displayName: "Install Node.js"
 
   - task: YarnInstaller@3
@@ -21,7 +21,7 @@ steps:
       scannerMode: CLI
       configMode: manual
       cliProjectKey: "awdware:presentation"
-      cliSources: Src
+      cliSources: web
       extraProperties: |
         sonar.sourceEncoding=UTF-8
         sonar.exclusions=**/node_modules/**,**/*.spec.ts,**/.gah/**
@@ -30,26 +30,34 @@ steps:
   - task: PowerShell@2
     inputs:
       targetType: "inline"
-      script: sudo yarn global add @gah/cli
-    displayName: "Installing gah globally"
-
-  - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: gah install --debug --restrictedLogging
-      workingDirectory: "Src/Awdware.Host/Awdware.Host.Presentation"
-    displayName: "Gah install"
+      script: "yarn install"
+      workingDirectory: "web"
+    displayName: "Install packages"
 
   - task: PowerShell@2
     inputs:
       targetType: "inline"
-      script: "gah run -e prod ng build --prod"
-      workingDirectory: "Src/Awdware.Host/Awdware.Host.Presentation"
-    displayName: "Build host and dependencies"
+      script: "yarn nx build host"
+      workingDirectory: "web"
+    displayName: "Build host"
+
+  - task: PowerShell@2
+    inputs:
+      targetType: "inline"
+      script: "yarn nx build core"
+      workingDirectory: "web"
+    displayName: "Build core"
+
+  - task: PowerShell@2
+    inputs:
+      targetType: "inline"
+      script: "yarn nx build led"
+      workingDirectory: "web"
+    displayName: "Build led"
 
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: "Src/Awdware.Host/Awdware.Host.Presentation/dist/"
+      PathtoPublish: "web/dist/"
       ArtifactName: "drop"
       publishLocation: "Container"
     displayName: publish build

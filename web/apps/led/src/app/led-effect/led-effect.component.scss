@@ -1,0 +1,26 @@
+.effect-details-container {
+  display: flex;
+  flex-direction: column;
+  .effect-actions {
+    width: 100%;
+    display: flex;
+    .action-item {
+      cursor: pointer;
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
+      .icon {
+        font-size: 32px;
+        &:hover {
+          color: var(--colorHighlightColor1);
+        }
+      }
+    }
+  }
+  span.header {
+    font-size: var(--fontSizeGiant);
+    font-weight: var(--fontWeightBold);
+    align-self: center;
+    padding: 15px 0;
+  }
+}

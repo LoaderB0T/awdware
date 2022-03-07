@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "projects": {
+    "core": "apps/core",
+    "core-e2e": "apps/core-e2e",
+    "core-lib": "libs/core-lib",
+    "host": "apps/host",
+    "host-e2e": "apps/host-e2e",
+    "led": "apps/led",
+    "led-e2e": "apps/led-e2e",
+    "session": "libs/session",
+    "shared": "libs/shared"
+  }
+}

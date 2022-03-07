@@ -1,0 +1,38 @@
+$shadowDefault: 0px 0px 12px 0px rgba(0, 0, 0, 0.9);
+$shadowFocus: 0px 0px 22px 0px rgba(0, 0, 0, 0.9);
+
+$fontSizeSmall: 14px;
+$fontSizeNormal: 16px;
+$fontSizeLarge: 18px;
+$fontSizeGiant: 24px;
+
+$fontWeightNormal: 400;
+$fontWeightBold: 700;
+
+$fontMain: 'Montserrat', sans-serif;
+
+html {
+  #{--shadowDefault}: $shadowDefault;
+  #{--shadowFocus}: $shadowFocus;
+
+  #{--fontSizeSmall}: $fontSizeSmall;
+  #{--fontSizeNormal}: $fontSizeNormal;
+  #{--fontSizeLarge}: $fontSizeLarge;
+  #{--fontSizeGiant}: $fontSizeGiant;
+
+  #{--fontWeightNormal}: $fontWeightNormal;
+  #{--fontWeightBold}: $fontWeightBold;
+
+  #{--fontMain}: $fontMain;
+}
+
+@mixin content-color {
+  background-color: var(--colorHighlightContent04);
+  transition: background-color 0.1s;
+  box-shadow: var(--shadowDefault);
+  &:hover,
+  &:focus-within {
+    box-shadow: var(--shadowFocus);
+    background-color: var(--colorHighlightContent10);
+  }
+}
