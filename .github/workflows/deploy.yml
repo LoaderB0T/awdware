@@ -28,16 +28,20 @@ jobs:
               branch: "main",
               per_page: 1,
             });
+            console.log(`found ${workflowRuns.data.total_count} runs`);
             var workflowRun = workflowRuns.data.workflow_runs[0];
-            var workflowId = workflowRun.id;
+            var runId = workflowRun.id;
+            console.log(`found runId ${runId}`);
 
             var artifacts = await github.actions.listWorkflowRunArtifacts({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              run_id: workflowId,
+              run_id: runId,
             });
+            console.log(`found ${artifacts.data.total_count} artifacts`);
             var artifact = artifacts.data.artifacts[0];
             var artifactId = artifact.id;
+            console.log(`found artifactId ${artifactId}`);
             var download = await github.actions.downloadArtifact({
               owner: context.repo.owner,
               repo: context.repo.repo,
