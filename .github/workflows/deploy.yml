@@ -57,6 +57,12 @@ jobs:
             Remove-Item "$PWD\..\artifacts\web" -Recurse
             Add-Type -AssemblyName System.IO.Compression.FileSystem
             [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD\..\artifacts\web.zip", "$PWD\..\artifacts\web")
+      - name: Stop IIS AppPool
+        uses: Amadevus/pwsh-script@v2.0.1
+        with:
+          script: |
+            Set-Location "C:\Windows\System32\inetsrv"
+            ./appcmd stop apppool /apppool.name:"awdware2"
       - name: Copy Artifacts
         uses: Amadevus/pwsh-script@v2.0.1
         with:
@@ -79,3 +85,9 @@ jobs:
 
             Copy-Item $moduleJsonPath -Destination "$appPath\host\modules"
             Copy-Item $envJsonPath -Destination "$appPath\host\environments"
+      - name: Start IIS AppPool
+        uses: Amadevus/pwsh-script@v2.0.1
+        with:
+          script: |
+            Set-Location "C:\Windows\System32\inetsrv"
+            ./appcmd start apppool /apppool.name:"awdware2"
