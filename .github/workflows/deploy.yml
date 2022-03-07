@@ -49,4 +49,4 @@ jobs:
               archive_format: "zip",
             });
             var fs = require("fs");
-            fs.writeFileSync("web.zip", Buffer.from(download.data));
+            fs.writeFileSync("../web.zip", Buffer.from(download.data));
