@@ -50,9 +50,32 @@ jobs:
             });
             var fs = require("fs");
             fs.writeFileSync("../artifacts/web.zip", Buffer.from(download.data));
-      - name: PowerShell script
+      - name: Extract artifact
         uses: Amadevus/pwsh-script@v2.0.1
         with:
           script: |
             Add-Type -AssemblyName System.IO.Compression.FileSystem
             [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD\..\artifacts\web.zip", "$PWD\..\artifacts\web")
+      - name: Copy Artifacts
+        uses: Amadevus/pwsh-script@v2.0.1
+        with:
+          script: |
+            $appPath = 'C:\web\www\awdware2\angular'
+            $webCfgPath = 'C:\web\www\awdware2\cfg\angular\web.config'
+            $moduleJsonPath = 'C:\web\www\awdware2\cfg\angular\modules.json'
+            $envJsonPath = 'C:\web\www\awdware2\cfg\angular\environment.json'
+            $apps = @('core', 'led');
+
+            Remove-Item $appPath -Recurse
+            New-Item -ItemType Directory -Path $appPath -Force
+
+            Copy-Item "$PWD\..\artifacts\web\apps\host" -Destination $appPath -Recurse
+            Copy-Item $webCfgPath -Destination "$appPath\host"
+
+            foreach ($app in $apps) {
+              Copy-Item "$PWD\..\artifacts\web\apps\$app" -Destination "$appPath\host\assets" -Recurse
+            }
+
+            Copy-Item $moduleJsonPath -Destination "$appPath\host\modules"
+            Copy-Item $envJsonPath -Destination "$appPath\host\environments"
+
