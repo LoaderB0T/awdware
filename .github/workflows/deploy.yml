@@ -49,4 +49,10 @@ jobs:
               archive_format: "zip",
             });
             var fs = require("fs");
-            fs.writeFileSync("../web.zip", Buffer.from(download.data));
+            fs.writeFileSync("../artifacts/web.zip", Buffer.from(download.data));
+      - name: PowerShell script
+        uses: Amadevus/pwsh-script@v2.0.1
+        with:
+          script: |
+            Add-Type -AssemblyName System.IO.Compression.FileSystem
+            [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD\..\artifacts\web.zip", "$PWD\..\artifacts\web")
