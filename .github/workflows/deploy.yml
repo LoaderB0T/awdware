@@ -16,11 +16,30 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Download artifact
-      uses: dawidd6/action-download-artifact@v2
-      with:
-        workflow: CI
-        workflow_conclusion: success
-        branch: main
-        name: web
-        path: artifact-dl
+      - name: 'Download artifact'
+        uses: actions/github-script@v3.1.0
+        with:
+          script: |
+            var workflowRuns = await github.actions.listWorkflowRuns({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               workflow_id: 'ci.yml',
+            });
+            console.log(JSON.stringify(workflowRuns));
+            var artifacts = await github.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: ${{github.event.workflow_run.id }},
+            });
+            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "pr"
+            })[0];
+            var download = await github.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifact.id,
+               archive_format: 'zip',
+            });
+            var fs = require('fs');
+            fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
+      - run: unzip pr.zip
