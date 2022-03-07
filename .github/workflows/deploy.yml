@@ -21,25 +21,28 @@ jobs:
         with:
           script: |
             var workflowRuns = await github.actions.listWorkflowRuns({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               workflow_id: 'ci.yml',
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: "ci.yml",
+              success: "success",
+              branch: "main",
+              per_page: 1,
             });
-            console.log(JSON.stringify(workflowRuns));
+            var workflowRun = workflowRuns.data.workflow_runs[0];
+            var workflowId = workflowRun.id;
+
             var artifacts = await github.actions.listWorkflowRunArtifacts({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               run_id: ${{github.event.workflow_run.id }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: workflowId,
             });
-            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "pr"
-            })[0];
+            var artifact = artifacts.data.artifacts[0];
+            var artifactId = artifact.id;
             var download = await github.actions.downloadArtifact({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               artifact_id: matchArtifact.id,
-               archive_format: 'zip',
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              artifact_id: artifactId,
+              archive_format: "zip",
             });
-            var fs = require('fs');
-            fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
-      - run: unzip pr.zip
+            var fs = require("fs");
+            fs.writeFileSync("web.zip", Buffer.from(download.data));
