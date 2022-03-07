@@ -16,7 +16,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: 'Download artifact'
+      - name: "Download artifact"
         uses: actions/github-script@v3.1.0
         with:
           script: |
@@ -54,6 +54,7 @@ jobs:
         uses: Amadevus/pwsh-script@v2.0.1
         with:
           script: |
+            Remove-Item "$PWD\..\artifacts\web" -Recurse
             Add-Type -AssemblyName System.IO.Compression.FileSystem
             [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD\..\artifacts\web.zip", "$PWD\..\artifacts\web")
       - name: Copy Artifacts
@@ -78,4 +79,3 @@ jobs:
 
             Copy-Item $moduleJsonPath -Destination "$appPath\host\modules"
             Copy-Item $envJsonPath -Destination "$appPath\host\environments"
-
