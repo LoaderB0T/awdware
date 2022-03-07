@@ -24,7 +24,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: "ci.yml",
-              success: "success",
+              status: "success",
               branch: "main",
               per_page: 1,
             });
