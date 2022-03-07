@@ -1,7 +1,8 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { environment } from 'ng-dynamic-mf';
 
-if ((window as any).__gah__env.production) {
+if (environment.production) {
   enableProdMode();
 }
 
