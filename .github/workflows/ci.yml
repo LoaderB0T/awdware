@@ -24,7 +24,9 @@ jobs:
         with:
           node-version: "14"
       - run: npm install
-      - run: npx nx affected --target=build --parallel=3
+      - run: npx nx build host
+      - run: npx nx build core
+      - run: npx nx build led
       - run: npx nx affected --target=test --parallel=2
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.0.0
