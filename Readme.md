@@ -1,3 +1,5 @@
+# OUT OF DATE - SEE https://github.com/LoaderB0T/awdware3 instead
+
 # awdware
 awdware is a hobby web app project that has (or will have) various features.
 
